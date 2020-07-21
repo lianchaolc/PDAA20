@@ -27,7 +27,7 @@ public class FingerGatherService {
 
 		Log.i("arg0", userId + "");
 		Log.i("arg1", finger + "");
-		Log.i("arg2", Arrays.toString(cValue) + "");
+		Log.i("arg2", cValue.length + "");
 		Log.i("arg3", Arrays.toString(cValue1) + "");
 
 		SoapObject soap = WebService.getSoapObject(methodName, param);

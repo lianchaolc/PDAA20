@@ -1,8 +1,11 @@
 package com.ljsw.tjbankpda.yy.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,9 +46,12 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
     private Intent intent;
     private ManagerClass managerClass;
 
+    public Handler handler;
+    private boolean isFlag = true;
 
     private boolean selectTast = false;// 标识当前是否有任务
 
+    @SuppressLint("HandlerLeak")
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -55,6 +61,133 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
 
         intent = new Intent();
         managerClass = new ManagerClass();
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                managerClass.getRuning().remove();
+                isFlag = true;
+                switch (msg.what) {
+                    case 1:// 验证成功跳转
+
+                        finger.setImageBitmap(ShareUtil.finger_gather);
+                        fname.setText(result_user.getUsername());
+                        top.setText("指纹验证成功");
+
+                        System.out.print("!!!" + result_user.getUserid() + ":::"
+                                + result_user.getUsername() + "!!!" + result_user.getUserzhanghu());
+                        managerClass.getSureCancel().makeSuerCancel2(
+                                YayunLoginSAcitivity.this, "押运员：" + result_user.getUsername(),
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getSureCancel().remove();
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "即将请稍后...");
+                                        Log.d(TAG, "===GApplication.use" + GApplication.use.getUserzhanghu());
+                                        S_application.s_userYayun = result_user
+                                                .getUserzhanghu();
+                                        getescortselectTask();
+                                    }
+
+
+                                }, false);
+                        break;
+                    case -1:
+                        // top.setText("验证异常，请重按");
+                        S_application.s_userYayun = null;// 修改20200320
+                        fingerCount++;
+                        top.setText("验证失败" + fingerCount + "次，请重按");
+                        if (fingerCount >= ShareUtil.three) {
+                            // 跳用户登录
+                            intent.setClass(YayunLoginSAcitivity.this,
+                                    YayunDenglu.class);
+                            YayunLoginSAcitivity.this.startActivityForResult(
+                                    intent, 1);
+                            top.setText("");
+                            fingerCount = 0;
+                        }
+                        break;
+                    case -4:
+
+                        top.setText("验证超时，请重按");
+                        break;
+                    case 0:
+
+                        fingerCount++;
+                        top.setText("验证失败" + fingerCount + "次，请重按");
+                        if (fingerCount >= ShareUtil.three) {
+                            // 跳用户登录
+                            intent.setClass(YayunLoginSAcitivity.this,
+                                    YayunDenglu.class);
+                            YayunLoginSAcitivity.this.startActivityForResult(
+                                    intent, 1);
+                            top.setText("");
+                            fingerCount = 0;
+                        }
+                        break;
+                    case 10:
+
+                    case 11:
+                        //					Skip.skip(YayunLoginSAcitivity.this, YayunRwLbSActivity.class,null, 0);  // 修改以前的接口
+                        Skip.skip(YayunLoginSAcitivity.this,
+                                YayunSelectRewuUseActivity.class, null, 0);
+                        break;
+
+
+                    case 9:
+                        Skip.skip(YayunLoginSAcitivity.this,
+                                YayunSelectTaskActivity.class, null, 0);
+//								YayunRwLbSActivity.class, null, 0);
+                        break;
+                    case 12:
+                        managerClass.getSureCancel().makeSuerCancel(
+                                YayunLoginSAcitivity.this, "网络请求失败",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "网络请求失败");
+                                        managerClass.getRuning().remove();
+                                    }
+                                }, false);
+                        break;
+                    case 13:
+                        managerClass.getSureCancel().makeSuerCancel(
+                                YayunLoginSAcitivity.this, "服务器没数据",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "网络请求失败");
+                                        managerClass.getRuning().remove();
+                                    }
+
+
+                                }, false);
+                        break;
+                    case 14:
+                        managerClass.getSureCancel().makeSuerCancel(
+                                YayunLoginSAcitivity.this, "网络请求失败",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "连接超时");
+                                        managerClass.getRuning().remove();
+                                    }
+                                }, false);
+                        break;
+
+
+                    default:
+
+
+                        break;
+                }
+            }
+        };
     }
 
     public void initView() {
@@ -73,7 +206,14 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
     public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
         ShareUtil.ivalBack = charBytes;
         ShareUtil.finger_gather = img;
-        checkFinger();
+
+        if (isFlag) {
+            top.setText("正在验证指纹...");
+            isFlag = false;
+            // 开始调用服务器验证指纹
+            CheckFingerThread cf = new CheckFingerThread();
+            cf.start();
+        }
     }
 
     @Override
@@ -86,82 +226,63 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
         top.setText("获取指纹特征值失败,请重试");
     }
 
+    /**
+     * 指纹验证线程
+     *
+     * @author Administrator
+     */
+    class CheckFingerThread extends Thread {
+        Message m;
 
-    //请求网络, 验证指纹
-    public void checkFinger() {
-        top.setText("正在验证指纹...");
-        IPdaOfBoxOperateService yz = new IPdaOfBoxOperateService();
-        try {
-            // 押运员的机构id默认 等于最开始登录用户的机构id
-            S_application.s_yayunJigouId = GApplication.user.getOrganizationId();
-
-            Log.d(TAG, "sjigou" + S_application.s_yayunJigouId);
-            Log.d(TAG, "userid" + GApplication.user.getLoginUserId());
-            Log.d(TAG, "ivalBack" + ShareUtil.ivalBack);
-
-            result_user = yz.checkFingerprint(S_application.s_yayunJigouId, GApplication.user.getLoginUserId(), ShareUtil.ivalBack);
-
-            if (result_user != null) {// 验证成功
-
-                Log.d(TAG, "验证后:" + result_user);
-                GApplication.use = result_user;
-
-                Log.d(TAG, GApplication.use.getUsername() + ":::::覆盖后");
-                Log.d(TAG, GApplication.use.getUserzhanghu() + ":::::覆盖后");
-                Log.d(TAG, S_application.s_userYayun + ":::::");
-                checkSucceed();
-            } else {
-                checkErr();
-            }
-        } catch (SocketTimeoutException e) {
-            e.printStackTrace();
-            top.setText("验证超时，请重按");
-        } catch (Exception e) {
-            e.printStackTrace();
-            S_application.s_userYayun = null;// 修改20200320
-            checkErr();
-        } finally {
-            GolbalUtil.onclicks = true;
-            //获取下一个指纹信息
-            fingerUtil.getFingerCharAndImg();
+        public CheckFingerThread() {
+            super();
+            m = handler.obtainMessage();
         }
-    }
 
-    private void checkSucceed() {
-        finger.setImageBitmap(ShareUtil.finger_gather);
-        fname.setText(result_user.getUsername());
-        top.setText("指纹验证成功");
+        @Override
+        public void run() {
+            super.run();
+            IPdaOfBoxOperateService yz = new IPdaOfBoxOperateService();
+            try {
+                // 押运员的机构id默认 等于最开始登录用户的机构id
+                S_application.s_yayunJigouId = GApplication.user
+                        .getOrganizationId();
+                System.out.println("GApplication.user.getLoginUserId():" + 9);
+                Log.d(TAG, "=====+sjigou" + S_application.s_yayunJigouId + "");
+                Log.d(TAG, "=====userid" + GApplication.user.getLoginUserId() + "");
+                Log.d(TAG, "=====ivalBack" + ShareUtil.ivalBack + "");
 
-        System.out.print("!!!" + result_user.getUserid() + ":::" + result_user.getUsername() + "!!!" + result_user.getUserzhanghu());
-        managerClass.getSureCancel().makeSuerCancel2(
-                YayunLoginSAcitivity.this, "押运员：" + result_user.getUsername(),
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        managerClass.getSureCancel().remove();
-                        managerClass.getRuning().runding(YayunLoginSAcitivity.this, "即将请稍后...");
-                        Log.d(TAG, "===GApplication.use" + GApplication.use.getUserzhanghu());
-                        S_application.s_userYayun = result_user
-                                .getUserzhanghu();
-                        getescortselectTask();
-                    }
+                result_user = yz.checkFingerprint(
+                        S_application.s_yayunJigouId,
+                        GApplication.user.getLoginUserId(), ShareUtil.ivalBack);
+                System.out.println("result_user============"
+                        + result_user);
+                System.out.println("yyl============"
+                        + GApplication.user.getLoginUserId());
+                System.out.println("yyl============"
+                        + GApplication.user.getOrganizationId());
+                if (result_user != null) {// 验证成功
 
+                    Log.d(TAG, result_user + ":::::::::::::::------");
+                    GApplication.use = result_user;
 
-                }, false);
-    }
-
-    private void checkErr() {
-        fingerCount++;
-        top.setText("验证失败" + fingerCount + "次，请重按");
-
-        if (fingerCount >= ShareUtil.three) {
-            // 跳用户登录
-            intent.setClass(YayunLoginSAcitivity.this, YayunDenglu.class);
-            YayunLoginSAcitivity.this.startActivityForResult(
-                    intent, 1);
-            top.setText("");
-            fingerCount = 0;
-            return;
+                    Log.d(TAG, GApplication.use.getUsername() + ":::::覆盖后");
+                    Log.d(TAG, GApplication.use.getUserzhanghu() + ":::::覆盖后");
+                    Log.d(TAG, S_application.s_userYayun + ":::::");
+                    m.what = 1;
+                } else {
+                    m.what = 0;
+                }
+            } catch (SocketTimeoutException e) {
+                e.printStackTrace();
+                m.what = -4;// 超时验证
+            } catch (Exception e) {
+                e.printStackTrace();
+                m.what = -1;// 验证异常
+            } finally {
+                handler.sendMessage(m);
+                GolbalUtil.onclicks = true;
+            }
         }
     }
 
@@ -290,17 +411,5 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
 
         }.start();
         return selectTast;
-    }
-
-    private void showDialog(String msg, final String rundingMsg) {
-        managerClass.getSureCancel().makeSuerCancel(YayunLoginSAcitivity.this, msg,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
-                                rundingMsg);
-                        managerClass.getRuning().remove();
-                    }
-                }, false);
     }
 }
