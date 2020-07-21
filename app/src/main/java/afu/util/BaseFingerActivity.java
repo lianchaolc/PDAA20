@@ -26,8 +26,8 @@ public abstract class BaseFingerActivity extends Activity implements FingerHandl
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         fingerUtil.closeFinger();
+        super.onDestroy();
     }
 
     //没有发现指纹

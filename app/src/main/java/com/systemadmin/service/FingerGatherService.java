@@ -7,6 +7,8 @@ import android.util.Log;
 import com.entity.WebParameter;
 import com.service.WebService;
 
+import java.util.Arrays;
+
 public class FingerGatherService {
 	// 指纹采集
 	/**
@@ -25,12 +27,13 @@ public class FingerGatherService {
 
 		Log.i("arg0", userId + "");
 		Log.i("arg1", finger + "");
-		Log.i("arg2", cValue + "");
-		Log.i("arg3", cValue1 + "");
+		Log.i("arg2", Arrays.toString(cValue) + "");
+		Log.i("arg3", Arrays.toString(cValue1) + "");
 
 		SoapObject soap = WebService.getSoapObject(methodName, param);
 		String code = soap.getProperty("code").toString();
 		Log.i("code", code);
+		Log.i("soap", soap.toString());
 		if ("00".equals(code)) {
 			return true;
 		}

@@ -166,8 +166,7 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
                     resultText.setVisibility(View.VISIBLE);
                     resultText.setText("请按压手指...");
 
-                    // 打开指纹
-                    fingerUtil.openFinger();
+                    fingerUtil.getFingerCharAndImg();
 
                     Bundle bundle = msg.getData();
                     String name = bundle.getString("fingerName");
@@ -223,7 +222,7 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
 
     @Override
     public void openFingerSucceed() {
-        fingerUtil.getFingerCharAndImg();
+        //输入正确的人员编号才获取指纹信息
     }
 
     @Override
@@ -476,11 +475,5 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
         ShareUtil.finger_gather = null;
         ShareUtil.ivalBack = null;
         this.finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        fingerUtil.closeFinger();
     }
 }

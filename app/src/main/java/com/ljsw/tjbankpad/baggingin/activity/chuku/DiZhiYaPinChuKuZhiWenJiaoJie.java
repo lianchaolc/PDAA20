@@ -7,7 +7,6 @@ import java.net.SocketTimeoutException;
 import com.application.GApplication;
 import com.entity.SystemUser;
 import com.example.pda.R;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpad.baggingin.activity.CashToPackgersActivity;
 import com.ljsw.tjbankpad.baggingin.activity.cashtopackges.service.CashToPackgersService;
 import com.ljsw.tjbankpad.baggingin.activity.chuku.service.GetResistCollateralBaggingService;
@@ -16,7 +15,6 @@ import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
 import com.ljsw.tjbankpda.util.BianyiType;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.manager.classs.pad.ManagerClass;
-import com.moneyboxadmin.biz.FingerCheckBiz;
 import com.poka.device.ShareUtil;
 
 import android.annotation.SuppressLint;
@@ -116,26 +114,6 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
         super.onResume();
 
         isFlag = true;
-        GetFingerValue.handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                Bundle bundle;
-                if (msg.what == 1) {
-                    bundle = msg.getData();
-                    if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-
-                    } else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-                        if (isFlag) {
-                            top.setText("正在验证指纹...");
-                            isFlag = false;
-                            YanZhenFinger yf = new YanZhenFinger();
-                            yf.start();
-                        }
-                    }
-                }
-            }
-        };
 
         handler = new Handler() {
             @Override
@@ -375,13 +353,27 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
 
     @Override
     public void findFinger() {
-
+        top.setText("正在获取指纹特征值！");
     }
 
     @Override
     public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
         super.getCharImgSucceed(charBytes, img);
-        //todo
+
+        if (!firstSuccess && !"1".equals(f1)) {
+            ShareUtil.finger_bitmap_left = img;
+        } else {
+            ShareUtil.finger_bitmap_right = img;
+        }
+
+        ShareUtil.ivalBack = charBytes;
+
+        if (isFlag) {
+            top.setText("正在验证指纹...");
+            isFlag = false;
+            YanZhenFinger yf = new YanZhenFinger();
+            yf.start();
+        }
     }
 
     /**
@@ -431,6 +423,8 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                 m.what = -1;
             } finally {
                 handler.sendMessage(m);
+
+                fingerUtil.getFingerCharAndImg();
             }
         }
     }

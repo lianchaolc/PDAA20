@@ -69,6 +69,8 @@ public class FingerUtil {
     }
 
     public void closeFinger() {
+
+        mHandler.removeCallbacksAndMessages(null);
         if (serialPort != null) {
             serialPort.power3v3off();
         }

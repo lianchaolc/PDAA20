@@ -1,6 +1,6 @@
 package com.ljsw.tjbankpad.baggingin.activity.handover;
 
-import hdjc.rfid.operator.RFID_Device;
+import afu.util.BaseFingerActivity;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import com.example.pda.HomeMangeerToCenterDataScanActivity;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
 import com.google.gson.Gson;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpad.baggingin.activity.DiZhiYaPinKuangJiaActivity;
 import com.ljsw.tjbankpad.baggingin.activity.KuGuanYuanByZhangHuzhongxinLogin;
 import com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.chukujieyue.AccountInfomationReturnService;
@@ -22,10 +21,11 @@ import com.ljsw.tjbankpda.yy.service.IPdaOfBoxOperateService;
 import com.manager.classs.pad.ManagerClass;
 import com.poka.device.ShareUtil;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.util.Log;
@@ -37,7 +37,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import poka_global_constant.GlobalConstant;
 
 /***
  * lc 库管员到请分员现金装袋后会有个提交
@@ -45,12 +44,12 @@ import poka_global_constant.GlobalConstant;
  * @author Administrator
  *
  */
-public class HomeMangerToCleanHandoverActivity extends Activity implements OnClickListener {
-	protected static final String TAG = "HomeMangerToCleanHandoverActivity";
+public class HomeMangerToCleanHandoverActivity extends BaseFingerActivity{
+	protected static final String TAG = "HomeMangerCleanHandover";
 	private TextView top, fname, bottom;// 顶部提示 指纹对应人员姓名 底部提示
 	private ImageView finger;// 指纹图片
 	private ManagerClass managerClass;
-	private ManagerClass manager;
+
 	public User result_user;
 	public Handler handler;
 	private Intent intent;
@@ -65,7 +64,7 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 
 	private long lastClickTime = 0;/// 限制点击的时间间隔
 	private boolean flag = false;
-	private RFID_Device rfid;
+
 	private Dialog dialog;// dialog 成功
 	private Dialog dialogfa;// 失败
 	private Dialog dialogforreturnaccountinten;
@@ -73,15 +72,10 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 
 	private String userId = "";
 
-	RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	@SuppressLint("HandlerLeak")
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_manger_to_clean_handover);
 		initView();
@@ -91,13 +85,11 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 		updatastr = getIntent().getStringExtra("str");
 //				str
 		managerClass = new ManagerClass();
-		managerClass.getRfid().addNotifly(new GetFingerValue()); // 添加通知
-		managerClass.getRfid().fingerOpen(); // 打开指纹
+
 
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
 				super.handleMessage(msg);
 				isFlag = true;
 				switch (msg.what) {
@@ -144,11 +136,9 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 					}
 					break;
 				case -4:
-
 					top.setText("验证超时，请重按");
 					break;
 				case 0:
-
 					fingerCount++;
 					top.setText("验证失败" + fingerCount + "次，请重按");
 					if (fingerCount >= ShareUtil.three) {
@@ -209,9 +199,9 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								startActivity(intent);
 
-								if (rfid != null) {
+								/*if (rfid != null) {
 									getRfid().close_a20();
-								}
+								}*/
 								HomeMangerToCleanHandoverActivity.this.finish();
 							}
 
@@ -237,49 +227,19 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 					dialogfa.show();
 //			            	  更改显示的弹窗  需要测试
 //			            	managerClass.getResultmsg().resultmsg(null, "提交数据失败",false);
-
 					break;
 				case 997:
-					Toast.makeText(HomeMangerToCleanHandoverActivity.this, "参数不完整请检查参数", 500).show();
+					Toast.makeText(HomeMangerToCleanHandoverActivity.this, "参数不完整请检查参数", Toast.LENGTH_SHORT).show();
 					break;
 				}
-
 			}
-
 		};
-
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
 		super.onResume();
 		isFlag = true;
-		// 获得指纹通知
-		GetFingerValue.handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				Bundle bundle;
-
-				if (msg.what == 1) {
-					bundle = msg.getData();
-					if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-
-					} else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-						if (isFlag) {
-							top.setText("正在验证指纹...");
-							isFlag = false;
-							// 开始调用服务器验证指纹
-							CheckFingerThread cf = new CheckFingerThread();
-							cf.start();
-						}
-					}
-				}
-			}
-		};
 	}
 
 	private void initView() {
@@ -289,7 +249,33 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 		bottom = (TextView) this.findViewById(R.id.dzypll_yayun_bottom);
 	}
 
-	/**
+    @Override
+    public void openFingerSucceed() {
+        fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        top.setText("正在获取特征值");
+	}
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack = charBytes;
+        ShareUtil.finger_gather = img;
+
+        if (isFlag) {
+            top.setText("正在验证指纹...");
+            isFlag = false;
+            // 开始调用服务器验证指纹
+            CheckFingerThread cf = new CheckFingerThread();
+            cf.start();
+        }
+    }
+
+    /**
 	 * 指纹验证线程
 	 * 
 	 * @author Administrator
@@ -310,12 +296,12 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 				// 押运员的机构id默认 等于最开始登录用户的机构id
 //						S_application.getApplication().s_userguankuyaun = GApplication.user.getOrganizationId();     
 				// 改动
-				S_application.getApplication().s_yayunJigouId = GApplication.user.getOrganizationId();
+				S_application.s_yayunJigouId = GApplication.user.getOrganizationId();
 
 				System.out
-						.println("getLoginUserId():" + "货位" + 26 + "=" + S_application.getApplication().s_yayunJigouId);
+						.println("getLoginUserId():" + "货位" + 26 + "=" + S_application.s_yayunJigouId);
 				System.out.println("getLoginUserId():" + GApplication.user.getLoginUserId());
-				result_user = yz.checkFingerprint(S_application.getApplication().s_yayunJigouId,
+				result_user = yz.checkFingerprint(S_application.s_yayunJigouId,
 						GApplication.user.getLoginUserId(), ShareUtil.ivalBack);
 
 				System.out.println("============" + GApplication.user);
@@ -324,7 +310,7 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 				System.out.println("yyl============" + GApplication.user.getOrganizationId());
 				if (result_user != null) {// 验证成功
 					GApplication.use = result_user;
-					S_application.getApplication().s_userguankuyaun = result_user.getUserzhanghu();/// 这里更改可能出错
+					S_application.s_userguankuyaun = result_user.getUserzhanghu();/// 这里更改可能出错
 
 					if (flag) {
 						userId = result_user.getUserzhanghu();
@@ -345,6 +331,8 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 			} finally {
 				handler.sendMessage(m);
 				GolbalUtil.onclicks = true;
+
+				fingerUtil.getFingerCharAndImg();
 			}
 		}
 	}
@@ -353,22 +341,15 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		getRfid().close_a20();
+
 		isFlag = false;
 		managerClass.getRuning().remove();
 
 	}
 
-	@Override
-	protected void onStop() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
-		super.onStop();
-	}
 
-	protected void onDestory() {
-
+	protected void onDestroy() {
 		super.onDestroy();
-		getRfid().close_a20();
 		isFlag = false;
 		managerClass.getRuning().remove();
 		if (dialog != null) {
@@ -377,20 +358,6 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 		if (dialogfa != null) {
 			dialogfa.dismiss();
 		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-
-		case 1:
-
-			break;
-
-		default:
-			break;
-		}
-
 	}
 
 	/***
@@ -408,7 +375,7 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 				finger.setImageResource(R.drawable.result_isok);
 				bottom.setText("验证成功!");
 				if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
-					S_application.getApplication().s_userYayun = bundle.getString("name");
+					S_application.s_userYayun = bundle.getString("name");
 				}
 //						当账号密码登陆成功后的网络请求判断190402
 //						userId=o_Application.yayunyuan.getYonghuZhanghao();/// 登录账户
@@ -429,13 +396,11 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						try {
 							Thread.sleep(1000);
 
 //									handler.sendEmptyMessage(10);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -498,9 +463,6 @@ public class HomeMangerToCleanHandoverActivity extends Activity implements OnCli
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (rfid != null) {
-				getRfid().close_a20();
-			}
 			HomeMangerToCleanHandoverActivity.this.finish();
 		}
 		return super.onKeyDown(keyCode, event);
