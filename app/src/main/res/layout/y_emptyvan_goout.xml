@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/dimen_480x"
+              android:layout_height="@dimen/dimen_800y"
+              android:orientation="vertical"
+              android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/blue_top">
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/user_fragment"
+        android:name="com.fragment.pda.HeadUser_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100y"
+        android:background="@color/blue_title"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="4">
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_72x"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical|right">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/dimen_40x"
+                    android:layout_height="@dimen/dimen_40y"
+                    android:src="@drawable/out_atm_box"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_marginBottom="@dimen/dimen_20y"
+                    android:id="@+id/biz_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_30"
+                    android:textColor="@color/white"
+                    android:text="空钞箱出库"
+                    android:layout_marginTop="@dimen/dimen_27y"
+                    android:layout_marginLeft="@dimen/dimen_10x"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/refresh"
+                android:layout_width="@dimen/dimen_70x"
+                android:layout_height="@dimen/dimen_70y"
+                android:src="@drawable/refplace_cirle"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="@dimen/dimen_70x"
+                android:layout_height="@dimen/dimen_70y"
+                android:src="@drawable/back_cirle"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_650y"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/fragment_lay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

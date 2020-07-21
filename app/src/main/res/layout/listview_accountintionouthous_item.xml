@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+     android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+    android:orientation="vertical" >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+       
+        android:background="#EFEEEE" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+
+        <TextView
+            android:id="@+id/zhziliao_id"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="RW0000001"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_26" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+
+        <TextView
+            android:id="@+id/zhziliao_item"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="21111"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_26" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+
+        <TextView
+            android:id="@+id/zhziliao_type_tv"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_26" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:background="#cccccc" >
+    </View>
+
+</LinearLayout>

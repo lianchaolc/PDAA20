@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEEEE"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="抵质押品出库明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size" />
+
+      
+
+        <ImageView
+            android:id="@+id/diziypchuku_iv_ql_ruku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_70x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_8x"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="@dimen/dimen_60y"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="操作人:"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/dizhilocationtvorpter"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="@dimen/dimen_60y"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:text="白小白"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+
+       
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10y"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/dimen_10y"
+        android:orientation="vertical" >
+
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100y"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_8x"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="任务编号:"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/tvdizhiyapintitle"
+                android:layout_width="@dimen/dimen_0x"
+               android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:text="JH000002"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+    
+    
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_8x"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="抵制押品袋数量:"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/dizhiyapincpount"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_8x"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="4"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_350y"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+          <ListView
+                 android:id="@+id/listview_chuku"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:divider="#00000000"
+              ></ListView>
+        </LinearLayout>
+
+     </LinearLayout>
+
+    <Button
+        android:id="@+id/dizhiyapin_btn_chuku"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:textSize="@dimen/text_size_30"
+        android:background="@drawable/buttom_selector_bg"
+        android:gravity="center"
+        android:text="出库" />
+
+</LinearLayout>

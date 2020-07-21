@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingarr">
+        <item>PSAM 通讯（点击打开通讯并发送命令）</item>
+        <item>RFID 扫描（点击时扫描）</item>
+        <item>扫码头 扫描（点击开启扫描）</item>
+        <item>433 接收（点击打开接收）</item>
+        <item>指纹识别（点击打开识别）</item>
+        <item>USB 串口发送数据</item>
+    </string-array>
+</resources>

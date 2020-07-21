@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F1f1f1"
+    tools:context="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZLaActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+      
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:src="@drawable/user_order" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="抵制押品"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50" />
+
+        <Button
+            android:id="@+id/ql_ruku_update"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:background="@drawable/replace" />
+
+        <ImageView
+            android:id="@+id/ql_ruku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+           android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_marginRight="@dimen/dimen_10x"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dzyp_"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_marginLeft="@dimen/dimen_60x"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="操作人员"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" />
+
+        <TextView
+            android:id="@+id/zhuanghu_username"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="张三"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" >
+        </TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_marginRight="@dimen/dimen_10x"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dzyp_"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="账户资料入库任务数量"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" />
+
+        <TextView
+            android:id="@+id/dzyp_username"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="5"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" >
+        </TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <ListView
+        android:id="@+id/zhzl_listview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_135y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:layout_marginTop="@dimen/dimen_8y" >
+    </ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_marginRight="@dimen/dimen_10x"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dzyp_"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="账户资料归还任务数量"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" />
+
+        <TextView
+            android:id="@+id/dzyp_username"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="0"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" >
+        </TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <LinearLayout
+            android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_marginRight="@dimen/dimen_10x"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dzyp_"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="账户资料请领任务数量"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" />
+
+        <TextView
+            android:id="@+id/dzyp_username"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="5"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" >
+        </TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_marginRight="@dimen/dimen_10x"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dzyp_"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="账户质量借阅任务数量"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" />
+
+        <TextView
+            android:id="@+id/dzyp_username"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_30y"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="0"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_24" >
+        </TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="@color/back" />
+
+    <Button
+        android:id="@+id/zhzilabtn_sure"
+        android:layout_marginTop="@dimen/dimen_15y"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_45y"
+        android:background="@drawable/buttom_selector_bg"
+          android:textSize="@dimen/text_size_24"
+        android:text="确定"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

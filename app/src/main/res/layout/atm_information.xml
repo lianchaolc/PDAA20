@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_top"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/f3"
+        android:name="com.fragment.pda.HeadUser_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100y"
+        android:background="@color/blue_title"
+        android:orientation="horizontal" 
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" 
+            android:layout_weight="4">
+
+           <LinearLayout
+                android:layout_width="@dimen/dimen_72x"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical|right" >
+
+                <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dimen_40x"
+                android:layout_height="@dimen/dimen_40y"
+                android:src="@drawable/user_order" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" 
+                android:gravity="center_vertical">
+                
+                <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_40"
+                android:textColor="@color/white"
+                android:text="ATM明细信息" 
+                android:layout_marginLeft="@dimen/dimen_10x"/>
+            </LinearLayout>
+             
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/atm_back"
+                android:layout_width="@dimen/dimen_70x"
+                android:layout_height="@dimen/dimen_70y"
+                android:src="@drawable/back_cirle" 
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+         >
+
+        <ListView
+           
+            android:id="@+id/listviewatminfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

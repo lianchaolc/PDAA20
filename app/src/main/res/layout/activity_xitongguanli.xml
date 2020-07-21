@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/bule_main" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.example.app.fragment.Head_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/updatepass"
+        android:layout_width="@dimen/dimen_110x"
+        android:layout_height="@dimen/dimen_110y"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginRight="@dimen/dimen_44x"
+        android:layout_marginTop="@dimen/dimen_44y"
+        android:clickable="true"
+        android:src="@drawable/updateimge_change" />
+
+    <ImageView
+        android:id="@+id/PDAshezhi"
+        android:layout_width="@dimen/dimen_110x"
+        android:layout_height="@dimen/dimen_110y"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/updatepass"
+        android:layout_marginLeft="@dimen/dimen_42x"
+        android:clickable="true"
+        android:src="@drawable/system_admin_change" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/textView3"
+        android:text="PDA设置"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
+
+    <ImageView
+        android:id="@+id/fingergather"
+        android:layout_width="@dimen/dimen_110x"
+        android:layout_height="@dimen/dimen_110y"
+        android:layout_alignLeft="@+id/PDAshezhi"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:src="@drawable/button_fingergather" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fingergather"
+        android:layout_below="@+id/fingergather"
+        android:layout_marginTop="@dimen/dimen_12y"
+        android:text="指纹采集"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/updatepass"
+        android:layout_below="@+id/updatepass"
+        android:layout_marginTop="@dimen/dimen_10y"
+        android:text="修改密码"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20" />
+
+</RelativeLayout>

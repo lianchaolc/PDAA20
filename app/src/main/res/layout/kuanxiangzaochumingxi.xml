@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.example.app.fragment.Head_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/bule_main" >
+
+        <TextView
+            android:id="@+id/ym_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_30x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="款箱早送出库明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40" />
+
+        <!-- <ImageView
+            android:id="@+id/zaochu_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_38x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:src="@drawable/back_cirle" /> -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_80y" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="钞车线路："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/tv_chaoche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="东丽之行中心库一线"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_80y" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="网点数量："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/tv_wangdiancount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="0"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_80y" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="款箱数量："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/tv_kuanxiangcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="0"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_80y" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="配送日期："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:text="2015-05-01"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_400y"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/zaochu_button1"
+            android:layout_width="@dimen/dimen_180x"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginRight="@dimen/dimen_4x"
+            android:background="@drawable/buttom_selector_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30"
+            android:text="款箱明细" />
+
+        <Button
+            android:id="@+id/zaochu_button2"
+            android:layout_width="@dimen/dimen_180x"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginLeft="@dimen/dimen_4x"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30"
+            android:background="@drawable/buttom_selector_bg"
+            android:text="出库操作" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00aeFF"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/head_fragment"
+            android:name="com.example.app.fragment.Head_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50y" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/bule_main"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_60x"
+            android:text="早送申请"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50" />
+
+        <!-- <ImageView
+            android:id="@+id/zcsqBack"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_150x"
+            android:src="@drawable/back_cirle" /> -->
+    </LinearLayout>
+
+	<ScrollView
+	    android:layout_width="@dimen/dimen_480x"
+	    android:layout_height="@dimen/dimen_750y" >
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_750y"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dimen_80y" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:text="配送线路："
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/z_lineName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/back"
+                android:text="东丽之行中心库一线"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_1y"
+            android:layout_marginLeft="@dimen/dimen_8x"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:background="@drawable/view_hr_backgroud" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dimen_80y" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:text="网点名称："
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/z_netName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="东丽之行网点1"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_1y"
+            android:layout_marginLeft="@dimen/dimen_8x"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:background="@drawable/view_hr_backgroud" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dimen_80y" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:text="早送日期："
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_30" />
+
+            <TextView
+                android:id="@+id/z_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-05-01"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+            <Button
+                android:id="@+id/btnTime"
+                android:layout_width="@dimen/dimen_50x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:layout_marginTop="@dimen/dimen_8y"
+                android:background="@drawable/time" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:layout_height="@dimen/dimen_70y" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_25"
+                android:gravity="center"
+                android:text="款箱"
+                android:textColor="@color/back" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_25"
+                android:gravity="center"
+                android:text="状态"
+                android:textColor="@color/back" />
+
+            <CheckBox
+                android:id="@+id/zaosong_checkeDbox"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_25"
+                android:text="是否早送"
+                android:textColor="@color/back" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_25"
+                android:text="一次性锁扣"
+                android:textColor="@color/back" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:layout_height="@dimen/dimen_220y"
+            android:orientation="vertical" >
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <ListView
+                        android:id="@+id/zaosqlistView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_160y" >
+                    </ListView>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+           
+
+            <Button
+                android:id="@+id/zaochushenqing_button2"
+                android:layout_width="@dimen/dimen_170x"
+                android:layout_height="@dimen/dimen_90y"
+                android:textSize="@dimen/text_size_40"
+                android:enabled="false"
+                android:background="@drawable/gray_btn_bg"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

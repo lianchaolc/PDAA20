@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <!-- 2020-05-22-查看1 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#EFEEEE" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+
+        <TextView
+            android:id="@+id/yayunyuanlinenum"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="线路编号"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+
+        <TextView
+            android:id="@+id/yayunyuanlinename"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="线路名"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#cccccc" >
+        </View>
+            <TextView
+            android:id="@+id/yayunyuanlineturefalsetask"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="请领任务"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#cccccc" >
+    </View>
+
+</LinearLayout>

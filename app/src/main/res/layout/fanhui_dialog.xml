@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+     >
+
+    <LinearLayout
+        android:background="#e7e7e7"
+        android:gravity="center"
+        android:layout_width="@dimen/dimen_400x"
+        android:layout_height="@dimen/dimen_170y"
+        android:orientation="vertical" >
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/msg_back"
+            android:textSize="@dimen/text_size_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="连接超时!"
+            android:textColor="@color/back" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_15y"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:layout_marginRight="@dimen/dimen_20x"
+                android:id="@+id/fanhui_back"
+                android:textSize="@dimen/text_size_25"
+                android:layout_width="@dimen/dimen_130x"
+                android:layout_height="@dimen/dimen_50y"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="确定"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

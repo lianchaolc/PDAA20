@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    
+     > 
+	<!-- <ScrollView
+	    xmlns:android="http://schemas.android.com/apk/res/android"   
+	    android:layout_width="@dimen/dimen_480x"
+	    android:layout_height="@dimen/dimen_400y"    
+	    android:scrollbars="vertical"    
+	    android:fadingEdge="vertical">   -->  
+	    <TableLayout 
+	        android:id="@+id/wayparent1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f6f6f6"
+            android:orientation="vertical"
+	        >  
+            <TableRow >
+				<CheckBox 
+				    android:layout_width="wrap_content"  
+	        		android:layout_height="wrap_content"
+				    android:id="@+id/box_notclear"
+				    android:checked="false"/>
+	            <TextView
+	                android:paddingLeft="5px"
+	                android:layout_weight="1"
+	                android:singleLine="false"
+	                android:id="@+id/bin_number"
+	                android:textSize="@dimen/text_size_22"
+	                android:layout_width="match_parent"
+	                android:layout_height="match_parent"
+	                android:background="#f6f6f6"
+	                android:gravity="center_vertical"
+	                android:text="JN30113243434222"
+	                android:textColor="@color/gray" />
+	            <TextView
+	                android:layout_weight="1"
+	                android:id="@+id/line_num"
+	                android:textSize="@dimen/text_size_20"
+	                android:layout_width="match_parent"
+	                android:layout_height="match_parent"
+	                android:background="#f6f6f6"
+	                android:gravity="center_vertical"
+	                android:singleLine="true"
+	                android:text="东丽支行中心库一线"
+	                android:textColor="@color/gray" />
+	
+	            <TextView                
+	                android:visibility="gone"
+	                android:id="@+id/isfirst"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="TextView" /> 
+			</TableRow>
+        
+        </TableLayout>
+	<!-- </ScrollView>	--> 
+</LinearLayout> 

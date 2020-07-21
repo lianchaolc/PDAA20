@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:background="@color/gray_background"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y" >
+
+        <TextView
+            android:textSize="@dimen/text_size_25"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:textColor="@color/gray"
+            android:id="@+id/textView1"
+            android:layout_width="@dimen/dimen_410x"
+            android:layout_height="wrap_content"
+            android:text="空钞箱出库" />
+
+        <TextView
+            android:gravity="center"
+            android:background="@drawable/business_number"
+            android:textSize="@dimen/text_size_25"
+            android:textColor="@color/white"
+            android:id="@+id/textView2"
+            android:layout_width="@dimen/dimen_30x"
+            android:layout_height="@dimen/dimen_30y"
+            android:text="4" />
+
+    </LinearLayout>
+
+</LinearLayout>

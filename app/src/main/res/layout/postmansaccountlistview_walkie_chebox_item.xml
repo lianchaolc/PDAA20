@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:layout_marginTop="10dip"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#EFEEEE" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <CheckBox
+            android:id="@+id/dzyp_chebox"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:textColor="@color/back"
+           />
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/postmancountresult1"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="2.1"
+            android:gravity="center"
+            android:text="physon"
+            android:textColor="@color/back"
+            android:textSize="20px" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/postmancounttv"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="physon111"
+            android:textColor="@color/back"
+            android:textSize="20px" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#EFEEEE" >
+    </View>
+
+</LinearLayout>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llc"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:background="#00aeFF"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fg_qingling_zhouzhuanxiangluru_loginUserInfo"
+            android:name="com.ljsw.tjbankpda.qf.fragment.LoginUserInfoFragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/bule_main" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="请领周转箱录入"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_50x"
+            android:layout_height="@dimen/dimen_50y"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/user_order" />
+
+        <ImageView
+            android:id="@+id/iv_qingling_zhouzhuanxiangluru_back"
+            android:layout_width="@dimen/dimen_64x"
+            android:layout_height="@dimen/dimen_64y"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:src="@drawable/back_change" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_620y" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_35x"
+                android:layout_marginTop="@dimen/dimen_20y"
+                android:text="请扫描周转箱编号....."
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_40"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_1y"
+                android:layout_marginBottom="@dimen/dimen_4y"
+                android:layout_marginTop="@dimen/dimen_4y"
+                android:background="@drawable/gradient_white_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8y"
+                    android:layout_marginLeft="@dimen/dimen_35x"
+                    android:text="编号："
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_40" />
+
+                <TextView
+                    android:id="@+id/tv_qingling_zhouzhuanxiangluru_bianhao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_35x"
+		    android:text=""
+                    android:textColor="@color/back"
+		    android:textSize="@dimen/text_size_40" />
+            </LinearLayout>
+
+<!-- 2020-05-22-查看2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_20y"
+                android:layout_marginTop="@dimen/dimen_20y" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_marginRight="@dimen/dimen_25x"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:text="请扫描周转箱"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" >
+                </TextView>
+
+                <Button
+                    android:id="@+id/btn_qinglingzhou"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_marginRight="@dimen/dimen_25x"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttom_selector_bg"
+                    android:gravity="center"
+                    android:text="重新扫描"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_35" >
+                </Button>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listviewqinglingzhuouzhuanxingluru"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_270y"
+                android:layout_marginBottom="@dimen/dimen_10y"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_marginTop="@dimen/dimen_10y" />
+              <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/gradient_white_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10y"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:text="选中的周转箱:"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+
+                <TextView
+                    android:id="@+id/showselecttv"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/back"
+                    android:textSize="@dimen/text_size_35" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_qingling_zhouzhuanxiangluru_suokoubianhao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:text="一次性锁扣编号："
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+
+                <TextView
+                    android:id="@+id/tv_qingling_zhouzhuanxiangluru_luru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/dimen_110x"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:layout_marginTop="@dimen/dimen_10y"
+                    android:text="录入"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_10y"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/ed_qingling_zhouzhuanxiangluru_suokoubianhao"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:background="@drawable/money_count"
+                    android:ems="10"
+                    android:paddingLeft="@dimen/dimen_5x"
+                    android:textSize="@dimen/text_size_35" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_460x"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_15y" >
+
+                <TextView
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.8"
+                    android:gravity="center"
+                    android:text="周转箱编号"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+
+                <TextView
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.9"
+                    android:gravity="center"
+                    android:text="锁扣编号"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+
+                <TextView
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <ListView
+                android:layout_marginTop="@dimen/dimen_10y"
+                android:id="@+id/lv_qingling_zhouzhuanxiangluru_zhuangxiangInfo"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center" >
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/dimen_30x" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计："
+                    android:textColor="@color/back"
+                    android:textSize="@dimen/text_size_35" />
+
+                <TextView
+                    android:id="@+id/tv_qingling_zhouzhuanxiangluru_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_35" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_1y"
+                android:layout_marginTop="@dimen/dimen_8y"
+                android:background="@drawable/gradient_white_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_30y"
+                android:layout_marginTop="@dimen/dimen_30y" >
+
+                <Button
+                    android:id="@+id/btn_qingling_zhouzhuanxiangluru_tongji"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_marginLeft="@dimen/dimen_25x"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttom_selector_bg"
+                    android:text="装箱统计"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_35" />
+
+                <Button
+                    android:id="@+id/btn_qingling_zhouzhuanxiangluru_wancheng"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_marginRight="@dimen/dimen_25x"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttom_selector_bg"
+                    android:text="装箱完成"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_35" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

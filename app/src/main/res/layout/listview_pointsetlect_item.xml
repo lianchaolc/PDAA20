@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff" 
+    android:orientation="vertical">
+  <View
+       android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#EFEEEE"
+    ></View><LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_gravity="center"
+        android:divider="@null"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/lv_dizhiyapinid"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="physon"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_22" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/dizhiyapinitem"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="physon"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_22" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/dizhiyapintype"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_22" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#EFEEEE" >
+    </View>
+</LinearLayout>

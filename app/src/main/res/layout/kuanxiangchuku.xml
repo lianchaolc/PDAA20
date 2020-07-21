@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.example.app.fragment.Head_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+        android:background="@color/bule_main" >
+
+        <TextView
+            android:id="@+id/kxck_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_30x"
+            android:text="款箱出库"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size" />
+
+        <!-- <ImageView
+            android:id="@+id/chuku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_60x"
+            android:src="@drawable/back_cirle" /> -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100y"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:text="扫描款箱数量："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_35" />
+
+        <TextView
+            android:id="@+id/chuku_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:text="0"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_35" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_75y"
+        android:gravity="center" >
+
+        
+		<TextView
+                     android:id="@+id/textView2"
+                     android:textSize="@dimen/text_size_30"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginRight="@dimen/dimen_8x"
+                     android:layout_weight="1"
+                     android:gravity="center"
+                     android:text="网点名称"
+                     android:textColor="@color/red"/>
+       
+          <TextView
+              android:id="@+id/textView3"
+              android:textSize="@dimen/text_size_30"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:background="#FFFFFF"
+              android:ems="10"
+              android:gravity="center"
+              android:text="钞箱编号"
+              android:textColor="@color/red"  />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_300y"
+        android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_300y"
+                android:orientation="vertical" >
+                <ListView
+                     android:divider="@color/transparency"
+                     android:dividerHeight="0px"
+                     android:id="@+id/aaa__listView1"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1" >
+                 </ListView>
+            </LinearLayout>
+        
+    </LinearLayout>
+	
+   
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        
+
+        <Button
+            android:id="@+id/zaochu_button1"
+            android:layout_width="@dimen/dimen_180x"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginRight="@dimen/dimen_4x"
+            android:enabled="false"
+            android:background="@drawable/gray_btn_bg"
+            android:text="出库"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+        <Button
+            android:id="@+id/zaochu_button2"
+            android:layout_width="@dimen/dimen_180x"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginLeft="@dimen/dimen_4x"
+            android:background="@drawable/buttom_selector_bg"
+            android:text="重扫"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+</LinearLayout>

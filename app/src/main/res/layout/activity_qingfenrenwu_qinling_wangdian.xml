@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_qingfenrenwu_qingling_wangdian"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_80y"
+                android:background="@color/bule_main" >
+
+                <ImageView
+                    android:id="@+id/iv_qingfenrenwu_qingling_wangdian_back"
+                    android:layout_width="@dimen/dimen_64x"
+                    android:layout_height="@dimen/dimen_64y"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:src="@drawable/back_change" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/dimen_60x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_20x"
+                    android:src="@drawable/user_order" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="请领装箱网点" 
+                    android:textSize="@dimen/title_text_size"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60y"
+                android:background="#00aeFF"
+                android:orientation="vertical" >
+
+                <fragment
+                    android:id="@+id/fg_qingfenrenwu_qingling_wangdian_loginUserInfo"
+                    android:name="com.ljsw.tjbankpda.qf.fragment.LoginUserInfoFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_60y" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_qingfenrenwu_qingling_wangdian_zhihangName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_70y"
+                android:gravity="center"
+                android:text="西青支行一线"
+                android:textColor="@color/back"
+                android:background="@color/white"
+                android:textSize="@dimen/text_size_40"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/lv_qingfenrenwu_qingling_wangdian_Info"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_540y" 
+                android:divider="@color/white"
+                android:dividerHeight="5px">
+            </ListView>
+
+        </LinearLayout>
+
+</LinearLayout>

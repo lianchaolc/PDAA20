@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+     >
+
+    <LinearLayout
+        android:paddingRight="20px"
+        android:paddingLeft="20px"
+        android:gravity="center"
+        android:background="@color/gray_background"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_100y" >
+
+        <ProgressBar
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_50y" />
+
+        <TextView
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/runingtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在登陆..." />
+
+    </LinearLayout>
+
+</LinearLayout>

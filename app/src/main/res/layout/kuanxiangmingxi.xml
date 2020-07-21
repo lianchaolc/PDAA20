@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50y"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.example.app.fragment.Head_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:gravity="center_vertical"
+        android:background="@color/bule_main" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_30x"
+            android:text="款箱明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50" />
+
+        <!-- <ImageView
+            android:id="@+id/mingxi_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_128x"
+            android:src="@drawable/back_cirle" /> -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100y"
+        android:gravity="center_vertical"
+        android:weightSum="5" >
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_80y"
+            android:gravity="center"
+            android:layout_weight="3"
+             >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:text="网点名称"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_40" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_80y"
+            android:gravity="center"
+            android:layout_weight="2"
+            >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="箱号"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_40" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:layout_marginLeft="@dimen/dimen_8x"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:background="@drawable/view_hr_backgroud" />
+
+    <!-- <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_600y" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" > -->
+
+            <ListView
+                android:id="@+id/mingxiView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_500y"
+                android:headerDividersEnabled="false" >
+            </ListView>
+
+        <!-- </LinearLayout>
+    </ScrollView> -->
+
+</LinearLayout>

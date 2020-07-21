@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEEEE"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:src="@drawable/user_order" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="抵质押品装袋"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50" />
+
+        <Button
+            android:id="@+id/ql_ruku_update"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:background="@drawable/replace" />
+
+        <ImageView
+            android:id="@+id/ql_ruku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/aalaydizhiyapin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView_Style"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:text="操作人员:" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/dizhiyapin_username"
+                style="@style/TextView_Style"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_weight="2"
+                android:text="张三" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView_Style"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:text="总袋数:" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/dizhiyapin_allpakager"
+                    style="@style/TextView_Style"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:text="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/TextView_Style"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:text="未装袋:" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/dizhiyapin_unallpakager"
+                    style="@style/TextView_Style"
+                    android:layout_marginRight="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:text="" >
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView_Style"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:text="输入编号:" >
+            </TextView>
+
+            <LinearLayout
+                style="@style/TextView_Style"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_weight="2"
+                android:orientation="horizontal" >
+
+                   <AutoCompleteTextView  
+                   android:id="@+id/dizhiyapintv"
+                   android:textSize="@dimen/text_size_30"            
+                android:singleLine="true"
+                android:paddingLeft="10px"
+                android:completionThreshold="1"
+                android:textColor="@color/gray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder"
+                android:dropDownVerticalOffset="10dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:ems="10">
+			<requestFocus />
+			</AutoCompleteTextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_dizhiyapinsousuo"
+            android:layout_width="@dimen/dimen_200x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_5x"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@drawable/buttom_selector_bg"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView_Style"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:text="客户名称:" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/kaihuren"
+                style="@style/TextView_Style"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_weight="2"
+                android:text="" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/aalaydizhiyapin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_10y"
+            android:layout_marginTop="@dimen/dimen_10y"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/TextView_Style"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:text="物品名称:" >
+            </TextView>
+
+            <TextView
+                  android:id="@+id/kaiwupin"
+                style="@style/TextView_Style"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_weight="2"
+                android:text="" >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/aalaydizhiyapin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/TextView_Style"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="扫描结果:" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_resultsaomiao"
+            style="@style/TextView_Style"
+            android:layout_weight="2"
+            android:text="" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_20y"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_dizhiyapinsaomiao"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:layout_weight="1"
+            android:background="@drawable/buttom_selector_bg"
+            android:gravity="center"
+            android:text="扫描"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" >
+        </Button>
+
+        <Button
+            android:id="@+id/zhuangdai_btn"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:layout_weight="1"
+            android:background="@drawable/buttom_selector_bg"
+            android:gravity="center"
+            android:text="装袋"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+</LinearLayout>

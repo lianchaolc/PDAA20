@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_300x"
+    android:layout_height="@dimen/dimen_300y"
+    android:gravity="center"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <DatePicker
+        android:id="@+id/datePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/button12121"
+            android:layout_width="@dimen/dimen_120x"
+            android:layout_height="@dimen/dimen_60y"
+            android:background="@drawable/buttom_selector_bg"
+            android:text="确定"
+            android:textSize="@dimen/text_size_30" />
+
+        <Button
+            android:id="@+id/btn12121"
+            android:layout_width="@dimen/dimen_120x"
+            android:layout_height="@dimen/dimen_60y"
+            android:background="@drawable/buttom_selector_bg"
+            android:layout_marginLeft="@dimen/dimen_40x"
+            android:text="取消"
+            android:textSize="@dimen/text_size_30" />
+    </LinearLayout>
+
+</LinearLayout>

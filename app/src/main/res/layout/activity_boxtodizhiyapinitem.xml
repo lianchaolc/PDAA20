@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEEEE"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:src="@drawable/user_order" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="抵质押品装袋"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50" />
+
+        <Button
+            android:id="@+id/ql_ruku_update"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:background="@drawable/replace" />
+
+        <ImageView
+            android:id="@+id/ql_ruku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+  <LinearLayout
+     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" 
+    android:orientation="vertical">
+   <LinearLayout
+       android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100y"
+     
+       android:background="@color/white"
+       android:gravity="center"
+       android:orientation="horizontal" >
+
+       <TextView
+           android:layout_width="@dimen/dimen_0x"
+           android:layout_height="match_parent"
+           android:layout_marginLeft="@dimen/dimen_10x"
+           android:layout_weight="1"
+           android:gravity="center|left"
+           android:text="任务编号:"
+           android:textColor="@color/back"
+           android:textSize="@dimen/text_size_26" />
+
+       <TextView
+           android:id="@+id/dzyphedui_number"
+           android:layout_width="@dimen/dimen_0x"
+           android:layout_height="match_parent"
+           android:layout_marginRight="@dimen/dimen_10x"
+           android:layout_weight="1"
+           android:gravity="center|left"
+           android:text=""
+           android:textColor="@color/back"
+           android:textSize="@dimen/text_size_26" >
+       </TextView>
+   </LinearLayout>
+ 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginTop="@dimen/dimen_5y"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="@dimen/dimen_60y"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/dzyp_"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="待扫描:"
+                    android:textColor="@color/back"
+                    android:textSize="@dimen/text_size_26" />
+  <TextView
+                    android:id="@+id/boxtodizhiyapin_left"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text=""
+                    android:textColor="@color/back"
+                   android:textSize="@dimen/text_size_26" >
+                </TextView>
+               
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="@dimen/dimen_60y"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/dzyp_"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="已扫描:"
+                    android:textColor="@color/back"
+                   android:textSize="@dimen/text_size_26"/>
+
+               <TextView
+                    android:id="@+id/boxtodizhiyapin_rigth"
+                    android:layout_width="@dimen/dimen_0x"
+                    android:layout_height="@dimen/dimen_60y"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text=""
+                    android:textColor="@color/back"
+                   android:textSize="@dimen/text_size_26" >
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1y"
+            android:background="@color/black_boder" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_400y"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ListView
+                android:id="@+id/boxtodizhiyapin_weilistview1"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_8x"
+                android:layout_marginRight="@dimen/dimen_8x"
+                 android:divider="#00000000"
+                android:layout_weight="1" >
+            </ListView>
+
+            <View
+                android:layout_width="@dimen/dimen_1x"
+                android:layout_height="match_parent"
+                android:background="@color/black_boder" />
+
+                <ListView
+                android:id="@+id/boxtodizhiyapin_yilistvieyisao1"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_8x"
+                android:layout_marginRight="@dimen/dimen_8x"
+                android:divider="#00000000"
+                android:layout_weight="1" >
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btdzypibtn_sure"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_margin="5px"
+                android:layout_weight="1"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="确定"
+                android:textSize="@dimen/text_size_30"
+                 />
+
+            <Button
+                android:id="@+id/zhuangdai_btn_cancle"
+                android:layout_width="@dimen/dimen_0x"
+                android:layout_height="match_parent"
+                android:layout_margin="5px"
+                android:layout_weight="1"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="取消"
+                android:textSize="@dimen/text_size_30" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

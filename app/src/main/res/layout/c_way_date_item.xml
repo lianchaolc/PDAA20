@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_80y"
+    android:orientation="vertical"
+    
+     >
+
+    <LinearLayout
+       	android:background="#646464"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y" >
+
+        <TextView
+            
+            android:id="@+id/way"
+            android:textSize="@dimen/text_size_25"
+            android:layout_width="@dimen/dimen_280x"
+            android:layout_height="match_parent"
+            android:background="#f6f6f6"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="JN30113243434"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:gravity="center" 
+            android:background="#f6f6f6"
+            android:textSize="@dimen/text_size_25"
+            android:textColor="@color/gray"
+            android:id="@+id/plannumber"
+            android:layout_width="@dimen/dimen_50x"
+            android:layout_height="match_parent"
+            android:text="5"
+            android:singleLine="true"
+             />
+
+        <TextView 
+            android:background="#f6f6f6"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_25"
+            android:textColor="@color/gray"
+            android:id="@+id/date"
+            android:layout_width="@dimen/dimen_150x"
+            android:layout_height="match_parent"
+            android:text="2014-02-01 16:00:00"
+            android:singleLine="false"
+             />
+
+    </LinearLayout>
+    
+</LinearLayout>

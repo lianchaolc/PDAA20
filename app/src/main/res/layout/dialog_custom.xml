@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_300x"
+    android:layout_height="@dimen/dimen_400y"
+    android:background="@color/back"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="@dimen/dimen_200x"
+        android:layout_height="@dimen/dimen_100y"
+        android:background="#87CEFA"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_30" />
+
+    <LinearLayout
+     android:layout_width="@dimen/dimen_200x"
+     android:layout_height="@dimen/dimen_100y"
+        android:orientation="horizontal">
+
+        <!--取消-->
+        <Button
+            android:id="@+id/btn_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#87CEFA"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+        <!--确定-->
+        <Button
+            android:id="@+id/btn_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#87CEFA"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="查/盘库补录任务列表"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_34" />
+
+        <Button
+            android:id="@+id/ql_ruku_update"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:background="@drawable/replace" />
+
+        <ImageView
+            android:id="@+id/ql_ruku_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/dimen_60y"
+       android:layout_gravity="center"
+       android:background="@color/white"
+       android:orientation="horizontal" >
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen_60y"
+           android:gravity="center|left"
+           android:text="操作人:"
+           android:textColor="@color/back"
+           android:textSize="@dimen/text_size_26" />
+
+       <TextView
+           android:id="@+id/checkls_tvusername"
+           android:layout_width="wrap_content"
+           android:layout_height="@dimen/dimen_60y"
+           android:gravity="center|left"
+           android:text=""
+           android:textColor="@color/back"
+           android:textSize="@dimen/text_size_26" />
+</LinearLayout>
+ 
+<LinearLayout 
+      android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+         
+               android:background="@color/white"
+    >
+     <LinearLayout 
+      android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+               android:background="#EFEEEE"
+    >   
+    
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60y"
+             android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:gravity="center|left"
+            android:text="盘/查库补录任务列表"
+            android:textColor="@color/blue_top"
+            android:background="#EFEEEE"
+            android:textSize="@dimen/text_size_28" />
+</LinearLayout>
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/dimen_60y"
+     android:layout_gravity="center"
+     android:layout_marginLeft="@dimen/dimen_10x"
+     android:layout_marginRight="@dimen/dimen_10x"
+     android:layout_marginTop="@dimen/dimen_10y"
+     android:orientation="horizontal" >
+
+     <View
+         android:layout_width="@dimen/dimen_1x"
+         android:layout_height="match_parent"
+         android:background="#EFEEEE" >
+     </View>
+
+     <TextView
+         android:layout_width="@dimen/dimen_0x"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         android:background="@drawable/tv_boder"
+         android:gravity="center"
+         android:text="任务编号"
+         android:textColor="@color/back"
+         android:textSize="@dimen/text_size_26" />
+
+   
+
+     <TextView
+         android:layout_width="@dimen/dimen_0x"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         android:background="@drawable/tv_boder"
+         android:gravity="center"
+         android:text="漏扫数量"
+         android:textColor="@color/back"
+         android:textSize="@dimen/text_size_26" />
+
+     <View
+         android:layout_width="@dimen/dimen_1x"
+         android:layout_height="match_parent"
+         android:background="#EFEEEE" >
+     </View>
+
+     
+    
+ </LinearLayout>
+       
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:layout_marginTop="@dimen/dimen_2y"
+            android:orientation="vertical" >
+            <ListView
+                android:id="@+id/cls_listview"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:divider="#00000000"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_height="match_parent" >
+            </ListView>
+        </LinearLayout>
+
+  </LinearLayout>  
+</LinearLayout>

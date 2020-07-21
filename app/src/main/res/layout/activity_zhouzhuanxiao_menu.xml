@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:orientation="vertical"
+    android:background="#ffffff">
+    <!-- 2020-05-22-查看2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#00aeFF" >
+
+        <fragment 
+            android:id="@+id/zhouzhuanxiang_fragment"
+            android:name="com.fragment.pda.Head_fragment"
+            android:layout_height="@dimen/dimen_50y"
+            android:layout_width="match_parent"
+            />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_750y"
+        android:layout_weight="1"
+        android:orientation="vertical" 
+        android:gravity="center"
+        android:background="#2459b2">
+
+        <LinearLayout
+            android:id="@+id/ll_zhouzhuanxiao_menu_all"
+            android:layout_width="@dimen/dimen_380x"
+            android:layout_height="@dimen/dimen_600y"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_zhouzhuanxiao_menu_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_zhouzhuanxiao_menu_diaobo"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    android:id="@+id/iv_zhouzhuanxiao_menu_diaobo"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/diaobo" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="调拨管理"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_zhouzhuanxiao_menu_yayun"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/yayun" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="押运管理"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                
+                 <LinearLayout
+                    android:id="@+id/ll_postman_menu_yayun"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/menu_qingfen">
+</ImageView>
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="后督账包"
+                        android:textColor="@color/white" />
+                </LinearLayout> 
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_zhouzhuanxiao_menu_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/ll_zhouzhuanxiao_menu_qingfen"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    android:id="@+id/iv_zhouzhuanxiao_menu_qingfen"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/menu_qingfen" />
+
+                    <TextView
+                    	android:id="@+id/tv_zhouzhuanxiao_menu_qingfen"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="清分管理"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_zhouzhuanxiao_menu_saomiao"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    android:id="@+id/iv_zhouzhuanxiao_menu_saomiao"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/saomiao" />
+
+                    <TextView
+                   	 	android:id="@+id/tv_zhouzhuanxiao_menu_saomiao"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="周转箱扫描"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                 <LinearLayout
+                    android:id="@+id/ll_account_menu_yayun"
+                    android:layout_width="@dimen/dimen_190x"
+                    android:layout_height="@dimen/dimen_200y"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                    	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
+                        android:layout_width="@dimen/dimen_110x"
+                        android:layout_height="@dimen/dimen_110y"
+                        android:src="@drawable/yayun" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:textSize="@dimen/text_size_30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10y"
+                        android:text="账户资料"
+                        android:textColor="@color/white" />
+                </LinearLayout> 
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/cb_item_qingfenrenwu_qingling_wangdian_orderno"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_height="@dimen/dimen_85y" />
+
+    <TextView
+        android:id="@+id/smtext"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:layout_marginTop="@dimen/dimen_5y"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textColor="@color/back"
+        android:textSize="@dimen/text_size_35" />
+
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/gray_background"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView05"
+            android:textSize="@dimen/text_size_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:text="所在位置:"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/join_address"
+            android:textSize="@dimen/text_size_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="无"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView08"
+            android:textSize="@dimen/text_size_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:text="加钞钞箱:"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:id="@+id/join_addnum"
+            android:textSize="@dimen/text_size_22"
+            android:layout_width="@dimen/dimen_100x"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/join_addstate"
+            android:textSize="@dimen/text_size_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:text="未知"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:textSize="@dimen/text_size_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_8x"
+            android:text="回收钞箱:"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/join_backnum"
+            android:textSize="@dimen/text_size_22"
+            android:layout_width="@dimen/dimen_100x"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="0"
+            android:textColor="@color/gray" />
+
+        <TextView
+            android:id="@+id/join_backjoin"
+            android:textSize="@dimen/text_size_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:text="未知"
+            android:textColor="@color/gray" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/gray_msg_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_2y"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

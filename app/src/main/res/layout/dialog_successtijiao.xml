@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/success_layout"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dialog_success1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      
+		android:layout_gravity="center_horizontal"
+		android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size_30"
+        android:textColor="@color/back"
+        android:text="提交成功" />
+    <TextView
+        android:id="@+id/dialog_failure1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|top"
+        android:textSize="@dimen/text_size_30"
+         android:textColor="@color/gray_msg_bg"
+        android:text="提交失败" />
+
+</LinearLayout>

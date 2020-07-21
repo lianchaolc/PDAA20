@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_10y"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+    <!-- 2020-05-22-查看1 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#EFEEEE" >
+    </View>
+
+    <LinearLayout
+        android:id="@+id/yyyliniiten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:divider="@null"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/yyyyayunorgname"
+            android:textSize="@dimen/text_size_30"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="physon"
+            android:textColor="@color/back" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/yyytooktast"
+            android:textSize="@dimen/text_size_30"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@color/back" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE" >
+        </View>
+
+        <TextView
+            android:id="@+id/yyyupdatatast"
+            android:textSize="@dimen/text_size_30"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@color/back" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#EFEEEE" >
+    </View>
+
+</LinearLayout>

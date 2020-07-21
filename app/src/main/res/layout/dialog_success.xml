@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/success"
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_75y"
+        android:background="#87CEFA"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:focusable="true"
+        android:textSize="@dimen/text_size_40"
+        android:text="交接成功" />
+</LinearLayout>
