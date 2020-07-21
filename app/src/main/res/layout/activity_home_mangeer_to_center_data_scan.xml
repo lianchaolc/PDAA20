@@ -46,7 +46,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="80dip"
         android:layout_gravity="center"
@@ -55,7 +54,7 @@
 
         <LinearLayout
             android:layout_width="0px"
-            android:layout_height="80dip"
+            android:layout_height="@dimen/dimen_70y"
             android:layout_gravity="center"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
@@ -64,7 +63,7 @@
 
             <TextView
                 android:layout_width="0dip"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="未扫描:"
@@ -74,7 +73,7 @@
             <TextView
                 android:id="@+id/homepackger_tvleft"
                 android:layout_width="0dip"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="0"
@@ -84,7 +83,7 @@
 
         <LinearLayout
             android:layout_width="0px"
-            android:layout_height="80dip"
+            android:layout_height="@dimen/dimen_70y"
             android:layout_gravity="center"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
@@ -93,7 +92,7 @@
 
             <TextView
                 android:layout_width="0dip"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="已扫描:"
@@ -103,7 +102,7 @@
             <TextView
                 android:id="@+id/homepackgerright"
                 android:layout_width="0dip"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="0"
@@ -119,7 +118,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="460px"
+        android:layout_height="@dimen/dimen_570y"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -145,8 +144,8 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
             android:layout_weight="1"
             android:divider="#00000000" >
         </ListView>
@@ -154,16 +153,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_height="@dimen/dimen_80x"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/btn_hometoclean_jiaojie"
             android:layout_width="0dip"
-            android:layout_height="60px"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
             android:layout_weight="1"
             android:background="@drawable/buttom_selector_bg"
             android:gravity="center"
@@ -174,9 +172,9 @@
         <Button
             android:id="@+id/btn_hometoclean_cancle"
             android:layout_width="0dip"
-            android:layout_height="60px"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
             android:layout_weight="1"
             android:background="@drawable/buttom_selector_bg"
             android:gravity="center"
