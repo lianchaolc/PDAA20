@@ -192,12 +192,10 @@ public class Cash_TailZeroAllctivity extends BaseFingerActivity implements OnCli
 							new Thread(new Runnable() {
 								@Override
 								public void run() {
-									// TODO Auto-generated method stub
 									try {
 										Thread.sleep(1000);
 										handler.sendEmptyMessage(4);
 									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 								}
