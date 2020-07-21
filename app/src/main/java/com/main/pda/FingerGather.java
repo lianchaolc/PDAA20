@@ -244,9 +244,6 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
             managerClass.getRuning().runding(FingerGather.this, "请等待...");
             getFingerbiz().fingerprintInput(fingerNumberText, fingerInt(), firstFinger, ShareUtil.ivalBack);
         }
-
-        //获取下一个指纹信息
-        fingerUtil.getFingerCharAndImg();
     }
 
     @Override

@@ -605,8 +605,5 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
 
             }
         }
-
-        //获取下一个指纹
-        fingerUtil.getFingerCharAndImg();
     }
 }

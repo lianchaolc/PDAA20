@@ -423,8 +423,6 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                 m.what = -1;
             } finally {
                 handler.sendMessage(m);
-
-                fingerUtil.getFingerCharAndImg();
             }
         }
     }

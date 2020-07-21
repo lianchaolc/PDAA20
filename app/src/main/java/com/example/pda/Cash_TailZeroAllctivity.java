@@ -33,7 +33,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import afu.util.BaseFingerActivity;
-import poka_global_constant.GlobalConstant;
 
 /***
  * lc 装袋(尾零 和正钞) 201910.30
@@ -366,7 +365,6 @@ public class Cash_TailZeroAllctivity extends BaseFingerActivity implements OnCli
 						});
 					}
 					dialog.show();
-
 					break;
 
 				}
@@ -470,8 +468,6 @@ public class Cash_TailZeroAllctivity extends BaseFingerActivity implements OnCli
 				m.what = -1;
 			} finally {
 				handler.sendMessage(m);
-
-				fingerUtil.getFingerCharAndImg();
 			}
 		}
 	}

@@ -331,8 +331,6 @@ public class HomeMangerToCleanHandoverActivity extends BaseFingerActivity{
 			} finally {
 				handler.sendMessage(m);
 				GolbalUtil.onclicks = true;
-
-				fingerUtil.getFingerCharAndImg();
 			}
 		}
 	}

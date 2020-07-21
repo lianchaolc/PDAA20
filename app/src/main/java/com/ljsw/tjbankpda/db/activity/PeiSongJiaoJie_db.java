@@ -2,13 +2,12 @@ package com.ljsw.tjbankpda.db.activity;
 
 import java.net.SocketTimeoutException;
 
-import hdjc.rfid.operator.RFID_Device;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,31 +16,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.application.GApplication;
 import com.entity.SystemUser;
-import com.example.app.activity.KuanXiangJiaoJieYaYunActivity;
 import com.example.pda.R;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
 import com.ljsw.tjbankpda.db.service.ZhouZhuanXiangJiaoJie;
 import com.ljsw.tjbankpda.util.Skip;
-import com.ljsw.tjbankpda.yy.activity.YayunRwLbSActivity;
-import com.ljsw.tjbankpda.yy.application.S_application;
 import com.ljsw.tjbankpda.yy.service.ICleaningManService;
 import com.manager.classs.pad.ManagerClass;
 import com.moneyboxadmin.biz.FingerCheckBiz;
 import com.poka.device.ShareUtil;
-import poka_global_constant.GlobalConstant;
+
+import afu.util.BaseFingerActivity;
 
 /**
  * 配送交接
- * 
+ *
  * @author yuyunheng
- * 
+ *
  */
 @SuppressLint("HandlerLeak")
-public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListener {
+public class PeiSongJiaoJie_db extends BaseFingerActivity implements OnClickListener {
 	private ImageView back, img;
 	private TextView setname, bottom_tishi, top;
 	private SystemUser result_user;// 指纹验证
@@ -65,21 +60,9 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 	private FingerCheckBiz fingerCheck;
 	private ManagerClass manager;
 
-	FingerCheckBiz getFingerCheck() {
-		return fingerCheck = fingerCheck == null ? new FingerCheckBiz() : fingerCheck;
-	}
-
-	private RFID_Device rfid;
-
-	private RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_peisongjiaojie);
@@ -118,44 +101,9 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 
 	@Override
 	protected void onResume() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
 		super.onResume();
 		isFlag = true;
 		getJigouLeibie();
-		getRfid().addNotifly(new GetFingerValue());
-		new Thread() {
-			@Override
-			public void run() {
-				super.run();
-				getRfid().fingerOpen();
-			}
-
-		}.start();
-
-		GetFingerValue.handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				Bundle bundle;
-				if (msg.what == 1) {
-					System.out.println("进入handler");
-					System.out.println("isFlag:" + isFlag);
-					bundle = msg.getData();
-
-					if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-						top.setText("正在验证指纹");
-					} else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-						System.out.println("调取验证接口");
-						if (isFlag) {
-							isFlag = false;
-							yanzhengFinger();
-						}
-					}
-
-				}
-			}
-
-		};
 	}
 
 	String params;// 返回机构的类别
@@ -209,7 +157,6 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 					handler.sendEmptyMessage(1);
 				}
 			}
-
 		}.start();
 	}
 
@@ -486,7 +433,6 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				try {
 					jigouleibie = is.getJigouLeibie(o_Application.kuguan_db.getOrganizationId());
 					if (null != jigouleibie || !"".equals(jigouleibie)) {
@@ -510,16 +456,10 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		isFlag = false;
 	}
 
-	@Override
-	protected void onStop() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
-		super.onStop();
-	}
 
 	@Override
 	protected void onDestroy() {
@@ -529,7 +469,6 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 		cashBoxNum = "";
 		o_Application.yayunyuan = null;
 		manager.getRuning().remove();
-		getRfid().close_a20();
 	}
 
 	@Override
@@ -540,4 +479,27 @@ public class PeiSongJiaoJie_db extends FragmentActivity implements OnClickListen
 		return super.onKeyDown(keyCode, event);
 	}
 
+    @Override
+    public void openFingerSucceed() {
+        fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        top.setText("正在验证指纹");
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack = charBytes;
+        ShareUtil.finger_gather = img;
+
+        System.out.println("调取验证接口");
+        if (isFlag) {
+            isFlag = false;
+            yanzhengFinger();
+        }
+    }
 }

@@ -321,9 +321,6 @@ public class QingfenDengLuAcyivity extends BaseFingerActivity implements OnClick
                 } catch (Exception e1) {
                     e1.printStackTrace();
                     handler.sendEmptyMessage(1);
-                } finally {
-                    //获取下一个指纹信息
-                    fingerUtil.getFingerCharAndImg();
                 }
             }
 

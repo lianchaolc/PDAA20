@@ -2,32 +2,29 @@ package com.ljsw.tjbankpda.yy.activity;
 
 import java.net.SocketTimeoutException;
 
-import android.os.SystemClock;
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.util.Log;
-import hdjc.rfid.operator.RFID_Device;
+
+import afu.util.BaseFingerActivity;
 
 import com.application.GApplication;
 import com.entity.SystemUser;
 import com.example.pda.R;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
 import com.ljsw.tjbankpda.util.BianyiType;
 import com.ljsw.tjbankpda.util.Skip;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.manager.classs.pad.ManagerClass;
-import com.moneyboxadmin.biz.FingerCheckBiz;
 import com.poka.device.ShareUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import poka_global_constant.GlobalConstant;
 
 /**
  * 押运任务交接,网点人员(库管员)验证指纹页面
@@ -35,7 +32,7 @@ import poka_global_constant.GlobalConstant;
  * @author 石锚
  * 
  */
-public class YyrwJiaojieActivity extends FragmentActivity implements OnClickListener {
+public class YyrwJiaojieActivity extends BaseFingerActivity implements OnClickListener {
 
 	// 左右姓名提示和底部提示
 	private TextView setName_left, setName_right, prompt, yy_fingerTop, top;
@@ -45,7 +42,6 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 	String f1 = null; // 第一个按手指的人
 	String f2 = null; // 第二个按手指的人
 	StringBuffer f1AndF2 = new StringBuffer();
-	private FingerCheckBiz fingerCheck;
 	private ManagerClass manager;
 	private OnClickListener OnClick, OnClick2;
 	private String left_name, right_name;
@@ -58,25 +54,13 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 
 	private String jiaosheId;
 
-	FingerCheckBiz getFingerCheck() {
-		return fingerCheck = fingerCheck == null ? new FingerCheckBiz() : fingerCheck;
-	}
-
-	private RFID_Device rfid;
-
-	RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
 	/**
 	 * 080114 080107 98223
 	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	@SuppressLint("HandlerLeak")
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yy_jiaojie_s);
 		manager = new ManagerClass();
@@ -86,8 +70,8 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 		userTxt2 = (TextView) this.findViewById(R.id.username22);
 		prompt = (TextView) this.findViewById(R.id.yanshi);
 		initView();
-		OnClick = new OnClickListener() {
 
+		OnClick = new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				manager.getAbnormal().remove();
@@ -96,12 +80,10 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 					YanZhenFinger yf = new YanZhenFinger();
 					yf.start();
 				}
-
 			}
 		};
 
 		OnClick2 = new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				manager.getAbnormal().remove();
@@ -130,7 +112,7 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 						}
 						firstSuccess = true;
 						yy_fingerTop.setText("第一位验证成功");
-						if (S_application.getApplication().jiaojieType == 1) {
+						if (S_application.jiaojieType == 1) {
 							prompt.setText("请第二位库管员按手指...");
 						} else {
 							System.out.println("2015-11-09:hander");
@@ -150,19 +132,17 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 							setName_right.setText(right_name);
 							f2 = "2";
 							f1AndF2.append(ShareUtil.zhiwenid_left + BianyiType.xiahuaxian + ShareUtil.zhiwenid_right);
-							S_application.getApplication().s_userWangdian = f1AndF2.toString();
+							S_application.s_userWangdian = f1AndF2.toString();
 							prompt.setText("验证成功！");
 							top.setText("");
 							firstSuccess = false;
 							new Thread(new Runnable() {
 								@Override
 								public void run() {
-									// TODO Auto-generated method stub
 									try {
 										Thread.sleep(1000);
 										handler.sendEmptyMessage(4);
 									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 								}
@@ -223,53 +203,12 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 
 	@Override
 	protected void onResume() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
 		super.onResume();
-
-		getRfid().addNotifly(new GetFingerValue());
-		getRfid().fingerOpen();
 		isFlag = true;
-		GetFingerValue.handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				Bundle bundle;
-				if (msg.what == 1) {
-					bundle = msg.getData();
-					if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-						top.setText("正在获取指纹...");
-						new Thread(new Runnable() {
-							@Override
-							public void run() {
-								SystemClock.sleep(2500);
-								if (isFlag) {
-									runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											Log.e("TAG", "run: 获取指纹失败");
-											if (!top.getText().equals("正在验证指纹..."))
-												top.setText("获取指纹失败...");
-										}
-									});
-								}
-							}
-						}).start();
-					} else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-						if (isFlag) {
-							Log.e("TAG", "run: 正在验证指纹");
-							top.setText("正在验证指纹...");
-							isFlag = false;
-							YanZhenFinger yf = new YanZhenFinger();
-							yf.start();
-						}
-					}
-				}
-			}
-		};
 	}
 
 	public void initView() {
-		if (S_application.getApplication().jiaojieType == 1) {
+		if (S_application.jiaojieType == 1) {
 			userTxt1.setText("库管员");
 			userTxt2.setText("库管员");
 			prompt.setText("请第一位库管员按手指...");
@@ -291,7 +230,38 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 		findViewById(R.id.yanshi).setOnClickListener(this);
 	}
 
-	/**
+    @Override
+    public void openFingerSucceed() {
+	    fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        top.setText("正在获取指纹...");
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack = charBytes;
+
+        if (!firstSuccess && !"1".equals(f1)) {
+            ShareUtil.finger_wangdian_left = img;
+        } else {
+            ShareUtil.finger_wangdian_right = img;
+        }
+
+        if (isFlag) {
+            Log.e("TAG", "run: 正在验证指纹");
+            top.setText("正在验证指纹...");
+            isFlag = false;
+            YanZhenFinger yf = new YanZhenFinger();
+            yf.start();
+        }
+    }
+
+    /**
 	 * 指纹验证线程
 	 * 
 	 * @author Administrator
@@ -308,11 +278,11 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 		public void run() {
 			super.run();
 			YanZhengZhiWenService yanzheng = new YanZhengZhiWenService();
-			System.out.println("网点机构:" + S_application.getApplication().wangdianJigouId);
+			System.out.println("网点机构:" + S_application.wangdianJigouId);
 			System.out.println("网点角色ID" + jiaosheId);
 			System.out.println("网点指纹特征值:" + ShareUtil.ivalBack);
 			try {
-				result_user = yanzheng.checkFingerprint(S_application.getApplication().wangdianJigouId, jiaosheId, // 网点人员角色Id
+				result_user = yanzheng.checkFingerprint(S_application.wangdianJigouId, jiaosheId, // 网点人员角色Id
 						ShareUtil.ivalBack);
 
 				if (result_user != null) {
@@ -322,11 +292,9 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 					m.what = 0;
 				}
 			} catch (SocketTimeoutException e) {
-				// TODO: handle exception
 				e.printStackTrace();
 				m.what = -4;
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 				m.what = -1;
 			} finally {
@@ -341,13 +309,13 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 		top.setText("");
 		if (null == f1) {
 			firstSuccess = false;
-			if (S_application.getApplication().jiaojieType == 1) {
+			if (S_application.jiaojieType == 1) {
 				prompt.setText("请第一位库管员按手指...");
 			} else {
 				prompt.setText("请第一位网点人员按手指...");
 			}
 		} else {
-			if (S_application.getApplication().jiaojieType == 1) {
+			if (S_application.jiaojieType == 1) {
 				prompt.setText("请第二位库管员按手指...");
 			} else {
 				prompt.setText("请第二位网点人员按手指...");
@@ -357,7 +325,7 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 			Bundle bundle = arg2.getExtras();
 			String isOk = bundle.getString("isOk");
 			String name = bundle.getString("name");
-			if (isOk.equals("success") && firstSuccess == false) {
+			if (isOk.equals("success") && !firstSuccess) {
 				f1 = "1";
 				left_name = GApplication.user.getLoginUserName();
 				setName_left.setText(left_name);
@@ -365,14 +333,14 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 				firstSuccess = true;
 				top.setText("第一位验证成功");
 				ShareUtil.zhiwenid_left = name;
-				if (S_application.getApplication().jiaojieType == 1) {
+				if (S_application.jiaojieType == 1) {
 					prompt.setText("请第二位库管员按手指...");
 				} else {
 					System.out.println("2015-11-09:hander2");
 					prompt.setText("请第二位网点人员按手指...");
 				}
-				S_application.getApplication().left_user = GApplication.user;
-			} else if (isOk.equals("success") && firstSuccess == true) {
+				S_application.left_user = GApplication.user;
+			} else if (isOk.equals("success") && firstSuccess) {
 				f2 = "2";
 				right_name = GApplication.user.getLoginUserName();
 				if (right_name != null && right_name.equals(left_name)) {
@@ -384,19 +352,17 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 					yy_fingerTop.setText("");
 					ShareUtil.zhiwenid_right = name;
 					prompt.setText("验证成功！");
-					S_application.getApplication().right_user = GApplication.user;
+					S_application.right_user = GApplication.user;
 					f1AndF2.append(ShareUtil.zhiwenid_left + BianyiType.xiahuaxian + ShareUtil.zhiwenid_right);
-					S_application.getApplication().s_userWangdian = f1AndF2.toString();
+					S_application.s_userWangdian = f1AndF2.toString();
 					if (f1 != null && f2 != null) {
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
-								// TODO Auto-generated method stub
 								try {
 									Thread.sleep(2000);
 									handler.sendEmptyMessage(4);
 								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
@@ -429,18 +395,13 @@ public class YyrwJiaojieActivity extends FragmentActivity implements OnClickList
 		manager.getAbnormal().remove(); // LR_TODO: 2020/6/4 18:23 liu_rui 以防万一
 	}
 
-	@Override
-	protected void onStop() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
-		super.onStop();
-	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		S_application.getApplication().left_user = null;
-		S_application.getApplication().right_user = null;
+		S_application.left_user = null;
+		S_application.right_user = null;
 		f2 = null;
 		f1 = null;
 		firstSuccess = false;

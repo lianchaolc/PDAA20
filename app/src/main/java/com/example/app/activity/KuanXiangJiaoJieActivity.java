@@ -91,8 +91,6 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     handler.sendEmptyMessage(3);
-                } finally {
-                    fingerUtil.getFingerCharAndImg();
                 }
             }
         };

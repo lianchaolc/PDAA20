@@ -128,6 +128,8 @@ public class FingerUtil {
 
                 fingerHandlerInterface.getImgSucceed(bitmap);
 
+                mHandler.postDelayed(getFPImageTask, 1000);
+
             } else if (statues == mFingerHelper.PS_NO_FINGER) {
                 fingerHandlerInterface.noFingerHandler();
                 mHandler.postDelayed(getFPImageTask, 100);
@@ -164,6 +166,8 @@ public class FingerUtil {
                         //upload success
                         fingerHandlerInterface.getCharSucceed(charBytes);
                     }
+
+                    mHandler.postDelayed(getCharTask, 1000);
                 } else {
                     //char is bad quickly
                     fingerHandlerInterface.badCharHandler();
@@ -209,6 +213,9 @@ public class FingerUtil {
 
                         fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
                     }
+
+                    //获取下一枚指纹信息, 避免页面控制
+                    mHandler.postDelayed(getCharImgTask, 1000);
                 } else {
                     //char is bad quickly
                     fingerHandlerInterface.badCharHandler();
@@ -260,6 +267,7 @@ public class FingerUtil {
                             fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
                         }
 
+                        mHandler.postDelayed(twoFingerTask, 1000);
                         fpCharBuffer = mFingerHelper.CHAR_BUFFER_B;
                     } else {
                         //char is bad quickly
@@ -279,6 +287,8 @@ public class FingerUtil {
                             //upload success
                             fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
                         }
+
+                        mHandler.postDelayed(twoFingerTask, 1000);
                     } else {
                         //char is bad quickly
                         fingerHandlerInterface.badCharHandler();

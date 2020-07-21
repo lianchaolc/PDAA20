@@ -339,7 +339,6 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
             } finally {
                 handler.sendMessage(m);
                 GolbalUtil.onclicks = true;
-                fingerUtil.getFingerCharAndImg();
             }
         }
     }

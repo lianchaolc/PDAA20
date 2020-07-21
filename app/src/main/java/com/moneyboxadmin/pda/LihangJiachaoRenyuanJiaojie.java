@@ -4,7 +4,8 @@ import java.net.SocketTimeoutException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,14 +16,12 @@ import com.application.GApplication;
 import com.entity.SystemUser;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
-import com.main.pda.Scan;
 import com.manager.classs.pad.ManagerClass;
 import com.moneyboxadmin.service.SaveAuthLogService;
 import com.poka.device.ShareUtil;
-import hdjc.rfid.operator.RFID_Device;
-import poka_global_constant.GlobalConstant;
+
+import afu.util.BaseFingerActivity;
 
 /**
  * 离行式加钞人员指纹交接
@@ -30,7 +29,7 @@ import poka_global_constant.GlobalConstant;
  * @author Administrator
  * 
  */
-public class LihangJiachaoRenyuanJiaojie extends Activity {
+public class LihangJiachaoRenyuanJiaojie extends BaseFingerActivity {
 
 	private TextView tishi; // 顶部提示控件
 	private TextView tishiDibu; // 底部提示控件
@@ -47,14 +46,6 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 	final ManagerClass managerClass = new ManagerClass();
 	private Bundle bundleBussin;
 
-	private RFID_Device rfid;
-
-	RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
 	// 页面跳转
 	private void gotoActivity() {
@@ -65,9 +56,9 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 		LihangJiachaoRenyuanJiaojie.this.finish();
 	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	@SuppressLint("HandlerLeak")
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.y_bank_double_jiachaoyuan);
 		tishi = (TextView) findViewById(R.id.resultmsg);
@@ -80,76 +71,17 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 		isOKTxt = (TextView) findViewById(R.id.resulttext);
 
 		bundleBussin = getIntent().getExtras();
-		Scan scan = new Scan();
-		scan.scan();
-		scan.handler = new Handler() {
-
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				managerClass.getRfid().addNotifly(new GetFingerValue()); // 添加通知
-				managerClass.getRfid().fingerOpen(); // 打开指纹
-
-			}
-		};
-
-		// 获得指纹通知
-		GetFingerValue.handler = new Handler() {
-
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				Bundle bundle;
-				if (msg.what == 1) {
-					bundle = msg.getData();
-					String tishiString = bundle.getString("finger");
-					tishi.setText("正在验证...");
-					System.out.println("tishi:" + tishiString);
-					if (GolbalUtil.onclicks && bundle.getString("finger").equals("获取指纹特征值成功！")) { // 指纹获取成功
-						System.out.println("state:" + state);
-						GolbalUtil.onclicks = false;
-						switch (state) {
-						case 0: // 第一人验证
-							zhiwen1.setImageBitmap(ShareUtil.finger_bitmap_left); // 现实指纹图片
-							break;
-
-						case 1: // 第二人验证
-							zhiwen2.setImageBitmap(ShareUtil.finger_bitmap_left); // 现实指纹图片
-							break;
-						}
-
-						/*
-						 * 验证交接
-						 */
-						String corpId = GApplication.user.getOrganizationId(); // 机构ID
-						String roidId = "5";
-						byte[] cValue = ShareUtil.ivalBack;
-						System.out.println("准备交接");
-						jiaojie(corpId, roidId, cValue);
-					}
-
-				}
-			}
-		};
 	}
 
-	@Override
-	protected void onResume() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
-		super.onResume();
-	}
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		GolbalUtil.onclicks = true;
 	}
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
 		super.onStop();
 		ShareUtil.finger_bitmap_right = null;
 		ShareUtil.finger_bitmap_left = null;
@@ -167,7 +99,47 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 		thread.start();
 	}
 
-	/**
+    @Override
+    public void openFingerSucceed() {
+        fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        tishi.setText("正在验证...");
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack = charBytes;
+
+        System.out.println("state:" + state);
+        GolbalUtil.onclicks = false;
+        switch (state) {
+            case 0: // 第一人验证
+                ShareUtil.finger_bitmap_right = img;
+                zhiwen1.setImageBitmap(ShareUtil.finger_bitmap_left); // 现实指纹图片
+                break;
+
+            case 1: // 第二人验证
+                ShareUtil.finger_bitmap_left = img;
+                zhiwen2.setImageBitmap(ShareUtil.finger_bitmap_left); // 现实指纹图片
+                break;
+        }
+
+        /*
+         * 验证交接
+         */
+        String corpId = GApplication.user.getOrganizationId(); // 机构ID
+        String roidId = "5";
+        byte[] cValue = ShareUtil.ivalBack;
+        System.out.println("准备交接");
+        jiaojie(corpId, roidId, cValue);
+    }
+
+    /**
 	 * 指纹交接验证
 	 * 
 	 * @author Administrator
@@ -186,7 +158,6 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			YanZhengZhiWenService yanzheng = new YanZhengZhiWenService();
 			Message msg = handler.obtainMessage();
 			try {
@@ -214,7 +185,8 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 	/*
 	 * 指纹验证handelr
 	 */
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1: // 验证成功
@@ -258,7 +230,6 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			Message msg = kongxianHandelr.obtainMessage();
 			try {
 				System.out.println("钓调用空闲查询——参数userId:" + user.getLoginUserId());
@@ -276,7 +247,6 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 				e.printStackTrace();
 				msg.what = 3;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				msg.what = 4;
 			} finally {
@@ -288,7 +258,8 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 	/*
 	 * 空闲验证handler
 	 */
-	private Handler kongxianHandelr = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler kongxianHandelr = new Handler() {
 		public void handleMessage(Message msg) {
 			SystemUser user = (SystemUser) msg.obj;
 
@@ -319,10 +290,8 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 					// 延迟跳转到押韵验证界面
 					Timer timer = new Timer();
 					timer.schedule(new TimerTask() {
-
 						@Override
 						public void run() {
-							// TODO Auto-generated method stub
 							gotoActivity();
 						}
 					}, 2000);
@@ -343,7 +312,7 @@ public class LihangJiachaoRenyuanJiaojie extends Activity {
 			}
 
 			GolbalUtil.onclicks = true;
-		};
+		}
 	};
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 import afu.util.PrivilegeActivity;
 import com.service.NetService;
-import hdjc.rfid.operator.RFID_Device;
 
 import com.application.GApplication;
 import com.example.pda.R;
@@ -21,9 +20,6 @@ import com.service.FixationValue;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,20 +36,8 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	ImageView home; // 主菜单
 	ImageView systemset; // 系统设置
 	ImageView version; // 版本更新
-	BroadcastReceiver broad_net;
-
-	private RFID_Device rfid;
-
-	RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
 	public static List<Activity> list_version;
-
-	int i = 0;
 	private ManagerClass managerClass;
 
 	@Override
@@ -82,12 +66,11 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 
 		boolean txt_namespace = fileIsExists("namespace.txt");
 		boolean txt_url = fileIsExists("url.txt");
-		if (txt_url == true && txt_namespace == true) {
+		if (txt_url && txt_namespace) {
 			inputSDCardNAMESPACE();
 			inputSDCardURL();
 
@@ -97,7 +80,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 		boolean txt_namespacethree = fileIsExists("namespace_three.txt");
 		boolean txt_urlthree = fileIsExists("url_three.txt");
-		if (txt_namespacethree == true && txt_urlthree == true) {
+		if (txt_namespacethree && txt_urlthree) {
 			inputSDCardNAMESPACEThree();
 			inputSDCardURLThree();
 		} else {
@@ -154,7 +137,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 		// 当松手的的时候
 		if (MotionEvent.ACTION_UP == even.getAction()) {
-			Log.i("getGetUtil().ismover", new GolbalUtil().ismover + "");
+			Log.i("getGetUtil().ismover", GolbalUtil.ismover + "");
 			switch (view.getId()) {
 			// 主菜单
 			case R.id.home:
@@ -232,7 +215,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	/**
 	 * 本机读取保存的地址 文件名 需要赋值的控件
 	 * 
-	 * @param urlname
+	 * @param
 	 */
 	public void inputSDCardNAMESPACE() {
 		try {
@@ -266,15 +249,16 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			}
 			String getsaveinfo = sb.toString();
 			System.out.println("=====读取:" + getsaveinfo);
-			FixationValue.URL = getsaveinfo + "/cash_pda";
-			String str = getsaveinfo.substring(getsaveinfo.length() - 9, getsaveinfo.length());
-			if (str.equals("/cash_pda")) {
-				FixationValue.URL2 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_box";
-				FixationValue.URL3 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_cm";
-				FixationValue.URL4 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_cmanagement";
-				FixationValue.URL5 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_kuguanyuan";
+			FixationValue.URL = getsaveinfo + "/cash_pdaHDHE";
+			String str = getsaveinfo.substring(getsaveinfo.length() - 9);
+			if (str.equals("/cash_pdaHDHE")) {
+                String substring = getsaveinfo.substring(0, getsaveinfo.length() - 9);
+                FixationValue.URL2 = substring + "/cash_boxHDHE";
+				FixationValue.URL3 = substring + "/cash_cm";
+				FixationValue.URL4 = substring + "/cash_cmanagement";
+				FixationValue.URL5 = substring + "/cash_kuguanyuan";
 			} else {
-				FixationValue.URL2 = getsaveinfo + "/cash_box";
+				FixationValue.URL2 = getsaveinfo + "/cash_boxHDHE";
 				FixationValue.URL3 = getsaveinfo + "/cash_cm";
 				FixationValue.URL4 = getsaveinfo + "/cash_cmanagement";
 				FixationValue.URL5 = getsaveinfo + "/cash_kuguanyuan";
@@ -297,7 +281,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	/**
 	 * 本机读取保存的地址 文件名 需要赋值的控件
 	 * 
-	 * @param urlname
+	 * @param
 	 */
 	public void inputSDCardNAMESPACEThree() {
 		try {
@@ -334,26 +318,27 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			FixationValue.URL6 = getsaveinfo + "/pda";
 			String str = getsaveinfo.substring(getsaveinfo.length() - 9, getsaveinfo.length());
 			if (str.equals("/pda")) {
-				FixationValue.URL6 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/pda";
-				FixationValue.URL7 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/account";
-				FixationValue.URL8 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/ckc";
-				FixationValue.URL9 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_cm";
-				FixationValue.url11 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/escort";
-				FixationValue.URL10 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_cm";
-				FixationValue.url15 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cd";
-				FixationValue.url16 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/ckc";
-				FixationValue.URL17 = getsaveinfo.substring(0, getsaveinfo.length() - 9) + "/cash_sk";
+			    String sub = getsaveinfo.substring(0, getsaveinfo.length() - 9);
+				FixationValue.URL6 = sub + "/pda";
+				FixationValue.URL7 = sub + "/account";
+				FixationValue.URL8 = sub + "/ckc";
+				FixationValue.URL9 = sub + "/cash_cm";
+				FixationValue.url11 = sub + "/escort";
+				FixationValue.URL10 = sub + "/cash_cm";
+				FixationValue.url15 = sub + "/cd";
+				FixationValue.url16 = sub + "/ckc";
+				FixationValue.URL17 = sub + "/cash_sk";
 
 			} else {
-				FixationValue.URL6 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/pda";
-				FixationValue.URL7 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/account";
-				FixationValue.URL8 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/ckc";
-				FixationValue.URL9 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/cash_cm";
-				FixationValue.url11 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/escort";
-				FixationValue.URL10 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/cash_cm";
-				FixationValue.url15 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/cd";
-				FixationValue.url16 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/ckc";
-				FixationValue.URL17 = getsaveinfo.substring(0, getsaveinfo.length() - 0) + "/cash_sk";
+				FixationValue.URL6 = getsaveinfo + "/pda";
+				FixationValue.URL7 = getsaveinfo + "/account";
+				FixationValue.URL8 = getsaveinfo + "/ckc";
+				FixationValue.URL9 = getsaveinfo + "/cash_cm";
+				FixationValue.url11 = getsaveinfo + "/escort";
+				FixationValue.URL10 = getsaveinfo + "/cash_cm";
+				FixationValue.url15 = getsaveinfo + "/cd";
+				FixationValue.url16 = getsaveinfo + "/ckc";
+				FixationValue.URL17 = getsaveinfo + "/cash_sk";
 			}
 			System.out.println("地址2：" + FixationValue.URL6);
 			System.out.println("地址7：" + FixationValue.URL7);

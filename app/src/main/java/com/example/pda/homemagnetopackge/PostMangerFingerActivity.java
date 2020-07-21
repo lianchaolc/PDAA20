@@ -348,8 +348,6 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
             } finally {
                 handler.sendMessage(m);
                 GolbalUtil.onclicks = true;
-
-                fingerUtil.getFingerCharAndImg();
             }
         }
     }

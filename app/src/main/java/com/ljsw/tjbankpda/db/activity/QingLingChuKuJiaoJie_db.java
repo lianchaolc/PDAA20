@@ -2,13 +2,13 @@ package com.ljsw.tjbankpda.db.activity;
 
 import java.net.SocketTimeoutException;
 
-import hdjc.rfid.operator.RFID_Device;
+import afu.util.BaseFingerActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.entity.SystemUser;
 import com.example.pda.R;
-import com.imple.getnumber.GetFingerValue;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
 import com.ljsw.tjbankpda.db.service.ZhouZhuanXiangJiaoJie;
@@ -27,7 +26,6 @@ import com.ljsw.tjbankpda.util.Skip;
 import com.manager.classs.pad.ManagerClass;
 import com.moneyboxadmin.biz.FingerCheckBiz;
 import com.poka.device.ShareUtil;
-import poka_global_constant.GlobalConstant;
 
 /**
  * 请领装箱出库
@@ -36,7 +34,7 @@ import poka_global_constant.GlobalConstant;
  * 
  */
 @SuppressLint("HandlerLeak")
-public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClickListener {
+public class QingLingChuKuJiaoJie_db extends BaseFingerActivity implements OnClickListener {
 	private ImageView back, img_left, img_right;
 	private TextView setName_left, setName_right, top_tishi, bottom_tishi;
 	private SystemUser result_user;// 指纹验证
@@ -58,21 +56,9 @@ public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClick
 	private FingerCheckBiz fingerCheck;
 	private ManagerClass manager;
 
-	FingerCheckBiz getFingerCheck() {
-		return fingerCheck = fingerCheck == null ? new FingerCheckBiz() : fingerCheck;
-	}
-
-	private RFID_Device rfid;
-
-	private RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_zhaungxiangchuku_db);
@@ -106,42 +92,9 @@ public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClick
 
 	@Override
 	protected void onResume() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
 		super.onResume();
 		isFlag = true;
 		load();
-		getRfid().addNotifly(new GetFingerValue());
-		new Thread() {
-
-			@Override
-			public void run() {
-				super.run();
-				getRfid().fingerOpen();
-			}
-
-		}.start();
-
-		GetFingerValue.handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				Bundle bundle;
-				if (msg.what == 1) {
-					bundle = msg.getData();
-
-					if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-						top_tishi.setText("正在验证指纹...");
-					} else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-						if (isFlag) {
-							isFlag = false;
-							yanzhengFinger();
-						}
-
-					}
-				}
-			}
-
-		};
 	}
 
 	/**
@@ -255,7 +208,6 @@ public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClick
 				o_Application.jihuadan_list_xianjin.clear();
 				o_Application.jihuadan_list_zhongkong.clear();
 				o_Application.numberlist.clear();
-				o_Application.jihuadan_list_dizhiyapin.clear();
 				o_Application.guolv.clear();
 				cashBoxNum = "";
 				userId = "";
@@ -441,14 +393,8 @@ public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClick
 		isFlag = false;
 		manager.getRuning().remove();
 		manager.getAbnormal().remove();
-		// getRfid().close_a20();
 	}
 
-	@Override
-	protected void onStop() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
-		super.onStop();
-	}
 
 	@Override
 	protected void onDestroy() {
@@ -460,11 +406,37 @@ public class QingLingChuKuJiaoJie_db extends FragmentActivity implements OnClick
 		cashBoxNum = "";
 		userId = "";
 		o_Application.FingerJiaojieNum.clear();
-		getRfid().close_a20();
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		return super.onKeyDown(keyCode, event);
 	}
+
+    @Override
+    public void openFingerSucceed() {
+        fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        top_tishi.setText("正在验证指纹...");
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack = charBytes;
+        if (!firstSuccess && !"1".equals(f1)) {
+            ShareUtil.finger_kuguandenglu_left = img;
+        } else {
+            ShareUtil.finger_kuguandenglu_right = img;
+        }
+
+        if (isFlag) {
+            isFlag = false;
+            yanzhengFinger();
+        }
+    }
 }

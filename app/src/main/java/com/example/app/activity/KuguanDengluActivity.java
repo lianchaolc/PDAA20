@@ -92,7 +92,6 @@ public class KuguanDengluActivity extends BaseFingerActivity {
                 bottomtext.setText("请第二位库管员按压手指...");
                 texttop.setText("第一位验证成功");
 
-                fingerUtil.getFingerCharAndImg();
             }
             if (flag.equals("kuguantwo")) {
                 img_right.setImageResource(R.drawable.sccuss);
@@ -201,9 +200,6 @@ public class KuguanDengluActivity extends BaseFingerActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     handler.sendEmptyMessage(5);
-                } finally {
-                    //获取下一个指纹信息
-                    fingerUtil.getFingerCharAndImg();
                 }
             }
         };
@@ -236,8 +232,6 @@ public class KuguanDengluActivity extends BaseFingerActivity {
                         firstSuccess = true;
                         bottomtext.setText("请第二位库管员按压手指...");
                         texttop.setText("第一位验证成功");
-
-                        fingerUtil.getFingerCharAndImg();
                     // 第二位验证
                     } else {
                         fname_right = result_user.getUsername();

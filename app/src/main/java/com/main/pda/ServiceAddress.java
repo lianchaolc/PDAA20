@@ -60,7 +60,7 @@ public class ServiceAddress extends Activity {
 			GolbalView.webServiceAddress = true;
 			editor = sharepre.edit();
 			editor.putString("space", "http://service.timer.cashman.poka.cn");
-			editor.putString("webservice", "http://http://192.168.1.121:8080/CashWebServices/webservice/cash_pda");
+			editor.putString("webservice", "http://http://192.168.1.121:8080/CashWebServices/webservice/cash_pdaHDHE");
 			editor.commit();
 		}
 

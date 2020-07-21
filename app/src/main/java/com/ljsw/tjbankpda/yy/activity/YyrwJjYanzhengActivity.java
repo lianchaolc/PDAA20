@@ -2,48 +2,40 @@ package com.ljsw.tjbankpda.yy.activity;
 
 import java.net.SocketTimeoutException;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.SystemClock;
-import hdjc.rfid.operator.RFID_Device;
-import android.app.Dialog;
+
+import afu.util.BaseFingerActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.GApplication;
-import com.example.app.activity.YayunJiaojieActivity;
 import com.example.app.entity.User;
 import com.example.pda.R;
 import com.example.pda.YayunSelectRewuUseActivity;
 import com.golbal.pda.GolbalUtil;
-import com.imple.getnumber.GetFingerValue;
-import com.ljsw.tjbankpad.baggingin.activity.CustomDialog;
-import com.ljsw.tjbankpad.baggingin.activity.DiZhiYaPinActivity;
-import com.ljsw.tjbankpad.baggingin.activity.DialogManager;
-import com.ljsw.tjbankpad.baggingin.activity.SuccessDialog;
 import com.ljsw.tjbankpda.util.Skip;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.ljsw.tjbankpda.yy.service.ICleaningManService;
 import com.ljsw.tjbankpda.yy.service.IPdaOfBoxOperateService;
 import com.manager.classs.pad.ManagerClass;
 import com.poka.device.ShareUtil;
-import poka_global_constant.GlobalConstant;
 
 /**
  * 押运任务交接 押运员验证手指页面
  * 
  * @author 石锚
  */
-public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickListener {
+    public class YyrwJjYanzhengActivity extends BaseFingerActivity{
 
 	protected static final String TAG = "YyrwJjYanzhengActivity";
 	private TextView top, // 头部提示文字
@@ -59,22 +51,11 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 	private boolean isFlag = true;
 	private String bundleName;
 
-	private RFID_Device rfid;
-	private Dialog successDialog;// 成功弹出框
-	private DialogManager dmanager;// 弹出框管理类
-	private CustomDialog outDialog;
-	private String qlJiaojieTypesecond;
-	private String sjJiaojieTypesecond;
 	private Context mContext;
 
-	RFID_Device getRfid() {
-		if (rfid == null) {
-			rfid = new RFID_Device();
-		}
-		return rfid;
-	}
 
-	Handler jiaoJieHandler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    Handler jiaoJieHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -85,13 +66,13 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 			case 1:
 				// 提交成功,回到押运任务列表界面
 				managerClass.getResultmsg().resultOnlyMsg(YyrwJjYanzhengActivity.this, "提交成功,页面跳转中...", true);
-				S_application.getApplication().s_zzxShangjiao = null;
-				S_application.getApplication().s_zzxQingling = null;
-				S_application.getApplication().s_userWangdian = null;
+				S_application.s_zzxShangjiao = null;
+				S_application.s_zzxQingling = null;
+				S_application.s_userWangdian = null;
 //				Skip.skip(YyrwJjYanzhengActivity.this,YayunRwLbSActivity.class, null, 0);  /// 跳轉页面进行修改
 				Skip.skip(YyrwJjYanzhengActivity.this, YayunSelectRewuUseActivity.class, null, 0);
-				if (null != S_application.getApplication().s_userYayun) {
-					GApplication.use.setUserzhanghu(S_application.getApplication().s_userYayun);
+				if (null != S_application.s_userYayun) {
+					GApplication.use.setUserzhanghu(S_application.s_userYayun);
 				}
 				S_application.wrong = null;
 				new Thread(new Runnable() {
@@ -119,18 +100,16 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 		}
 	};
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	@SuppressLint("HandlerLeak")
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yy_jjyayun_s);
 		managerClass = new ManagerClass();
 		intent = new Intent();
 		initView();
-		dmanager = new DialogManager(YyrwJjYanzhengActivity.this);
 		// 重试单击事件
 		onclickreplace = new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				managerClass.getAbnormal().remove();
@@ -139,10 +118,8 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 		};
 		mContext = YyrwJjYanzhengActivity.this;
 		handler = new Handler() {
-			@SuppressWarnings("static-access")
 			@Override
 			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
 				super.handleMessage(msg);
 				isFlag = true; // 将点击置为 可点击
 				switch (msg.what) {
@@ -150,8 +127,8 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 					/*
 					 * revised by zhangxuewei at 2016/9/6 此类写了两个
 					 */
-					Log.d(TAG, "" + S_application.getApplication().s_userYayun);
-					System.out.println("!!!!!!!" + S_application.getApplication().s_userYayun);
+					Log.d(TAG, "" + S_application.s_userYayun);
+					System.out.println("!!!!!!!" + S_application.s_userYayun);
 					System.out.println("!!!!!!!" + bundleName);
 					System.out.println("!!!!!!! getLoginUserName()" + GApplication.user.getLoginUserName());
 //				    GApplication.userInfo.getNameZhanghao();
@@ -182,13 +159,13 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 										submit();
 									}
 								}, false);
-					} else if (S_application.getApplication().s_userYayun.equals(bundleName)) {
+					} else if (S_application.s_userYayun.equals(bundleName)) {
 						top.setText("验证成功");
 						System.out.println("handler-->submit");
 						isFlag = false;
 						System.out.println("第二个");
 						submit();
-					} else if (!S_application.getApplication().s_userYayun.equals(result_user.getUserzhanghu())) {
+					} else if (!S_application.s_userYayun.equals(result_user.getUserzhanghu())) {
 						top.setText("押运员身份不符合");
 						isFlag = true; // 重置为可点击
 					}
@@ -227,42 +204,8 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 
 	@Override
 	protected void onResume() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.ENABLE_IO);
 		super.onResume();
 		isFlag = true;
-		// ShareUtil.finger_gather=null;
-		managerClass.getRfid().addNotifly(new GetFingerValue()); // 添加通知
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				managerClass.getRfid().fingerOpen(); // 打开指纹
-			}
-		}).start();
-
-		// 获得指纹通知
-		GetFingerValue.handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				Bundle bundle;
-				if (msg.what == 1) {
-					bundle = msg.getData();
-					if (bundle != null && bundle.getString("finger").equals("正在获取指纹特征值！")) {
-
-					} else if (bundle != null && bundle.getString("finger").equals("获取指纹特征值成功！")) {
-						if (isFlag) {
-							toubuTishi.setText("正在验证指纹...");
-							isFlag = false;
-							CheckFingerThread cf = new CheckFingerThread();
-							cf.start();
-						}
-					}
-				}
-			}
-		};
 	}
 
 	public void initView() {
@@ -272,7 +215,31 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 		toubuTishi = (TextView) this.findViewById(R.id.yy_top);
 	}
 
-	/**
+    @Override
+    public void openFingerSucceed() {
+        fingerUtil.getFingerCharAndImg();
+    }
+
+    @Override
+    public void findFinger() {
+        toubuTishi.setText("正在获取特征值...");
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
+        super.getCharImgSucceed(charBytes, img);
+
+        ShareUtil.ivalBack =charBytes;
+        ShareUtil.finger_gather = img;
+        if (isFlag) {
+            toubuTishi.setText("正在验证指纹...");
+            isFlag = false;
+            CheckFingerThread cf = new CheckFingerThread();
+            cf.start();
+        }
+    }
+
+    /**
 	 * 指纹验证线程
 	 * 
 	 * @author Administrator
@@ -290,9 +257,9 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 			super.run();
 			// GApplication.user.getLoginUserId()
 			IPdaOfBoxOperateService yz = new IPdaOfBoxOperateService();
-			System.out.println("验证机构:" + S_application.getApplication().s_yayunJigouId);
+			System.out.println("验证机构:" + S_application.s_yayunJigouId);
 			try {
-				result_user = yz.checkFingerprint(S_application.getApplication().s_yayunJigouId, "9",
+				result_user = yz.checkFingerprint(S_application.s_yayunJigouId, "9",
 						ShareUtil.ivalBack);
 				System.out.println("我是空吗??" + ShareUtil.finger_gather);
 				if (result_user != null) {// 验证成功
@@ -345,14 +312,7 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 		// TODO Auto-generated method stub
 		super.onPause();
 		isFlag = false;
-		getRfid().close_a20();
 		managerClass.getRuning().remove();
-	}
-
-	@Override
-	protected void onStop() {
-		getRfid().setOpenClose(GlobalConstant.IO_AS602_POWER, GlobalConstant.DISABLE_IO);
-		super.onStop();
 	}
 
 	@Override
@@ -362,23 +322,11 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 		managerClass.getResultmsg().remove();
 	}
 
-	@Override
-	public void onClick(View arg0) {
-		switch (arg0.getId()) {
-		// case R.id.ll_yy_back_bank:
-		// YyrwJjYanzhengActivity.this.finish();
-		// break;
-
-		default:
-			break;
-		}
-	}
-
 	private void submit() {
 		String qlJiaojieType = "", sjJiaojieType = "";
 
 		// 根据交接状态 判断交接类型
-		switch (S_application.getApplication().jiaojieType) {
+		switch (S_application.jiaojieType) {
 		case 1:
 			qlJiaojieType = "24";
 			sjJiaojieType = "29";
@@ -418,16 +366,15 @@ public class YyrwJjYanzhengActivity extends FragmentActivity implements OnClickL
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 //			managerClass.getRuning().runding(YyrwJjYanzhengActivity.this,
 //					"正在处理...");
 			try {
 				System.out.println("调用押运员交接接口");
 				System.out.println("押运员ID:" + GApplication.use.getUserzhanghu());
 				// 接口修改加入一个参数
-				String param = new ICleaningManService().SaveAuthLogYayun(S_application.getApplication().s_zzxShangjiao,
-						S_application.getApplication().s_zzxQingling, S_application.getApplication().s_userWangdian,
-						S_application.getApplication().s_userYayun, S_application.getApplication().s_yayunXianluId,
+				String param = new ICleaningManService().SaveAuthLogYayun(S_application.s_zzxShangjiao,
+						S_application.s_zzxQingling, S_application.s_userWangdian,
+						S_application.s_userYayun, S_application.s_yayunXianluId,
 						qlJiaojieType, sjJiaojieType);
 				if (param != null && param.equals("交接成功")) {
 					jiaoJieHandler.sendEmptyMessage(1);
