@@ -313,6 +313,12 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
 
         ShareUtil.ivalBack = charBytes;
 
+        if (!firstSuccess && !"1".equals(f1)) {
+            ShareUtil.w_finger_bitmap_left = img;
+        } else {
+            ShareUtil.w_finger_bitmap_right = img;
+        }
+
         yanzhengFinger();
     }
 }
