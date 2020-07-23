@@ -1,5 +1,6 @@
 package com.example.app.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -69,7 +70,8 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 		return systemLogin;
 	}
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wangdian_checkfinger);
@@ -81,7 +83,7 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 		cancel = (Button) findViewById(R.id.wangdian_login_cancel1);
 		editname = (EditText) findViewById(R.id.wangdian_name1);
 		editpwd = (EditText) findViewById(R.id.wangdian_pwd1);
-		textlogin = (TextView) findViewById(R.id.netmsgtext1);
+		textlogin = (TextView) findViewById(R.id.netmsgtext2);
 
 		login.setOnTouchListener(this);
 		cancel.setOnTouchListener(this);

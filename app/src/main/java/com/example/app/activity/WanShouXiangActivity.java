@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,7 +73,8 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 		return rfid;
 	}
 
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -108,7 +110,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 						ws_count.setText("" + 0);
 						GApplication.linshilist.clear();
 						listView.setAdapter(adapter);
-						GApplication.getApplication().strBox = "";
+						GApplication.strBox = "";
 						shouxiang.setBackgroundResource(R.drawable.gray_btn_bg);
 						shouxiang.setEnabled(false);
 						System.out.println("我重扫了-cscount:" + cscount);
@@ -139,7 +141,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 						ws_count.setText("" + 0);
 						GApplication.linshilist.clear();
 						listView.setAdapter(adapter);
-						GApplication.getApplication().strBox = "";
+						GApplication.strBox = "";
 						shouxiang.setBackgroundResource(R.drawable.gray_btn_bg);
 						shouxiang.setEnabled(false);
 						System.out.println("我重扫了-cscount1:" + cscount1);
@@ -167,7 +169,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 						ws_count.setText("" + 0);
 						GApplication.linshilist.clear();
 						listView.setAdapter(adapter);
-						GApplication.getApplication().strBox = "";
+						GApplication.strBox = "";
 						shouxiang.setBackgroundResource(R.drawable.gray_btn_bg);
 						shouxiang.setEnabled(false);
 						System.out.println("我重扫了-cscount2:" + cscount2);
@@ -258,7 +260,8 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 			return arg0;
 		}
 
-		@Override
+		@SuppressLint("ClickableViewAccessibility")
+        @Override
 		public View getView(final int arg0, View arg1, ViewGroup arg2) {
 			final int index = arg0;
 			View v = arg1;
@@ -272,8 +275,8 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 				holder = (KongjianEntity) v.getTag();
 			}
 			BoxDetail box = (BoxDetail) getItem(arg0);
-			if (GApplication.getApplication().linshilist.get(arg0).getBrand().equals("正确")) {
-				System.out.println("我是正确的:" + GApplication.getApplication().linshilist.get(arg0).getNum());
+			if (GApplication.linshilist.get(arg0).getBrand().equals("正确")) {
+				System.out.println("我是正确的:" + GApplication.linshilist.get(arg0).getNum());
 				holder.bianhao.setTextColor(android.graphics.Color.BLACK);
 			} else {
 				holder.bianhao.setTextColor(android.graphics.Color.RED);
@@ -318,7 +321,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 										 * 查询是否有红色箱子
 										 */
 										for (int i = 0; i < GApplication.linshilist.size(); i++) {
-											if (!GApplication.getApplication().linshilist.get(i).getBrand()
+											if (!GApplication.linshilist.get(i).getBrand()
 													.equals("正确")) {
 												aa = 1;
 											}
@@ -438,7 +441,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 		GApplication.linshilist.clear();
 		// ls.clear();
 		// GApplication.getApplication().wrong="";
-		GApplication.getApplication().strBox = "";
+		GApplication.strBox = "";
 		shouxiang.setBackgroundResource(R.drawable.gray_btn_bg);
 		shouxiang.setEnabled(false);
 		chongsao.setBackgroundResource(R.drawable.buttom_selector_bg);
@@ -474,7 +477,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 			GApplication.linshilist.clear();
 			// ls.clear();
 			adapter.notifyDataSetChanged();
-			GApplication.getApplication().strBox = "";
+			GApplication.strBox = "";
 			shouxiang.setBackgroundResource(R.drawable.gray_btn_bg);
 			shouxiang.setEnabled(false);
 			break;
