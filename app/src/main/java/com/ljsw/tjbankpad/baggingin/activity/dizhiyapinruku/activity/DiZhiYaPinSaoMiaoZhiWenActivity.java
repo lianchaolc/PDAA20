@@ -85,8 +85,12 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
         returnaccountinteninfolist = (List<String>) getIntent().getSerializableExtra("list");
         // 判断应该走哪个方法
 
-        if (!Tasknumber.isEmpty()) {
-            flag = true;
+        try {
+            if (!Tasknumber.equals("") && Tasknumber != null) {
+                flag = true;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
 
         intent = new Intent();
