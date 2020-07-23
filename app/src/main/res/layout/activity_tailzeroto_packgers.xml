@@ -80,7 +80,8 @@
                         android:layout_weight="1.0"
                         android:text="版别"
                         android:textColor="@color/blue_top"
-                        android:textSize="@dimen/text_size_30" />
+                        android:textSize="@dimen/text_size_30"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -283,7 +284,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_60y"
+                android:layout_height="@dimen/dimen_58y"
                 android:orientation="horizontal" >
 
                 <LinearLayout
@@ -294,7 +295,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="30px"
                         android:text="数量:"
                         android:textColor="@color/blue_top"
@@ -303,9 +304,9 @@
                 <EditText
                     android:id="@+id/tailzeroet"
                     android:layout_width="wrap_content"
-                    android:layout_height="60px"
-                    android:layout_marginRight="20px"
-                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/dimen_20x"
+                    android:layout_weight="0.7"
                     android:hint="请输入数量"
                     android:inputType="number"
                     android:lines="1"
@@ -345,18 +346,17 @@
                 <TextView
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.5"
                     android:gravity="center|left"
                     android:text="已读卡:"
                     android:textColor="@color/bule_main"
                     android:textSize="@dimen/text_size_26" />
-
                 <TextView
                     android:id="@+id/tailzero_readcard"
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_weight="1.7"
-                    android:gravity="center|right"
+                    android:gravity="center"
                     android:text=""
                     android:textColor="@color/bule_main"
                     android:textSize="@dimen/text_size_26" />
