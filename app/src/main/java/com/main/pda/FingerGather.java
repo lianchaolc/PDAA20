@@ -230,6 +230,11 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
         ShareUtil.finger_gather = img;
         ShareUtil.ivalBack = charBytes;
 
+        //验证是否选择了手指和编号是否填写
+        if(check()){
+            return;
+        }
+
         finger_image.setImageBitmap(ShareUtil.finger_gather);
         if (count == 0) {
             count++;
@@ -248,7 +253,7 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
 
     @Override
     public void findFinger() {
-        resultText.setText("正在获取指纹特征值");
+        //resultText.setText("正在获取指纹特征值");
     }
 
     @Override
@@ -351,7 +356,7 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
     public boolean check() {
         is = false;
         fingerNumberText = fingerUserNumber.getText() + "";
-        if (fingerNumberText == null || fingerNumberText.equals("")) {
+        if (fingerNumberText.equals("")) {
             Toast.makeText(this, "请输入编号", Toast.LENGTH_SHORT).show();
             is = true;
         }
@@ -387,7 +392,7 @@ public class FingerGather extends BaseFingerActivity implements OnTouchListener{
         finger_image.setImageBitmap(ShareUtil.finger_gather);// 2020-05-25 这行删除
         // 获取编号fingerUserName
         fingerNumberText = fingerUserNumber.getText() + "";
-        if (fingerNumberText == null || fingerNumberText.equals("")) {
+        if (fingerNumberText.equals("")) {
             Toast.makeText(FingerGather.this, "请输入编号", Toast.LENGTH_SHORT).show();
         } else {
             // 开始线程获取姓名

@@ -78,6 +78,8 @@ public class FingerUtil {
     }
 
     public void getFingerImg() {
+        mHandler.removeCallbacksAndMessages(null);
+
         startTime = System.currentTimeMillis();
         endTime = startTime;
         //run get finger image task
@@ -85,6 +87,8 @@ public class FingerUtil {
     }
 
     public void getFingerChar() {
+        mHandler.removeCallbacksAndMessages(null);
+
         startTime = System.currentTimeMillis();
         endTime = startTime;
         //run get finger char task
@@ -92,6 +96,8 @@ public class FingerUtil {
     }
 
     public void getFingerCharAndImg() {
+        mHandler.removeCallbacksAndMessages(null);
+
         startTime = System.currentTimeMillis();
         endTime = startTime;
         //run get finger char task
@@ -99,6 +105,8 @@ public class FingerUtil {
     }
 
     public void getTwoFingerCharAndImg() {
+        mHandler.removeCallbacksAndMessages(null);
+
         startTime = System.currentTimeMillis();
         endTime = startTime;
         //run get finger char task
