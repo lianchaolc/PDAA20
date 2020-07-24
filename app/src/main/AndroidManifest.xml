@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
     android:versionCode="1"
-    android:versionName="1.20" >
+    android:versionName="1.20">
 
-    <uses-feature android:name="android.hardware.usb.host" android:sharedUserId="android.uid.system"/>
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:sharedUserId="android.uid.system" />
 
     <uses-permission android:name="android.permission.READ_OWNER_DATA" />
     <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -35,98 +36,62 @@
         <!-- 主界面 -->
         <activity
             android:name="com.main.pda.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.main.pda.HomeMenu" />
-
         <activity android:name="com.main.pda.SystemLogin" />
-
         <activity android:name="com.moneyboxadmin.pda.BankDoublePersonLogin" />
-
         <activity
             android:name="com.moneyboxadmin.pda.MoneyBoxManager"
             android:launchMode="singleTask" />
-
         <activity android:name="com.main.pda.FingerGather" />
-
         <activity android:name="com.main.pda.SystemManager" />
-
         <activity android:name="com.moneyboxadmin.pda.PlanWay" />
-
         <activity android:name="com.moneyboxadmin.pda.BoxDetailInfoDo" />
-
         <activity android:name="com.moneyboxadmin.pda.MoneyBoxDetial" />
-
         <activity android:name="com.moneyboxadmin.pda.BoxDoDetail" />
-
         <activity android:name="com.moneyboxadmin.pda.LihangJiachaoRenyuanJiaojie" />
-
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.YayunLoginSAcitivity" />
-
         <activity
             android:name="com.moneyboxadmin.pda.ClearerUser"
             android:launchMode="singleTop" />
-
         <activity android:name="com.moneyboxadmin.pda.JoinResult" />
-
         <activity android:name="com.moneyboxadmin.pda.BoxAddStop" />
-
         <activity android:name="com.moneyboxadmin.pda.SupercargoJoin" />
-
         <activity
             android:name="com.clearadmin.pda.ClearManager"
             android:launchMode="singleTask" />
-
         <activity android:name="com.clearadmin.pda.BackMoneyBoxCount" />
-
         <activity android:name="com.clearadmin.pda.BackMoneyBoxCountDo" />
-
         <activity
             android:name="com.out.admin.pda.OrderWork"
             android:launchMode="singleTask" />
-
         <activity android:name="com.out.admin.pda.OrderWorkInformation" />
-
         <activity android:name="com.out.admin.pda.ATMInformation" />
-
         <activity android:name="com.out.admin.pda.AboutJoin" />
-
         <activity android:name="com.out.admin.pda.WebSiteJoin" />
-
         <activity android:name="com.main.pda.UpdatePwd" />
-
         <activity android:name="com.main.pda.SystemSet" />
-
         <activity android:name="com.main.pda.VersionCheck" />
-
         <activity android:name="com.out.admin.pda.ClearMachineResult" />
-
         <activity android:name="com.clear.machine.pda.ClearMachineDo" />
-
         <activity android:name="com.clear.machine.pda.ClearMachineLogin" />
-
         <activity android:name="com.out.admin.pda.ClearMachineIing" />
-
         <activity android:name="com.main.pda.ServiceAddress" />
-
         <activity android:name="com.clearadmin.pda.ClearAddMoneyOutDo" />
-
         <activity android:name="a20.cn.uhf.admin.WriteAndRead" />
-
 
         <!-- modify by wangmeng 未清回收钞箱出库 -->
         <activity android:name="com.moneyboxadmin.pda.NotClearBoxDetailInfoDo" />
-
         <activity android:name="com.moneyboxadmin.pda.NotClearBoxDoDetail" />
 
-
-        <service android:name="com.service.NetService"
+        <service
+            android:name="com.service.NetService"
             android:exported="false">
             <intent-filter>
                 <action android:name="network" />
@@ -134,7 +99,7 @@
         </service>
 
         <!-- 开机启动广播 -->
-        <receiver android:name="com.broadcastreceiver.BroadcastreceiverStart" >
+        <receiver android:name="com.broadcastreceiver.BroadcastreceiverStart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
@@ -143,7 +108,7 @@
         </receiver>
 
         <!-- 监听应用程序安装和卸载广播 -->
-        <receiver android:name="com.online.update.biz.InstallAfter" >
+        <receiver android:name="com.online.update.biz.InstallAfter">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
 
@@ -154,59 +119,36 @@
         </receiver>
 
         <activity android:name="com.example.app.activity.ShouyeActivity" />
-
         <activity android:name="com.example.app.activity.XitongDengluActivity" />
-
         <activity android:name="com.example.app.activity.XianchaoGuanliActivity" />
-
         <activity android:name="com.example.app.activity.ATMcaidanActivity" />
-
         <activity
             android:name="com.example.app.activity.KuanxiangCaidanActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.example.app.activity.KuguanDengluActivity" />
-
         <activity
             android:name="com.example.app.activity.KuanxiangChuruActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.example.app.activity.GuanyuActivity" />
-
         <activity android:name="com.example.app.activity.XitongGuanliActivity" />
-
         <activity android:name="com.example.app.activity.ZhiWenCaiJiActivity" />
-
         <activity
             android:name="com.example.app.activity.ZaoSongshenqingActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name="com.example.app.activity.JiaoJieActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.example.app.activity.WanShouXiangActivity" />
-
         <activity android:name="com.example.app.activity.KuanXiangJiaoJieActivity" />
-
         <activity android:name="com.example.app.activity.KuanXiangJiaoJieYaYunActivity" />
-
         <activity android:name="com.example.app.activity.KuanXiangZaochuMingxiActivity" />
-
         <activity android:name="com.example.app.activity.KuanXiangMingXiActivity" />
-
         <activity android:name="com.example.app.activity.KuanXiangChuKuActivity" />
-
         <activity android:name="com.example.app.activity.YayunJiaojieActivity" />
-
         <activity android:name="com.example.app.activity.KuguanCheckFingerActivity" />
-
         <activity android:name="com.example.app.activity.YayunCheckFingerActivity" />
-
         <activity android:name="com.example.app.activity.WangdianCheckFingerActivity" />
-
         <activity android:name="com.main.pda.Service_Address" />
-
 
         <!-- 三期 -->
         <activity
@@ -215,96 +157,63 @@
 
         <!-- 清分管理Activity -->
         <activity android:name="com.ljsw.tjbankpda.main.QingfenDengLuAcyivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QingfenMenuActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.main.QingfenRenwuActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QinglingWangdianActivity"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="com.ljsw.pda3.QinglingWangdian" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangInfoActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <activity android:name="com.ljsw.tjbankpda.main.QinglingZhouzhuanxiangluruActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangTongjiActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.main.QingFenLingQu_qf" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QingFenJinDu_qf"
             android:launchMode="singleTask" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.ZhouZhuanXiangSaoMiao_qf"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.main.ZhouZhuanXiangHeDui_qf" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.ShangJiaoQingFen_o_qf"
             android:windowSoftInputMode="stateHidden" />
-
         <activity android:name="com.ljsw.tjbankpda.main.QingFenJinDuShuaXin_qf" />
 
         <!-- 调拨管理Activity -->
         <activity android:name="com.ljsw.tjbankpda.db.activity.KuGuanLogin_db" />
-
         <activity
             android:name="com.ljsw.tjbankpda.db.activity.RenWuLieBiao_db"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.JiHuaDanMingXi_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.DiZhiYaPinSaoMiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingLingChuKuJiaoJie_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingLingZhuangXiangChuKu_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoQingFenLieBiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingFenJiHuaMingXi_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoQingFenSaoMiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingFenZhouZhuanJiaoJie_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.PeiSongChuKuXianLu_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.PeiSongSaoMiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.PeiSongJiaoJie_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoChuKu_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoChuKuMingXi_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoChuKuSaoMiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingLingZhuangXiangRuKu_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingLingZhuangXiangRuKuSaoMiao_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoRuKu_db" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.ShangJiaoRuKuSaoMiao_db" />
-
 
         <!-- 押运管理Activity -->
         <!-- <activity android:name="com.ljsw.tjbankpda.yy.activity.YayunLoginSAcitivity" /> -->
@@ -312,109 +221,78 @@
         <activity
             android:name="com.ljsw.tjbankpda.yy.activity.YayunRwLbSActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.YaYunRwMingxiActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.QingLzhxSaomiaoActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.SjzzxSaomiaoActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.YyrwJiaojieActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.YyrwJjYanzhengActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.QingfenGlyRwActivity" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.QingfenJhdActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.yy.activity.QingfenJhdMxActivity"
             android:launchMode="singleTask" />
-
         <activity android:name="com.ljsw.tjbankpda.yy.activity.ZzXiangKdSmiaoActivity" />
-
 
         <!-- 周转箱信息扫描Activity -->
         <activity android:name="com.ljsw.tjbankpda.yy.activity.ZhouzXixinSmiaoActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpda.db.activity.YaYunYuanDengLu"
             android:launchMode="singleTop" />
-
         <activity android:name="com.ljsw.tjbankpda.db.activity.QingFenYuanDengLu" />
-
         <activity
             android:name="com.ljsw.tjbankpda.main.QingfenDengluByUserno"
             android:launchMode="singleTop" />
-
         <activity
             android:name="com.ljsw.tjbankpda.db.activity.KuGuanYuanDengLu"
             android:launchMode="singleTop" />
-
         <activity
             android:name="com.ljsw.tjbankpda.yy.activity.YayunDoubleLogin"
             android:launchMode="singleTop" />
-
         <activity
             android:name="com.ljsw.tjbankpda.yy.activity.YayunDenglu"
             android:launchMode="singleTop" />
 
-
         <!-- 查库服务所需要的几个activity -->
         <activity android:name="com.example.app.activity.LookStorageTaskListActivity" />
-
         <activity android:name="com.example.app.activity.LookStorageTaskDetailActivity" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.BaggingActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 盘查库制卡lc -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.cash.BaggingActivitySend"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.RealThingInToActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.RealThingInToItemActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.AccountPackageActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.AccountInfoActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.AccountDataActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZHZiLiaoHeDuiActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZLaActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZiLiaoRuKuActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZLRuKuMingXiItemActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZHZiLiaoSaoMiaoActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ReadBoxTypeActivity"
             android:label="@string/title_activity_bagging" />
@@ -433,6 +311,7 @@
 
         <!--  -->
 
+
         <!-- 账户 资料出入库管理 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ZHZiLiaoRuKuActivity"
@@ -443,7 +322,6 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.dizhiyapinruku.activity.DiZhiYaPinSaoMiaoLieBiaoActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 周转箱中取出抵制押品 -->
         <activity
@@ -461,7 +339,6 @@
             android:name="com.ljsw.tjbankpad.baggingin.activity.dizhiyapinruku.activity.DiZhiYaPinSaoMiaoZhiWenActivity"
             android:label="@string/title_activity_bagging" />
 
-
         <!-- 抵制押品出库 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.chuku.DiZhiYaPinChuKuActivity"
@@ -477,13 +354,13 @@
             android:name="com.ljsw.tjbankpad.baggingin.activity.chuku.DiZhiYaPinChuKuItemHeDuiActivity"
             android:label="@string/title_activity_bagging" />
 
-
         <!-- 装袋 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.zhuangdai.DiZhiYaPinZhuangXiangTActivity"
             android:label="@string/title_activity_bagging" />
 
         <!-- @@@@@ -->
+
 
         <!-- 核对 -->
         <activity
@@ -504,7 +381,6 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.zhuangdai.DiZhiYaPInZhuangXiangActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 框架 -->
         <activity
@@ -539,7 +415,6 @@
             android:name="com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.chukujieyue.ZhangHuZiLiaoChuKuJiaoJieActivity"
             android:label="@string/title_activity_bagging" />
 
-
         <!-- 账户资料归还 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.guihuan.ZhangHuZiLiaoGuiHuanActivity"
@@ -549,7 +424,6 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.guihuan.ZhangHuZiLiaoGuiHuanJiaojieActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 账户资料待归还 -->
         <activity
@@ -566,22 +440,18 @@
             android:name="com.ljsw.tjbankpad.baggingin.activity.ruzhanghuzhongxin.RuZhangHuZhongXinActivity"
             android:label="@string/title_activity_bagging" />
 
-
         <!-- 如账户中心核对 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ruzhanghuzhongxin.ZhouZhuanXiangHeDuiActivity"
             android:label="@string/title_activity_bagging" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.KuGuanYuanByZhangHuzhongxinLogin"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 入账户中心的指纹   账户中心的指纹 -->
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.ruzhanghuzhongxin.InAccountCenterFingerActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 指纹交接 -->
         <activity
@@ -602,7 +472,6 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.chuku.CleanOpretarDoubleLogin"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 盘库任务列表 -->
         <activity
@@ -629,34 +498,31 @@
         <activity
             android:name="com.example.pda.WaiBusaomiaoactivity"
             android:label="@string/title_activity_wai_busaomiaoactivity" >
-         新增现金读袋  4.28 -->
+         新增现金读袋  4.28
+        -->
         <!-- 新修改押运员登录pda指纹或账户进行任务选择 -->
         <activity
-            android:name="com.example.pda.YayunSelectTaskActivity"
+            android:name=".YayunSelectTaskActivity"
             android:label="@string/title_activity_yayun_select_task" />
-
         <activity
-            android:name="com.example.pda.CashtopackageSelectActivity"
+            android:name=".CashtopackageSelectActivity"
             android:label="@string/title_activity_cashtopackage" />
-
         <activity
-            android:name="com.example.pda.TailzerotoPackgersActivity"
+            android:name=".TailzerotoPackgersActivity"
             android:label="@string/title_activity_tailzeroto_packgers" />
-
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.handover.HomeMangerToCleanHandoverActivity"
             android:label="@string/title_activity_home_manger_to_clean_handover" />
 
         <!-- 扫描各种袋 -->
         <activity
-            android:name="com.example.pda.HomeMangeerToCenterDataScanActivity"
+            android:name=".HomeMangeerToCenterDataScanActivity"
             android:label="@string/title_activity_home_mangeer_to_center_data_scan" />
 
         <!-- 尾零的处理 -->
         <activity
-            android:name="com.example.pda.Cash_TailZeroAllctivity"
+            android:name=".Cash_TailZeroAllctivity"
             android:label="@string/title_activity_cash__tail_zero_allctivity" />
-
 
         <!--
         <activity  作废暂时不用
@@ -665,77 +531,70 @@
         -->
         <!-- 押运员选择任务明细 -->
         <activity
-            android:name="com.example.pda.YayunSelectRewuTookinfoAndTrueictivity"
+            android:name=".YayunSelectRewuTookinfoAndTrueictivity"
             android:label="@string/title_activity_yayun_select_rewu_ming_xictivity" />
 
         <!-- 押运员是否有任务 都在这选择条目做上缴和领取的任务 -->
         <activity
-            android:name="com.example.pda.YayunSelectRewuUseActivity"
+            android:name=".YayunSelectRewuUseActivity"
             android:label="@string/title_activity_yayun_select_rewu_ming_xictivity" />
-
 
         <!-- 库管员把装袋工行的袋子 -->
         <activity
-            android:name="com.example.pda.HomeMangerAddPackageActivity"
+            android:name=".HomeMangerAddPackageActivity"
             android:label="@string/title_activity_home_manger_add_package" />
-
 
         <!-- 管库员整钞装袋20200323 -->
         <activity
-            android:name="com.example.pda.homemagnetopackge.HomeMangerToAddCashToPackgersActivity"
+            android:name=".homemagnetopackge.HomeMangerToAddCashToPackgersActivity"
             android:label="@string/title_activity_home_manger_add_package" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.HomeMangerByTailzerotoPackgersActivity"
+            android:name=".homemagnetopackge.HomeMangerByTailzerotoPackgersActivity"
             android:label="@string/title_activity_home_manger_add_package" />
-
 
         <!-- 盘查库的水牌功能 -->
         <activity
-            android:name="com.example.pda.inventory.InventoryActivity"
+            android:name=".inventory.InventoryActivity"
             android:label="@string/title_activity_inventory" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.HouDuActivity"
+            android:name=".homemagnetopackge.HouDuActivity"
             android:label="@string/title_activity_hou_du" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.PostmansAccountCheckerActivity"
+            android:name=".homemagnetopackge.PostmansAccountCheckerActivity"
             android:label="@string/title_activity_postmans_account_checker" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.HandoverLiabrarytoPostmanAccountActivity"
+            android:name=".homemagnetopackge.HandoverLiabrarytoPostmanAccountActivity"
             android:label="@string/title_activity_handover_liabraryto_postman_account" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.AccountinformationSelectMainActivity"
+            android:name=".homemagnetopackge.AccountinformationSelectMainActivity"
             android:label="@string/title_activity_accountinformation_select_main" />
-
         <activity
-            android:name="com.example.pda.homemagnetopackge.AccountInfoChecksActivity"
+            android:name=".homemagnetopackge.AccountInfoChecksActivity"
             android:label="@string/title_activity_account_info_checks" />
 
         <!-- 账户资料指纹验证代码 -->
-        <activity android:name="com.example.pda.homemagnetopackge.AccountCenterByHomemangerFingerActivity"
+        <activity
+            android:name=".homemagnetopackge.AccountCenterByHomemangerFingerActivity"
             android:label="@string/title_activity_account_info_checks"
-            android:launchMode="singleTask"  />
-        <!-- 账户资料人员登录代码-->
-        <activity android:name="com.example.pda.homemagnetopackge.accountinfo.HomemangertoAccountMangerLoginActivity"
+            android:launchMode="singleTask" />
+        <!-- 账户资料人员登录代码 -->
+        <activity
+            android:name=".homemagnetopackge.accountinfo.HomemangertoAccountMangerLoginActivity"
             android:label="@string/title_activity_account_info_checks" />
-
 
         <!-- 后督账包操作 指纹操作 -->
         <activity
-            android:name="com.example.pda.homemagnetopackge.PostMangerFingerActivity"
+            android:name=".homemagnetopackge.PostMangerFingerActivity"
             android:label="@string/title_activity_account_info_checks"
             android:launchMode="singleTask" />
 
         <!-- 后督账包操作 登录操作 -->
         <activity
-            android:name="com.example.pda.homemagnetopackge.OutsourcingLoginActivity"
+            android:name=".homemagnetopackge.OutsourcingLoginActivity"
             android:label="@string/title_activity_account_info_checks" />
-
-        <activity android:name="afu.util.PrivilegeActivity"/>
+        <activity android:name="afu.util.PrivilegeActivity" />
+        <!--适配3代设备录入登陆人的信息新增 07.24-->
+        <activity android:name="com.main.pda.FingerGatherEditeSeltDataActivity"></activity>
     </application>
 
 </manifest>
