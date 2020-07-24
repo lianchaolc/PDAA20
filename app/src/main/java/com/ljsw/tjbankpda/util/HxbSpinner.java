@@ -9,7 +9,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 public class HxbSpinner extends MySpinner {
-	private static final int fontSize = 40;
+	private static final int fontSize = 30;
 	private List<String> list;
 	private String chooseText;
 	private SpinnerAdapter spinnerAdapter;
