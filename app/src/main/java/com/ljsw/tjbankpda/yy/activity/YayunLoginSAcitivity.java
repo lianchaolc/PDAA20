@@ -198,6 +198,13 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        isFlag = false;
+        managerClass.getRuning().remove();
+    }
+
+    @Override
     public void openFingerSucceed() {
         fingerUtil.getFingerCharAndImg();
     }
