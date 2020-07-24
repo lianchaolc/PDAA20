@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.main.pda.FingerGatherEditeSeltDataActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="#4ec1fc"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/edtself_imageView1"
+            android:layout_width="@dimen/dimen_49x"
+            android:layout_height="@dimen/dimen_50y"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:src="@drawable/finger_img" />
+
+        <TextView
+            android:id="@+id/edtself_textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5y"
+            android:text="采集本人指纹"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_30" />
+
+        <ImageView
+            android:id="@+id/edtself_finger_back"
+            android:layout_width="@dimen/dimen_64x"
+            android:layout_height="@dimen/dimen_65y"
+            android:layout_marginLeft="@dimen/dimen_125x"
+            android:src="@drawable/back_cirle" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_53y"
+            android:layout_marginTop="@dimen/dimen_20y"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_450x"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:background="@drawable/circle_edit_rudit">
+
+                <TextView
+                    android:id="@+id/edtself_textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:text="人员编号:"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_25" />
+
+                <TextView
+                    android:id="@+id/edtself_finger_usernumber"
+                    android:layout_width="@dimen/dimen_220x"
+                    android:layout_height="match_parent"
+                    android:background="#dde8f4"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_30" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_450x"
+            android:layout_height="@dimen/dimen_53y"
+            android:layout_marginTop="@dimen/dimen_20y"
+            android:background="@drawable/circle_edit_rudit"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/edtself_textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_15x"
+                android:text="姓       名:"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_25" />
+
+            <TextView
+                android:id="@+id/edtself_finger_username"
+                android:layout_width="@dimen/dimen_310x"
+                android:layout_height="match_parent"
+                android:background="#dde8f4"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_30" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_450x"
+            android:layout_height="@dimen/dimen_53y"
+            android:layout_marginTop="@dimen/dimen_20y">
+
+            <TextView
+                android:id="@+id/edtself_textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择需要采集指纹手指"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_30" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_450x"
+            android:layout_height="@dimen/dimen_83y"
+            android:background="@drawable/circle_edit_rudit"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/edtself_spinnertext"
+                android:layout_width="@dimen/dimen_360x"
+                android:layout_height="@dimen/dimen_53y"
+                android:gravity="center"
+                android:text="右手大拇指"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/edtself_imageView3"
+            android:layout_width="@dimen/dimen_24x"
+            android:layout_height="@dimen/dimen_21y"
+            android:src="@drawable/spinner_droplist_img" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_190y"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/edtself_finger_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_95y"
+        android:background="@color/gray_msg_bg"
+        android:gravity="top"
+        android:paddingTop="15px"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/edtself_fingerGather_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="采集成功"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_35"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/edtself_finger_success"
+            android:layout_width="@dimen/dimen_56x"
+            android:layout_height="@dimen/dimen_56y"
+            android:layout_marginLeft="@dimen/dimen_20x"
+            android:src="@drawable/sccuss"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/edtself_finger_fail"
+            android:layout_width="@dimen/dimen_56x"
+            android:layout_height="@dimen/dimen_56y"
+            android:src="@drawable/fail_img"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/edtself_finger_getname"
+        android:layout_width="@dimen/dimen_450x"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_marginTop="@dimen/dimen_15x"
+        android:background="@drawable/buttom_selector_bg"
+        android:text="开始采集指纹"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_30" />
+</LinearLayout>
