@@ -8,16 +8,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="@dimen/dimen_80y"
         android:background="@color/blue_title"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:layout_marginLeft="15px"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
             android:src="@drawable/user_order" />
 
         <TextView
@@ -25,23 +25,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
-            android:text="尾零现金装袋"
+            android:text="尾零装袋"
             android:textColor="@color/white"
             android:textSize="@dimen/title_text_size" />
 
         <Button
             android:id="@+id/ql_ruku_update"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:layout_marginLeft="15px"
-            android:layout_marginTop="5px"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_75x"
+            android:layout_marginTop="@dimen/dimen_5y"
             android:background="@drawable/replace" />
 
         <ImageView
             android:id="@+id/ta_ql_ruku_back"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:layout_marginLeft="10px"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_20x"
             android:src="@drawable/back_cirle" />
     </LinearLayout>
 
@@ -71,6 +71,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/dimen_10x"
                     android:weightSum="4" >
 
                     <TextView
@@ -87,7 +88,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5px"
-                        android:layout_weight="1.3"
+                        android:layout_weight="1.0"
                         android:text="劵别"
                         android:textColor="@color/blue_top"
                         android:textSize="@dimen/text_size_30" />
@@ -95,7 +96,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.8"
                         android:text="状态"
                         android:textColor="@color/blue_top"
                         android:textSize="@dimen/text_size_30" />
@@ -103,7 +104,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:layout_weight="0.7"
                         android:text="数量"
                         android:textColor="@color/blue_top"
                         android:textSize="@dimen/text_size_30" />
@@ -305,8 +306,8 @@
                     android:id="@+id/tailzeroet"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/dimen_20x"
-                    android:layout_weight="0.7"
+                    android:layout_marginRight="@dimen/dimen_16x"
+                    android:layout_weight="0.6"
                     android:hint="请输入数量"
                     android:inputType="number"
                     android:lines="1"
@@ -339,14 +340,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
-                android:layout_marginTop="10px"
+                android:layout_marginLeft="@dimen/dimen_20y"
+                android:layout_marginTop="@dimen/dimen_20x"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:gravity="center|left"
                     android:text="已读卡:"
                     android:textColor="@color/bule_main"
@@ -365,7 +366,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dip"
@@ -392,7 +394,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="0dip"
@@ -419,7 +423,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="0dip"
@@ -449,7 +455,7 @@
                 android:layout_marginBottom="@dimen/dimen_10y"
                 android:layout_marginLeft="@dimen/dimen_20x"
                 android:layout_marginRight="@dimen/dimen_20x"
-                android:layout_marginTop="@dimen/dimen_10x"
+                android:layout_marginTop="@dimen/dimen_30x"
                 android:orientation="horizontal" >
 
                 <Button
@@ -461,7 +467,7 @@
                     android:background="@drawable/buttom_selector_bg"
                     android:text="读卡"
                     android:textColor="@color/back"
-                    android:textSize="30px" />
+                    android:textSize="@dimen/text_size_30" />
 
                 <Button
                     android:id="@+id/tailztoredadupdata_btn"
@@ -472,7 +478,7 @@
                     android:background="@drawable/buttom_selector_bg"
                     android:text="提交"
                     android:textColor="@color/back"
-                    android:textSize="30px" />
+                    android:textSize="@dimen/text_size_30" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
