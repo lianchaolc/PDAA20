@@ -27,6 +27,9 @@ public class SystemManager extends Activity implements OnTouchListener {
 	LinearLayout lfinger; // 指纹采集
 	LinearLayout lpdaset; // pda设置
 	LinearLayout lupdatepwd; // 修改密码
+	// lianc 录入自己指纹20200723
+	private  LinearLayout edtseltdatalin;//录入自己的指纹
+	private ImageView edtseltdataiv;//  图片
 
 	private GolbalUtil golbalUtil;
 
@@ -48,15 +51,22 @@ public class SystemManager extends Activity implements OnTouchListener {
 		finger = (ImageView) findViewById(R.id.finger);
 		pdaset = (ImageView) findViewById(R.id.pda);
 		updatepwd = (ImageView) findViewById(R.id.updatepwd);
-
+		edtseltdataiv=(ImageView)findViewById(R.id.edtseltdataiv);// 录入指纹自己图片
 		lfinger = (LinearLayout) findViewById(R.id.lfinger);
 		lpdaset = (LinearLayout) findViewById(R.id.lpda);
 		lupdatepwd = (LinearLayout) findViewById(R.id.lupdatepwd);
-
+		edtseltdatalin=(LinearLayout) findViewById(R.id.edtseltdatalin);// 录入指纹自己
 		finger.setOnTouchListener(this);
 		pdaset.setOnTouchListener(this);
 		updatepwd.setOnTouchListener(this);
+		edtseltdataiv.setOnTouchListener(this);
 
+		edtseltdatalin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getGolbalUtil().gotoActivity(SystemManager.this, FingerGatherEditeSeltDataActivity.class, null, getGolbalUtil().ismover);
+			}
+		});
 		// 把当前activity放进集合
 		// GApplication.addActivity(this,"0systemmanager");
 		// 权限判断
@@ -88,8 +98,11 @@ public class SystemManager extends Activity implements OnTouchListener {
 				break;
 			// 修改密码
 			case R.id.updatepwd:
-				updatepwd.setImageResource(R.drawable.updatepwd_down);
-				break;
+					updatepwd.setImageResource(R.drawable.updatepwd_down);
+					break;
+				case R.id.edtseltdataiv:
+					edtseltdataiv.setImageResource(R.drawable.fingergather_down);
+					break;
 			}
 			getGolbalUtil().ismover++;
 		}
@@ -113,6 +126,11 @@ public class SystemManager extends Activity implements OnTouchListener {
 				updatepwd.setImageResource(R.drawable.updatepwd);
 				getGolbalUtil().gotoActivity(SystemManager.this, UpdatePwd.class, null, getGolbalUtil().ismover);
 				break;
+				// 采集登录用户指纹
+				case R.id.edtseltdataiv:
+					edtseltdataiv.setImageResource(R.drawable.fingergather_down);
+					getGolbalUtil().gotoActivity(SystemManager.this, FingerGatherEditeSeltDataActivity.class, null, getGolbalUtil().ismover);
+					break;
 			}
 
 			getGolbalUtil().ismover = 0;
@@ -134,6 +152,9 @@ public class SystemManager extends Activity implements OnTouchListener {
 			case R.id.updatepwd:
 				updatepwd.setImageResource(R.drawable.updatepwd);
 				break;
+				case R.id.edtseltdataiv:
+					edtseltdataiv.	setImageResource(R.drawable.updatepwd);
+					break;
 			}
 			getGolbalUtil().ismover = 0;
 
