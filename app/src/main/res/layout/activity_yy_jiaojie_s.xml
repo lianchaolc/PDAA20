@@ -176,8 +176,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="240px"
-                    android:layout_marginBottom="10px"
+                    android:layout_height="@dimen/dimen_240y"
+                    android:layout_marginBottom="@dimen/dimen_10y"
                     android:gravity="center"
                     android:orientation="vertical" >
 
