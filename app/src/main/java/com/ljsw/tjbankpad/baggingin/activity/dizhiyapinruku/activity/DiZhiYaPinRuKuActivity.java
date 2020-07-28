@@ -98,7 +98,7 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 						Gson gson = new Gson();
 						DiZhiYaPinRuKu[] mDiZhiYaPinRuKu = gson.fromJson(dzyprkparms, DiZhiYaPinRuKu[].class);
 						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[0]);
-						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[1]);
+//						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[1]);
 						for (int i = 0; i < mDiZhiYaPinRuKu.length; i++) {
 							dzyprukuArrayList = Arrays.asList(mDiZhiYaPinRuKu);
 						}
