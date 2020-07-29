@@ -46,8 +46,6 @@ public class YayunJiaojieActivity extends BaseFingerActivity {
         setContentView(R.layout.yuyayunjiaojie);
         load();
         manager = new ManagerClass();
-
-
     }
 
     public void load() {

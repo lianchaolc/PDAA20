@@ -13,6 +13,7 @@ import com.ljsw.tjbankpda.util.TurnListviewHeight;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.manager.classs.pad.ManagerClass;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -167,7 +168,8 @@ public class ZhangHuZiLiaoChuRuKuMingXiActivity extends Activity implements OnCl
 	/***
 	 * 网络请求成功获取后的显示
 	 */
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {

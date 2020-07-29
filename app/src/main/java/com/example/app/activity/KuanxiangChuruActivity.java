@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -177,7 +178,7 @@ public class KuanxiangChuruActivity extends Activity {
 				if (wanru != null) {
 					wanru = null;
 				}
-				if (compare_date(GApplication.pcDate, zaochu.getPeisongdate()) == true) {
+				if (compare_date(GApplication.pcDate, zaochu.getPeisongdate())) {
 					getMingXi();
 				} else {
 					// Toast.makeText(KuanxiangChuruActivity.this, "175行", 2000).show();
@@ -381,7 +382,8 @@ public class KuanxiangChuruActivity extends Activity {
 		}.start();
 	}
 
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {

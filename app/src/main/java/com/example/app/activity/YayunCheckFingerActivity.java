@@ -1,18 +1,16 @@
 package com.example.app.activity;
 
 import com.application.GApplication;
-import com.example.app.entity.User;
 import com.example.app.entity.UserInfo;
 import com.example.app.util.Skip;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
 import com.loginsystem.biz.SystemLoginBiz;
-import com.main.pda.SystemLogin;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
-import com.poka.device.ShareUtil;
 import com.service.NetService;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,7 +61,8 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 		return systemLogin;
 	}
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yayun_checkfinger);

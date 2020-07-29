@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -439,6 +440,8 @@ public class KuguanDengluActivity extends BaseFingerActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
+        Log.e("kuguandenglu", "onStop");
 
         manager.getRuning().remove();
         if (fname_left == null || fname_right == null) {

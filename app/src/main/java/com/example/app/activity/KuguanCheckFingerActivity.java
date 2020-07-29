@@ -1,10 +1,10 @@
 package com.example.app.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,7 +28,6 @@ import com.example.app.util.Skip;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
 import com.loginsystem.biz.SystemLoginBiz;
-import com.main.pda.SystemLogin;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.poka.device.ShareUtil;
@@ -50,9 +49,6 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 	String name = null; // 用户名
 	String pwd = null; // 密码
 	OnClickListener onclickreplace;
-	SharedPreferences sharepre;
-	String space; // 空间
-	String webservice; // webservice地址
 	int error = 3;
 
 	boolean network = true; // 是否有网络
@@ -72,7 +68,8 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 		return systemLogin;
 	}
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kuguan_checkfinger);
@@ -124,7 +121,7 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 					managerClass.getRuning().runding(KuguanCheckFingerActivity.this, "正在登录...");
 					// System.out.println("账号"+name +"密码"+pwd);
 					// GApplication.getApplication().user.getOrganizationId()
-					getSystemLogin().kuguanLogin(GApplication.getApplication().user.getOrganizationId(), "4",
+					getSystemLogin().kuguanLogin(GApplication.user.getOrganizationId(), "4",
 							ShareUtil.ivalBack, name, pwd);
 					// getSystemLogin().login(name, pwd);
 				} else {
@@ -159,7 +156,7 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 							User u = new User();
 							u.setUserzhanghu(name);
 							u.setPwd(pwd);
-							GApplication.getApplication().kuguan1 = u;
+							GApplication.kuguan1 = u;
 							/*
 							 * GApplication.getApplication().use = new User();
 							 * GApplication.getApplication().use.setUsername(GApplication.getApplication().
@@ -178,16 +175,16 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 							User u = new User();
 							u.setUserzhanghu(name);
 							u.setPwd(pwd);
-							GApplication.getApplication().kuguan2 = u;
+							GApplication.kuguan2 = u;
 							/*
 							 * GApplication.getApplication().use = new User();
 							 * GApplication.getApplication().use.setUsername(GApplication.getApplication().
 							 * user.getLoginUserName());
 							 */
-							System.out.println("库管用户:" + GApplication.getApplication().use.getUsername());
+							System.out.println("库管用户:" + GApplication.use.getUsername());
 							System.out.println("库管刚刚用户:" + name1);
-							if (name1 != null && name1.equals(GApplication.getApplication().use.getUsername())) {
-								Toast.makeText(KuguanCheckFingerActivity.this, "该用户已经验证过!", 4).show();
+							if (name1 != null && name1.equals(GApplication.use.getUsername())) {
+								Toast.makeText(KuguanCheckFingerActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
 							} else {
 								intent.putExtras(bundle);
 								managerClass.getRuning().runding(KuguanCheckFingerActivity.this, "用户名和密码验证成功");
@@ -289,7 +286,7 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 						}
 						// System.out.println("开始调用登陆的方法========"+"checkFingerprint");
 						// 登陆方法
-						getSystemLogin().kuguanLogin(GApplication.getApplication().user.getOrganizationId(), "4", null,
+						getSystemLogin().kuguanLogin(GApplication.user.getOrganizationId(), "4", null,
 								name, pwd);
 						// getSystemLogin().login(name, pwd);
 					} else {
@@ -381,13 +378,6 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 	}
 
 	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-
-	}
-
-	@Override
 	protected void onStop() {
 		super.onStop();
 		KuguanCheckFingerActivity.this.finish();
@@ -402,11 +392,11 @@ public class KuguanCheckFingerActivity extends Activity implements OnTouchListen
 			if (ShareUtil.zhiwenid_right != null) {
 				ShareUtil.zhiwenid_right = null;
 			}
-			if (GApplication.getApplication().kuguan1 != null) {
-				GApplication.getApplication().kuguan1 = null;
+			if (GApplication.kuguan1 != null) {
+				GApplication.kuguan1 = null;
 			}
-			if (GApplication.getApplication().kuguan2 != null) {
-				GApplication.getApplication().kuguan2 = null;
+			if (GApplication.kuguan2 != null) {
+				GApplication.kuguan2 = null;
 			}
 			Skip.skip(KuguanCheckFingerActivity.this, KuanxiangCaidanActivity.class, null, 0);
 		}
