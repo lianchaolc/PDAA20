@@ -323,7 +323,7 @@
                     android:background="@color/white"
                     android:text="添加"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_40" />
+                    android:textSize="@dimen/text_size_30" />
             </LinearLayout>
             </LinearLayout>
             <View
