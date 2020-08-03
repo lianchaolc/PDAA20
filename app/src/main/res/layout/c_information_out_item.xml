@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_600y"
     android:background="#f6f6f6"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:gravity="center_vertical"
@@ -18,7 +19,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加钞计划编号:" />
+            android:text="加钞计划编号:"
+            tools:ignore="all"/>
 
         <EditText
             android:background="#FFFFFF"
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="JN292320304230"
+            tools:ignore="all"
              />
 
     </LinearLayout>
@@ -44,7 +47,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加钞路线:" />
+            android:text="加钞路线:"
+            tools:ignore="all"/>
 
         <EditText
             android:background="#FFFFFF"
@@ -54,6 +58,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="JN292320304230"
+            tools:ignore="all"
              />
 
     </LinearLayout>
@@ -71,7 +76,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="入库钞箱数量:" />
+            android:text="入库钞箱数量:"
+            tools:ignore="all"/>
 
         <EditText
             android:background="#FFFFFF"
@@ -81,6 +87,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="4"
+            tools:ignore="all"
              />
 
     </LinearLayout>
@@ -98,7 +105,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="入库日期:" />
+            android:text="入库日期:"
+            tools:ignore="all"/>
 
         <EditText
             android:background="#FFFFFF"
@@ -108,6 +116,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="2014-5-5"
+            tools:ignore="all"
              />
 
     </LinearLayout>

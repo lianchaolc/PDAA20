@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_600y"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
     
      <LinearLayout
         android:gravity="center_vertical"
@@ -44,7 +45,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="清分时间:" />
+            android:text="清分时间:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/back"
@@ -71,7 +73,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="入库钞箱数量:" />
+            android:text="入库钞箱数量:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/back"
@@ -98,7 +101,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="入库日期:" />
+            android:text="入库日期:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/back"
