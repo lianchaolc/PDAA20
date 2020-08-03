@@ -197,12 +197,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginLeft="@dimen/dimen_110x"
+                    android:layout_marginLeft="@dimen/dimen_70x"
                     android:layout_marginRight="@dimen/dimen_10x"
                     android:layout_marginTop="@dimen/dimen_10y"
                     android:text="录入"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" />
+                    android:textSize="@dimen/text_size_30" />
             </LinearLayout>
 
             <LinearLayout
