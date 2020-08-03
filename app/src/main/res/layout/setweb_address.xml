@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray_msg_bg"
+    xmlns:tools="http://schemas.android.com/tools"
      >
 
      <LinearLayout
@@ -66,7 +67,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
         android:layout_alignParentLeft="true"
-        android:text="请在下方输入空间地址" />
+        android:text="请在下方输入空间地址"
+        tools:ignore="all"/>
 
     <EditText
         android:paddingLeft="5px"
@@ -111,7 +113,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
         android:layout_alignParentLeft="true"
-        android:text="请在下方输入三期的地址空间" />
+        android:text="请在下方输入三期的地址空间"
+         tools:ignore="all"/>
     <EditText
         android:paddingLeft="5px"
         android:text=""
@@ -134,7 +137,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
         android:layout_alignParentLeft="true"
-        android:text="输三期webserviceip地址" />
+        android:text="输三期webserviceip地址"
+        tools:ignore="all"/>
     
     <EditText
         android:id="@+id/etipadressthree"

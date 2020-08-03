@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -64,7 +65,8 @@
                 android:gravity="center"
                 android:textSize="@dimen/text_size_30"
                 android:textColor="@color/red"
-                android:text="任务1" >
+                android:text="任务1"
+                tools:ignore="all">
             </TextView>
         </LinearLayout>
 
@@ -81,7 +83,8 @@
                 android:gravity="center"
                 android:textSize="@dimen/text_size_30"
                 android:textColor="@color/red"
-                android:text="任务2" >
+                android:text="任务2"
+                tools:ignore="all">
             </TextView>
         </LinearLayout>
     </LinearLayout>

@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:orientation="vertical"
-    android:background="#ffffff" >
+    android:background="#ffffff"
+    xmlns:tools="http://schemas.android.com/tools">
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,7 +109,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_8x"
                 android:text="所在位置:"
-                android:textColor="@color/red" />
+                android:textColor="@color/red"
+                tools:ignore="all"
+                />
 
             <Spinner
                 android:padding="3px"
@@ -155,7 +158,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_8x"
                 android:text="需交接加钞钞箱数量:"
-                android:textColor="@color/red" />
+                android:textColor="@color/red"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/join_need_num"
@@ -183,7 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_8x"
                 android:text="需交接回收钞箱数量:"
-                android:textColor="@color/red" />
+                android:textColor="@color/red"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/join_now_num"

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray_background"
+    xmlns:tools="http://schemas.android.com/tools"
      >
 
     <LinearLayout
@@ -44,7 +45,8 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="出库时间"
-                android:textColor="@color/back" />
+                android:textColor="@color/back"
+                tools:ignore="all"/>
         </LinearLayout>
 
         <RelativeLayout
