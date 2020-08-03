@@ -83,7 +83,6 @@ public class PeiSongJiaoJie_db extends BaseFingerActivity implements OnClickList
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				manager.getAbnormal().remove();
 				Xianlu();
 			}
