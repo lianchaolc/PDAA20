@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:weightSum="10"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,8 @@
             android:textSize="@dimen/text_size_25"
             android:layout_marginLeft="@dimen/dimen_15x"
             android:textColor="@color/back_2b"
-            android:text="原密码：" />
+            android:text="原密码："
+            tools:ignore="all"/>
 
         <EditText
             android:id="@+id/editText1"
@@ -55,7 +57,8 @@
             android:paddingLeft="5dp"
             android:background="@drawable/edittext_biankuang"
             android:layout_marginRight="@dimen/dimen_8x"
-            android:inputType="textPassword" >
+            android:inputType="textPassword"
+            tools:ignore="all">
 
             <requestFocus />
         </EditText>
@@ -80,7 +83,8 @@
             android:textSize="@dimen/text_size_25"
             android:layout_marginLeft="@dimen/dimen_15x"
             android:textColor="@color/back_2b"
-            android:text="新密码：" />
+            android:text="新密码："
+            tools:ignore="all"/>
 
         <EditText
             android:id="@+id/editText1"
@@ -92,7 +96,8 @@
             android:layout_marginLeft="@dimen/dimen_19x"
             android:paddingLeft="5dp"
             android:layout_marginRight="@dimen/dimen_8x"
-            android:inputType="textPassword" >
+            android:inputType="textPassword"
+            tools:ignore="all">
 
             <requestFocus />
         </EditText>
@@ -117,7 +122,8 @@
             android:textSize="@dimen/text_size_25"
             android:layout_marginLeft="@dimen/dimen_15x"
             android:textColor="@color/back_2b"
-            android:text="再次输入：" />
+            android:text="再次输入："
+            tools:ignore="all"/>
 
         <EditText
             android:id="@+id/editText1"
@@ -128,7 +134,9 @@
             android:background="@drawable/edittext_biankuang"
             android:layout_marginRight="@dimen/dimen_8x"
             android:paddingLeft="5dp"
-            android:inputType="textPassword" >
+            android:inputType="textPassword"
+            tools:ignore="all"
+            >
 
             <requestFocus />
         </EditText>

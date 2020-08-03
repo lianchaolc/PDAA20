@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 <!-- 2020-05-22-查看2 -->
     <LinearLayout
             android:layout_width="match_parent"
@@ -132,7 +133,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_10y"
                                 android:text="库存管理"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                            tools:ignore="all"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -147,7 +149,8 @@
                                 android:id="@+id/home_menu_img_accountcenter"
                                 android:layout_width="@dimen/dimen_110x"
                                 android:layout_height="@dimen/dimen_110y"
-                                android:src="@drawable/look_storage" />
+                                android:src="@drawable/look_storage"
+                                  tools:ignore="all"/>
 
                         <TextView
                                 android:id="@+id/textViewaccountcenter"
@@ -155,7 +158,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="制卡"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                                tools:ignore="all"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -170,7 +174,8 @@
                             android:id="@+id/home_menu_img_homemangertopacke"
                             android:layout_width="@dimen/dimen_110x"
                             android:layout_height="@dimen/dimen_110y"
-                            android:src="@drawable/look_storage" />
+                            android:src="@drawable/look_storage"
+                            tools:ignore="all"/>
 
                         <TextView
                             android:id="@+id/textViewhomemangertopacke"
@@ -179,7 +184,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_10y"
                             android:text="库管员水牌"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            tools:ignore="all"/>
                     </LinearLayout>
                    
                 </LinearLayout>
@@ -314,7 +320,8 @@
                                 android:id="@+id/home_menu_img_accountcenter"
                                 android:layout_width="@dimen/dimen_110x"
                                 android:layout_height="@dimen/dimen_110y"
-                                android:src="@drawable/look_storage" />
+                                android:src="@drawable/look_storage"
+                                tools:ignore="all"/>
 
                         <TextView
                                 android:id="@+id/textViewaccountcenter"
@@ -323,7 +330,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_10y"
                                 android:text="账户中心"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                                tools:ignore="all"/>
                     </LinearLayout>
                     <!-- 清分员对库管员的交接 -->
                     <LinearLayout
@@ -362,7 +370,8 @@
                             android:id="@+id/home_menu_img_homemangertopacke"
                             android:layout_width="@dimen/dimen_110x"
                             android:layout_height="@dimen/dimen_110y"
-                            android:src="@drawable/meun_money" />
+                            android:src="@drawable/meun_money"
+                            tools:ignore="all"/>
 
                         <TextView
                             android:id="@+id/textViewhomemangertopacke"
@@ -371,7 +380,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_10y"
                             android:text="库管员装袋"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            tools:ignore="all"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
