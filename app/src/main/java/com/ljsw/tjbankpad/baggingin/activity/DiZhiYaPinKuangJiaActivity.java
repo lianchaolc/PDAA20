@@ -31,6 +31,7 @@ import com.ljsw.tjbankpda.util.Skip;
 import com.manager.classs.pad.ManagerClass;
 import com.service.FixationValue;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -199,6 +200,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	 */
 	private void getIncenterandAccountintiontopackges() {
 		new Thread() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void run() {
 				super.run();
@@ -241,6 +243,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	 */
 	private void getAccountUnHandoverCountAndList() {
 		new Thread() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void run() {
 				super.run();
@@ -282,6 +285,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	 */
 	private void getWarehouseTaskListAndCount() {
 		new Thread() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void run() {
 				super.run();
