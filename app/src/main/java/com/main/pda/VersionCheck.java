@@ -3,14 +3,19 @@ package com.main.pda;
 import hdjc.rfid.operator.RFID_Device;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.*;
 import com.application.GApplication;
 import com.clearadmin.pda.ClearAddMoneyOutDo;
+import com.example.pda.BuildConfig;
 import com.example.pda.R;
 import com.golbal.pda.GolbalView;
+import com.hjq.permissions.XXPermissions;
+import com.loginsystem.biz.PermissionUtil;
+import com.loginsystem.biz.PictureFileHelp;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.Loading;
 import com.messagebox.Runing;
@@ -33,6 +38,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,7 +48,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class VersionCheck extends Activity {
-
+	private static final int REQ_CODE_PERMISSION = 0x1111;//  新增200200727
 	TextView versionNum, tvscan;
 	Button btn;
 	private GetPDA Pda;
@@ -187,23 +193,129 @@ public class VersionCheck extends Activity {
 	// 安装应用程序
 	public void installAPK() {
 		String paths = Environment.getExternalStorageDirectory() + "/PDA_Version" + "/" + VersionInfo.APKNAME;
+//		String paths = Environment.getExternalStorageDirectory()+ "/" +VersionInfo.APKNAME;
 		// String paths =
 		// Environment.getExternalStorageDirectory()+"/PDA_Version"+"/PDAA20.apk";
 		File file = new File(paths);
+		Uri uri;
 		if (file.exists()) {
+			if (XXPermissions.isHasPermission(VersionCheck.this, PermissionUtil.Group.STORAGE)) {
+//				if (Build.VERSION.SDK_INT >= 24) {
+////				uri = FileProvider.getUriForFile(VersionCheck.this, VersionCheck.this.getPackageName() + ".FileProvider", file);
+////					installapktest();
+//					File file2= new File(paths);
+//					Uri apkUri = FileProvider.getUriForFile(VersionCheck.this, "com.example.pda.FileProvider", file2);//在AndroidManifest中的android:authorities值
+//					Intent install = new Intent(Intent.ACTION_VIEW);
+//					install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+//					install.setDataAndType(apkUri, "application/vnd.android.package-archive");
+//					VersionCheck.this.startActivity(install);
+//				}else{
+//
+//					Intent intent = new Intent(Intent.ACTION_VIEW);
+//					try {
+//						intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//						startActivity(intent);
+//						VersionCheck.this.finish();
+//						exit();
+//					} catch (Exception e) {
+//						e.getCause();
+//						System.out.println(e.getMessage());
+//					}
+//				}
 
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			try {
-				intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-				startActivity(intent);
-				VersionCheck.this.finish();
-				exit();
-			} catch (Exception e) {
-				e.getCause();
-				System.out.println(e.getMessage());
+
+//			    File dir = new File(paths);
+//				File file1 = new File(dir, "PDA.apk");
+				if(!file.exists()){
+					try {
+						file.createNewFile(); //创建文件
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}else{
+					Log.i("gdchent","文件存在");
+				}
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+					//小于7.0
+					intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				} else {
+					//大于7.0
+					// 声明需要的临时权限
+					intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					// 第二个参数，即第一步中配置的authorities
+					String packageName = VersionCheck.this.getApplication().getPackageName();
+					Log.i("gdchent","package:"+packageName);
+					Log.i("gdchent","ab_path:"+file.getAbsolutePath());
+					Uri contentUri = FileProvider.getUriForFile(VersionCheck.this,  "com.example.pda.FileProvider", file);
+//					FileProvider.getUriForFile(VersionCheck.this,"com.example.pda.FileProvider",file1);//在AndroidManifest中的andr
+					intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+				}
+				VersionCheck.this.startActivity(intent);
+			} else {
+				PictureFileHelp.requestPermissionSave(VersionCheck.this, REQ_CODE_PERMISSION);
+				XXPermissions.gotoPermissionSettings(this);
+
 			}
+
+
 		}
+
+
 	}
+
+
+	/***
+	 * 7.0 设备安装
+	 */
+	private void install1(Activity activity, String name) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		// 打开安装包方式
+		intent.setDataAndType(getUri1(activity, name), "application/vnd.android.package-archive");
+		activity.startActivity(intent);
+	}
+
+	/***
+	 * 转url
+	 */
+	private Uri getUri1(Activity activity, String name) {
+		Uri uri;
+		// 获取下载apk，存储地址
+//		File fileSave = new File(getDownloadPath() + File.separator + String.valueOf(BuildConfig.APPLICATION_ID) + ".apk");
+		File fileSave = new File(getDownloadPath()+"/PDA_Version" + "/"+File.separator+String.valueOf(BuildConfig.APPLICATION_ID)+".apk");
+		if (Build.VERSION.SDK_INT >= 24) {
+			// 适配android7.0 ，不能直接访问原路径
+			// 需要对intent 授权
+			uri = FileProvider.getUriForFile(activity, "com.example.pda.FileProvider", fileSave);
+		} else {
+			Log.d("----------------------",fileSave+"");
+			uri = Uri.fromFile(fileSave);
+		}
+		return uri;
+	}
+
+
+	/***
+	 * /**
+	 * 获取下载apk，存储地址
+	 *
+	 * @return
+	 */
+	private String getDownloadPath() {
+		return Environment.getExternalStorageDirectory().getAbsolutePath();
+	}
+
+
+	public void installapktest() {
+		install1(VersionCheck.this, "PDA.apk");
+	}
+
+
+
 
 	public void exit() {
 		for (int i = 0; i < MainActivity.list_version.size(); i++) {
