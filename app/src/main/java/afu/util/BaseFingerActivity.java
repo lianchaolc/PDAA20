@@ -1,9 +1,11 @@
 package afu.util;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * @ClassName: BaseFingerActivity
@@ -18,14 +20,31 @@ public abstract class BaseFingerActivity extends Activity implements FingerHandl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.e("baseFingerActivity", "onCreate -- openFinger");
         fingerUtil = new FingerUtil(this);
 
         fingerUtil.openFinger();
     }
 
     @Override
+    protected void onRestart() {
+        Log.e("baseFingerActivity", "onRestart -- openFinger");
+        fingerUtil = new FingerUtil(this);
+        fingerUtil.openFinger();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.e("baseFingerActivity", "onNewIntent -- openFinger");
+        fingerUtil = new FingerUtil(this);
+        fingerUtil.openFinger();
+        super.onNewIntent(intent);
+    }
+
+    @Override
     protected void onStop() {
+        Log.e("baseFingerActivity", "onStop -- closeFinger");
         fingerUtil.closeFinger();
         super.onStop();
     }
