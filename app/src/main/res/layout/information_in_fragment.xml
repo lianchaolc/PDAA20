@@ -3,13 +3,15 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_600y"
     android:paddingLeft="10px"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_70y"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        xmlns:tools="http://schemas.android.com/tools">
 
         <TextView
             android:textSize="@dimen/text_size_25"
@@ -44,7 +46,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加钞路线:" />
+            android:text="加钞路线:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/gray"
@@ -69,6 +72,7 @@
             android:textColor="@color/red"
             android:layout_marginRight="@dimen/dimen_8x"
             android:id="@+id/textView1"
+            tools:ignore="all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="计划类型:" />
@@ -98,7 +102,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="总金额:" />
+            android:text="总金额:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/gray"
@@ -125,7 +130,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="钞箱数量:" />
+            android:text="钞箱数量:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/gray"
@@ -152,7 +158,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="加钞日期:" />
+            android:text="加钞日期:"
+            tools:ignore="all"/>
 
         <TextView
             android:textColor="@color/gray"

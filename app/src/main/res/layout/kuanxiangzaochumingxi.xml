@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +54,8 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="钞车线路："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_30" />
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/tv_chaoche"
@@ -84,7 +86,8 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="网点数量："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_30" />
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/tv_wangdiancount"
@@ -115,7 +118,9 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="款箱数量："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_30" />
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all"
+            />
 
         <TextView
             android:id="@+id/tv_kuanxiangcount"
@@ -146,7 +151,8 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="配送日期："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_30" />
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/tv_date"

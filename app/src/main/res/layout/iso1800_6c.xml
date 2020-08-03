@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:background="#f0f0f0"
+    xmlns:tools="http://schemas.android.com/tools"
 >
 
     <LinearLayout
@@ -16,7 +17,8 @@
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            tools:ignore="all">
 
             <TextView
                 android:layout_width="@dimen/dimen_0x"
@@ -37,7 +39,8 @@
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            tools:ignore="all">
 
             <TextView
                 android:id="@+id/textView1"
