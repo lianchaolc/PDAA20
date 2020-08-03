@@ -4,7 +4,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -68,7 +69,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimen_30x"
-                    android:src="@drawable/user_order" />
+                    android:src="@drawable/user_order"
+                    tools:ignore="all"
+                    />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -92,7 +95,8 @@
                     android:background="@drawable/business_number"
                     android:gravity="center"
                     android:text="0"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/zaosong_kuanxiangcount"
@@ -127,7 +131,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimen_30x"
-                    android:src="@drawable/user_order2" />
+                    android:src="@drawable/user_order2"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -138,7 +143,8 @@
                     android:layout_marginLeft="@dimen/dimen_11x"
                     android:layout_toRightOf="@+id/updatepass"
                     android:text="款箱晚收入库"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/wanru_wangdian"

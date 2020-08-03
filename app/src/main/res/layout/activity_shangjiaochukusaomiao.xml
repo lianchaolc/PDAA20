@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -63,7 +64,9 @@
                 android:layout_height="wrap_content"
                 android:text="未扫描："
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
+            />
 
             <TextView
                 android:id="@+id/peisong_saomiao_left_text"
@@ -121,7 +124,10 @@
                 android:layout_height="wrap_content"
                 android:text="未扫描周转箱"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
+
+            />
         </LinearLayout>
 
         <LinearLayout
@@ -136,7 +142,9 @@
                 android:layout_height="wrap_content"
                 android:text="已扫描周转箱"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
+            />
         </LinearLayout>
     </LinearLayout>
 

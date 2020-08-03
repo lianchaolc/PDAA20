@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +63,8 @@
                 android:layout_marginLeft="@dimen/dimen_15x"
                 android:text="配送线路："
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_30" />
+                android:textSize="@dimen/text_size_30"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/z_lineName"
@@ -92,7 +94,8 @@
                 android:layout_marginLeft="@dimen/dimen_15x"
                 android:text="网点名称："
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_30" />
+                android:textSize="@dimen/text_size_30"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/z_netName"
@@ -122,7 +125,8 @@
                 android:layout_marginLeft="@dimen/dimen_15x"
                 android:text="早送日期："
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_30" />
+                android:textSize="@dimen/text_size_30"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/z_date"

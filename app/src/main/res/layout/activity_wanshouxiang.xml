@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +54,8 @@
             android:layout_marginTop="@dimen/dimen_15y"
             android:text="配送线路："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_35" />
+            android:textSize="@dimen/text_size_35"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/oxianlu"
@@ -77,7 +79,8 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="需要交接款箱数："
             android:textColor="@color/red"
-            android:textSize="@dimen/text_size_35" />
+            android:textSize="@dimen/text_size_35"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/kuanxiang_num"
@@ -101,7 +104,8 @@
             android:layout_marginTop="@dimen/dimen_10y"
             android:text="扫描款箱数："
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_35" />
+            android:textSize="@dimen/text_size_35"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/wanshou_count"

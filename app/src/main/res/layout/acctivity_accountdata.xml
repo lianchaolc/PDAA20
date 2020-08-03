@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -84,7 +85,8 @@
               android:layout_marginRight="@dimen/dimen_8x"
               android:layout_weight="1"
               android:gravity="center"
-              android:orientation="vertical" >
+              android:orientation="vertical"
+              tools:ignore="all">
 
               <ImageView
                   android:layout_width="@dimen/dimen_100x"

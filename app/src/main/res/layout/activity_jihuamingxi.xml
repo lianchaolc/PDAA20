@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -78,7 +79,8 @@
                     android:layout_marginLeft="@dimen/dimen_50x"
                     android:text="现金："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_40" />
+                    android:textSize="@dimen/text_size_40"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/tv_jihuadan_xianjin"
@@ -113,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:text="劵别代码"
                         android:textColor="@color/blue_title"
-                        android:textSize="@dimen/text_size_40" />
+                        android:textSize="@dimen/text_size_40"
+                        tools:ignore="all"/>
 
                 </LinearLayout>
 
@@ -129,7 +132,8 @@
                         android:layout_height="wrap_content"
                         android:text="数量"
                         android:textColor="@color/blue_title"
-                        android:textSize="@dimen/text_size_40" />
+                        android:textSize="@dimen/text_size_40"
+                        tools:ignore="all"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -160,7 +164,8 @@
                     android:layout_marginLeft="@dimen/dimen_50x"
                     android:text="重空凭证："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_40" />
+                    android:textSize="@dimen/text_size_40"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/tv_jihuadan_zhongkong"
@@ -195,7 +200,8 @@
                         android:layout_height="wrap_content"
                         android:text="凭证种类"
                         android:textColor="@color/blue_title"
-                        android:textSize="@dimen/text_size_40" />
+                        android:textSize="@dimen/text_size_40"
+                        tools:ignore="all"/>
 
                 </LinearLayout>
 
@@ -211,7 +217,8 @@
                         android:layout_height="wrap_content"
                         android:text="数量"
                         android:textColor="@color/blue_title"
-                        android:textSize="@dimen/text_size_40" />
+                        android:textSize="@dimen/text_size_40"
+                        tools:ignore="all"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -242,6 +249,7 @@
                     android:layout_marginLeft="@dimen/dimen_50x"
                     android:text="抵质押品："
                     android:textColor="@color/red"
+                    tools:ignore="all"
                     android:textSize="@dimen/text_size_40" />
 
                 <TextView

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 	
     <LinearLayout
         android:layout_width="fill_parent"
@@ -33,7 +34,8 @@
                 android:layout_width="@dimen/dimen_60x"
                 android:layout_height="@dimen/dimen_60y"
                 android:layout_marginLeft="@dimen/dimen_15x"
-                android:src="@drawable/u24" />
+                android:src="@drawable/u24"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -42,7 +44,8 @@
                 android:layout_marginLeft="@dimen/dimen_15x"
                 android:text="线路名称"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/title_text_size" />
+                android:textSize="@dimen/title_text_size"
+                tools:ignore="all"/>
 
             <ImageView
                 android:id="@+id/yyrw_update"
@@ -80,7 +83,9 @@
                 android:layout_width="@dimen/dimen_60x"
                 android:layout_height="@dimen/dimen_60y"
                 android:layout_marginLeft="@dimen/dimen_15x"
-                android:src="@drawable/u24" />
+                android:src="@drawable/u24"
+                tools:ignore="all"
+                />
 
             <TextView
                 android:id="@+id/textView3"
@@ -89,7 +94,8 @@
                 android:text="任务列表"
                 android:layout_marginLeft="@dimen/dimen_15x"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/text_size_40" />
+                android:textSize="@dimen/text_size_40"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/textView5"

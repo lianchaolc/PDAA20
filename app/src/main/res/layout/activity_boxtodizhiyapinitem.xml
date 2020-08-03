@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -104,6 +105,7 @@
                     android:gravity="center|left"
                     android:text="待扫描:"
                     android:textColor="@color/back"
+                    tools:ignore="all"
                     android:textSize="@dimen/text_size_26" />
   <TextView
                     android:id="@+id/boxtodizhiyapin_left"
@@ -133,6 +135,7 @@
                     android:gravity="center_vertical"
                     android:text="已扫描:"
                     android:textColor="@color/back"
+                    tools:ignore="all"
                    android:textSize="@dimen/text_size_26"/>
 
                <TextView

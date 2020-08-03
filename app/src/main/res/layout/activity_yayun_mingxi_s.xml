@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -66,7 +67,8 @@
                 android:textColor="#DC143C"
                 android:textSize="@dimen/text_size_35"
                 android:layout_marginLeft="20sp"
-                android:text="机构名称:" />
+                android:text="机构名称:"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/yy_wdName"
@@ -83,7 +85,8 @@
             android:id="@+id/view1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_1y"
-            android:background="@drawable/u25" />
+            android:background="@drawable/u25"
+            tools:ignore="all"/>
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +104,8 @@
                 android:textColor="#DC143C"
                 android:textSize="@dimen/text_size_35"
                 android:layout_marginLeft="20sp"
-                android:text="所属线路:" />
+                android:text="所属线路:"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/yy_xlName"
@@ -117,7 +121,8 @@
             android:id="@+id/view1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_1y"
-            android:background="@drawable/u25" />
+            android:background="@drawable/u25"
+            tools:ignore="all"/>
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,7 +138,8 @@
                 android:textColor="#DC143C"
                 android:textSize="@dimen/text_size_35"
                 android:layout_marginLeft="-10sp"
-                android:text="上缴周转箱数量:" />
+                android:text="上缴周转箱数量:"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/yy_sjNum"
@@ -149,7 +155,8 @@
             android:id="@+id/view1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_1y"
-            android:background="@drawable/u25" />
+            android:background="@drawable/u25"
+            tools:ignore="all"/>
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,7 +172,8 @@
                 android:textColor="#DC143C"
                 android:layout_marginLeft="-10sp"
                 android:textSize="@dimen/text_size_35"
-                android:text="请领周转箱数量:" />
+                android:text="请领周转箱数量:"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/yy_qlNum"
@@ -181,7 +189,8 @@
             android:id="@+id/view1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_1y"
-            android:background="@drawable/u25" />
+            android:background="@drawable/u25"
+            tools:ignore="all"/>
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -197,7 +206,8 @@
                 android:textColor="#DC143C"
                 android:textSize="@dimen/text_size_35"
                 android:layout_marginLeft="20sp"
-                android:text="运送日期:" />
+                android:text="运送日期:"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/yy_xlDate"

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -37,7 +38,8 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="上缴出库"
             android:textColor="@color/white"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/title_text_size"
+            tools:ignore="all"/>
 
         <Button
             android:id="@+id/shangjiaochuku_update"
@@ -72,7 +74,9 @@
                 android:layout_height="wrap_content"
                 android:text="线路编号"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"
+                />
         </LinearLayout>
 
         <View
@@ -92,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:text="线路名称"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
         </LinearLayout>
         <View
             android:layout_width="@dimen/dimen_1x"
@@ -112,7 +117,8 @@
                 android:text="周转箱数量"
                 android:textColor="@color/red"
                 android:gravity="center"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
         </LinearLayout>
     </LinearLayout>
 

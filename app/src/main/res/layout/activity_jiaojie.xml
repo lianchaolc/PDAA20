@@ -4,7 +4,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -45,7 +46,8 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/dimen_30x"
-                    android:src="@drawable/user_order" />
+                    android:src="@drawable/user_order"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -58,6 +60,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="配送路线"
+                    tools:ignore="all"
                     android:textColor="@color/white" />
 
                 <ImageView
@@ -101,7 +104,8 @@
                     android:layout_width="@dimen/dimen_60x"
                     android:layout_height="@dimen/dimen_60y"
                     android:layout_marginLeft="@dimen/dimen_30x"
-                    android:src="@drawable/user_order2" />
+                    android:src="@drawable/user_order2"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -112,6 +116,7 @@
                     android:layout_marginLeft="@dimen/dimen_20x"
                     android:layout_toRightOf="@+id/updatepass"
                     android:text="早送交接"
+                    tools:ignore="all"
                     android:textColor="@color/white" />
 
 
@@ -157,7 +162,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimen_30x"
-                    android:src="@drawable/user_order" />
+                    android:src="@drawable/user_order"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -168,7 +174,8 @@
                     android:layout_marginLeft="@dimen/dimen_11x"
                     android:layout_toRightOf="@+id/updatepass"
                     android:text="晚收交接"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    tools:ignore="all"/>
 
                  <TextView
                     android:id="@+id/wanrujiaojie_kuanxiangcount"

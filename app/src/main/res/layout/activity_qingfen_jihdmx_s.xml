@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -90,7 +91,8 @@
                 android:layout_toRightOf="@+id/AllcheckBox"
                 android:text="已完成"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/allQfdan"
@@ -130,6 +132,7 @@
                 android:gravity="center|right"
                 android:text="任务单号"
                 android:textSize="@dimen/text_size_30"
+                tools:ignore="all"
                 android:textColor="#FF00FF" />
 
             <TextView
@@ -140,7 +143,8 @@
                 android:gravity="center"
                 android:text="负责小组"
                 android:textSize="@dimen/text_size_30"
-                android:textColor="#FF00FF" />
+                android:textColor="#FF00FF"
+                tools:ignore="all"/>
         </LinearLayout>
 
         <View
@@ -191,7 +195,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_30"
-                android:text="条线路" />
+                android:text="条线路"
+                tools:ignore="all"/>
 
             <TextView
                 android:id="@+id/textView8"
@@ -199,6 +204,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_45x"
                 android:textSize="@dimen/text_size_30"
+                tools:ignore="all"
                 android:text="共计:" />
 
             <TextView
@@ -214,7 +220,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_30"
-                android:text="个周转箱" />
+                android:text="个周转箱"
+                tools:ignore="all"/>
         </LinearLayout>
 
         <View
@@ -253,7 +260,8 @@
                 android:layout_marginLeft="@dimen/dimen_98x"
                 android:text="未完成"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -277,7 +285,8 @@
                     android:gravity="center"
                     android:text="任务单号"
                     android:textSize="@dimen/text_size_35"
-                    android:textColor="#FF00FF" />
+                    android:textColor="#FF00FF"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/textView7"
@@ -287,7 +296,8 @@
                     android:gravity="center"
                     android:text="负责小组"
                     android:textSize="@dimen/text_size_35"
-                    android:textColor="#FF00FF" />
+                    android:textColor="#FF00FF"
+                    tools:ignore="all"/>
             </LinearLayout>
 
             <View

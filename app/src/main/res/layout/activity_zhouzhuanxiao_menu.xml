@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- 2020-05-22-查看2 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +75,8 @@
                     	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
                         android:layout_width="@dimen/dimen_110x"
                         android:layout_height="@dimen/dimen_110y"
-                        android:src="@drawable/yayun" />
+                        android:src="@drawable/yayun"
+                        tools:ignore="all"/>
 
                     <TextView
                         android:id="@+id/textView2"
@@ -83,7 +85,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_10y"
                         android:text="押运管理"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        tools:ignore="all"/>
                 </LinearLayout>
                 
                  <LinearLayout
@@ -97,7 +100,8 @@
                     	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
                         android:layout_width="@dimen/dimen_110x"
                         android:layout_height="@dimen/dimen_110y"
-                        android:src="@drawable/menu_qingfen">
+                        android:src="@drawable/menu_qingfen"
+                        tools:ignore="all">
 </ImageView>
                     <TextView
                         android:id="@+id/textView2"
@@ -106,7 +110,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_10y"
                         android:text="后督账包"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        tools:ignore="all"/>
                 </LinearLayout> 
                 
             </LinearLayout>
@@ -173,7 +178,8 @@
                     	android:id="@+id/iv_zhouzhuanxiao_menu_yayun"
                         android:layout_width="@dimen/dimen_110x"
                         android:layout_height="@dimen/dimen_110y"
-                        android:src="@drawable/yayun" />
+                        android:src="@drawable/yayun"
+                        tools:ignore="all"/>
 
                     <TextView
                         android:id="@+id/textView2"
@@ -182,7 +188,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_10y"
                         android:text="账户资料"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        tools:ignore="all"/>
                 </LinearLayout> 
             </LinearLayout>
 

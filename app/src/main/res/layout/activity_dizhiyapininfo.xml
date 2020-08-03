@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1f1f1"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -52,14 +53,15 @@
 
        
         <TextView
-            android:id="@+id/dzyp_"
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="@dimen/dimen_30y"
             android:gravity="center"
             android:layout_weight="1"
             android:text="操作人员:"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/dzyp_username"
@@ -69,7 +71,8 @@
             android:layout_weight="1"
             android:text="张三"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
     </LinearLayout>
     
@@ -87,13 +90,13 @@
 
        
         <TextView
-            android:id="@+id/dzyp_"
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="@dimen/dimen_30y"
             android:gravity="center"
             android:layout_weight="1"
             android:text="入库单号:"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -104,6 +107,7 @@
             android:layout_weight="1"
             android:text="RK20180908002"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" >
         </TextView>
     </LinearLayout>
@@ -136,6 +140,7 @@
             android:layout_weight="3"
             android:text="已扫描数量:"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -162,6 +167,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:text="待扫描数量:"
+            tools:ignore="all"
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_24" />
 

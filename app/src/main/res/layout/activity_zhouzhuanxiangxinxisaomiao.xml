@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -71,7 +72,8 @@
                         android:layout_height="wrap_content"
                         android:text="周转箱编号："
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,7 +128,9 @@
                         android:layout_height="wrap_content"
                         android:text="所属配送单："
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -168,7 +172,8 @@
                         android:layout_height="wrap_content"
                         android:text="配送单所属网点："
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -211,7 +216,8 @@
                         android:text="配送单周转箱数量："
                         android:textColor="@color/red"
                         android:layout_marginLeft="@dimen/dimen_10x"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,7 +259,8 @@
                         android:text="配送单下属订单号："
                         android:textColor="@color/red"
                         android:layout_marginLeft="@dimen/dimen_10x"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
                 
             </LinearLayout>

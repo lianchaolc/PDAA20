@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -39,7 +40,7 @@
     <LinearLayout
           android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:gravity="center_vertical" 
+         android:gravity="center_vertical"
          android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +73,7 @@
                  android:textSize="@dimen/text_size_30" >
             </TextView>
         </LinearLayout>
-      
+
     <LinearLayout
         android:layout_width="match_parent"
          android:layout_height="@dimen/dimen_60y"
@@ -105,7 +106,7 @@
             android:text="1"
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_30" />
-    
+
         </LinearLayout>
           <LinearLayout
          android:layout_width="@dimen/dimen_0x"
@@ -114,6 +115,7 @@
          android:layout_weight="1"
          android:orientation="horizontal" >
         <TextView
+            tools:ignore="all"
             android:id="@+id/dzyp_"
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="match_parent"
@@ -179,7 +181,7 @@
          android:gravity="center_vertical"
          android:layout_marginTop="@dimen/dimen_15y"
         android:orientation="horizontal" >
-       
+
     <Button
         android:layout_margin="5px"
         android:id="@+id/dpjd_rukubtn_sure"
@@ -200,5 +202,5 @@
         android:text="取消"
      android:textSize="@dimen/text_size_30"/>
 </LinearLayout>
-       </LinearLayout>      
+       </LinearLayout>
 </LinearLayout>

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -69,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:text="未清分配送单："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" />
+                    android:textSize="@dimen/text_size_35"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/qf_jindu_shuaxin_weiqing_count"
@@ -103,7 +105,8 @@
                         android:layout_height="wrap_content"
                         android:text="配送单号"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -118,7 +121,9 @@
                         android:layout_height="wrap_content"
                         android:text="所属网点"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -161,7 +166,8 @@
                     android:layout_height="wrap_content"
                     android:text="已清分配送单："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" />
+                    android:textSize="@dimen/text_size_35"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/qf_jindu_shuaxin_yiqing_count"
@@ -188,7 +194,8 @@
                         android:layout_height="wrap_content"
                         android:text="配送单号"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -203,7 +210,8 @@
                         android:layout_height="wrap_content"
                         android:text="所属网点"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/text_size_35" />
+                        android:textSize="@dimen/text_size_35"
+                        tools:ignore="all"/>
                 </LinearLayout>
             </LinearLayout>
 

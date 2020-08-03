@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -70,7 +71,8 @@
                     android:layout_height="wrap_content"
                     android:text="配送单号："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_30" />
+                    android:textSize="@dimen/text_size_30"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/zhouzhuan_hedui_left_text"
@@ -105,7 +107,9 @@
                     android:layout_marginLeft="@dimen/dimen_40x"
                     android:text="现金："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_30" />
+                    android:textSize="@dimen/text_size_30"
+                    tools:ignore="all"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -209,7 +213,8 @@
                     android:layout_width="@dimen/dimen_0x"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.2"
-                    android:gravity="center" >
+                    android:gravity="center"
+                    tools:ignore="all">
 
                     <TextView
                         android:id="@+id/shangjiaoqingfen_spinner_text"
@@ -251,7 +256,8 @@
                     android:layout_width="@dimen/dimen_0x"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.2"
-                    android:gravity="center" >
+                    android:gravity="center"
+                    tools:ignore="all">
 
                     <EditText
                         android:id="@+id/shangjiaoqingfen_edit"
@@ -351,7 +357,8 @@
                     android:layout_marginLeft="@dimen/dimen_50x"
                     android:text="重空凭证："
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_40" />
+                    android:textSize="@dimen/text_size_40"
+                    tools:ignore="all"/>
             </LinearLayout>
 
             <View
@@ -373,7 +380,8 @@
                     android:layout_marginLeft="@dimen/dimen_50x"
                     android:text="已清点："
                     android:textColor="@color/blue_top"
-                    android:textSize="@dimen/text_size_30" />
+                    android:textSize="@dimen/text_size_30"
+                    tools:ignore="all"/>
 
                 <TextView
                     android:id="@+id/shangjiaoqingfen_zhongkong_yiqingdian"
@@ -605,7 +613,8 @@
                     android:text="抵质押品数量："
                     android:textColor="@color/red"
                     android:layout_marginRight="@dimen/dimen_10x"
-                    android:textSize="@dimen/text_size_30" />
+                    android:textSize="@dimen/text_size_30"
+                    tools:ignore="all"/>
      <TextView
                     android:id="@+id/textViewdizhiyapincoount"
                     android:layout_width="@dimen/dimen_0x"

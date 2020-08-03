@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        tools:ignore="all"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -215,6 +217,7 @@
             android:layout_marginBottom="@dimen/dimen_10y"
             android:layout_marginTop="@dimen/dimen_10y"
             android:background="@color/white"
+            tools:ignore="all"
             android:orientation="horizontal" >
 
             <TextView
@@ -239,6 +242,7 @@
         android:layout_height="@dimen/dimen_80y"
         android:layout_gravity="center"
         android:background="@color/white"
+        tools:ignore="all"
         android:orientation="horizontal" >
 
         <TextView

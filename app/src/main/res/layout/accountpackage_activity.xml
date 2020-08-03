@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1F1F1"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +28,7 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="资料封包"
             android:textColor="@color/white"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_50" />
 
         <Button
@@ -58,6 +61,7 @@
             android:gravity="center"
             android:text="操作人：张三"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_30" />
     </LinearLayout>
 
@@ -84,6 +88,7 @@
             android:gravity="center"
             android:text="账号账号"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" >
         </TextView>
 
@@ -123,6 +128,7 @@
             android:gravity="center"
             android:text="开户单位:"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" />
 
         <TextView
@@ -134,6 +140,7 @@
             android:gravity="center_vertical"
             android:text="xxx公司"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" />
     </LinearLayout>
 
@@ -159,6 +166,7 @@
             android:gravity="center"
             android:text="开户日期:"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" >
         </TextView>
 
@@ -171,6 +179,7 @@
             android:gravity="center_vertical"
             android:text="2018-6-7"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" />
     </LinearLayout>
 
@@ -196,6 +205,7 @@
             android:gravity="center"
             android:text="订单号："
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" >
         </TextView>
 
@@ -208,6 +218,7 @@
             android:gravity="center_vertical"
             android:text="DL02018607001"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" />
     </LinearLayout>
 
@@ -232,6 +243,7 @@
             android:gravity="center"
             android:text="封包袋编号"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_28" />
 
         <TextView

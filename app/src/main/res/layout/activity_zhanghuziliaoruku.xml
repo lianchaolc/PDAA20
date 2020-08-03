@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F1f1f1"
-    tools:context="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZLaActivity" >
+    tools:context="com.ljsw.tjbankpad.baggingin.activity.ZhangHuZLaActivity"
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,7 +95,8 @@
             android:gravity="center"
             android:text="入库任务编号"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"
@@ -104,7 +106,8 @@
             android:gravity="center|left"
             android:text="RK20180607002 "
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
     </LinearLayout>
 
@@ -127,7 +130,8 @@
             android:gravity="center"
             android:text="入库日期"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"
@@ -137,7 +141,8 @@
             android:gravity="center|left"
             android:text="2018-6-7 "
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
 </LinearLayout>
 <LinearLayout
@@ -154,7 +159,8 @@
             android:gravity="center"
             android:text="封包数量"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"
@@ -164,7 +170,8 @@
             android:gravity="center|left"
             android:text="6 "
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
 </LinearLayout>
 
@@ -182,7 +189,8 @@
             android:gravity="center"
             android:text="已入库封包数量"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"
@@ -192,7 +200,8 @@
             android:gravity="center|left"
             android:text="2"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
 </LinearLayout>
 <LinearLayout
@@ -209,7 +218,8 @@
             android:gravity="center"
             android:text="待入库封包数量"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"
@@ -219,7 +229,8 @@
             android:gravity="center|left"
             android:text="4"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
 </LinearLayout>
     <View

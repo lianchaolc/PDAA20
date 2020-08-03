@@ -134,7 +134,9 @@
             android:gravity="center"
             android:text="账户资料袋数量:"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_30" />
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all"
+            />
 
         <TextView
             android:id="@+id/zhanghuziliaoruku"

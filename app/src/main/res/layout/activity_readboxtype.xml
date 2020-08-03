@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -25,7 +26,8 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="读取箱子修改信息"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_50" />
+            android:textSize="@dimen/text_size_50"
+            tools:ignore="all"/>
 
         <Button
             android:id="@+id/ql_ruku_update"
@@ -104,7 +106,8 @@
                       android:gravity="center|left"
                       android:text="请选择类型:"
                       android:textColor="@color/back"
-                      android:textSize="@dimen/text_size_30" />
+                      android:textSize="@dimen/text_size_30"
+                      tools:ignore="all"/>
 
                   <RadioGroup
                       android:id="@+id/rg_zzx_num"

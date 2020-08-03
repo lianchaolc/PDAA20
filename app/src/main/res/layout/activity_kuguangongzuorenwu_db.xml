@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 <LinearLayout 
     android:layout_width="fill_parent"
     android:layout_height="@dimen/dimen_50y">
@@ -27,7 +28,8 @@
             android:layout_width="@dimen/dimen_50x"
             android:layout_height="@dimen/dimen_50y"
             android:layout_marginLeft="@dimen/dimen_25x"
-            android:src="@drawable/user_order" />
+            android:src="@drawable/user_order"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -36,7 +38,8 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="任务列表"
             android:textColor="@color/white"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/title_text_size"
+            tools:ignore="all"/>
 
         <Button
             android:id="@+id/renwu_update"
@@ -81,7 +84,8 @@
             android:layout_width="@dimen/dimen_50x"
             android:layout_height="@dimen/dimen_50y"
             android:layout_marginLeft="@dimen/dimen_25x"
-            android:src="@drawable/user_order" />
+            android:src="@drawable/user_order"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -90,7 +94,8 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="出库操作"
             android:textColor="@color/white"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/title_text_size"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/renwuliebiao_chuku_count"
@@ -129,7 +134,8 @@
             android:layout_width="@dimen/dimen_50x"
             android:layout_height="@dimen/dimen_50y"
             android:layout_marginLeft="@dimen/dimen_25x"
-            android:src="@drawable/user_order" />
+            android:src="@drawable/user_order"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -138,7 +144,8 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:text="入库操作"
             android:textColor="@color/white"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/title_text_size"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/renwuliebiao_ruku_count"

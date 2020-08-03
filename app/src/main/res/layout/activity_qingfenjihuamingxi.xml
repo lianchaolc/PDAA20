@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -66,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:text="计划单号: "
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_35" />
+                android:textSize="@dimen/text_size_35"
+                tools:ignore="all"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +85,8 @@
                 android:layout_marginLeft="@dimen/dimen_8x"
                 android:text="P9000001"
                 android:textColor="@color/back"
-                android:textSize="@dimen/text_size_30" />
+                android:textSize="@dimen/text_size_30"
+                tools:ignore="all"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -156,7 +159,8 @@
                 android:layout_height="wrap_content"
                 android:text="线路名称"
                 android:textColor="@color/blue_top"
-                android:textSize="@dimen/text_size_40" />
+                android:textSize="@dimen/text_size_40"
+                tools:ignore="all"/>
         </LinearLayout>
 
         <LinearLayout
@@ -171,7 +175,8 @@
                 android:layout_height="wrap_content"
                 android:text="数量"
                 android:textColor="@color/blue_top"
-                android:textSize="@dimen/text_size_40" />
+                android:textSize="@dimen/text_size_40"
+                tools:ignore="all"/>
         </LinearLayout>
     </LinearLayout>
 	<View

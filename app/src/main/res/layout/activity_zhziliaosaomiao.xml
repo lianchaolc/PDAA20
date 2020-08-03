@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEEEE"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
     
   <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +59,8 @@
             android:layout_weight="1"
             android:text="操作人员"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/dzyp_username"
@@ -68,7 +70,8 @@
             android:layout_weight="1"
             android:text="张三"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
     </LinearLayout>
     
@@ -91,7 +94,8 @@
             android:layout_weight="1"
             android:text="入库任务编号"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/dzyp_username"
@@ -101,7 +105,8 @@
             android:layout_weight="1"
             android:text="RK20180607002"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
     </LinearLayout>
      <View
@@ -128,7 +133,8 @@
             android:layout_weight="1"
             android:text="入库任务编号"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/dzyp_username"
@@ -138,7 +144,8 @@
             android:layout_weight="1"
             android:text="RK20180607002"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
         </LinearLayout>
          <LinearLayout
@@ -155,7 +162,8 @@
             android:layout_weight="1"
             android:text="待库任务编号"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"/>
 
         <TextView
             android:id="@+id/dzyp_username"
@@ -165,7 +173,8 @@
             android:layout_weight="1"
             android:text="RK20180607002"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
         </LinearLayout>
     </LinearLayout>
@@ -219,7 +228,9 @@
             android:layout_weight="1"
             android:text="存放位置"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" />
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all"
+            />
 
         <TextView
             android:id="@+id/saomiaocunfagnweizhi"

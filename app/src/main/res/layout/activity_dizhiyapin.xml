@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1f1f1"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -59,6 +60,7 @@
             android:layout_weight="1"
             android:text="操作人员"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -68,6 +70,7 @@
             android:gravity="center|left"
             android:layout_weight="1"
             android:text="张三"
+            tools:ignore="all"
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_24" >
         </TextView>
@@ -93,6 +96,7 @@
             android:layout_weight="1"
             android:text="归还任务数量"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -102,6 +106,7 @@
             android:gravity="center|left"
             android:layout_weight="1"
             android:text="1"
+            tools:ignore="all"
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_24" >
         </TextView>
@@ -142,6 +147,7 @@
             android:layout_weight="1"
             android:text="出库任务数量"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -152,7 +158,8 @@
             android:layout_weight="1"
             android:text="1"
             android:textColor="@color/back"
-            android:textSize="@dimen/text_size_24" >
+            android:textSize="@dimen/text_size_24"
+            tools:ignore="all">
         </TextView>
     </LinearLayout>
  <View
@@ -174,6 +181,7 @@
             android:layout_weight="1"
             android:text="借阅任务数量"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -184,6 +192,7 @@
             android:layout_weight="1"
             android:text="1"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" >
         </TextView>
     </LinearLayout>
@@ -206,6 +215,7 @@
             android:layout_weight="1"
             android:text="归还任务数量"
             android:textColor="@color/back"
+            tools:ignore="all"
             android:textSize="@dimen/text_size_24" />
 
         <TextView
@@ -215,6 +225,7 @@
             android:gravity="center|left"
             android:layout_weight="1"
             android:text="1"
+            tools:ignore="all"
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_24" >
         </TextView>
