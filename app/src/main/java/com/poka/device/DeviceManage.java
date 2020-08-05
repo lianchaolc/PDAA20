@@ -1,18 +1,14 @@
 package com.poka.device;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import afu.util.DeviceInfo;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.*;
 import android.util.Log;
-import android.widget.Toast;
-import android_serialport_api.SerialPort;
 
-import cn.poka.util.ShareUtil;
 
 public class DeviceManage {
 	public static DeviceManage dM;
@@ -144,11 +140,11 @@ public class DeviceManage {
 			scanDevice = new ScanDevice(mHandler);
 		}
 
-		@Override
+		@SuppressLint("HandlerLeak")
+        @Override
 		public void run() {
 			super.run();
 
-			//
 			Looper.prepare();
 			Log.i("DeviceMsg", "NEW  ScanHANDLER ");
 			scanHandler = new Handler() {
@@ -205,7 +201,8 @@ public class DeviceManage {
 			fingersDevcie = new FingerDevcie();
 		}
 
-		@Override
+		@SuppressLint("HandlerLeak")
+        @Override
 		public void run() {
 			super.run();
 			Looper.prepare();

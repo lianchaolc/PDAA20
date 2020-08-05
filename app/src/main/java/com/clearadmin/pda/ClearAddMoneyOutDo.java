@@ -1,37 +1,22 @@
 package com.clearadmin.pda;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import afu.util.SoundUtil;
-import hdjc.rfid.operator.IRFID_Device;
+import afu.util.Util;
 import hdjc.rfid.operator.RFID_Device;
 
 import com.application.GApplication;
 import com.clearadmin.biz.AddMoneyConfirmBiz;
-import com.clearadmin.biz.CashboxAddMoneyDetailBiz;
 import com.clearadmin.biz.GetAddMoneySumBiz;
-import com.entity.BoxDetail;
 import com.example.pda.R;
-import com.golbal.pda.CrashHandler;
 import com.golbal.pda.GolbalUtil;
 import com.golbal.pda.GolbalView;
 import com.imple.getnumber.AddMoneygetNum;
-import com.imple.getnumber.BackCleanBox;
 import com.imple.getnumber.GetMoneyNum;
-import com.loginsystem.biz.SystemLoginBiz;
-import com.main.pda.Scan;
 import com.manager.classs.pad.ManagerClass;
-import com.messagebox.Abnormal;
-import com.messagebox.ResultMsg;
-import com.messagebox.Runing;
 import com.moneyboxadmin.pda.BankDoublePersonLogin;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -52,13 +37,6 @@ import android.widget.TextView;
 //钞箱加钞操作
 
 public class ClearAddMoneyOutDo extends Activity {
-	// 获取钞箱明细
-	private CashboxAddMoneyDetailBiz cashboxAddMoneyDetail;
-
-	public CashboxAddMoneyDetailBiz getCashboxAddMoneyDetail() {
-		return cashboxAddMoneyDetail = cashboxAddMoneyDetail == null ? new CashboxAddMoneyDetailBiz()
-				: cashboxAddMoneyDetail;
-	}
 
 	// 筛选数据
 	private AddMoneygetNum addMoneygetNum;
@@ -79,12 +57,6 @@ public class ClearAddMoneyOutDo extends Activity {
 
 	AddMoneyConfirmBiz getAddMoneyConfirm() {
 		return addMoneyConfirm = addMoneyConfirm == null ? new AddMoneyConfirmBiz() : addMoneyConfirm;
-	}
-
-	private SystemLoginBiz systemLogin;
-
-	SystemLoginBiz getSystemLogin() {
-		return systemLogin = systemLogin == null ? new SystemLoginBiz() : systemLogin;
 	}
 
 	private GetAddMoneySumBiz getAddMoneySum;
@@ -134,7 +106,8 @@ public class ClearAddMoneyOutDo extends Activity {
 	GetMoneyNum scanMoneyNum = new GetMoneyNum(); // 钱捆编号扫描类
 	View.OnClickListener clickgetbox;
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -147,8 +120,6 @@ public class ClearAddMoneyOutDo extends Activity {
 		managerClass.getGolbalView().Init(this);
 		first = true;
 
-		// 全局异常处理
-		// CrashHandler.getInstance().init(this);
 		planNum = (TextView) findViewById(R.id.addmoneyout_plan);
 		boxNum = (TextView) findViewById(R.id.addmoneyout_planNum);
 		money = (TextView) findViewById(R.id.addmoenyout_money);
@@ -168,6 +139,11 @@ public class ClearAddMoneyOutDo extends Activity {
 		back.setOnTouchListener(new Touch());
 
 		waitaddbox.setText(AddMoneygetNum.map.size() + "");
+
+
+        //初始化声音
+        Util.initSoundPool(this);
+
 
 		// 一、首先扫描钞箱编号，钞箱扫描通知
 		AddMoneygetNum.handler = new Handler() {
@@ -193,27 +169,13 @@ public class ClearAddMoneyOutDo extends Activity {
 					// 开启线程，获取钞箱的信息
 					getGetAddMoneySum().getupdateAndGetAddMoneySum(plan, boxnum_text, BankDoublePersonLogin.userid1,
 							BankDoublePersonLogin.userid2, GApplication.user.getOrganizationId());
-
 					break;
-				case 0:
-
-					break;
-				case -1:
-
-					break;
-
 				// 所有钞箱已扫描完成
 				case 3:
 					getRfid().stop_a20();
 					break;
-
-				case 2:
-
-					break;
-
 				}
 			}
-
 		};
 
 		// 取得箱钞信息，更新信息重试事件
@@ -262,7 +224,6 @@ public class ClearAddMoneyOutDo extends Activity {
 									getRfid().start_a20();
 								}
 							}, true);
-
 					break;
 				case -1:
 					managerClass.getAbnormal().timeout(ClearAddMoneyOutDo.this, "连接异常!", clickgetbox);
@@ -271,7 +232,6 @@ public class ClearAddMoneyOutDo extends Activity {
 					managerClass.getAbnormal().timeout(ClearAddMoneyOutDo.this, "连接超时!", clickgetbox);
 					break;
 				}
-
 			}
 		};
 
@@ -285,6 +245,9 @@ public class ClearAddMoneyOutDo extends Activity {
 
 				switch (msg.what) {
 				case 1:
+				    //扫描到一二维码, 语音提示
+                    Util.play(1, 0);
+
 					if (ad == null) {
 						ad = new Ad();
 						listView.setAdapter(ad);
@@ -312,10 +275,8 @@ public class ClearAddMoneyOutDo extends Activity {
 						btn.setEnabled(false);
 					}
 					break;
-
 				}
 			}
-
 		};
 
 		// 出库重试事件
@@ -328,7 +289,6 @@ public class ClearAddMoneyOutDo extends Activity {
 				getAddMoneyConfirm().addMoneyConfrim(plan, GetAddMoneySumBiz.box.getNum(),
 						BankDoublePersonLogin.userid1, BankDoublePersonLogin.userid2,
 						GApplication.user.getOrganizationId(), bagNum1, bagNum2, bagNum3, bagNum4, bagNum5, bagNum6);
-
 			}
 		};
 
@@ -364,9 +324,7 @@ public class ClearAddMoneyOutDo extends Activity {
 										getRfid().setVoice(false);
 										getRfid().start_a20();
 									}
-
 								}
-
 							}, true);
 
 					// 加钞成功后，进行信息清空处理------------------
@@ -401,7 +359,6 @@ public class ClearAddMoneyOutDo extends Activity {
 												0);
 									}
 								}, true);
-
 					} else {
 						listView.setAdapter(new Ad());
 						domsg.setText("请扫描钞箱");
@@ -410,7 +367,6 @@ public class ClearAddMoneyOutDo extends Activity {
 						// 添加钞箱扫描通知
 						managerClass.getRfid().addNotifly(scanbox);
 						listView.setAdapter(ad);
-
 					}
 					break;
 
@@ -429,7 +385,6 @@ public class ClearAddMoneyOutDo extends Activity {
 									getRfid().start_a20();
 									// 添加钞箱扫描通知
 									managerClass.getRfid().addNotifly(scanbox);
-
 								}
 							}, true);
 					break;
@@ -455,20 +410,14 @@ public class ClearAddMoneyOutDo extends Activity {
 					managerClass.getRfid().addNotifly(scanbox);
 					break;
 				}
-
 			}
-
 		};
-
 	}
 
 	// 总金额比对
 	public boolean moneyCount(int money) {
-		if (moneyToal == money) {
-			return true;
-		}
-		return false;
-	}
+        return moneyToal == money;
+    }
 
 	// 适配器
 	class Ad extends BaseAdapter {
@@ -727,12 +676,6 @@ public class ClearAddMoneyOutDo extends Activity {
 
 			}
 		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-
 	}
 
 	@Override

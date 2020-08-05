@@ -7,9 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.w3c.dom.Notation;
 
-import com.clearadmin.biz.CashboxAddMoneyDetailBiz;
 import com.entity.BoxDetail;
 import com.strings.tocase.CaseString;
 
@@ -17,7 +15,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 public class AddMoneygetNum implements INotify {
 	// 钞箱加钞-加钞操作-扫描钞箱编号
@@ -26,16 +23,8 @@ public class AddMoneygetNum implements INotify {
 	Bundle bundle;
 	public static Map<String, BoxDetail> map = new HashMap<String, BoxDetail>();
 	public static List<String> yiQingfenList = new ArrayList<String>();// 已清分列表
-	boolean temp = true;
 	public List<String> list = new ArrayList<String>();
 
-	// 钞箱明细类
-	private CashboxAddMoneyDetailBiz cashboxAddMoneyDetail;
-
-	CashboxAddMoneyDetailBiz getCashboxAddMoneyDetail() {
-		return cashboxAddMoneyDetail = cashboxAddMoneyDetail == null ? new CashboxAddMoneyDetailBiz()
-				: cashboxAddMoneyDetail;
-	}
 
 	@Override
 	public void getNumber(String number) {

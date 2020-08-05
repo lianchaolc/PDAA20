@@ -25,6 +25,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <protected-broadcast android:name="android.rfid.FUN_KEY"/>
+    <protected-broadcast android:name="android.intent.action.FUN_KEY"/>
+
     <application
         android:name="com.application.GApplication"
         android:allowBackup="true"

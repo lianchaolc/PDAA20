@@ -121,7 +121,7 @@ public class ScanDevice extends Thread {
 //            String dataStr = new String(data, 0, dataLen);
 			String dataStr = new String(data, 0, dataLen, "GBK");
 			Bundle bundle = new Bundle();
-			bundle.putString("data", dataStr);
+			bundle.putString("code", dataStr);
 			byte[] dataBytes = new byte[dataLen];
 			System.arraycopy(data, 0, dataBytes, 0, dataLen);
 			bundle.putByteArray("dataBytes", dataBytes);

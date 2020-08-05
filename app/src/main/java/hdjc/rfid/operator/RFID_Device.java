@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import com.manager.classs.pad.ManagerClass;
 import com.poka.device.DeviceManage;
 import com.poka.device.GPIO;
-import poka_global_constant.GlobalConstant;
+import com.poka.device.ScanDevice;
 
 public class RFID_Device implements IRFID_Device {
 	public static final int scanCheck = 0x88;
-	public static final int scanMsg = 10;
 	private static INotify notifys;
 	private DeviceManage device = DeviceManage.getDeviceMObject("", null);
 	static String singlecode = null;
@@ -36,17 +34,18 @@ public class RFID_Device implements IRFID_Device {
 	private static final String parameterWireless = "wireless";
 	private static final String parameterMicro = "micro";
 
-	private ManagerClass managerHint;
-
 	final Handler h = new Handler(new Handler.Callback() {
 		@Override
 		public boolean handleMessage(Message msg) {
 
 			switch (msg.what) {
-			case scanMsg:
+			case ScanDevice.SCAN:
 				Bundle bundle = msg.getData();
 				String code = bundle.getString("code");
 				System.out.println("10是否传递回来值:" + code);
+                if (code == null || code.equals("")) {
+                    break;
+                }
 				read(code);
 				readScan(code);
 				break;
@@ -175,7 +174,6 @@ public class RFID_Device implements IRFID_Device {
 		Log.e("TAG", "liu_rui, notify: " + notifys + number);
 		if (notifys != null)
 			notifys.getNumber(number);//
-
 	}
 
 	// 打开一维码扫描
