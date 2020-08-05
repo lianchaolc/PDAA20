@@ -82,7 +82,8 @@ public class WebService {
 				property.setValue(webParameter.getValue());
 				request.addProperty(property);
 
-                Log.e(TAG,"----------访问的参数：" + property.getValue().toString());
+				//property.getValue()会报空
+                //Log.e(TAG,"----------访问的参数：" + property.getValue().toString());
 			}
 		}
 
