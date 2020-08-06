@@ -279,11 +279,11 @@ public class FingerDevcie extends Device {
 						} else {
 							ShareUtil.finger_bitmap_left = b1;
 						}
-						if (KuanXiangJiaoJieActivity.firstSuccess) {
+						/*if (KuanXiangJiaoJieActivity.firstSuccess) {
 							ShareUtil.w_finger_bitmap_right = b1;
 						} else {
 							ShareUtil.w_finger_bitmap_left = b1;
-						}
+						}*/
 						if (KuGuanLogin_db.firstSuccess) {
 							ShareUtil.finger_kuguandenglu_right = b1;
 						} else {

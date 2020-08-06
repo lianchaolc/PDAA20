@@ -13,33 +13,28 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.application.GApplication;
 import com.entity.BoxDetail;
-import com.example.app.entity.S_box;
 import com.example.app.util.Skip;
 import com.example.pda.R;
-import com.golbal.pda.GolbalUtil;
 import com.imple.getnumber.WanShouGetNumber;
 import com.manager.classs.pad.ManagerClass;
-import com.moneyboxadmin.pda.SupercargoJoin;
 
 /**
  * 晚收款箱交接 页面
@@ -53,12 +48,9 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 	int count = 0;// 数量显示问题
 	private ListView listView;
 //	private List<String> ls;// 传送过来的箱子集合
-	public boolean Flag;
 	private RFID_Device rfid;
 	ShowListView adapter;
 	private ManagerClass manager;
-	private int checkId;
-	OnClickListener OnClick;
 	int cscount = 0;// 重扫
 
 	int cscount1 = 0;// 重扫
@@ -435,6 +427,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
+        Log.e("WanShouXiang", "onPause");
 		super.onPause();
 		count = 0;
 		getRfid().close_a20();
@@ -450,16 +443,9 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
+        Log.e("WanShouXiang", "onStop");
 		super.onStop();
 		manager.getRuning().remove();
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			WanShouXiangActivity.this.finish();
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
@@ -469,6 +455,9 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 		 * case R.id.wanshou_back: WanShouXiangActivity.this.finish(); break;
 		 */
 		case R.id.wanshou_bt:
+
+		    //关闭rfid 扫描
+
 			manager.getRuning().runding(WanShouXiangActivity.this, "正在启动指纹扫描,请稍后...");
 			Skip.skip(WanShouXiangActivity.this, KuanXiangJiaoJieActivity.class, null, 0);
 			break;
@@ -483,4 +472,11 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
+    @Override
+    protected void onDestroy() {
+        Log.e("WanShouXiang", "onDestroy");
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
 }

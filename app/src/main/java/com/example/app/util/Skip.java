@@ -1,7 +1,5 @@
 package com.example.app.util;
 
-import com.example.app.entity.KuanxiangChuruEntity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

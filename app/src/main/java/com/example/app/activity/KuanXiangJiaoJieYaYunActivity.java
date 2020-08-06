@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -618,8 +619,10 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
             GApplication.map = null;
             GApplication.wd_user2 = null;
             GApplication.jiaojiestate = 0;
+            //JiaoJieActivity 位singleTask 启动模式, 会把栈上其他Activity弹出
             Skip.skip(KuanXiangJiaoJieYaYunActivity.this, JiaoJieActivity.class, null, 0);
-            KuanXiangJiaoJieYaYunActivity.this.finish();
+
+            finish();
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -627,8 +630,16 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        Log.e("YaYunFinger", "onStop");
         ShareUtil.ivalBack = null;
         manager.getRuning().remove();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("YaYunFinger", "onDestroy");
+        handler.removeCallbacksAndMessages(null);
     }
 
     @Override

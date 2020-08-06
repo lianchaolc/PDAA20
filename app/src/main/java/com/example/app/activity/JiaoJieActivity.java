@@ -4,6 +4,7 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -168,7 +169,8 @@ public class JiaoJieActivity extends Activity {
 		}
 	}
 
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -745,4 +747,10 @@ public class JiaoJieActivity extends Activity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
 }

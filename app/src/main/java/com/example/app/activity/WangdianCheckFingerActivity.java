@@ -191,7 +191,7 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 								System.out.println("GApplication.user.getLoginUserName()2  :"
 										+ GApplication.user.getLoginUserName());
 								if (left.equals(GApplication.user.getLoginUserName())) {
-									Toast.makeText(WangdianCheckFingerActivity.this, "该用户已经验证过!", 4).show();
+									Toast.makeText(WangdianCheckFingerActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
 								} else {
 									intent.putExtras(bundle);
 									managerClass.getRuning().runding(WangdianCheckFingerActivity.this, "正在验证用户名和密码...");
@@ -371,22 +371,9 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 		return false;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add("a");
-		return true;
-	}
-
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-
-	}
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 		managerClass.getRuning().remove();
 		WangdianCheckFingerActivity.this.finish();
