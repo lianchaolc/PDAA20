@@ -3,6 +3,7 @@ package com.example.app.activity;
 import java.net.SocketTimeoutException;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,14 +19,14 @@ import com.example.app.entity.User;
 import com.example.app.util.Skip;
 import com.example.pda.R;
 import com.manager.classs.pad.ManagerClass;
-import com.moneyboxadmin.biz.FingerCheckBiz;
 import com.o.service.YanZhengZhiWen;
 import com.poka.device.ShareUtil;
 import com.service.FixationValue;
 
-import afu.util.BaseFingerActivity;
+import afu.util.FingerHandlerInterface;
+import afu.util.FingerUtil;
 
-public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
+public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerInterface {
 
     private TextView name_left, name_right, bottomtext, texttop;
     private ImageView img_left, img_right;
@@ -41,9 +42,9 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
     int one = 0;// 统计第一个验证指纹失败的次数
     int two = 0;// 统计第二个验证指纹失败的次数
 
-    private FingerCheckBiz fingerCheck;
     private ManagerClass manager;
 
+    public FingerUtil fingerUtil;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
         load();
         manager = new ManagerClass();
 
+        fingerUtil = new FingerUtil(this);
+
+        fingerUtil.openFinger();
     }
 
     /**
@@ -303,14 +307,22 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
     }
 
     @Override
+    public void noFingerHandler() {
+
+    }
+
+    @Override
     public void findFinger() {
         texttop.setText("正在获取特征值");
     }
 
     @Override
-    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
-        super.getCharImgSucceed(charBytes, img);
+    public void badCharHandler() {
 
+    }
+
+    @Override
+    public void getCharImgSucceed(byte[] charBytes, Bitmap img) {
         ShareUtil.ivalBack = charBytes;
 
         if (!firstSuccess && !"1".equals(f1)) {
@@ -320,5 +332,15 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
         }
 
         yanzhengFinger();
+    }
+
+    @Override
+    public void getCharSucceed(byte[] charBytes) {
+
+    }
+
+    @Override
+    public void getImgSucceed(Bitmap img) {
+
     }
 }
