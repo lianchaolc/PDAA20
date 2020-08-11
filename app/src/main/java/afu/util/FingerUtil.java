@@ -1,87 +1,90 @@
 package afu.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbManager;
 import android.os.Handler;
+import android.util.Log;
 
-import com.za.finger.FingerHelper;
-import com.za.finger.IUsbConnState;
+import com.za.finger.ZA_finger;
+import com.za.finger.ZAandroid;
 
-import cn.pda.serialport.SerialPort;
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 public class FingerUtil {
 
-    private FingerHelper mFingerHelper;  //option finger
-
-    private int statues = 0;
-
-    private long startTime = 0L;
-    private long endTime = 0L;
-
     private String tag = "FingerUtil";
 
     private Handler mHandler = new Handler(); //handle thread message
-    SerialPort serialPort = new SerialPort();
 
-    private final int IMAGE_SIZE = 256 * 288;//image size
+    private int IMG_SIZE = 0;// 同参数：（0:256x288 1:256x360）
     private String tempImgPath = "/mnt/sdcard/temp.bmp";
 
     private FingerHandlerInterface fingerHandlerInterface;
 
-    private int fpCharBuffer = 0;
+    int DEV_ADDR = 0xffffffff;
+
+    /**
+     * 设置特征长度
+     */
+    private int charLen = 2304;
+
+    ZAandroid a6 = new ZAandroid();
+    private ZA_finger mFPower = new ZA_finger();
+
+    Activity activity;
 
     public FingerUtil(Activity activity) {
         this.fingerHandlerInterface = (FingerHandlerInterface) activity;
-        mFingerHelper = new FingerHelper(activity, usbConnstate);
+
+        this.activity = activity;
     }
 
-    //IUsbConnState is to receive usb finger connect state
-    private IUsbConnState usbConnstate = new IUsbConnState() {
-        @Override
-        public void onUsbConnected() {
-
-            //connect finger device
-            statues = mFingerHelper.connectFingerDev();
-            if (statues == mFingerHelper.CONNECT_OK) {
-                fingerHandlerInterface.openFingerSucceed();
-            } else {
-
-            }
-
-        }
-
-        @Override
-        public void onUsbPermissionDenied() {
-
-        }
-
-        @Override
-        public void onDeviceNotFound() {
-
-        }
-    };
-
     public void openFinger() {
-        serialPort.power3v3on();
-        mFingerHelper.init();
+
+        mFPower.finger_power_on();
+        mFPower.card_power_on();
+
+        int fd = getrwusbdevices();
+        Log.e(tag, "zhw === open fd: " + fd);
+
+        int defiCom = 11;//ttyMT1
+        int defDeviceType = 1;
+        int defiBaud = 6;
+        int status = a6.ZAZOpenDeviceEx(fd, defDeviceType, defiCom, defiBaud, 0, 0);
+
+        a6.ZAZSetImageSize(IMG_SIZE);
+
+        Log.e(tag, " open status: " + status);
+        if (status == 1) {
+            fingerHandlerInterface.openFingerSucceed();
+        } else {
+            //"打开设备失败";
+        }
     }
 
     public void closeFinger() {
-
         mHandler.removeCallbacksAndMessages(null);
-        if (serialPort != null) {
-            serialPort.power3v3off();
-        }
-        mFingerHelper.close();
+
+        int status = a6.ZAZCloseDeviceEx();
+        mFPower.finger_power_off();
+
+        Log.e(tag, " close status: " + status);
     }
 
     public void getFingerImg() {
         mHandler.removeCallbacksAndMessages(null);
 
-        startTime = System.currentTimeMillis();
-        endTime = startTime;
         //run get finger image task
         mHandler.postDelayed(getFPImageTask, 0);
     }
@@ -89,8 +92,6 @@ public class FingerUtil {
     public void getFingerChar() {
         mHandler.removeCallbacksAndMessages(null);
 
-        startTime = System.currentTimeMillis();
-        endTime = startTime;
         //run get finger char task
         mHandler.postDelayed(getCharTask, 0);
     }
@@ -98,53 +99,36 @@ public class FingerUtil {
     public void getFingerCharAndImg() {
         mHandler.removeCallbacksAndMessages(null);
 
-        startTime = System.currentTimeMillis();
-        endTime = startTime;
         //run get finger char task
         mHandler.postDelayed(getCharImgTask, 0);
-    }
-
-    public void getTwoFingerCharAndImg() {
-        mHandler.removeCallbacksAndMessages(null);
-
-        startTime = System.currentTimeMillis();
-        endTime = startTime;
-        //run get finger char task
-        mHandler.postDelayed(twoFingerTask, 0);
     }
 
     /**
      * get finger image task
      */
     private Runnable getFPImageTask = new Runnable() {
-        @Override
         public void run() {
-            statues = mFingerHelper.getImage();
-            //find finger
-            if (statues == mFingerHelper.PS_OK) {
 
+            int nRet = a6.ZAZGetImage(DEV_ADDR);
+            if (nRet == 0) {
+                int[] len = {0, 0};
+                byte[] Image = new byte[256 * 360];
+                a6.ZAZUpImage(DEV_ADDR, Image, len);
+                a6.ZAZImgData2BMP(Image, tempImgPath);
+                //temp = "获取图像成功";
+
+                Bitmap bmpDefaultPic = BitmapFactory.decodeFile(tempImgPath, null);
+
+                fingerHandlerInterface.getImgSucceed(bmpDefaultPic);
+            } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
+                //temp = "正在读取指纹中 ";
                 fingerHandlerInterface.findFinger();
-
-                int[] recvLen = {0, 0};
-                byte[] imageByte = new byte[IMAGE_SIZE];//256*288
-                mFingerHelper.uploadImage(imageByte, recvLen);
-                //switch to bmp
-                mFingerHelper.imageData2BMP(imageByte, tempImgPath);
-
-                //将识别的指纹图片保存进 ShareUtil.finger_gather
-                Bitmap bitmap = BitmapFactory.decodeFile(tempImgPath, null);
-
-                fingerHandlerInterface.getImgSucceed(bitmap);
-
-                mHandler.postDelayed(getFPImageTask, 1000);
-
-            } else if (statues == mFingerHelper.PS_NO_FINGER) {
-                fingerHandlerInterface.noFingerHandler();
                 mHandler.postDelayed(getFPImageTask, 100);
-            } else if (statues == mFingerHelper.PS_GET_IMG_ERR) {
+            } else if (nRet == a6.PS_GET_IMG_ERR) {
+                //temp = "图像获取中";
                 mHandler.postDelayed(getFPImageTask, 100);
             } else {
-                //temp = res.getString(R.string.dev_error);
+                //temp = "通讯异常";
             }
         }
     };
@@ -157,37 +141,34 @@ public class FingerUtil {
         @Override
         public void run() {
 
-            statues = mFingerHelper.getImage();
-            //find finger
-            if (statues == mFingerHelper.PS_OK) {
+            int nRet = a6.ZAZGetImage(DEV_ADDR);
 
-                fingerHandlerInterface.findFinger();
+            if (nRet == 0) {
+                nRet = a6.ZAZGenChar(DEV_ADDR, a6.CHAR_BUFFER_A);
+                if (nRet == a6.PS_OK) {
+                    nRet = a6.ZAZSetCharLen(charLen);
+                    int[] iTempletLength = {0, 0};
 
-                //gen char to bufferA
-                statues = mFingerHelper.genChar(mFingerHelper.CHAR_BUFFER_A);
-                if (statues == mFingerHelper.PS_OK) {
-                    int[] iCharLen = {0, 0};
-                    byte[] charBytes = new byte[512];
-                    //upload char
-                    statues = mFingerHelper.upCharFromBufferID(mFingerHelper.CHAR_BUFFER_A, charBytes, iCharLen);
-                    if (statues == mFingerHelper.PS_OK) {
-                        //upload success
-                        fingerHandlerInterface.getCharSucceed(charBytes);
+                    byte[] pTemplet = new byte[512];
+                    nRet = a6.ZAZUpChar(DEV_ADDR, a6.CHAR_BUFFER_A, pTemplet, iTempletLength);
+                    if (nRet == a6.PS_OK) {
+
+                        fingerHandlerInterface.getCharSucceed(pTemplet);
                     }
-
-                    mHandler.postDelayed(getCharTask, 1000);
                 } else {
-                    //char is bad quickly
+                    //temp = "特征太差，请重新录入";
                     fingerHandlerInterface.badCharHandler();
-                    mHandler.postDelayed(getCharTask, 100);
+                    mHandler.postDelayed(getCharTask, 1000);
                 }
-            } else if (statues == mFingerHelper.PS_NO_FINGER) {
-                fingerHandlerInterface.noFingerHandler();
-                mHandler.postDelayed(getCharTask, 100);
-            } else if (statues == mFingerHelper.PS_GET_IMG_ERR) {
-                mHandler.postDelayed(getCharTask, 100);
+            } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
+                //temp = "正在读取指纹中";
+                fingerHandlerInterface.findFinger();
+                mHandler.postDelayed(getCharTask, 10);
+            } else if (nRet == a6.PS_GET_IMG_ERR) {
+                //temp = "图像获取中";
+                mHandler.postDelayed(getCharTask, 10);
             } else {
-                //temp = res.getString(R.string.dev_error);
+               // temp = "通讯异常";
             }
         }
     };
@@ -195,124 +176,98 @@ public class FingerUtil {
     private Runnable getCharImgTask = new Runnable() {
         @Override
         public void run() {
-            statues = mFingerHelper.getImage();
-            //find finger
-            if (statues == mFingerHelper.PS_OK) {
+            int nRet = a6.ZAZGetImage(DEV_ADDR);
 
-                fingerHandlerInterface.findFinger();
+            Log.e(tag, "ZAZGetImage: " + nRet);
 
-                int[] recvLen = {0, 0};
-                byte[] imageByte = new byte[IMAGE_SIZE];//256*288
-                mFingerHelper.uploadImage(imageByte, recvLen);
-                //switch to bmp
-                mFingerHelper.imageData2BMP(imageByte, tempImgPath);
-                Bitmap bitmap = BitmapFactory.decodeFile(tempImgPath, null);
+            if (nRet == 0) {
 
-                //gen char to bufferA
-                statues = mFingerHelper.genChar(mFingerHelper.CHAR_BUFFER_A);
-                if (statues == mFingerHelper.PS_OK) {
-                    int[] iCharLen = {0, 0};
-                    byte[] charBytes = new byte[512];
+                int[] len = {0, 0};
+                byte[] Image = new byte[256 * 360];
+                a6.ZAZUpImage(DEV_ADDR, Image, len);
+                a6.ZAZImgData2BMP(Image, tempImgPath);
 
-                    //upload char
-                    statues = mFingerHelper.upCharFromBufferID(mFingerHelper.CHAR_BUFFER_A, charBytes, iCharLen);
-                    if (statues == mFingerHelper.PS_OK) {
-                        //upload success
+                Bitmap bmpDefaultPic = BitmapFactory.decodeFile(tempImgPath, null);
 
-                        fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
+                nRet = a6.ZAZGenChar(DEV_ADDR, a6.CHAR_BUFFER_A);
+
+                Log.e(tag, "ZAZGenChar: " + nRet);
+                if (nRet == a6.PS_OK) {
+                    nRet = a6.ZAZSetCharLen(charLen);
+                    int[] iTempletLength = {0, 0};
+
+                    byte[] pTemplet = new byte[512];
+                    nRet = a6.ZAZUpChar(DEV_ADDR, a6.CHAR_BUFFER_A, pTemplet, iTempletLength);
+
+                    Log.e(tag, "ZAZUpChar: " + nRet);
+                    if (nRet == a6.PS_OK) {
+
+                        Log.e(tag, "pTemplet.length: " + pTemplet.length);
+                        fingerHandlerInterface.getCharImgSucceed(pTemplet, bmpDefaultPic);
                     }
-
-                    //获取下一枚指纹信息, 避免页面控制
-                    mHandler.postDelayed(getCharImgTask, 1000);
                 } else {
-                    //char is bad quickly
+                    //temp = "特征太差，请重新录入";
                     fingerHandlerInterface.badCharHandler();
-                    mHandler.postDelayed(getCharImgTask, 100);
+                    mHandler.postDelayed(getCharImgTask, 1000);
                 }
-            } else if (statues == mFingerHelper.PS_NO_FINGER) {
-                fingerHandlerInterface.noFingerHandler();
-                mHandler.postDelayed(getCharImgTask, 100);
-            } else if (statues == mFingerHelper.PS_GET_IMG_ERR) {
-                mHandler.postDelayed(getCharImgTask, 100);
-            } else {
-                //temp = res.getString(R.string.dev_error);
-            }
-        }
-    };
-
-
-    private Runnable twoFingerTask = new Runnable() {
-        @Override
-        public void run() {
-
-            statues = mFingerHelper.getImage();
-            //find finger
-            if (statues == mFingerHelper.PS_OK) {
-
+            } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
+                //temp = "正在读取指纹中";
                 fingerHandlerInterface.findFinger();
-
-                int[] recvLen = {0, 0};
-                byte[] imageByte = new byte[IMAGE_SIZE];//256*288
-                mFingerHelper.uploadImage(imageByte, recvLen);
-                //switch to bmp
-                mFingerHelper.imageData2BMP(imageByte, tempImgPath);
-
-                //将识别的指纹图片保存进 ShareUtil.finger_gather
-                Bitmap bitmap = BitmapFactory.decodeFile(tempImgPath, null);
-
-
-                if (fpCharBuffer == mFingerHelper.CHAR_BUFFER_A) {
-                    //gen char to bufferA
-                    statues = mFingerHelper.genChar(fpCharBuffer);
-                    if (statues == mFingerHelper.PS_OK) {
-
-                        int[] iCharLen = {0, 0};
-                        byte[] charBytes = new byte[512];
-                        //upload char
-                        statues = mFingerHelper.upCharFromBufferID(mFingerHelper.CHAR_BUFFER_A, charBytes, iCharLen);
-                        if (statues == mFingerHelper.PS_OK) {
-                            //upload success
-                            fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
-                        }
-
-                        mHandler.postDelayed(twoFingerTask, 1000);
-                        fpCharBuffer = mFingerHelper.CHAR_BUFFER_B;
-                    } else {
-                        //char is bad quickly
-                        fingerHandlerInterface.badCharHandler();
-                        mHandler.postDelayed(twoFingerTask, 100);
-                    }
-                } else if (fpCharBuffer == mFingerHelper.CHAR_BUFFER_B) { //second finger
-                    //gen char to bufferB
-                    statues = mFingerHelper.genChar(fpCharBuffer);
-                    if (statues == mFingerHelper.PS_OK) {
-
-                        int[] iCharLen = {0, 0};
-                        byte[] charBytes = new byte[512];
-                        //upload char
-                        statues = mFingerHelper.upCharFromBufferID(mFingerHelper.CHAR_BUFFER_B, charBytes, iCharLen);
-                        if (statues == mFingerHelper.PS_OK) {
-                            //upload success
-                            fingerHandlerInterface.getCharImgSucceed(charBytes, bitmap);
-                        }
-
-                        mHandler.postDelayed(twoFingerTask, 1000);
-                    } else {
-                        //char is bad quickly
-                        fingerHandlerInterface.badCharHandler();
-                        mHandler.postDelayed(twoFingerTask, 100);
-                    }
-                }
-            } else if (statues == mFingerHelper.PS_NO_FINGER) {
-                fingerHandlerInterface.noFingerHandler();
-
-                mHandler.postDelayed(twoFingerTask, 100);
-            } else if (statues == mFingerHelper.PS_GET_IMG_ERR) {
-                mHandler.postDelayed(twoFingerTask, 100);
+                mHandler.postDelayed(getCharImgTask, 10);
+            } else if (nRet == a6.PS_GET_IMG_ERR) {
+                //temp = "图像获取中";
+                mHandler.postDelayed(getCharImgTask, 10);
             } else {
-                //temp = res.getString(R.string.dev_error);
+                //temp = "通讯异常";
             }
         }
     };
 
+
+    @SuppressLint("NewApi")
+    public int getrwusbdevices() {
+        // get FileDescriptor by Android USB Host API
+        UsbManager mUsbManager = (UsbManager) activity.getSystemService(Context.USB_SERVICE);
+        final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
+        HashMap<String, UsbDevice> deviceList = mUsbManager.getDeviceList();
+        Iterator<UsbDevice> deviceIterator = deviceList.values().iterator();
+        PendingIntent mPermissionIntent = PendingIntent.getBroadcast(activity, 0,
+                new Intent(ACTION_USB_PERMISSION), 0);
+        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+        BroadcastReceiver mUsbReceiver = null;
+        activity.registerReceiver(mUsbReceiver, filter);
+        Log.i(tag, "zhw 060");
+        int fd = -1;
+        while (deviceIterator.hasNext()) {
+            UsbDevice device = deviceIterator.next();
+            Log.i(tag,
+                    device.getDeviceName() + " "
+                            + Integer.toHexString(device.getVendorId()) + " "
+                            + Integer.toHexString(device.getProductId()));
+            if ((device.getVendorId() == 0x2109)
+                    && (0x7638 == device.getProductId())) {
+                Log.d(tag, " get FileDescriptor ");
+                mUsbManager.requestPermission(device, mPermissionIntent);
+                while (!mUsbManager.hasPermission(device)) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+                if (mUsbManager.hasPermission(device)) {
+                    if (mUsbManager.openDevice(device) != null) {
+                        fd = mUsbManager.openDevice(device).getFileDescriptor();
+                        Log.d(tag, " get FileDescriptor fd " + fd);
+                        return fd;
+                    } else
+                        Log.e(tag, "UsbManager openDevice failed");
+                    mUsbManager.openDevice(device).close();
+                }
+                break;
+            }
+        }
+        return 0;
+    }
 }
