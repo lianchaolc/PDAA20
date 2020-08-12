@@ -14,8 +14,9 @@ import android.hardware.usb.UsbManager;
 import android.os.Handler;
 import android.util.Log;
 
-import com.za.finger.ZA_finger;
+
 import com.za.finger.ZAandroid;
+import com.zhiang.interfac.ZA_finger;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,7 +38,7 @@ public class FingerUtil {
     /**
      * 设置特征长度
      */
-    private int charLen = 2304;
+    private int charLen = 512;
 
     ZAandroid a6 = new ZAandroid();
     private ZA_finger mFPower = new ZA_finger();
@@ -120,12 +121,15 @@ public class FingerUtil {
                 Bitmap bmpDefaultPic = BitmapFactory.decodeFile(tempImgPath, null);
 
                 fingerHandlerInterface.getImgSucceed(bmpDefaultPic);
+
+                //识别成功后, 开启下一次识别
+                mHandler.postDelayed(getFPImageTask, 1000);
             } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
                 //temp = "正在读取指纹中 ";
-                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getFPImageTask, 100);
             } else if (nRet == a6.PS_GET_IMG_ERR) {
                 //temp = "图像获取中";
+                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getFPImageTask, 100);
             } else {
                 //temp = "通讯异常";
@@ -155,6 +159,9 @@ public class FingerUtil {
 
                         fingerHandlerInterface.getCharSucceed(pTemplet);
                     }
+
+                    //识别成功后, 开启下一次识别
+                    mHandler.postDelayed(getCharTask, 1000);
                 } else {
                     //temp = "特征太差，请重新录入";
                     fingerHandlerInterface.badCharHandler();
@@ -162,10 +169,10 @@ public class FingerUtil {
                 }
             } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
                 //temp = "正在读取指纹中";
-                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getCharTask, 10);
             } else if (nRet == a6.PS_GET_IMG_ERR) {
                 //temp = "图像获取中";
+                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getCharTask, 10);
             } else {
                // temp = "通讯异常";
@@ -182,12 +189,13 @@ public class FingerUtil {
 
             if (nRet == 0) {
 
+                /* 识别出图片耗时太久, 使用默认指纹图片代替
                 int[] len = {0, 0};
                 byte[] Image = new byte[256 * 360];
                 a6.ZAZUpImage(DEV_ADDR, Image, len);
                 a6.ZAZImgData2BMP(Image, tempImgPath);
 
-                Bitmap bmpDefaultPic = BitmapFactory.decodeFile(tempImgPath, null);
+                Bitmap bmpDefaultPic = BitmapFactory.decodeFile(tempImgPath, null);*/
 
                 nRet = a6.ZAZGenChar(DEV_ADDR, a6.CHAR_BUFFER_A);
 
@@ -202,9 +210,13 @@ public class FingerUtil {
                     Log.e(tag, "ZAZUpChar: " + nRet);
                     if (nRet == a6.PS_OK) {
 
+                        Bitmap bmpDefaultPic = BitmapFactory.decodeFile("/mnt/sdcard/test.bmp",null);
                         Log.e(tag, "pTemplet.length: " + pTemplet.length);
                         fingerHandlerInterface.getCharImgSucceed(pTemplet, bmpDefaultPic);
                     }
+
+                    //识别成功后, 开启下一次识别
+                    mHandler.postDelayed(getCharImgTask, 1000);
                 } else {
                     //temp = "特征太差，请重新录入";
                     fingerHandlerInterface.badCharHandler();
@@ -212,10 +224,10 @@ public class FingerUtil {
                 }
             } else if (nRet == a6.PS_NO_FINGER || nRet == -2) {
                 //temp = "正在读取指纹中";
-                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getCharImgTask, 10);
             } else if (nRet == a6.PS_GET_IMG_ERR) {
                 //temp = "图像获取中";
+                fingerHandlerInterface.findFinger();
                 mHandler.postDelayed(getCharImgTask, 10);
             } else {
                 //temp = "通讯异常";
