@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.util.Log;
 
 
+import com.example.pda.R;
 import com.za.finger.ZAandroid;
 import com.zhiang.interfac.ZA_finger;
 
@@ -210,7 +211,7 @@ public class FingerUtil {
                     Log.e(tag, "ZAZUpChar: " + nRet);
                     if (nRet == a6.PS_OK) {
 
-                        Bitmap bmpDefaultPic = BitmapFactory.decodeFile("/mnt/sdcard/test.bmp",null);
+                        Bitmap bmpDefaultPic = BitmapFactory.decodeResource(activity.getResources(), R.drawable.finger_bmp);
                         Log.e(tag, "pTemplet.length: " + pTemplet.length);
                         fingerHandlerInterface.getCharImgSucceed(pTemplet, bmpDefaultPic);
                     }
