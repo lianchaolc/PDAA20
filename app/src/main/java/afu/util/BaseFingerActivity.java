@@ -23,15 +23,15 @@ public abstract class BaseFingerActivity extends Activity implements FingerHandl
     public FingerUtil fingerUtil;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e("baseFingerActivity", "onCreate -- openFinger");
+    protected void onResume() {
+        super.onResume();
+        Log.e("baseFingerActivity", "onResume -- openFinger");
         fingerUtil = new FingerUtil(this);
 
         fingerUtil.openFinger();
     }
 
-    @Override
+    /*@Override
     protected void onRestart() {
         Log.e("baseFingerActivity", "onRestart -- openFinger");
         fingerUtil = new FingerUtil(this);
@@ -45,13 +45,13 @@ public abstract class BaseFingerActivity extends Activity implements FingerHandl
         fingerUtil = new FingerUtil(this);
         fingerUtil.openFinger();
         super.onNewIntent(intent);
-    }
+    }*/
 
     @Override
-    protected void onStop() {
-        Log.e("baseFingerActivity", "onStop -- closeFinger");
+    protected void onPause() {
+        Log.e("baseFingerActivity", "onPause -- closeFinger");
         fingerUtil.closeFinger();
-        super.onStop();
+        super.onPause();
     }
 
     //没有发现指纹

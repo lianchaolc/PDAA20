@@ -340,6 +340,9 @@ import com.poka.device.ShareUtil;
 			sjJiaojieType = "2I";
 			break;
 		}
+
+        managerClass.getRuning().runding(YyrwJjYanzhengActivity.this,"正在处理...");
+
 		Thread thread = new Thread(new yayunjiaojie(qlJiaojieType, sjJiaojieType));
 		thread.start();
 	}

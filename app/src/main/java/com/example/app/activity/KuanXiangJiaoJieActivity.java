@@ -24,10 +24,10 @@ import com.o.service.YanZhengZhiWen;
 import com.poka.device.ShareUtil;
 import com.service.FixationValue;
 
+import afu.util.BaseFingerActivity;
 import afu.util.FingerHandlerInterface;
-import afu.util.FingerUtil;
 
-public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerInterface {
+public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements FingerHandlerInterface {
 
     private TextView name_left, name_right, bottomtext, texttop;
     private ImageView img_left, img_right;
@@ -44,8 +44,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
     int two = 0;// 统计第二个验证指纹失败的次数
 
     private ManagerClass manager;
-
-    private FingerUtil fingerUtil;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,9 +138,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
                                 GApplication.wd_user2 = new User();
                             }
 
-                            //第二位指纹验证成功, 跳转下一个页面之前, 先关闭指纹
-                            fingerUtil.closeFinger();
-
                             manager.getRuning().runding(KuanXiangJiaoJieActivity.this, "即将自动跳转");
                             try {
                                 Thread.sleep(2000);
@@ -188,9 +183,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
                         ShareUtil.w_finger_bitmap_left = null;
                         intent.putExtras(bundle2);
 
-                        //跳转下一个页面之前, 先关闭指纹
-                        fingerUtil.closeFinger();
-
                         Skip.skip(KuanXiangJiaoJieActivity.this, WangdianCheckFingerActivity.class, bundle2, 0);
                     } else if (two >= FixationValue.PRESS) {
                         Intent intent = new Intent();
@@ -201,9 +193,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
                             GApplication.map = ShareUtil.w_finger_bitmap_left;
                         bundle2.putString("left", fname_left);
                         intent.putExtras(bundle2);
-
-                        //跳转下一个页面之前, 先关闭指纹
-                        fingerUtil.closeFinger();
 
                         Skip.skip(KuanXiangJiaoJieActivity.this, WangdianCheckFingerActivity.class, bundle2, 0);
                     }
@@ -265,9 +254,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
                 bottomtext.setText("请第二位网点人员按压手指...");
                 texttop.setText("第一位验证成功");
 
-                //验证第二位指纹
-                fingerUtil = new FingerUtil(this);
-                fingerUtil.openFinger();
             }
             if (flag.equals("wangdiantwo")) {
                 fname_right = GApplication.wd_user2.getUsername();
@@ -302,10 +288,6 @@ public class KuanXiangJiaoJieActivity extends Activity implements FingerHandlerI
                     }
                 }
             }
-        } else {
-            //首次进入, 打开指纹
-            fingerUtil = new FingerUtil(this);
-            fingerUtil.openFinger();
         }
     }
 
