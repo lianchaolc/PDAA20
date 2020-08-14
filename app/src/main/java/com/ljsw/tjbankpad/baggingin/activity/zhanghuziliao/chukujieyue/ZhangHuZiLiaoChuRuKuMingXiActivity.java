@@ -123,23 +123,23 @@ public class ZhangHuZiLiaoChuRuKuMingXiActivity extends Activity implements OnCl
 					if (netresult != null && !netresult.equals("anyType{}")) {
 						Gson gson = new Gson();
 						aotdc = gson.fromJson(netresult, AccountOutTaskDetailCode.class);
-						Log.e(TAG, "**===" + aotdc);
+						Log.e(TAG, "**==============" + aotdc);
 						counts = aotdc.getCount() + "";// 获取数量
 						aotdcodelist.add(aotdc);// 外层添加数据
 
 						aotdcbaselist.clear();// 避免数据重复
 						for (int i = 0; i < aotdc.getList().size(); i++) {// 显示数据集合
 							aotdcbaselist.add(aotdc.getList().get(i));
-							Log.e(TAG, "**===i" + aotdcbaselist.get(i).getCONTAINERNO());
-							Log.e(TAG, "**===i" + aotdcbaselist.get(i).getSTOCKCODE());
-							Log.e(TAG, "**===i" + aotdc.getList().toString());
+//							Log.e(TAG, "**===i" + aotdcbaselist.get(i).getCONTAINERNO());
+//							Log.e(TAG, "**===i" + aotdcbaselist.get(i).getSTOCKCODE());
+//							Log.e(TAG, "**===i" + aotdc.getList().toString());
 						}
 						/// 添加扫描的数据
 						strlist.clear();
 						for (int j = 0; j < aotdcbaselist.size(); j++) {
 							strlist.add(aotdcbaselist.get(j).getSTOCKCODE());
-							Log.e(TAG, "**j===" + aotdcbaselist.get(j).getSTOCKCODE());
-							Log.e(TAG, "**j===" + aotdcbaselist.get(j).getCONTAINERNO());
+//							Log.e(TAG, "**j===" + aotdcbaselist.get(j).getSTOCKCODE());
+//							Log.e(TAG, "**j===" + aotdcbaselist.get(j).getCONTAINERNO());
 						}
 
 						handler.sendEmptyMessage(2);
