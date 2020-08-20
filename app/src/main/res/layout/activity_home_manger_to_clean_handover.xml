@@ -9,28 +9,29 @@
  
  <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="@dimen/dimen_120y"
         android:background="@color/blue_title"
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="80px"
+            android:layout_width="@dimen/dimen_80x"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center" >
+            android:gravity="center"
+            android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/PDAsetting"
-                android:layout_width="40px"
-                android:layout_height="40px"
+                android:layout_width="@dimen/dimen_40x"
+                android:layout_height="@dimen/dimen_40y"
                 android:src="@drawable/users" />
             
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="280px"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:gravity="center" >
 
             <TextView
                 android:textColor="@color/white"
@@ -62,17 +63,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="520px"
+        android:layout_height="@dimen/dimen_520y"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40px" >
+            android:layout_marginTop="@dimen/dimen_40y" >
 
             <LinearLayout
-                android:layout_width="180px"
-                android:layout_height="80px"
+                android:layout_width="@dimen/dimen_180x"
+                android:layout_height="@dimen/dimen_80y"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:background="@color/blue_title">
@@ -82,19 +83,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="请按手指"
-                    android:textSize="@dimen/text_size_35"
+                    android:textSize="@dimen/text_size_30"
                 	android:textColor="@color/white"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="300px"
-                android:layout_height="80px"
+                android:layout_width="@dimen/dimen_300x"
+                android:layout_height="@dimen/dimen_80y"
                 android:background="@color/blue_top"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:textSize="@dimen/text_size_30"
                     android:textColor="@color/white"
                     android:id="@+id/dzypyy_top"
@@ -108,12 +109,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="550px"
+            android:layout_height="@dimen/dimen_550y"
             android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                android:layout_height="@dimen/dimen_80y"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -121,7 +122,7 @@
                     android:id="@+id/dzypyy_usertextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="45sp"
+                    android:textSize="@dimen/text_size_45"
                     android:textColor="@color/back"
                     android:text="库管员" />
 
@@ -130,12 +131,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="250px" >
+                android:layout_height="@dimen/dimen_250y" >
 
                 <ImageView
                     android:id="@+id/dzypyy_image"
-                    android:layout_width="200px"
-                    android:layout_height="200px"
+                    android:layout_width="@dimen/dimen_200x"
+                    android:layout_height="@dimen/dimen_200y"
                     />
 
             </LinearLayout>
@@ -143,16 +144,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="60px" >
+                android:layout_height="@dimen/dimen_60y" >
 
             <TextView
                 android:id="@+id/dzypyy_fname"
-                android:layout_width="200px"
-                android:layout_height="60px"
+                android:layout_width="@dimen/dimen_200x"
+                android:layout_height="@dimen/dimen_60y"
                 android:background="@color/blue_text_bg"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="45sp" />        
+                android:textSize="@dimen/text_size_40" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -162,13 +163,13 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:background="@color/gray_msg_bg"
-        android:layout_height="120px" >
+        android:layout_height="@dimen/dimen_120y" >
 
         <TextView
             android:id="@+id/dzypll_yayun_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:textSize="@dimen/text_size_40"
             android:textColor="@color/back"
             android:text="库管员按手指" />
 

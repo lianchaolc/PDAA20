@@ -15,6 +15,7 @@ import com.ljsw.tjbankpda.util.Table;
 import com.manager.classs.pad.ManagerClass;
 import com.pda.checksupplement.service.CheckLibrarySupplementService;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -193,7 +194,8 @@ public class HomeMangeerToCenterDataScanActivity extends Activity implements OnC
 		}
 	}
 
-	private Handler handler1 = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler1 = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -271,7 +273,6 @@ public class HomeMangeerToCenterDataScanActivity extends Activity implements OnC
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ql_ruku_back:
 			if (rfid != null) {
@@ -422,7 +423,8 @@ public class HomeMangeerToCenterDataScanActivity extends Activity implements OnC
 	/**
 	 * 无限刷新集合
 	 */
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -479,11 +481,11 @@ public class HomeMangeerToCenterDataScanActivity extends Activity implements OnC
 			getRfid().close_a20();
 		}
 
+        handler1.removeCallbacksAndMessages(null);
 	}
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		if (rfid != null) {
 			getRfid().close_a20();
