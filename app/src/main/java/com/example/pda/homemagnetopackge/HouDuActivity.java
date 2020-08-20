@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.manager.classs.pad.ManagerClass;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -76,7 +77,6 @@ public class HouDuActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		loadMyData();
 	}
@@ -183,7 +183,7 @@ public class HouDuActivity extends Activity implements OnClickListener {
 					if (undata.equals("") || undata == null) {
 						Log.d(TAG, "!!!!!!!!!!!undata" + undata);
 						houduzhangbaobtn.setFocusable(false);// 可点击
-						Toast.makeText(HouDuActivity.this, "请选中要做的线路", 400).show();
+						Toast.makeText(HouDuActivity.this, "请选中要做的线路", Toast.LENGTH_SHORT).show();
 
 					} else {
 						Log.d(TAG, "!不等！！！！！！！！！！" + "ZZZZZZZ");
@@ -306,7 +306,8 @@ public class HouDuActivity extends Activity implements OnClickListener {
 
 	}
 
-	private Handler handler = new Handler() {
+	@SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {

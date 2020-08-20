@@ -2,6 +2,7 @@ package com.ljsw.tjbankpad.baggingin.activity;
 
 import java.net.SocketTimeoutException;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -77,7 +78,8 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
 		return systemLogin;
 	}
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.c_login_system);

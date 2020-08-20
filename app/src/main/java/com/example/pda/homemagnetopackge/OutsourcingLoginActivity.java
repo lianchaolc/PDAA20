@@ -7,7 +7,6 @@ import com.entity.SystemUser;
 import com.example.app.entity.User;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
-import com.ljsw.tjbankpad.baggingin.activity.dizhiyapinruku.activity.DiZhiYaPinSaoMiaoZhiWenActivity;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.db.service.SecondLogin;
 import com.ljsw.tjbankpda.util.Skip;
@@ -16,6 +15,7 @@ import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.service.NetService;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -79,7 +79,8 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 
 	private Context mContext;
 
-	@Override
+	@SuppressLint("HandlerLeak")
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.c_login_system);
@@ -155,7 +156,7 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 				case 1:
 					error = 3;
 					if (o_Application.yayunyuan != null && !o_Application.yayunyuan.getLoginUserId().equals("19")) {// 外包清分人
-						if (S_application.getApplication().s_userguankuyaun == null) {// 外包清分人
+						if (S_application.s_userguankuyaun == null) {// 外包清分人
 							managerClass.getAbnormal().timeout(mContext, "请后督中心人员接收!", new OnClickListener() {
 								@Override
 								public void onClick(View arg0) {
@@ -167,7 +168,7 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 						}
 					} else {
 						System.out.print("______" + name);
-						if (S_application.getApplication().s_userguankuyaun == null) {
+						if (S_application.s_userguankuyaun == null) {
 							// 修改
 							Intent intent = new Intent();
 							intent.putExtra("isOk", "success");
@@ -179,8 +180,8 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 
 									OutsourcingLoginActivity.this.RESULT_OK, intent);
 							OutsourcingLoginActivity.this.finish();
-						} else if (S_application.getApplication().s_userguankuyaun != null
-								&& S_application.getApplication().s_userguankuyaun.equals(name)) {
+						} else if (S_application.s_userguankuyaun != null
+								&& S_application.s_userguankuyaun.equals(name)) {
 							// 修改
 							Intent intent = new Intent();
 							intent.putExtra("isOk", "success");
@@ -191,7 +192,7 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 							OutsourcingLoginActivity.this.setResult(OutsourcingLoginActivity.this.RESULT_OK, intent);
 							OutsourcingLoginActivity.this.finish();
 						} else {
-							System.out.println("s_userYayun:" + S_application.getApplication().s_userguankuyaun);
+							System.out.println("s_userYayun:" + S_application.s_userguankuyaun);
 							System.out.println("name:" + name);
 							managerClass.getAbnormal().timeout(OutsourcingLoginActivity.this, "请后督中心人员接收!",
 									new OnClickListener() {
@@ -341,7 +342,13 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 		editname.setText("");
 	}
 
-	// 非空验证
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler_login.removeCallbacksAndMessages(null);
+    }
+
+    // 非空验证
 	public boolean isnull(String name, String pwd) {
 		if (name == null || "".equals(name)) {
 			managerClass.getGolbalView().toastShow(this, "用户名不能为空");
@@ -406,29 +413,26 @@ public class OutsourcingLoginActivity extends Activity implements OnTouchListene
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			Message msg = handler_login.obtainMessage();
 			try {
 				if (("").equals(name) || ("").equals(pwd)) {
 					msg.what = -3; // 帐号或密码为空
 				} else {
 //					S_application.getApplication().s_userguankuyaun
-					Log.e("TSG", "S_application" + S_application.getApplication().s_userguankuyaun);
+					Log.e("TSG", "S_application" + S_application.s_userguankuyaun);
 					loginUser = getSystemLogin().login(name, pwd);
 					if (loginUser != null) { // 成功获取
 						o_Application.yayunyuan = loginUser;
-						S_application.getApplication().s_yayunJigouId = o_Application.yayunyuan.getOrganizationId();
-						S_application.getApplication().s_userYayunName = o_Application.yayunyuan.getLoginUserName();
+						S_application.s_yayunJigouId = o_Application.yayunyuan.getOrganizationId();
+						S_application.s_userYayunName = o_Application.yayunyuan.getLoginUserName();
 						msg.what = 1;
 					} else { // 未成功获取
 						msg.what = 0;
 					}
 				}
 			} catch (SocketTimeoutException ee) {
-				// TODO: handle exception
 				msg.what = -4;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				msg.what = -1;
 			}
