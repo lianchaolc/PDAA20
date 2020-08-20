@@ -3,7 +3,6 @@ package com.example.app.activity;
 import java.net.SocketTimeoutException;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,9 +24,8 @@ import com.poka.device.ShareUtil;
 import com.service.FixationValue;
 
 import afu.util.BaseFingerActivity;
-import afu.util.FingerHandlerInterface;
 
-public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements FingerHandlerInterface {
+public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
 
     private TextView name_left, name_right, bottomtext, texttop;
     private ImageView img_left, img_right;
@@ -139,11 +137,11 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements Fing
                             }
 
                             manager.getRuning().runding(KuanXiangJiaoJieActivity.this, "即将自动跳转");
-                            try {
+                            /*try {
                                 Thread.sleep(2000);
                             } catch (Exception e) {
                                 e.printStackTrace();
-                            }
+                            }*/
                             fname_left = null;
                             fname_right = null;
                             if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
@@ -294,13 +292,13 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements Fing
     @Override
     protected void onPause() {
         super.onPause();
-        manager.getRuning().remove();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.e("kkk", "onStop");
+        manager.getRuning().remove();
     }
 
     @Override
@@ -316,18 +314,8 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements Fing
     }
 
     @Override
-    public void noFingerHandler() {
-
-    }
-
-    @Override
     public void findFinger() {
         texttop.setText("正在获取特征值");
-    }
-
-    @Override
-    public void badCharHandler() {
-
     }
 
     @Override
@@ -341,15 +329,5 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity implements Fing
         }
 
         yanzhengFinger();
-    }
-
-    @Override
-    public void getCharSucceed(byte[] charBytes) {
-
-    }
-
-    @Override
-    public void getImgSucceed(Bitmap img) {
-
     }
 }

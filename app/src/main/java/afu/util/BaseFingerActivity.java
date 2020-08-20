@@ -1,23 +1,9 @@
 package afu.util;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
-
-/**
- * 2020-8-6
- * 特殊情况: 网点双人指纹(KuanXiangJiaoJieActivity)验证完成, 跳转下一个页面验证指纹时, 不能在onStop中关闭指纹
- * Activity生命周期原因, 先执行下个页面的 onCrete - onResume, 再执行本页面的onStop
- * 下个页面会在 onCreate 中打开指纹, 如果本页面onStop执行关闭指纹, 将导致下个页面指纹逻辑崩溃.
- *
- * 另外,不能在onPause中执行关闭指纹, 启用指纹模块, 需要申请USB权限, 弹框提醒, 会导致当前指纹页面回调 onPause
- * 汉德霍尔设备暂无USB权限弹框, 但是依旧会导致当前页面回调 onPause.
- *
- */
 public abstract class BaseFingerActivity extends Activity implements FingerHandlerInterface{
 
     public FingerUtil fingerUtil;
