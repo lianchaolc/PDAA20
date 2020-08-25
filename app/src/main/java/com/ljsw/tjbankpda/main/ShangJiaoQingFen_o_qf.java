@@ -2,24 +2,31 @@ package com.ljsw.tjbankpda.main;
 
 import hdjc.rfid.operator.RFID_Device;
 
+import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import android.R.integer;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +39,9 @@ import android.widget.Toast;
 import com.application.GApplication;
 import com.example.pda.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ljsw.tjbankpda.qf.entity.QuanbieXinxi;
+import com.ljsw.tjbankpda.qf.entity.ShangJiaoQingFen_o_qf_Print_Entity;
 import com.ljsw.tjbankpda.qf.entity.TianJiaXianJin;
 import com.ljsw.tjbankpda.qf.entity.TianJiaZhongKong;
 import com.ljsw.tjbankpda.qf.entity.ZhongkongXinxi;
@@ -125,6 +134,18 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 	private ManagerClass manager;// 弹出框
 
 	Table[] table3 = new Table[10];// 声明一个数据
+//	打印机20200825
+    private List<String>  printsacelist= new ArrayList<String>();//  接受打印机数据的集合
+	private List<Map<String,String>>  printsacelistmap= new ArrayList<Map<String,String>>();//  接受打印机数据的集合
+	private String userNumber;//登录人的账号
+	private  String  printcode;// 获得打印机的牌子
+	private LinearLayout  shangjiaoqingfen_spinner_printinfo_layout,print_spinner_layout;//   ,二次进入spinner需要隐藏
+	private  TextView   shangjiaoqingfen_printinfo_spinner_text;
+	private  String param;
+
+
+	private  Map<String,String>   printmapnetrestult=new HashMap<String, String>();
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +163,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		dzadapter = new DiZhiAdapter();
 
 		orderNum = super.getIntent().getExtras().getString("orderNum");
+		userNumber=GApplication.user.getYonghuZhanghao();// 获取账号名称
 		load();
 		bangdingList();
 		getDate(); // 获取券别等级信息
@@ -161,6 +183,14 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		super.onPause();
 		getRfid().scanclose();
 		manager.getRuning().remove();
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(rfid!=null){
+			rfid.close();
+		}
 	}
 
 	public void load() {
@@ -226,6 +256,12 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		btn_print = (Button) findViewById(R.id.btn_print);
 		btn_print.setOnClickListener(this);
 		btn_print.setVisibility(View.VISIBLE);
+
+		shangjiaoqingfen_spinner_printinfo_layout=(LinearLayout) findViewById(R.id.shangjiaoqingfen_spinner_printinfo_layout);
+		shangjiaoqingfen_spinner_printinfo_layout.setOnClickListener(this);
+		shangjiaoqingfen_printinfo_spinner_text=(TextView) findViewById(R.id.shangjiaoqingfen_printinfo_spinner_text)	;
+		print_spinner_layout   =(LinearLayout) findViewById(R.id.print_spinner_layout);
+
 	}
 
 	@Override
@@ -315,8 +351,8 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 			// 如果抵质押品的数量为0 不允许被点击
 			int dizhishunumInt = Integer.parseInt(dizhishunum);
 			if (dizhishunumInt > 0) {
-				getprintinfo();
-
+//				getprintinfo();
+				getUpdata_printinfo();
 			} else {
 				// 设置不可点击和改变颜色状态
 				qingdfen_ok.setEnabled(false);
@@ -330,6 +366,13 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		case R.id.shangjiaoqingfen_back:
 			ShangJiaoQingFen_o_qf.this.finish();
 			break;
+			case R.id.shangjiaoqingfen_spinner_printinfo_layout://打印机spinner数据
+				spinner = new MySpinner(this, shangjiaoqingfen_spinner_printinfo_layout,
+						shangjiaoqingfen_printinfo_spinner_text);
+				spinner.setSpinnerHeight(shangjiaoqingfen_spinner_printinfo_layout.getHeight() * 2);
+				spinner.setListPrint(this, printsacelist);
+				spinner.showPopupWindow(shangjiaoqingfen_spinner_printinfo_layout);
+				spinner.setListPrint(this, printsacelist, 40);
 		default:
 			break;
 		}
@@ -417,6 +460,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 	/**
 	 * 重空添加 SM
 	 */
+	@SuppressLint("WrongConstant")
 	public void addZhongKong() {
 		String zhongkongQishihao = pingzhengbianhao.getText().toString(); // 重空起始号
 		if ("^(?![1-9]+$)[0-9A-Za-z]{8,16}$".matches(zhongkongQishihao)) { // ^\d{m,n}$
@@ -882,6 +926,59 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		}
 
 	}
+	/***
+	 * 新增
+	 * 获取打印机代码类型
+	 * 20200707
+	 *
+	 */
+	private class GetPrintInfo implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Message msg = create.obtainMessage();
+			try {
+				QingfenRenwuService service = new QingfenRenwuService();
+				String PrintInfo = service.getPrinInfo(userNumber);
+				if (null!=PrintInfo && !PrintInfo.equals("")) {
+					Gson gson = new Gson();
+					Type type = new TypeToken<ArrayList<ShangJiaoQingFen_o_qf_Print_Entity>>() {
+					}.getType();
+
+					List<ShangJiaoQingFen_o_qf_Print_Entity> listPrint = gson.fromJson(PrintInfo,
+							type);
+					printsacelist.clear();
+//					printsacelist = listPrint;
+					printsacelistmap.clear();
+					for (int i = 0; i < listPrint.size(); i++) {
+//						Map<String,String> printmap=new HashMap<String, String>();
+//						printmap.put(listPrint.get(i).getCode(), listPrint.get(i).getId());
+						printmapnetrestult.put(listPrint.get(i).getCode(), listPrint.get(i).getId());
+//						printsacelistmap.add(printmap);
+						printsacelist.add(listPrint.get(i).getCode());
+					}
+//					msg.obj = PrintInfo;
+					if(printsacelist.size()>0){
+						Log.d(TAG,"获取数据后我什么也没做等着数据放到组件上");
+//						msg.what = 7; //
+					}
+
+				} else {
+					msg.what = 8; //
+				}
+			} catch (SocketTimeoutException ee) {
+				// TODO: handle exception
+				msg.what = 5;
+			} catch (Exception e) {
+				// TODO: handle exception
+				msg.what = 8; // 获取券别信息失败
+			}
+
+			create.sendMessage(msg); // 发送消息
+		}
+
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -1327,6 +1424,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 				Skip.skip(ShangJiaoQingFen_o_qf.this, QingFenJinDu_qf.class, null, 0);
 			}
 			if (msg.what == 1) {
+				getPritInfoHander();//  每次进入都会获取到打印机的数据
 				load();
 				alllinear.setVisibility(View.VISIBLE); // 加载时显示
 				ResistcollateralCoaunt.setText(dizhishunum);// 设置抵制押品数量显示
@@ -1344,6 +1442,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					lin_lloutgo.setVisibility(View.GONE);
 					btn_print.setEnabled(false);
 					btn_print.setVisibility(btn_print.GONE);
+					print_spinner_layout.setVisibility(print_spinner_layout.GONE);
 //					现金！=0 抵制=0 中控=0
 				} else if (cash.size() > 0 && dizhishunum.equals("0") && importlist.size() == 0) {
 					lin_lloutgo.setVisibility(View.GONE);
@@ -1351,7 +1450,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					lin_impotan.setVisibility(View.GONE);
 					btn_print.setEnabled(true);
 					btn_print.setVisibility(View.GONE);
-
+					print_spinner_layout.setVisibility(print_spinner_layout.GONE);
 //					如果 现金！=0  抵质=0 中!=0	
 				} else if (cash.size() >= 0 && dizhishunum.equals("0") && importlist.size() > 0) {
 					lin_lloutgo.setVisibility(View.GONE);
@@ -1359,6 +1458,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					lin_impotan.setVisibility(View.VISIBLE);
 					btn_print.setEnabled(false);
 					btn_print.setVisibility(View.GONE);
+					print_spinner_layout.setVisibility(print_spinner_layout.GONE);
 //					如果 现金=0  抵质！0 中！0
 				} else if (cash.size() == 0 || cash == null && !dizhishunum.equals("0") && importlist.size() > 0) {
 					lin_lloutgo.setVisibility(View.GONE);
@@ -1366,6 +1466,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					lin_impotan.setVisibility(View.VISIBLE);
 					btn_print.setEnabled(true);
 					btn_print.setVisibility(View.VISIBLE);
+					print_spinner_layout.setVisibility(print_spinner_layout.VISIBLE);
 //					抵制为0  现金！=0  中空白！=！0
 				} else if (dizhishunum.equals("0") && cash.size() > 0 && importlist.size() > 0) {
 					btn_print.setEnabled(true);
@@ -1373,6 +1474,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					lin_cash.setVisibility(View.VISIBLE);
 					btn_print.setVisibility(View.GONE);
 					lin_impotan.setVisibility(View.VISIBLE);
+					print_spinner_layout.setVisibility(print_spinner_layout.GONE);
 					// 抵质押品和现金》0 中控=0
 				} else if ((!dizhishunum.equals("0")) && cash.size() > 0 && importlist.size() == 0) {
 					btn_print.setEnabled(true);
@@ -1380,12 +1482,14 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					btn_print.setVisibility(View.VISIBLE);
 					lin_impotan.setVisibility(View.GONE);
 					lin_lloutgo.setVisibility(View.VISIBLE);
+					print_spinner_layout.setVisibility(print_spinner_layout.VISIBLE);
 //			全部是0
 				} else if (cash.size() == 0 && (dizhishunum.equals(0)) && importlist.size() == 0) {
 					lin_lloutgo.setVisibility(View.GONE);
 					btn_print.setVisibility(View.GONE);
 					lin_cash.setVisibility(View.GONE);
 					btn_print.setEnabled(false);
+					print_spinner_layout.setVisibility(print_spinner_layout.GONE);
 //					 做一次刷新
 //					全显示
 				} else if (cash.size() > 0 && (!dizhishunum.equals(0)) && importlist.size() > 0) {
@@ -1394,6 +1498,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					btn_print.setVisibility(View.VISIBLE);
 					lin_lloutgo.setVisibility(View.VISIBLE);
 					lin_impotan.setVisibility(View.VISIBLE);
+					print_spinner_layout.setVisibility(print_spinner_layout.VISIBLE);
 				}
 
 				getSpinnerData(); // 获取成功以后继续 获取券别信息
@@ -1568,6 +1673,19 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					}
 				});
 			}
+			if(msg.what == 13){
+			manager.getResultmsg().resultmsg(ShangJiaoQingFen_o_qf.this,
+					"请选择打印设备！", false);
+
+		}
+			if(msg.what == 14){
+			Toast.makeText(getApplicationContext(),"返回不正常"+param,
+					Toast.LENGTH_SHORT).show();
+
+
+		}
+
+
 		};
 	};
 	private Handler handler = new Handler() {
@@ -1720,52 +1838,171 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 		}
 	};
 
+//	/***
+//	 * 获取抵制押品需要打印的详细信息
+//	 */
+//
+//	private void getprintinfo() {
+////		manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "数据加载中...");
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				String param;
+//
+//				List<String> daihaolist = new ArrayList<String>();
+//				Log.d(TAG, "==peisongId===" + peisongId + "===psdId==" + psdId);
+//				// 配送单传值
+//				if (psdId.equals("")) {
+//					psdId = peisongId;
+//				}
+//
+//				try {
+////					shuliang:|canshun:|quanbieId:|quanbie:1330
+//					param = new QingfenRenwuService().isPrintbagnumberlist(peisongId);
+//					Log.d(TAG, "_____======" + param);
+//					// 加入判断为null时候操作
+//					shangjiaoRenwu = Table.doParse(param);
+//
+//					Table[] table4 = Table.doParse(param);
+//					for (int i = 0; i < table4.length; i++) {
+//
+//						daihaolist = table4[0].get("daihao").getValues();
+//					}
+//					for (int i = 0; i < daihaolist.size(); i++) {
+//						dizhilist.add(daihaolist.get(i));
+//					}
+//					okHandle.sendEmptyMessage(3);
+//				} catch (SocketTimeoutException e) {
+//					e.printStackTrace();
+//					timeoutHandle.sendEmptyMessage(01);
+//				} catch (NullPointerException e) {
+//					e.printStackTrace();
+////					timeoutHandle.sendEmptyMessage(12);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//					timeoutHandle.sendEmptyMessage(11);
+//				}
+//			}
+//		}).start();
+//
+//	}
 	/***
 	 * 获取抵制押品需要打印的详细信息
+	 * printcode
+	 * 修改20200707  打印增加打印机的编号
 	 */
-
-	private void getprintinfo() {
-//		manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "数据加载中...");
+	private String  printroobort =""; // 组件上的文字打印机id
+	private String  seleckPrinrResult="";// 循环拿到结果 存keyvalyue 中的数据value
+	private void getUpdata_printinfo() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String param;
-
-				List<String> daihaolist = new ArrayList<String>();
-				Log.d(TAG, "==peisongId===" + peisongId + "===psdId==" + psdId);
-				// 配送单传值
-				if (psdId.equals("")) {
-					psdId = peisongId;
+				List<String> daihaolist=new ArrayList<String>();
+				Log.d(TAG,"==peisongId==="+peisongId+"===psdId=="+psdId);
+				//配送单传值
+				if(psdId.equals("")){
+					psdId=peisongId;
 				}
+				printroobort	=shangjiaoqingfen_printinfo_spinner_text.getText().toString();
+				seleckPrinrResult="";
+				for(String key : printmapnetrestult.keySet()){
+					Log.d(TAG,"-----------key-----"+key+"printroobort"+printroobort);
+					if(printroobort.equals(key)){
+						seleckPrinrResult = printmapnetrestult.get(key);
+					}
 
-				try {
+					Log.d(TAG,"-----------seleckPrinrResult-----"+seleckPrinrResult);
+				}
+				if(null==seleckPrinrResult||printroobort.equals("请选择")||seleckPrinrResult.equals("")){
+					timeoutHandle.sendEmptyMessage(13);
+					return;
+				}else{
+
+
+					Log.d(TAG,"-------===printroobort="+printroobort+"peisongId-------:"+peisongId);
+					try {
 //					shuliang:|canshun:|quanbieId:|quanbie:1330
-					param = new QingfenRenwuService().isPrintbagnumberlist(peisongId);
-					Log.d(TAG, "_____======" + param);
-					// 加入判断为null时候操作
-					shangjiaoRenwu = Table.doParse(param);
+//					param = new QingfenRenwuService().isPrintbagnumberlist(peisongId);
+						param = new QingfenRenwuService().isPrintbagnumberlist(peisongId,seleckPrinrResult);
+						Log.d(TAG,"_____======"+param);
+						if(param.equals("anyType{}")){
+							timeoutHandle.sendEmptyMessage(14);
+						}else{
+							// 加入判断为null时候操作
+							shangjiaoRenwu = Table.doParse(param);
 
-					Table[] table4 = Table.doParse(param);
-					for (int i = 0; i < table4.length; i++) {
+							Table[] table4=Table.doParse(param);
+							for (int i = 0; i < table4.length; i++) {
 
-						daihaolist = table4[0].get("daihao").getValues();
-					}
-					for (int i = 0; i < daihaolist.size(); i++) {
-						dizhilist.add(daihaolist.get(i));
-					}
-					okHandle.sendEmptyMessage(3);
-				} catch (SocketTimeoutException e) {
-					e.printStackTrace();
-					timeoutHandle.sendEmptyMessage(01);
-				} catch (NullPointerException e) {
-					e.printStackTrace();
+								daihaolist = table4[0].get("daihao")
+										.getValues();
+							}
+							for (int i = 0; i < daihaolist.size(); i++) {
+								dizhilist.add(daihaolist.get(i));
+							}
+							okHandle.sendEmptyMessage(3);
+						}
+					} catch (SocketTimeoutException e) {
+						e.printStackTrace();
+						timeoutHandle.sendEmptyMessage(01);
+					} catch (NullPointerException e) {
+						e.printStackTrace();
 //					timeoutHandle.sendEmptyMessage(12);
-				} catch (Exception e) {
-					e.printStackTrace();
-					timeoutHandle.sendEmptyMessage(11);
+					} catch (Exception e) {
+						e.printStackTrace();
+						timeoutHandle.sendEmptyMessage(11);
+					}
 				}
 			}
 		}).start();
+
+
+
+
+	}
+
+	// 适配器
+	class SpinnerAdapter extends ArrayAdapter<ShangJiaoQingFen_o_qf_Print_Entity> {
+		Context context;
+		List<ShangJiaoQingFen_o_qf_Print_Entity> items = new ArrayList<ShangJiaoQingFen_o_qf_Print_Entity>() {};
+		public SpinnerAdapter(Context context, int textViewResourceId,
+							  List<ShangJiaoQingFen_o_qf_Print_Entity> objects) {
+			super(context, textViewResourceId, objects);
+			this.items = objects;
+			this.context = context;
+		}
+		@Override
+		public View getDropDownView(int position, View convertView,
+									ViewGroup parent) {
+
+			if (convertView == null) {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				convertView = inflater.inflate(
+						android.R.layout.simple_spinner_item, parent, false);
+			}
+			// 此处设置spinner的字体大小 和文字颜色
+			TextView tv = (TextView) convertView
+					.findViewById(android.R.id.text1);
+			tv.setText(items.get(position).getCode());
+			tv.setGravity(Gravity.CENTER);
+			tv.setTextColor(Color.BLUE);
+			tv.setTextSize(40);
+			return convertView;
+		}
+	}
+	/***
+	 * 20200706获取打印机信息
+	 * lianchao
+	 */
+
+	/**
+	 * 获取打印机信息
+	 */
+	private void getPritInfoHander() {
+		manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "数据加载中...");
+		// 获取打印机信息
+		Thread thread = new Thread(new GetPrintInfo());
+		thread.start();
 
 	}
 

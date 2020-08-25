@@ -23,6 +23,8 @@ import com.service.FixationValue;
  */
 public class QingfenRenwuService {
 
+	private static final String TAG ="QingfenRenwuService" ;
+
 	/**
 	 * 获取清分员任务
 	 * 
@@ -446,6 +448,64 @@ public class QingfenRenwuService {
 			return params;
 		} else {
 			return null;
+		}
+	}
+
+	/***
+	 * 获取打印机的的数据类型  20200607
+	 * lianchao
+	 * 	arg0 : 外包清分人员id
+	 * 此处代码返回应放在params 但是在messge 中
+	 * 202008011放开
+	 */
+	public String  getPrinInfo(String cleanId) throws Exception{
+		String methodName ="collateralPrinterList";// 接口方法
+		System.out.println("taskId-->:"+cleanId);
+		SoapObject soap = null;// 创建返回值接收对象
+		WebParameter[] param = { new WebParameter<String>("arg0", cleanId) };//周转箱id
+		soap = WebServiceFromThree.getSoapObject(methodName, param,
+				FixationValue.NAMESPACEZH, FixationValue.URL9);
+		// 根据路径获得返回值
+		String code = soap.getProperty("code").toString();
+		String msg = soap.getProperty("msg").toString();
+		String params = soap.getProperty("params").toString();
+		System.out.println("params-->:" + params);
+		if ("00".equals(code)) {
+			return msg;
+		} else {
+			return null;
+		}
+	}
+	/***
+	 * 需要打印出抵制押品已打印袋子号列表
+	 * @param peisongId
+	 * @return
+	 * @throws Exception
+	 *
+	 * 派工单和打印机的id
+	 * 20200201
+	 */
+
+	public String isPrintbagnumberlist(String psdId,String printroobortid) throws Exception {
+		String methodName = "savePrint";// 接口方法
+		Log.d(TAG,"_____======"+"arg0="+psdId);
+		Log.d(TAG,"_____===arg1==="+printroobortid);
+		System.out.println("arg0="+psdId);
+		System.out.println("arg1="+printroobortid);
+		WebParameter[] param = {
+				new WebParameter<String>("arg0", psdId),// 配送单ID
+				new WebParameter<String>("arg1", printroobortid)};
+		SoapObject soap = null;// 创建返回值接收对象
+		soap = WebServiceFromThree.getSoapObject(methodName, param,
+				FixationValue.NAMESPACEZH, FixationValue.URL9);// 根据路径获得返回值
+		String code = soap.getProperty("code").toString();
+		String msg = soap.getProperty("msg").toString();
+		String params = soap.getProperty("params").toString();
+		System.out.println("params-->:"+params);
+		if ("00".equals(code)) {// code=00->成功,code=99->失败
+			return params;
+		} else {
+			return msg;
 		}
 	}
 

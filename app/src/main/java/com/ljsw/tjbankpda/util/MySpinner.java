@@ -217,5 +217,23 @@ public class MySpinner extends PopupWindow {
 		}
 		spinner_list.setAdapter(new SpinnerAdapter(context, list, size));
 	}
+	//新增20200825
+	public void setListPrint(Activity context, List<String> strs) {
+		list = new ArrayList<String>();
+//		for (String xinxi : strs) {
+//			list.add(xinxi.get);
+//		}
+		for (int i = 0; i < strs.size(); i++) {
+			list.add(strs.get(i));
+		}
+		spinner_list.setAdapter(new SpinnerAdapter(context, list));
+	}
 
+	public void setListPrint(Activity context, List<String> strs, int size) {
+		list = new ArrayList<String>();
+		for (int i = 0; i < strs.size(); i++) {
+			list.add(strs.get(i));
+		}
+		spinner_list.setAdapter(new SpinnerAdapter(context, list, size));
+	}
 }

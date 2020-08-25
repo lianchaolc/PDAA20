@@ -625,6 +625,55 @@
                     android:textColor="@color/red"
                     android:textSize="@dimen/text_size_35" />
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10px"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px"
+                    android:layout_height="80px" >
+
+                    <LinearLayout
+                        android:id="@+id/print_spinner_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="65px"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="0.8"
+                            android:gravity="center_vertical" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="30px"
+                                android:text="打印设备"
+                                android:textColor="@color/blue_top"
+                                android:textSize="40sp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/shangjiaoqingfen_spinner_printinfo_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1.2"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:id="@+id/shangjiaoqingfen_printinfo_spinner_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="60px"
+                                android:layout_marginRight="20px"
+                                android:background="@drawable/money_count"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="5px"
+                                android:text="请选择"
+                                android:textColor="@color/back"
+                                android:textSize="40sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
             <Button
                     android:id="@+id/btn_print"
                     android:layout_width="@dimen/dimen_200x"
@@ -645,162 +694,7 @@
                 </ListView>
 
             </LinearLayout>
-            
-            
-<!--  
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_60y"
-                android:gravity="center_vertical" >
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_50x"
-                    android:text="请扫描抵质押品编号......"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_1y"
-                android:layout_marginLeft="@dimen/dimen_20x"
-                android:layout_marginRight="@dimen/dimen_20x"
-                android:background="@drawable/gradient_white_gray" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_50y"
-                android:gravity="center_vertical"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="编号"
-                    android:layout_marginLeft="@dimen/dimen_135x"
-                    android:textColor="@color/blue_top"
-                    android:textSize="@dimen/text_size_35" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <ListView
-                    android:id="@+id/qf_shangjiaoqingfen_dizhiyapin_listView1"
-                    android:layout_width="match_parent"
-                    android:divider="@color/white"
-                    android:layout_height="wrap_content" >
-                </ListView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_80y"
-                android:gravity="center" >
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_280x"
-                    android:text="合计："
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" />
-
-                <TextView
-                    android:id="@+id/shangjiaoqingfen_dizhiyapin_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/back"
-                    android:textSize="@dimen/text_size_35" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_1y"
-                android:layout_marginLeft="@dimen/dimen_20x"
-                android:layout_marginRight="@dimen/dimen_20x"
-                android:background="@drawable/gradient_white_gray" />
-                -->
-                
-<!--  
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_80y"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="@dimen/dimen_0x"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_30x"
-                        android:text="编号："
-                        android:textColor="@color/blue_top"
-                        android:textSize="@dimen/text_size_35" />
-                </LinearLayout>
-                -->
-<!-- 
-                <LinearLayout
-                    android:layout_width="@dimen/dimen_0x"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1.2"
-                    android:gravity="center" >
-
-                    <EditText
-                        android:id="@+id/shangjiaoqingfen_dizhiyapin_edit"
-                        android:layout_width="@dimen/dimen_0x"
-                        android:layout_height="@dimen/dimen_60y"
-                        android:layout_marginRight="@dimen/dimen_20x"
-                        android:layout_weight="1"
-                        android:paddingLeft="5px"
-                        android:background="@drawable/money_count"
-                        android:textSize="@dimen/text_size_35" >
-
-                    </EditText>
-                </LinearLayout>
-                
-              
-            </LinearLayout>
-               -->
-            <!--  
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimen_80y"
-                android:orientation="horizontal"
-                android:gravity="center" >
-                <Button
-                    android:id="@+id/shangjiaoqingfen_dizhiyapin_tianjia_saomiao"
-                    android:layout_width="@dimen/dimen_160x"
-                    android:layout_height="@dimen/dimen_60y"
-                    android:background="@drawable/buttom_selector_bg"
-                    android:layout_marginRight="@dimen/dimen_20x"
-                    android:text="开启扫描"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_35" />
-
-                <Button
-                    android:id="@+id/shangjiaoqingfen_dizhiyapin_tianjia"
-                    android:layout_width="@dimen/dimen_160x"
-                    android:layout_height="@dimen/dimen_60y"
-                    android:layout_marginLeft="@dimen/dimen_20x"
-                    android:background="@drawable/buttom_selector_bg"
-                    android:text="添    加"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_35" />
-            </LinearLayout>
--->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_marginTop="@dimen/dimen_50y"
