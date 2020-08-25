@@ -276,7 +276,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 
 		case R.id.shangjiaoqingfen_zhongkong_tianjia:
 			addZhongKong();
-			if (zhongkongList.size() > 0 && importlist.size() == 0) {
+			if (zhongkongList.size() > 0) {
 				qingdfen_ok.setEnabled(true);
 				qingdfen_ok.setBackgroundResource(R.drawable.buttom_selector_bg);
 				lin_lloutgo.setVisibility(View.GONE);
