@@ -110,7 +110,7 @@ public class CashToPackgersActivity extends FragmentActivity implements OnClickL
 		}
 		return rfid;
 	}
-
+	private HashMap<String,String> str_meidandquanbie_map=new HashMap<String, String>();//存版别和meid  移植过来   存放meid券别
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.acctivity_cashtopackgers);
@@ -214,6 +214,7 @@ public class CashToPackgersActivity extends FragmentActivity implements OnClickL
 								moneyEditionMapstr.put(item.getEDITION(), list);
 							}
 							cahstopackgermeid.add(item.getMEID());
+							str_meidandquanbie_map.put(item.getMEID(),item.getMONEYTYPE());//存放meid标识和版别集合202008
 						}
 						// 文字版别 "纸100元（5套）
 						Set<String> moneySet = moneyEditionMap.keySet();
@@ -727,65 +728,76 @@ public class CashToPackgersActivity extends FragmentActivity implements OnClickL
 					Log.e(TAG, "！！！！！！！！！！！！！！！！！！！！！！！！！" + map.get("meid"));
 					shwotvreadcash_qunabeibu = map.get("moneytype");// 读卡后返显示版别和券别EDITION
 					showtvcash_banbie = map.get("edition");
-
-					if (readmeid.equals("01")) {
-						readcash_qunabeibu.setText("纸100元（5套）");
-					} else if (readmeid.equals("02")) {
-						readcash_qunabeibu.setText("纸100元（5套）");
-					} else if (readmeid.equals("03")) {
-						readcash_qunabeibu.setText("纸100元（5套）");
-					} else if (readmeid.equals("04")) {
-						readcash_qunabeibu.setText(" 纸50元（5套）");
-					} else if (readmeid.equals("05")) {
-						readcash_qunabeibu.setText(" 纸50元（5套）");
-					} else if (readmeid.equals("06")) {
-						readcash_qunabeibu.setText(" 纸20元（5套）");
-					} else if (readmeid.equals("07")) {
-						readcash_qunabeibu.setText(" 纸20元（5套）");
-					} else if (readmeid.equals("08")) {
-						readcash_qunabeibu.setText("纸10元（5套）");
-					} else if (readmeid.equals("09")) {
-
-						readcash_qunabeibu.setText("纸10元（5套）");
-					} else if (readmeid.equals("0A")) {
-						readcash_qunabeibu.setText("纸5元（5套）");
-					} else if (readmeid.equals("0B")) {
-						readcash_qunabeibu.setText("纸5元（5套）");
-					} else if (readmeid.equals("0C")) {
-						readcash_qunabeibu.setText("纸1元（5套）");
-					} else if (readmeid.equals("0D")) {
-						readcash_qunabeibu.setText("纸100元（4套）");
-					} else if (readmeid.equals("0E")) {
-						readcash_qunabeibu.setText("纸100元（4套）");
-					} else if (readmeid.equals("0F")) {
-						readcash_qunabeibu.setText("纸50元（4套）");
-					} else if (readmeid.equals("10")) {
-						readcash_qunabeibu.setText("纸50元（4套）");
-					} else if (readmeid.equals("11")) {
-						readcash_qunabeibu.setText("纸10元（4套）");
-					} else if (readmeid.equals("12")) {
-						readcash_qunabeibu.setText("纸5元（4套）");
-					} else if (readmeid.equals("13")) {
-						readcash_qunabeibu.setText("纸2元（4套）");
-					} else if (readmeid.equals("14")) {
-						readcash_qunabeibu.setText("纸2元（4套）");
-					} else if (readmeid.equals("16")) {
-						readcash_qunabeibu.setText("纸1元（4套）");
-					} else if (readmeid.equals("17")) {
-						readcash_qunabeibu.setText("纸1元（4套）");
-					} else if (readmeid.equals("15")) {
-						readcash_qunabeibu.setText("纸1元（4套）");
-					} else if (readmeid.equals("18")) {
-						readcash_qunabeibu.setText("纸5角（4套）");
-					} else if (readmeid.equals("19")) {
-						readcash_qunabeibu.setText("纸2角（4套）");
-					} else if (readmeid.equals("1A")) {
-						readcash_qunabeibu.setText("纸1角（4套）");
-					} else if (readmeid.equals("1B")) {
-						readcash_qunabeibu.setText("硬五角（5套）");
-					} else if (readmeid.equals("1C")) {
-						readcash_qunabeibu.setText("硬一角（5套）");
+					for(Map.Entry<String, String> vo : str_meidandquanbie_map.entrySet()){
+//							    vo.getKey();
+//					            vo.getValue();
+						Log.d(TAG,"---------------------readmeid-"+readmeid);
+						Log.d(TAG,"----------"+vo.getKey());
+						Log.d(TAG,"----------"+vo.getValue());
+						if(( vo.getKey().equals(readmeid))){
+							readcash_qunabeibu.setText(vo.getValue());
+							Log.d(TAG,"---------------------readmeid-"+readmeid);
+							Log.d(TAG,"------------------AAAAAA2----"+str_meidandquanbie_map.get(readmeid));
+						}
 					}
+//					if (readmeid.equals("01")) {
+//						readcash_qunabeibu.setText("纸100元（5套）");
+//					} else if (readmeid.equals("02")) {
+//						readcash_qunabeibu.setText("纸100元（5套）");
+//					} else if (readmeid.equals("03")) {
+//						readcash_qunabeibu.setText("纸100元（5套）");
+//					} else if (readmeid.equals("04")) {
+//						readcash_qunabeibu.setText(" 纸50元（5套）");
+//					} else if (readmeid.equals("05")) {
+//						readcash_qunabeibu.setText(" 纸50元（5套）");
+//					} else if (readmeid.equals("06")) {
+//						readcash_qunabeibu.setText(" 纸20元（5套）");
+//					} else if (readmeid.equals("07")) {
+//						readcash_qunabeibu.setText(" 纸20元（5套）");
+//					} else if (readmeid.equals("08")) {
+//						readcash_qunabeibu.setText("纸10元（5套）");
+//					} else if (readmeid.equals("09")) {
+//
+//						readcash_qunabeibu.setText("纸10元（5套）");
+//					} else if (readmeid.equals("0A")) {
+//						readcash_qunabeibu.setText("纸5元（5套）");
+//					} else if (readmeid.equals("0B")) {
+//						readcash_qunabeibu.setText("纸5元（5套）");
+//					} else if (readmeid.equals("0C")) {
+//						readcash_qunabeibu.setText("纸1元（5套）");
+//					} else if (readmeid.equals("0D")) {
+//						readcash_qunabeibu.setText("纸100元（4套）");
+//					} else if (readmeid.equals("0E")) {
+//						readcash_qunabeibu.setText("纸100元（4套）");
+//					} else if (readmeid.equals("0F")) {
+//						readcash_qunabeibu.setText("纸50元（4套）");
+//					} else if (readmeid.equals("10")) {
+//						readcash_qunabeibu.setText("纸50元（4套）");
+//					} else if (readmeid.equals("11")) {
+//						readcash_qunabeibu.setText("纸10元（4套）");
+//					} else if (readmeid.equals("12")) {
+//						readcash_qunabeibu.setText("纸5元（4套）");
+//					} else if (readmeid.equals("13")) {
+//						readcash_qunabeibu.setText("纸2元（4套）");
+//					} else if (readmeid.equals("14")) {
+//						readcash_qunabeibu.setText("纸2元（4套）");
+//					} else if (readmeid.equals("16")) {
+//						readcash_qunabeibu.setText("纸1元（4套）");
+//					} else if (readmeid.equals("17")) {
+//						readcash_qunabeibu.setText("纸1元（4套）");
+//					} else if (readmeid.equals("15")) {
+//						readcash_qunabeibu.setText("纸1元（4套）");
+//					} else if (readmeid.equals("18")) {
+//						readcash_qunabeibu.setText("纸5角（4套）");
+//					} else if (readmeid.equals("19")) {
+//						readcash_qunabeibu.setText("纸2角（4套）");
+//					} else if (readmeid.equals("1A")) {
+//						readcash_qunabeibu.setText("纸1角（4套）");
+//					} else if (readmeid.equals("1B")) {
+//						readcash_qunabeibu.setText("硬五角（5套）");
+//					} else if (readmeid.equals("1C")) {
+//						readcash_qunabeibu.setText("硬一角（5套）");
+//					}
 
 					double intbytailzermcan = Double.parseDouble(map.get("bagmoney"));
 					double result = (intbytailzermcan * (0.0001));
