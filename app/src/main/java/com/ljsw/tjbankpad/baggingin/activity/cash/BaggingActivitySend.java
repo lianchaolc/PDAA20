@@ -67,7 +67,6 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 	private Spinner ba_Spinner, bc_spinneridtype, bc_spkindof; // 尾零
 
 	private EditText ba_EdiText;
-//	private powercontrol rFidPowerControl;// yang
 	private UhfManager manager;
 	private SerialPort uhfSerialPort;// 超高频串口
 	String epc = "";
@@ -129,6 +128,9 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 	// 残损
 	private String iscansunshow = "";
 	private String WriterData = "";/// 提交数据变量
+	// 新增  读卡的操作20200825
+	private  Button bagginsend_copy_btn;//复制卡片时按钮
+	private  String  str_remCardno="";// 存放后台返给的生成卡数据
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -626,8 +628,6 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 				cansunid = "2";
 			} else if (cansunwanczhegn.equals("残损")) {
 				cansunid = "4";
-//			}else if(cansunwanczhegn.equals("半损")){
-//				cansunid="6";
 			}
 		} else if (null != TailZerorecive && TailZerorecive.equals("1")) {
 			if (cansunwanczhegn.equals("完整")) {
@@ -653,6 +653,9 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 	}
 
 	private void initView() {
+
+		bagginsend_copy_btn=(Button) findViewById(R.id.bagginsend_copy_btn);//  复制时的按钮
+		bagginsend_copy_btn.setOnClickListener(this);
 		sp_sp_banbieckc = (Spinner) findViewById(R.id.sp_banbieckc);
 		tv_readcard = (TextView) findViewById(R.id.tv_readcard);
 		btn_acmakecard = (Button) findViewById(R.id.makecard_btn);
@@ -791,6 +794,7 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 
 					String cdcode = dataStr.substring(0, 4);
 					StringBuffer sb = new StringBuffer();
+					sb.setLength(0);
 					if (cdcode.equals("6768")) {
 
 						if ("0".equals(dataStr.substring(4, 5)) && "0".equals(dataStr.substring(5, 6))) {
@@ -847,6 +851,7 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 						}
 						sb.toString();
 						tv_readcard.append(sb + "\n");
+						tv_readcard.setText(sb+ "\n");
 						Log.i(TAG, "成功了读" + sb);
 						handler.sendEmptyMessage(8);
 						break;
@@ -866,11 +871,22 @@ public class BaggingActivitySend extends FragmentActivity implements OnClickList
 		case R.id.updata_btn:
 			updatabyMCardData();// /提交制卡信息
 			break;
+			case R.id. bagginsend_copy_btn:///  执行复制操作
+				CopyAction();
+				break;
 		default:
 			break;
 		}
 	}
 
+
+	/****
+	 * 执行复制操作
+	 */
+	private void CopyAction() {
+		// TODO Auto-generated method stub
+		handler.sendEmptyMessage(6);
+	}
 	/***
 	 * 网络请求制卡
 	 * 
