@@ -5,103 +5,103 @@ import com.za.finger.ZAandroid;
 
 public class Xx500c {
 	/**
-	 * ²Ù×÷³É¹¦
+	 * æ“ä½œæˆåŠŸ
 	 */
 	public final int PS_OK = 0;
 	/**
-	 * Êı¾İÊÕ°ü´íÎó
+	 * æ•°æ®æ”¶åŒ…é”™è¯¯
 	 */
 	public final int PS_COMM_ERR = 1;
 	/**
-	 * ´«¸ĞÆ÷ÉÏÎŞÊÖÖ¸
+	 * ä¼ æ„Ÿå™¨ä¸Šæ— æ‰‹æŒ‡
 	 */
 	public final int PS_NO_FINGER = 2;
 	/**
-	 * Â¼ÈëÖ¸ÎÆ²»³É¹¦
+	 * å½•å…¥æŒ‡çº¹ä¸æˆåŠŸ
 	 */
 	public final int PS_GET_IMG_ERR = 3;
 	/**
-	 * Ö¸ÎÆÌ«¸É¡¢Ì«µ­£¬Éú²»³ÉÌØÕ÷
+	 * æŒ‡çº¹å¤ªå¹²ã€å¤ªæ·¡ï¼Œç”Ÿä¸æˆç‰¹å¾
 	 */
 	public final int PS_FP_TOO_DRY = 4;
 	/**
-	 * Ö¸ÎÆÌ«Êª¡¢Ì«ºı£¬Éú²»³ÉÌØÕ÷
+	 * æŒ‡çº¹å¤ªæ¹¿ã€å¤ªç³Šï¼Œç”Ÿä¸æˆç‰¹å¾
 	 */
 	public final int PS_FP_TOO_WET = 5;
 	/**
-	 * Ö¸ÎÆÍ¼ÏñÌ«ÂÒÉú²»³ÉÌØÕ÷
+	 * æŒ‡çº¹å›¾åƒå¤ªä¹±ç”Ÿä¸æˆç‰¹å¾
 	 */
 	public final int PS_FP_DISORDER = 6;
 	/**
-	 * Ö¸ÎÆÌ«Ğ¡»òÌØÕ÷µãÌ«ÉÙÉú²»³ÉÌØÕ÷
+	 * æŒ‡çº¹å¤ªå°æˆ–ç‰¹å¾ç‚¹å¤ªå°‘ç”Ÿä¸æˆç‰¹å¾
 	 */
 	public final int PS_LITTLE_FEATURE = 7;
 	/**
-	 * Ö¸ÎÆ²»Æ¥Åä
+	 * æŒ‡çº¹ä¸åŒ¹é…
 	 */
 	public final int PS_NOT_MATCH = 8;
 	/**
-	 * Ã»ËÑË÷µ½Ö¸ÎÆ
+	 * æ²¡æœç´¢åˆ°æŒ‡çº¹
 	 */
 	public final int PS_NOT_SEARCHED = 9;
 	/**
-	 * ÌØÕ÷ºÏ²¢Ê§°Ü
+	 * ç‰¹å¾åˆå¹¶å¤±è´¥
 	 */
 	public final int PS_MERGE_ERR = 10;
 	/**
-	 * ·ÃÎÊÖ¸ÎÆ¿âµØÖ·ĞòºÅ³¬³ö·¶Î§
+	 * è®¿é—®æŒ‡çº¹åº“åœ°å€åºå·è¶…å‡ºèŒƒå›´
 	 */
 	public final int PS_ADDRESS_OVER = 11;
 	/**
-	 * Ö¸ÎÆ¿â¶ÁÄ£°å³ö´í»òÎŞĞ§
+	 * æŒ‡çº¹åº“è¯»æ¨¡æ¿å‡ºé”™æˆ–æ— æ•ˆ
 	 */
 	public final int PS_READ_ERR = 12;
 	/**
-	 * ÉÏ´«ÌØÕ÷Ê§°Ü
+	 * ä¸Šä¼ ç‰¹å¾å¤±è´¥
 	 */
 	public final int PS_UP_TEMP_ERR = 13;
 	/**
-	 * Ä£¿é²»ÄÜ½ÓÊÕºóĞøÊı¾İ°ü
+	 * æ¨¡å—ä¸èƒ½æ¥æ”¶åç»­æ•°æ®åŒ…
 	 */
 	public final int PS_RECV_ERR = 14;
 	/**
-	 * ÉÏ´«Í¼ÏñÊ§°Ü
+	 * ä¸Šä¼ å›¾åƒå¤±è´¥
 	 */
 	public final int PS_UP_IMG_ERR = 15;
 	/**
-	 * É¾³ıÄ£°åÊ§°Ü
+	 * åˆ é™¤æ¨¡æ¿å¤±è´¥
 	 */
 	public final int PS_DEL_TEMP_ERR = 16;
 	/**
-	 * Çå¿ÕÖ¸ÎÆ¿âÊ§°Ü
+	 * æ¸…ç©ºæŒ‡çº¹åº“å¤±è´¥
 	 */
 	public final int PS_CLEAR_TEMP_ERR = 17;
 	/**
-	 * ²»ÄÜ½øÈëµÍ¹¦ºÄ×´Ì¬
+	 * ä¸èƒ½è¿›å…¥ä½åŠŸè€—çŠ¶æ€
 	 */
 	public final int PS_SLEEP_ERR = 18;
 	/**
-	 * ¿ÚÁî²»ÕıÈ·
+	 * å£ä»¤ä¸æ­£ç¡®
 	 */
 	public final int PS_INVALID_PASSWORD = 19;
 	/**
-	 * ÏµÍ³¸´Î»Ê§°Ü
+	 * ç³»ç»Ÿå¤ä½å¤±è´¥
 	 */
 	public final int PS_RESET_ERR = 20;
 	/**
-	 * »º³åÇøÄÚÃ»ÓĞÓĞĞ§Ô­Ê¼Í¼Ïñ²»ÄÜÉú³ÉÍ¼Ïñ
+	 * ç¼“å†²åŒºå†…æ²¡æœ‰æœ‰æ•ˆåŸå§‹å›¾åƒä¸èƒ½ç”Ÿæˆå›¾åƒ
 	 */
 	public final int PS_INVALID_IMAGE = 21;
 	/**
-	 * ÔÚÏßÉı¼¶Ê§°Ü
+	 * åœ¨çº¿å‡çº§å¤±è´¥
 	 */
 	public final int PS_HANGOVER_UNREMOVE = 22;
 	/**
-	 * ²ĞÁôÖ¸ÎÆ»òÁ½´Î²É¼¯Ö®¼äÊÖÖ¸Ã»ÓĞÒÆ¶¯¹ı
+	 * æ®‹ç•™æŒ‡çº¹æˆ–ä¸¤æ¬¡é‡‡é›†ä¹‹é—´æ‰‹æŒ‡æ²¡æœ‰ç§»åŠ¨è¿‡
 	 */
 	public final int PS_HAND_MOVE = 23;
 	/**
-	 * Ğ´Flash³ö´í
+	 * å†™Flashå‡ºé”™
 	 */
 	public final int PS_FLASH_ERROR = 24;
 
@@ -114,39 +114,39 @@ public class Xx500c {
 	public final int FLASH_CODE_LENGTH = 0xf5;
 	public final int FLASH_FAIL = 0xf6;
 	/**
-	 * Î´¶¨Òå´íÎó
+	 * æœªå®šä¹‰é”™è¯¯
 	 */
 	public final int PS_DON_ERROR = 0x19;
 	/**
-	 * ÎŞĞ§¼Ä´æÆ÷ºÅ
+	 * æ— æ•ˆå¯„å­˜å™¨å·
 	 */
 	public final int PS_SAVE_ID = 0x1a;
 	/**
-	 * ¼Ä´æÆ÷Éè¶¨ÄÚÈİ´íÎóºÅ
+	 * å¯„å­˜å™¨è®¾å®šå†…å®¹é”™è¯¯å·
 	 */
 	public final int PS_SAVEID_ERROR = 0x1b;
 	/**
-	 * ¼ÇÊÂ±¾Ò³ÂëÖ¸¶¨´íÎó
+	 * è®°äº‹æœ¬é¡µç æŒ‡å®šé”™è¯¯
 	 */
 	public final int PS_BOOK_ERROR = 0x1c;
 	/**
-	 * ¶Ë¿Ú²Ù×÷Ê§°Ü
+	 * ç«¯å£æ“ä½œå¤±è´¥
 	 */
 	public final int PS_IP_ERROR = 0x1d;
 	/**
-	 * ×Ô¶¯×¢²áenrollÊ§°Ü
+	 * è‡ªåŠ¨æ³¨å†Œenrollå¤±è´¥
 	 */
 	public final int PS_REGISTER_ERROR = 0x1e;
 	/**
-	 * Ö¸ÎÆ¿âÂú
+	 * æŒ‡çº¹åº“æ»¡
 	 */
 	public final int PS_FG_EMPTY = 0x1f;
 	/**
-	 * Ö¸ÎÆÉè±¸Î´Á¬½Ó
+	 * æŒ‡çº¹è®¾å¤‡æœªè¿æ¥
 	 */
 	public final int PS_NO_CONNECT = -1;
 	/**
-	 * Í¨Ñ¶´íÎó
+	 * é€šè®¯é”™è¯¯
 	 */
 	public final int PS_IM_ERROR = -2;
 
@@ -177,7 +177,7 @@ public class Xx500c {
 		return a6.ZAZDownChar(nAddr, iBufferID, pImageData, iTempletLengths);
 	}
 /**
- * iScoreµÄÖµ²»´«ÈçºÎ¶¨Òå*/
+ * iScoreçš„å€¼ä¸ä¼ å¦‚ä½•å®šä¹‰*/
 	public int FunPS_Match(int iBufferID) {
 		return a6.ZAZMatch(nAddr, iScore);
 	}
@@ -186,79 +186,79 @@ public class Xx500c {
 		
 		switch (status) {
 		case 0:
-			temp="²Ù×÷³É¹¦";
+			temp="æ“ä½œæˆåŠŸ";
 			break;
 		case 1:
-			temp="Êı¾İÊÕ°ü´íÎó";
+			temp="æ•°æ®æ”¶åŒ…é”™è¯¯";
 			break;
 		case 2:
-			temp="´«¸ĞÆ÷ÉÏÎŞÊÖÖ¸";
+			temp="ä¼ æ„Ÿå™¨ä¸Šæ— æ‰‹æŒ‡";
 			break;
 		case 3:
-			temp="Â¼ÈëÖ¸ÎÆ²»³É¹¦";
+			temp="å½•å…¥æŒ‡çº¹ä¸æˆåŠŸ";
 			break;
 		case 4:
-			temp="Ö¸ÎÆÌ«¸É¡¢Ì«µ­£¬Éú²»³ÉÌØÕ÷";
+			temp="æŒ‡çº¹å¤ªå¹²ã€å¤ªæ·¡ï¼Œç”Ÿä¸æˆç‰¹å¾";
 			break;
 		case 5:
-			temp="Ö¸ÎÆÌ«Êª¡¢Ì«ºı£¬Éú²»³ÉÌØÕ÷";
+			temp="æŒ‡çº¹å¤ªæ¹¿ã€å¤ªç³Šï¼Œç”Ÿä¸æˆç‰¹å¾";
 			break;
 		case 6:
-			temp="Ö¸ÎÆÍ¼ÏñÌ«ÂÒÉú²»³ÉÌØÕ÷";
+			temp="æŒ‡çº¹å›¾åƒå¤ªä¹±ç”Ÿä¸æˆç‰¹å¾";
 			break;
 		case 7:
-			temp="Ö¸ÎÆÌ«Ğ¡»òÌØÕ÷µãÌ«ÉÙÉú²»³ÉÌØÕ÷";
+			temp="æŒ‡çº¹å¤ªå°æˆ–ç‰¹å¾ç‚¹å¤ªå°‘ç”Ÿä¸æˆç‰¹å¾";
 			break;
 		case 8:
-			temp="Ö¸ÎÆ²»Æ¥Åä";
+			temp="æŒ‡çº¹ä¸åŒ¹é…";
 			break;
 		case 9:
-			temp="Ã»ËÑË÷µ½Ö¸ÎÆ";
+			temp="æ²¡æœç´¢åˆ°æŒ‡çº¹";
 			break;
 		case 10:
-			temp="ÌØÕ÷ºÏ²¢Ê§°Ü";
+			temp="ç‰¹å¾åˆå¹¶å¤±è´¥";
 			break;
 		case 11:
-			temp="·ÃÎÊÖ¸ÎÆ¿âµØÖ·ĞòºÅ³¬³ö·¶Î§";
+			temp="è®¿é—®æŒ‡çº¹åº“åœ°å€åºå·è¶…å‡ºèŒƒå›´";
 			break;
 		case 12:
-			temp="Ö¸ÎÆ¿â¶ÁÄ£°å³ö´í»òÎŞĞ§";
+			temp="æŒ‡çº¹åº“è¯»æ¨¡æ¿å‡ºé”™æˆ–æ— æ•ˆ";
 			break;
 		case 13:
-			temp="ÉÏ´«ÌØÕ÷Ê§°Ü";
+			temp="ä¸Šä¼ ç‰¹å¾å¤±è´¥";
 			break;
 		case 14:
-			temp="Ä£¿é²»ÄÜ½ÓÊÕºóĞøÊı¾İ°ü";
+			temp="æ¨¡å—ä¸èƒ½æ¥æ”¶åç»­æ•°æ®åŒ…";
 			break;
 		case 15:
-			temp="ÉÏ´«Í¼ÏñÊ§°Ü";
+			temp="ä¸Šä¼ å›¾åƒå¤±è´¥";
 			break;
 		case 16:
-			temp="É¾³ıÄ£°åÊ§°Ü";
+			temp="åˆ é™¤æ¨¡æ¿å¤±è´¥";
 			break;
 		case 17:
-			temp="Çå¿ÕÖ¸ÎÆ¿âÊ§°Ü";
+			temp="æ¸…ç©ºæŒ‡çº¹åº“å¤±è´¥";
 			break;
 		case 18:
-			temp="²»ÄÜ½øÈëµÍ¹¦ºÄ×´Ì¬";
+			temp="ä¸èƒ½è¿›å…¥ä½åŠŸè€—çŠ¶æ€";
 			break;
 		case 19:
-			temp="¿ÚÁî²»ÕıÈ·";
+			temp="å£ä»¤ä¸æ­£ç¡®";
 			break;
 		case 20:
-			temp="ÏµÍ³¸´Î»Ê§°Ü";
+			temp="ç³»ç»Ÿå¤ä½å¤±è´¥";
 			break;
 		case 21:
-			temp="»º³åÇøÄÚÃ»ÓĞÓĞĞ§Ô­Ê¼Í¼Ïñ²»ÄÜÉú³ÉÍ¼Ïñ";
+			temp="ç¼“å†²åŒºå†…æ²¡æœ‰æœ‰æ•ˆåŸå§‹å›¾åƒä¸èƒ½ç”Ÿæˆå›¾åƒ";
 			break;
 		case 22:
-			temp="ÔÚÏßÉı¼¶Ê§°Ü";
+			temp="åœ¨çº¿å‡çº§å¤±è´¥";
 			break;
 		case 23:
-			temp="²ĞÁôÖ¸ÎÆ»òÁ½´Î²É¼¯Ö®¼äÊÖÖ¸Ã»ÓĞÒÆ¶¯¹ı";
+			temp="æ®‹ç•™æŒ‡çº¹æˆ–ä¸¤æ¬¡é‡‡é›†ä¹‹é—´æ‰‹æŒ‡æ²¡æœ‰ç§»åŠ¨è¿‡";
 			break;
 		case 24:
-			temp="Ğ´Flash³ö´í";
+			temp="å†™Flashå‡ºé”™";
 			break;
 
 		default:

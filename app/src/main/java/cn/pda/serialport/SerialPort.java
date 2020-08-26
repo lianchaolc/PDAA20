@@ -79,8 +79,8 @@ public class SerialPort {
 	private static final String TAG = "SerialPort";
 	
 	
-	public static int TNCOM_EVENPARITY = 0;//żУ��
-	public static int TNCOM_ODDPARITY = 1 ;//��У��
+	public static int TNCOM_EVENPARITY = 0;
+	public static int TNCOM_ODDPARITY = 1 ;
 
 	/*
 	 * Do not remove or rename the field mFd: it is used by native method close();
@@ -90,7 +90,7 @@ public class SerialPort {
 	private FileOutputStream mFileOutputStream;
 	private boolean trig_on=false;
 	byte[] test;
-	//���ڵ���GPIO
+	//
 	public SerialPort(){}
 	
 	public SerialPort(int port, int baudrate, int flags) throws SecurityException, IOException {
@@ -192,7 +192,7 @@ public class SerialPort {
 	public native void setGPIOlow(int gpio);
 	
 	
-//	public native void setPortParity(int mode); //����У��λ
+//	public native void setPortParity(int mode); //
 	
 	public native void test(byte[] bytes);
 	

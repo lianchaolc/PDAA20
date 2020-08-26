@@ -18,7 +18,7 @@ import cn.pda.serialport.SerialPort;
 
 public class ZA_finger {
 	
-	private SerialPort mSerial;//???õô????
+	private SerialPort mSerial;//
 	private int mPort = 14;
 
 	final String HUB_RST_PATCH = "/sys/zhwpower/zhw_hubrest";
@@ -122,7 +122,7 @@ public class ZA_finger {
 	public int finger_power_on() {
 		try {
 			mSerial = new SerialPort(mPort, 57600, 1);
-			//????ðÓ??
+			//
 			mSerial.psam_poweron();
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -144,7 +144,7 @@ public class ZA_finger {
 	}
 
 	/**
-	 * USB hub ??¦Ë
+	 * USB hub ??
 	 */
 	public int hub_rest(int Ms) {
 

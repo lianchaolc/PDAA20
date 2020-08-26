@@ -41,332 +41,332 @@ public class ZAandroid {
 	public native int  finger_power_off();
 	
 	/*****************************
-	*´ò¿ªÉè±¸º¯Êý
-	*²ÎÊý£º
-	*nDeviceType Éè±¸ÀàÐÍ£¨0£ºÓÐÇý¶¯ USB Éè±¸£¬ 1£º´®¿ÚÉè±¸£¬ 2£ºÎÞÇý UDISK Éè±¸,3£ºÓÐÇý¶¯ USB Éè±¸+0x30£¬ 4£º´®¿ÚÉè±¸+0x30£¬ 5£ºÎÞÇý UDISK Éè±¸+0x30£©£»(0x30  4.0°æ±¾)
-	*nDeviceType (¼æÈÝ050)Éè±¸ÀàÐÍ£¨10£ºÓÐÇý¶¯ USB Éè±¸£¬ 11£º´®¿ÚÉè±¸£¬ 12£ºÎÞÇý UDISK Éè±¸,13£ºÓÐÇý¶¯ USB Éè±¸+0x30£¬ 14£º´®¿ÚÉè±¸+0x30£¬ 15£ºÎÞÇý UDISK Éè±¸+0x30£©
-	*nDeviceType Éè±¸ÀàÐÍÐÂ£¨20£ºÓÐÇý¶¯ USB Éè±¸£¬ 21£º´®¿ÚÉè±¸£¬ 22£ºÎÞÇý UDISK Éè±¸,23£ºÓÐÇý¶¯ USB Éè±¸+0x30£¬ 24£º´®¿ÚÉè±¸+0x30£¬ 25£ºÎÞÇý UDISK Éè±¸+0x30£©£»(0x30  4.0°æ±¾)
-	*nDeviceType (¼æÈÝ050ÐÂ)Éè±¸ÀàÐÍ£¨30£ºÓÐÇý¶¯ USB Éè±¸£¬ 31£º´®¿ÚÉè±¸£¬ 32£ºÎÞÇý UDISK Éè±¸,33£ºÓÐÇý¶¯ USB Éè±¸+0x30£¬ 34£º´®¿ÚÉè±¸+0x30£¬ 35£ºÎÞÇý UDISK Éè±¸+0x30£©
-	*iCom ´®¿ÚºÅ£¨1-16£©£¨USB Éè±¸ºÍÎÞÇý UDISK Éè±¸¸Ã²ÎÊýÎª 0£©£»(0-7   "/dev/ttySx",  10-17   "/dev/ttyMTx"  (xÎª0-7),  20-27   "/dev/ttysWKx"  (xÎª0-7),  30-37   "/dev/ttyHSLx"  (xÎª0-7)),	40-47   "/dev/ttyMAXx"  (xÎª0-7)),	50-57  "/dev/ttyAMAx"  (xÎª0-7)),	60-67
-	*iBaud ²¨ÌØÂÊ£¨9600-57600£©£¨USB Éè±¸ºÍÎÞÇý UDISK Éè±¸¸Ã²ÎÊýÎª 0£©²¨ÌØÂÊ=iBaud*9600£»
-	*nPackageSize Í¨Ñ¶°ü´óÐ¡£¨Ä¬ÈÏ:2£©
-	*iDevNum Í¨Ñ¶¶Ë¿ÚºÅ(Ä¬ÈÏ 0)
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*æ‰“å¼€è®¾å¤‡å‡½æ•°
+	*å‚æ•°ï¼š
+	*nDeviceType è®¾å¤‡ç±»åž‹ï¼ˆ0ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡ï¼Œ 1ï¼šä¸²å£è®¾å¤‡ï¼Œ 2ï¼šæ— é©± UDISK è®¾å¤‡,3ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡+0x30ï¼Œ 4ï¼šä¸²å£è®¾å¤‡+0x30ï¼Œ 5ï¼šæ— é©± UDISK è®¾å¤‡+0x30ï¼‰ï¼›(0x30  4.0ç‰ˆæœ¬)
+	*nDeviceType (å…¼å®¹050)è®¾å¤‡ç±»åž‹ï¼ˆ10ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡ï¼Œ 11ï¼šä¸²å£è®¾å¤‡ï¼Œ 12ï¼šæ— é©± UDISK è®¾å¤‡,13ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡+0x30ï¼Œ 14ï¼šä¸²å£è®¾å¤‡+0x30ï¼Œ 15ï¼šæ— é©± UDISK è®¾å¤‡+0x30ï¼‰
+	*nDeviceType è®¾å¤‡ç±»åž‹æ–°ï¼ˆ20ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡ï¼Œ 21ï¼šä¸²å£è®¾å¤‡ï¼Œ 22ï¼šæ— é©± UDISK è®¾å¤‡,23ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡+0x30ï¼Œ 24ï¼šä¸²å£è®¾å¤‡+0x30ï¼Œ 25ï¼šæ— é©± UDISK è®¾å¤‡+0x30ï¼‰ï¼›(0x30  4.0ç‰ˆæœ¬)
+	*nDeviceType (å…¼å®¹050æ–°)è®¾å¤‡ç±»åž‹ï¼ˆ30ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡ï¼Œ 31ï¼šä¸²å£è®¾å¤‡ï¼Œ 32ï¼šæ— é©± UDISK è®¾å¤‡,33ï¼šæœ‰é©±åŠ¨ USB è®¾å¤‡+0x30ï¼Œ 34ï¼šä¸²å£è®¾å¤‡+0x30ï¼Œ 35ï¼šæ— é©± UDISK è®¾å¤‡+0x30ï¼‰
+	*iCom ä¸²å£å·ï¼ˆ1-16ï¼‰ï¼ˆUSB è®¾å¤‡å’Œæ— é©± UDISK è®¾å¤‡è¯¥å‚æ•°ä¸º 0ï¼‰ï¼›(0-7   "/dev/ttySx",  10-17   "/dev/ttyMTx"  (xä¸º0-7),  20-27   "/dev/ttysWKx"  (xä¸º0-7),  30-37   "/dev/ttyHSLx"  (xä¸º0-7)),	40-47   "/dev/ttyMAXx"  (xä¸º0-7)),	50-57  "/dev/ttyAMAx"  (xä¸º0-7)),	60-67
+	*iBaud æ³¢ç‰¹çŽ‡ï¼ˆ9600-57600ï¼‰ï¼ˆUSB è®¾å¤‡å’Œæ— é©± UDISK è®¾å¤‡è¯¥å‚æ•°ä¸º 0ï¼‰æ³¢ç‰¹çŽ‡=iBaud*9600ï¼›
+	*nPackageSize é€šè®¯åŒ…å¤§å°ï¼ˆé»˜è®¤:2ï¼‰
+	*iDevNum é€šè®¯ç«¯å£å·(é»˜è®¤ 0)
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	*****************************/
 	public native int ZAZOpenDeviceEx(int fd,int nDeviceType,int iCom,int iBaud,int nPackageSize/*=2*/,int iDevNum/*=0*/);
 	/*********************************
-	*»ñÈ¡Í¼Ïñº¯Êý
-	*²ÎÊý£º£¨0:256x288 1:256x360£©
-	*nAddr£º 0xffffffff
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*èŽ·å–å›¾åƒå‡½æ•°
+	*å‚æ•°ï¼šï¼ˆ0:256x288 1:256x360ï¼‰
+	*nAddrï¼š 0xffffffff
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZSetImageSize(int imagesize);
 	
 	/*******************************
-	*¹Ø±ÕÉè±¸º¯Êý
-	*²ÎÊý£º
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*å…³é—­è®¾å¤‡å‡½æ•°
+	*å‚æ•°ï¼š
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************/
 	public native int ZAZCloseDeviceEx();
 	/*********************************
-	*»ñÈ¡Í¼Ïñº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*èŽ·å–å›¾åƒå‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZGetImage(int nAddr);
 	/*********************************
-	*Éú³ÉÌØÕ÷Âëº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º 0x01¡¢ 0x02(µçÈÝ/¹âÑ§) 0x01¡¢ 0x02¡¢ 0x03¡¢ 0x04(¹Î²Á)
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*ç”Ÿæˆç‰¹å¾ç å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š 0x01ã€ 0x02(ç”µå®¹/å…‰å­¦) 0x01ã€ 0x02ã€ 0x03ã€ 0x04(åˆ®æ“¦)
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZGenChar(int nAddr,int iBufferID);
 	/*********************************
-	*5¡¢¾«È·±È¶Ôº¯Êý£¨±È¶Ô CharBufferA Óë CharBufferB£©
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iScore£ºiscore[0] ±È¶ÔºóµÄ·ÖÊýÖµ
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*5ã€ç²¾ç¡®æ¯”å¯¹å‡½æ•°ï¼ˆæ¯”å¯¹ CharBufferA ä¸Ž CharBufferBï¼‰
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iScoreï¼šiscore[0] æ¯”å¯¹åŽçš„åˆ†æ•°å€¼
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZMatch(int nAddr,int[] iScore);
 	
 	
 	
 	/*********************************
-	*6¡¢ËÑË÷±È¶Ôº¯Êý£¨ÒÔ CharBufferA »ò CharBufferB ÖÐµÄÌØÕ÷ÎÄ¼þËÑË÷Õû¸ö»ò²¿·ÖÖ¸ÎÆ¿â£©
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º 0x01¡¢ 0x02
-	*iStartPage£ºÆðÊ¼ ID£»
-	*iPageNum£º½áÊø ID£»
-	*iMbAddress£ºiMbAddress[0]ËÑË÷³É¹¦ºóÄ£°å ID ºÅ£»
-	*iscore£ºÄ¬ÈÏ²ÎÊý£¨NULL£©
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*6ã€æœç´¢æ¯”å¯¹å‡½æ•°ï¼ˆä»¥ CharBufferA æˆ– CharBufferB ä¸­çš„ç‰¹å¾æ–‡ä»¶æœç´¢æ•´ä¸ªæˆ–éƒ¨åˆ†æŒ‡çº¹åº“ï¼‰
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š 0x01ã€ 0x02
+	*iStartPageï¼šèµ·å§‹ IDï¼›
+	*iPageNumï¼šç»“æŸ IDï¼›
+	*iMbAddressï¼šiMbAddress[0]æœç´¢æˆåŠŸåŽæ¨¡æ¿ ID å·ï¼›
+	*iscoreï¼šé»˜è®¤å‚æ•°ï¼ˆNULLï¼‰
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZSearch(int nAddr,int iBufferID, int iStartPage, int iPageNum, int[] iMbAddress/*int *iscore=NULL*/);
 
 	/*********************************
-	*7¡¢ºÏ³ÉÄ£°åº¯Êý(½« CharBufferA Óë CharBufferB ÖÐµÄÌØÕ÷ÎÄ¼þºÏ²¢Éú³ÉÄ£°å´æÓÚ ModelBuffer)
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*7ã€åˆæˆæ¨¡æ¿å‡½æ•°(å°† CharBufferA ä¸Ž CharBufferB ä¸­çš„ç‰¹å¾æ–‡ä»¶åˆå¹¶ç”Ÿæˆæ¨¡æ¿å­˜äºŽ ModelBuffer)
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZRegModule(int nAddr);
 
 	/********************************************************************
-	*8¡¢´æ´¢Ä£°åº¯Êý(½« ModelBuffer ÖÐµÄÎÄ¼þ´¢´æµ½ flash Ö¸ÎÆ¿âÖÐ)
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º 0x01¡¢ 0x02
-	*iPageID£ºÄ£°å´æ´¢µ½Ö¸ÎÆ¿âÖÐµÄ ID ºÅ
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*8ã€å­˜å‚¨æ¨¡æ¿å‡½æ•°(å°† ModelBuffer ä¸­çš„æ–‡ä»¶å‚¨å­˜åˆ° flash æŒ‡çº¹åº“ä¸­)
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š 0x01ã€ 0x02
+	*iPageIDï¼šæ¨¡æ¿å­˜å‚¨åˆ°æŒ‡çº¹åº“ä¸­çš„ ID å·
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	*********************************************************************/
 	public native int ZAZStoreChar(int nAddr,int iBufferID, int iPageID);
 	/*******************************************************************
-	*9¡¢¶Á³öÄ£°åº¯Êý(´Ó flash Ö¸ÎÆ¿âÖÐ¶ÁÈ¡Ò»¸öÄ£°åµ½ ModelBuffer)
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º´ÓÖ¸ÎÆ¿âÖÐ¶Á³öµÄÄ£°åËù´æ·ÅµÄÌØÕ÷»º³åÇø(0x01¡¢ 0x02)£»
-	*iPageID£ºÔÚÖ¸ÎÆ¿âÖÐ½«Òª¶Á³öµÄÖ¸ÎÆÄ£°å ID ºÅ
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*9ã€è¯»å‡ºæ¨¡æ¿å‡½æ•°(ä»Ž flash æŒ‡çº¹åº“ä¸­è¯»å–ä¸€ä¸ªæ¨¡æ¿åˆ° ModelBuffer)
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼šä»ŽæŒ‡çº¹åº“ä¸­è¯»å‡ºçš„æ¨¡æ¿æ‰€å­˜æ”¾çš„ç‰¹å¾ç¼“å†²åŒº(0x01ã€ 0x02)ï¼›
+	*iPageIDï¼šåœ¨æŒ‡çº¹åº“ä¸­å°†è¦è¯»å‡ºçš„æŒ‡çº¹æ¨¡æ¿ ID å·
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZLoadChar(int nAddr,int iBufferID,int iPageID);
 	
 	/*********************************
-	*ÉèÖÃÌØÕ÷Öµ´óÐ¡º¯Êý
-	*²ÎÊý£º£¨Ä¬ÈÏ512£©
+	*è®¾ç½®ç‰¹å¾å€¼å¤§å°å‡½æ•°
+	*å‚æ•°ï¼šï¼ˆé»˜è®¤512ï¼‰
 	*
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	***********************************/
 	public native int ZAZSetCharLen(int charLen);
 	
 	/*******************************************************************
-	*10¡¢ÉÏ´«ÌØÕ÷º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º½«ÒªÉÏ´«µÄÄ£°åÌØÕ÷»º³åÇø(0x01¡¢ 0x02)£»
-	*pTemplet£ºÖ¸ÎÆÄ£°åÊý¾ÝÉÏ´«´æ·ÅµÄµØÖ·£»
-	*iTemplet[0]£ºÖ¸ÎÆÄ£°åÊý¾Ý³¤¶È
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*10ã€ä¸Šä¼ ç‰¹å¾å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼šå°†è¦ä¸Šä¼ çš„æ¨¡æ¿ç‰¹å¾ç¼“å†²åŒº(0x01ã€ 0x02)ï¼›
+	*pTempletï¼šæŒ‡çº¹æ¨¡æ¿æ•°æ®ä¸Šä¼ å­˜æ”¾çš„åœ°å€ï¼›
+	*iTemplet[0]ï¼šæŒ‡çº¹æ¨¡æ¿æ•°æ®é•¿åº¦
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZUpChar(int nAddr,int iBufferID, byte[] pTemplet,int[] iTempletLength);
 	/*******************************************************************
-	*11¡¢ÏÂÔØÌØÕ÷º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º½«Ö¸ÎÆÄ£°åÊý¾ÝÏÂÔØµ½µÄÌØÕ÷»º³åÇø(0x01¡¢ 0x02)£»
-	*pTemplet£ºÏÂÔØµÄÖ¸ÎÆÄ£°åÊý¾ÝµØÖ·£»
-	*iTempletLength£ºÏÂÔØµÄÖ¸ÎÆÄ£°åÊý¾Ý³¤¶È
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*11ã€ä¸‹è½½ç‰¹å¾å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼šå°†æŒ‡çº¹æ¨¡æ¿æ•°æ®ä¸‹è½½åˆ°çš„ç‰¹å¾ç¼“å†²åŒº(0x01ã€ 0x02)ï¼›
+	*pTempletï¼šä¸‹è½½çš„æŒ‡çº¹æ¨¡æ¿æ•°æ®åœ°å€ï¼›
+	*iTempletLengthï¼šä¸‹è½½çš„æŒ‡çº¹æ¨¡æ¿æ•°æ®é•¿åº¦
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZDownChar(int nAddr,int iBufferID, byte[] pTemplet, int iTempletLength);
 	/*******************************************************************
-	*12¡¢ÉÏ´«Í¼Ïñº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pImageData£ºÉÏ´«µÄÖ¸ÎÆÍ¼ÏñÊý¾ÝµØÖ·£»
-	*pImageData[0]£ºÉÏ´«µÄÖ¸ÎÆÍ¼ÏñÊý¾Ý³¤¶È
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*12ã€ä¸Šä¼ å›¾åƒå‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pImageDataï¼šä¸Šä¼ çš„æŒ‡çº¹å›¾åƒæ•°æ®åœ°å€ï¼›
+	*pImageData[0]ï¼šä¸Šä¼ çš„æŒ‡çº¹å›¾åƒæ•°æ®é•¿åº¦
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZUpImage(int nAddr,byte[] pImageData,int[] iTempletLength);
 	/*******************************************************************
-	*13¡¢ÏÂÔØÍ¼Ïñº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pImageData£ºÏÂÔØµÄÖ¸ÎÆÍ¼ÏñÊý¾ÝµØÖ·£»
-	*iImageLength£ºÏÂÔØµÄÖ¸ÎÆÍ¼ÏñÊý¾Ý³¤¶È
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*13ã€ä¸‹è½½å›¾åƒå‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pImageDataï¼šä¸‹è½½çš„æŒ‡çº¹å›¾åƒæ•°æ®åœ°å€ï¼›
+	*iImageLengthï¼šä¸‹è½½çš„æŒ‡çº¹å›¾åƒæ•°æ®é•¿åº¦
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZDownImage(int nAddr,byte[] pImageData, int iLength);
 	/*******************************************************************
-	*14¡¢Í¼ÏñÊý¾Ý±£´æ³É BMP Í¼Æ¬º¯Êý
-	*²ÎÊý£º
-	*pImageData£ºÐè±£´æµÄÖ¸ÎÆÍ¼ÏñÊý¾ÝµØÖ·£»
-	*pImageFile(str)£º±£´æµÄÖ¸ÎÆÍ¼ÏñÎÄ¼þÃû
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*14ã€å›¾åƒæ•°æ®ä¿å­˜æˆ BMP å›¾ç‰‡å‡½æ•°
+	*å‚æ•°ï¼š
+	*pImageDataï¼šéœ€ä¿å­˜çš„æŒ‡çº¹å›¾åƒæ•°æ®åœ°å€ï¼›
+	*pImageFile(str)ï¼šä¿å­˜çš„æŒ‡çº¹å›¾åƒæ–‡ä»¶å
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 
 	public native int ZAZImgData2BMP(byte[] pImgData, String str);
 	/*******************************************************************
-	*15¡¢¶ÁÈ¡ BMP Í¼ÏñÌáÈ¡Í¼ÏñÊý¾Ýº¯Êý
-	*²ÎÊý£º
-	*pImageData£º¶ÁÈ¡ºóµÄÖ¸ÎÆÍ¼ÏñÊý¾ÝµØÖ·£»
-	*pImageFile(str)£º¶ÁÈ¡µÄÖ¸ÎÆÍ¼ÏñÎÄ¼þÃû£»
-	*pnImageLen£ºÖ¸ÎÆÍ¼ÏñÊý¾Ý³¤¶È
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*15ã€è¯»å– BMP å›¾åƒæå–å›¾åƒæ•°æ®å‡½æ•°
+	*å‚æ•°ï¼š
+	*pImageDataï¼šè¯»å–åŽçš„æŒ‡çº¹å›¾åƒæ•°æ®åœ°å€ï¼›
+	*pImageFile(str)ï¼šè¯»å–çš„æŒ‡çº¹å›¾åƒæ–‡ä»¶åï¼›
+	*pnImageLenï¼šæŒ‡çº¹å›¾åƒæ•°æ®é•¿åº¦
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZGetImgDataFromBMP(String str, byte[] pImageData, int[] pnImageLen);
 
 	/*******************************************************************
-	*16¡¢É¾³ýÄ£°åº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iStartPageID£ºÐèÉ¾³ýÖ¸ÎÆÇøÓòµÄÆðÊ¼ ID ºÅ£»
-	*nDelPageNum£ºÐèÉ¾³ýµÄ´ÓÆðÊ¼ ID ¿ªÊ¼µÄÄ£°å¸öÊý
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*16ã€åˆ é™¤æ¨¡æ¿å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iStartPageIDï¼šéœ€åˆ é™¤æŒ‡çº¹åŒºåŸŸçš„èµ·å§‹ ID å·ï¼›
+	*nDelPageNumï¼šéœ€åˆ é™¤çš„ä»Žèµ·å§‹ ID å¼€å§‹çš„æ¨¡æ¿ä¸ªæ•°
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZDelChar(int nAddr,int iStartPageID,int nDelPageNum);
 	/*******************************************************************
-	*17¡¢Çå¿ÕÖ¸ÎÆ¿âº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*17ã€æ¸…ç©ºæŒ‡çº¹åº“å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZEmpty(int nAddr);
 	/*******************************************************************
-	*18¡¢¶Á²ÎÊý±íº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pParTable£ºÏµÍ³²ÎÊýÊý¾ÝµÄ´æ·ÅµØÖ·
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*18ã€è¯»å‚æ•°è¡¨å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pParTableï¼šç³»ç»Ÿå‚æ•°æ•°æ®çš„å­˜æ”¾åœ°å€
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZReadParTable(int nAddr,byte[] pParTable);
 	/*******************************************************************
-	*19¡¢¿ìËÙ±È¶Ôº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º (0x01¡¢ 0x02)ÒÔ´ËÌØÕ÷»º³åÇøµÄÖ¸ÎÆÌØÕ÷ÎÄ¼þ±È¶ÔÖ¸ÎÆÄ£°å¿â£»
-	*iStartPage£º±È¶ÔµÄÖ¸ÎÆÄ£°å¿âÆðÊ¼ ID£»
-	*iPageNum£º´ÓÆðÊ¼ ID ¿ªÊ¼½«Òª±È¶ÔµÄÖ¸ÎÆ¿âµÄÖ¸ÎÆÄ£°å¸öÊý£»
-	*iMbAddress£ºid_iscore[0]±È¶Ô³É¹¦ºó·µ»ØµÄ±È¶Ô³É¹¦ ID ºÅ£» id_iscore[1](iscore)£ºÄ¬ÈÏÖµ
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*19ã€å¿«é€Ÿæ¯”å¯¹å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š (0x01ã€ 0x02)ä»¥æ­¤ç‰¹å¾ç¼“å†²åŒºçš„æŒ‡çº¹ç‰¹å¾æ–‡ä»¶æ¯”å¯¹æŒ‡çº¹æ¨¡æ¿åº“ï¼›
+	*iStartPageï¼šæ¯”å¯¹çš„æŒ‡çº¹æ¨¡æ¿åº“èµ·å§‹ IDï¼›
+	*iPageNumï¼šä»Žèµ·å§‹ ID å¼€å§‹å°†è¦æ¯”å¯¹çš„æŒ‡çº¹åº“çš„æŒ‡çº¹æ¨¡æ¿ä¸ªæ•°ï¼›
+	*iMbAddressï¼šid_iscore[0]æ¯”å¯¹æˆåŠŸåŽè¿”å›žçš„æ¯”å¯¹æˆåŠŸ ID å·ï¼› id_iscore[1](iscore)ï¼šé»˜è®¤å€¼
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZHighSpeedSearch(int nAddr,int iBufferID, int iStartPage, int iPageNum, int[] id_iscore);
 	/*******************************************************************
-	*20¡¢¶ÁÈ¡ÓÐÐ§Ä£°åÊýÁ¿º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iMbNum£ºÄ£°å¸öÊý
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*20ã€è¯»å–æœ‰æ•ˆæ¨¡æ¿æ•°é‡å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iMbNumï¼šæ¨¡æ¿ä¸ªæ•°
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZTemplateNum(int nAddr,int[] iMbNum);
 	/*******************************************************************
-	*21¡¢ÉèÖÃÉè±¸ÎÕÊÖ¿ÚÁîº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pPassword£ºÎÕÊÖ¿ÚÁîÊý¾Ý
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*21ã€è®¾ç½®è®¾å¤‡æ¡æ‰‹å£ä»¤å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pPasswordï¼šæ¡æ‰‹å£ä»¤æ•°æ®
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZSetPwd(int nAddr,byte[] pPassword);
 	/*******************************************************************
-	*22¡¢ÑéÖ¤Éè±¸ÎÕÊÖ¿ÚÁîº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pPassword£ºÎÕÊÖ¿ÚÁîÊý¾Ý
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*22ã€éªŒè¯è®¾å¤‡æ¡æ‰‹å£ä»¤å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pPasswordï¼šæ¡æ‰‹å£ä»¤æ•°æ®
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZVfyPwd(int nAddr,byte[] pPassword);
 	/*******************************************************************
-	*23¡¢¶ÁÈ¡ÓÃ»§ÐÅÏ¢º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*nPage£ºÓÃ»§ÐÅÏ¢Ò³£¨¹² 512 Ò³£¬Ã¿Ò³ 32 ×Ö½Ú£©£»
-	*UserContent£ºÓÃ»§Êý¾ÝÐÅÏ¢µØÖ·
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*23ã€è¯»å–ç”¨æˆ·ä¿¡æ¯å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*nPageï¼šç”¨æˆ·ä¿¡æ¯é¡µï¼ˆå…± 512 é¡µï¼Œæ¯é¡µ 32 å­—èŠ‚ï¼‰ï¼›
+	*UserContentï¼šç”¨æˆ·æ•°æ®ä¿¡æ¯åœ°å€
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZReadInfo(int nAddr,int nPage,byte[] UserContent);
 	/*******************************************************************
-	*24¡¢Ð´ÈëÓÃ»§ÐÅÏ¢º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*nPage£ºÓÃ»§ÐÅÏ¢Ò³£¨¹² 512 Ò³£¬Ã¿Ò³ 32 ×Ö½Ú£©£»
-	*UserContent£ºÐèÐ´ÈëµÄÓÃ»§Êý¾ÝÐÅÏ¢µØÖ·
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*24ã€å†™å…¥ç”¨æˆ·ä¿¡æ¯å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*nPageï¼šç”¨æˆ·ä¿¡æ¯é¡µï¼ˆå…± 512 é¡µï¼Œæ¯é¡µ 32 å­—èŠ‚ï¼‰ï¼›
+	*UserContentï¼šéœ€å†™å…¥çš„ç”¨æˆ·æ•°æ®ä¿¡æ¯åœ°å€
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZWriteInfo(int nAddr,int nPage,byte[] UserContent);
 	/*******************************************************************
-	*25¡¢ÉèÖÃ²¨ÌØÂÊº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*nBaudNum£ºÐèÉèÖÃµÄ²¨ÌØÂÊ´óÐ¡£¨9600-57600£©
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*25ã€è®¾ç½®æ³¢ç‰¹çŽ‡å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*nBaudNumï¼šéœ€è®¾ç½®çš„æ³¢ç‰¹çŽ‡å¤§å°ï¼ˆ9600-57600ï¼‰
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZSetBaud(int nAddr,int nBaudNum);
 	/*******************************************************************
-	*26¡¢ÉèÖÃ°²È«µÈ¼¶º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*nLevel£ºÐèÉèÖÃµÄ°²È«µÈ¼¶´óÐ¡£¨1-5£©
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*26ã€è®¾ç½®å®‰å…¨ç­‰çº§å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*nLevelï¼šéœ€è®¾ç½®çš„å®‰å…¨ç­‰çº§å¤§å°ï¼ˆ1-5ï¼‰
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZSetSecurLevel(int nAddr,int nLevel);
 	/*******************************************************************
-	*27¡¢ÉèÖÃÊý¾Ý°ü´óÐ¡º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*nSize£ºÐèÉèÖÃµÄÊý¾Ý°ü´óÐ¡£¨32/64/128/256£©
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*27ã€è®¾ç½®æ•°æ®åŒ…å¤§å°å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*nSizeï¼šéœ€è®¾ç½®çš„æ•°æ®åŒ…å¤§å°ï¼ˆ32/64/128/256ï¼‰
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZSetPacketSize(int nAddr,int nSize);
 	/*******************************************************************
-	*28¡¢Ö¸ÎÆÊý¾ÝÉÏ´«²¢Éú³ÉÒ»¸ö DAT ÎÄ¼þº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º (0x01¡¢ 0x02)ÉÏ´«µÄÖ¸ÎÆÌØÕ÷»º³åÇø£»
-	*pFileName£ºÌØÕ÷ÎÄ¼þÃû
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*28ã€æŒ‡çº¹æ•°æ®ä¸Šä¼ å¹¶ç”Ÿæˆä¸€ä¸ª DAT æ–‡ä»¶å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š (0x01ã€ 0x02)ä¸Šä¼ çš„æŒ‡çº¹ç‰¹å¾ç¼“å†²åŒºï¼›
+	*pFileNameï¼šç‰¹å¾æ–‡ä»¶å
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZUpChar2File(int nAddr,int iBufferID, byte[] pFileName);
 
 	/*******************************************************************
-	*29¡¢ DAT ÎÄ¼þÏÂÔØº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*iBufferID£º (0x01¡¢ 0x02)ÏÂÔØµ½Ö¸ÎÆÄ£¿éÉè±¸µÄÖ¸ÎÆÌØÕ÷»º³åÇø£»
-	*pFileName£ºÏÂÔØµÄÌØÕ÷ÎÄ¼þÃû
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*29ã€ DAT æ–‡ä»¶ä¸‹è½½å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*iBufferIDï¼š (0x01ã€ 0x02)ä¸‹è½½åˆ°æŒ‡çº¹æ¨¡å—è®¾å¤‡çš„æŒ‡çº¹ç‰¹å¾ç¼“å†²åŒºï¼›
+	*pFileNameï¼šä¸‹è½½çš„ç‰¹å¾æ–‡ä»¶å
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZDownCharFromFile(int nAddr,int iBufferID, byte[] pFileName);
 	/*******************************************************************
-	*30¡¢»ñÈ¡Ëæ»úÊýº¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pRandom£ºËæ»úÊý´æ·ÅµØÖ·
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*30ã€èŽ·å–éšæœºæ•°å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pRandomï¼šéšæœºæ•°å­˜æ”¾åœ°å€
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZGetRandomData(int nAddr,byte[] pRandom);
 
 	/*******************************************************************
-	*31¡¢ÉèÖÃÐ¾Æ¬µØÖ·º¯Êý
-	*²ÎÊý£º
-	*nAddr£º 0xffffffff £»
-	*pChipAddr£ºÐèÉèÖÃµÄÐ¾Æ¬µØÖ·Êý¾Ý
-	*·µ»ØÖµ£º
-	*0 Îª³É¹¦£¬ÆäËü·µ»ØÖµÇë²Î¿¼´íÎó·µ»ØÂë
+	*31ã€è®¾ç½®èŠ¯ç‰‡åœ°å€å‡½æ•°
+	*å‚æ•°ï¼š
+	*nAddrï¼š 0xffffffff ï¼›
+	*pChipAddrï¼šéœ€è®¾ç½®çš„èŠ¯ç‰‡åœ°å€æ•°æ®
+	*è¿”å›žå€¼ï¼š
+	*0 ä¸ºæˆåŠŸï¼Œå…¶å®ƒè¿”å›žå€¼è¯·å‚è€ƒé”™è¯¯è¿”å›žç 
 	********************************************************************/
 	public native int ZAZSetChipAddr(int nAddr,byte[] pChipAddr);
 	
@@ -375,7 +375,7 @@ public class ZAandroid {
 	
 	/*******************************************************************
 	*
-	*»ñÈ¡°æ±¾ºÅ
+	*èŽ·å–ç‰ˆæœ¬å·
 	*
 	********************************************************************/
 	public native int ZAZReadInfPage(int nAddr,byte[] pVersion);
