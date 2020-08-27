@@ -369,7 +369,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 			case R.id.shangjiaoqingfen_spinner_printinfo_layout://打印机spinner数据
 				spinner = new MySpinner(this, shangjiaoqingfen_spinner_printinfo_layout,
 						shangjiaoqingfen_printinfo_spinner_text);
-				spinner.setSpinnerHeight(shangjiaoqingfen_spinner_printinfo_layout.getHeight() * 2);
+				spinner.setSpinnerHeight(shangjiaoqingfen_spinner_printinfo_layout.getHeight() * 4);
 				spinner.setListPrint(this, printsacelist);
 				spinner.showPopupWindow(shangjiaoqingfen_spinner_printinfo_layout);
 				spinner.setListPrint(this, printsacelist, 40);
