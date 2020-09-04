@@ -134,7 +134,7 @@ public class QingLingZhuangXiangRuKuSaoMiao_db extends FragmentActivity implemen
 		getJigouLeibie();
 		o_Application.guolv.clear();
 		o_Application.qlruku.getZhouzhuanxiang().clear();
-		o_Application.qlruku.getZhouzhuanxiang().addAll(copylist);
+		o_Application.qlruku.getZhouzhuanxiang().addAll(copylist);o_Application.numberlist.clear();
 		getRfid().addNotifly(getnumber);
 		new Thread() {
 			@Override
