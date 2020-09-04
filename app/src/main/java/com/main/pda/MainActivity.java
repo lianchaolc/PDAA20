@@ -2,11 +2,15 @@ package com.main.pda;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import afu.util.PrivilegeActivity;
+import cn.poka.util.SharedPreUtil;
+
 import com.service.NetService;
 
 import com.application.GApplication;
@@ -28,6 +32,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class MainActivity extends PrivilegeActivity implements OnTouchListener {
@@ -39,6 +44,16 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 	public static List<Activity> list_version;
 	private ManagerClass managerClass;
+
+	private String text_namespace = "namespace.txt";
+	private String text_url = "url.txt";
+	private String text_namespacethree = "namespace_three.txt";
+	private String text_urlthree = "url_three.txt";
+	private  String  url="http://192.168.1.232:9080/web0805/webservice";//url
+	private  String  nameSpace="http://service.timer.cashman.poka.cn";//地址空间
+
+	private  String  EtnameSpace_three="http://service.pda.cashman.poka.cn";
+	private  String   Eturl_three="http://172.16.3.1:8888/cashman/webservice";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +76,19 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 		// 把当前activity放进集合
 		GApplication.addActivity(this, "1main");
+		boolean bool = fileIsExists(text_url);//
+		if(!bool){
+//			Thread  thread=new Thread();
+			outputSDCard(text_url, url);
+			outputSDCard(text_namespace, nameSpace);
+
+			outputSDCard(text_urlthree, Eturl_three);
+			outputSDCard(text_namespacethree, EtnameSpace_three);
+
+//			thread.start();
+
+
+		}
 
 	}
 
@@ -250,10 +278,13 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			String getsaveinfo = sb.toString();
 			System.out.println("=====读取:" + getsaveinfo);
 			FixationValue.URL = getsaveinfo + "/cash_pdaHDHE";
+//			FixationValue.URL = getsaveinfo + "/cash_pda";
 			String str = getsaveinfo.substring(getsaveinfo.length() - 9);
-			if (str.equals("/cash_pdaHDHE")) {
+			if (str.equals("/cash_pdaHDHE")) { // 7.22改
+//				if (str.equals("/cash_pda")) {
                 String substring = getsaveinfo.substring(0, getsaveinfo.length() - 9);
                 FixationValue.URL2 = substring + "/cash_boxHDHE";
+//				FixationValue.URL2 = substring + "/cash_box";
 				FixationValue.URL3 = substring + "/cash_cm";
 				FixationValue.URL4 = substring + "/cash_cmanagement";
 				FixationValue.URL5 = substring + "/cash_kuguanyuan";
@@ -369,4 +400,123 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		System.out.println("-----文件存在-----");
 		return true;
 	}
+
+
+	/****
+	 * 打开程序时直接创建并写文件
+	 */
+//	EditText edit;
+//	String 	textname="2222";
+	public void outputSDCard(String textname, String edit) {
+		try {
+			boolean bool = fileIsExists(textname);
+			File urlFile = Environment.getExternalStorageDirectory();
+			File outputFile = new File(urlFile, textname);
+			if (bool == false) {
+				System.out.println("-----创建文件-----");
+				outputFile.createNewFile();
+				OutputStream os = new FileOutputStream(outputFile);
+				os.write(edit.toString().getBytes());
+				inputSDCardinfo(textname, edit);
+				System.out.println("-----写入完成-----");
+			} else {
+				System.out.println("开始写入");
+				OutputStream os = new FileOutputStream(outputFile);
+				os.write(edit.toString().getBytes());
+				inputSDCardinfo(textname, edit);
+				System.out.println("-----写入完成-----");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+/***
+ *
+	**
+			* 本机读取保存的地址 文件名 需要赋值的控件
+	 *
+			 * @param
+	 */
+	public void inputSDCardinfo(String textname, String edit) {
+		String  getsaveinfo="";
+		try {
+			boolean bool = fileIsExists(textname);
+			if (bool == true) {
+				System.out.println("-----读取文件-----");
+				File file = new File(Environment.getExternalStorageDirectory(), textname);
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String readline = "";
+				StringBuffer sb = new StringBuffer();
+				while ((readline = br.readLine()) != null) {
+					sb.append(readline);
+				}
+				getsaveinfo = sb.toString();
+				System.out.println("=====读取:" + getsaveinfo);
+				edit=(getsaveinfo);
+				br.close();
+			} else {
+				outputSDCard(textname, edit);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void outputSDCardthree(String textname, String  edit) {
+		try {
+			boolean bool = fileIsExists(textname);
+			File urlFile = Environment.getExternalStorageDirectory();
+			File outputFile = new File(urlFile, textname);
+			if (bool == false) {
+				System.out.println("-----创建文件-----");
+				outputFile.createNewFile();
+				OutputStream os = new FileOutputStream(outputFile);
+				os.write(edit.toString().getBytes());
+				inputSDCardinfothree(textname, edit);
+				System.out.println("-----写入完成-----");
+			} else {
+				System.out.println("开始写入");
+				OutputStream os = new FileOutputStream(outputFile);
+				os.write(edit.toString().getBytes());
+				inputSDCardinfothree(textname, edit);
+				System.out.println("-----写入完成-----");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/***
+	 * 三期新增
+	 *
+	 * @param textname
+	 * @param edit
+	 */
+	public void inputSDCardinfothree(String textname, String  edit) {
+	 String 	getsaveinfo ="";
+		try {
+			boolean bool = fileIsExists(textname);
+			if (bool == true) {
+				System.out.println("-----读取文件-----");
+				File file = new File(Environment.getExternalStorageDirectory(), textname);
+				BufferedReader br = new BufferedReader(new FileReader(file));
+				String readline = "";
+				StringBuffer sb = new StringBuffer();
+				while ((readline = br.readLine()) != null) {
+					sb.append(readline);
+				}
+				getsaveinfo = sb.toString();
+				System.out.println("=====读取:" + getsaveinfo);
+				edit=(getsaveinfo);
+				br.close();
+			} else {
+				outputSDCard(textname, edit);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
