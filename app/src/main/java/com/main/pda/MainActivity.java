@@ -277,13 +277,13 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			}
 			String getsaveinfo = sb.toString();
 			System.out.println("=====读取:" + getsaveinfo);
-			FixationValue.URL = getsaveinfo + "/cash_pda";
+			FixationValue.URL = getsaveinfo + "/cash_pdaHDHE";
 //			FixationValue.URL = getsaveinfo + "/cash_pda";
 			String str = getsaveinfo.substring(getsaveinfo.length() - 9);
-			if (str.equals("/cash_pda")) { // 7.22改
+			if (str.equals("/cash_pdaHDHE")) { // 7.22改
 //				if (str.equals("/cash_pda")) {
                 String substring = getsaveinfo.substring(0, getsaveinfo.length() - 9);
-                FixationValue.URL2 = substring + "/cash_box";
+                FixationValue.URL2 = substring + "/cash_boxHDHE";
 //				FixationValue.URL2 = substring + "/cash_box";
 				FixationValue.URL3 = substring + "/cash_cm";
 				FixationValue.URL4 = substring + "/cash_cmanagement";
