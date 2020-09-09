@@ -49,11 +49,11 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	private String text_url = "url.txt";
 	private String text_namespacethree = "namespace_three.txt";
 	private String text_urlthree = "url_three.txt";
-	private  String  url="http://192.168.1.232:9080/web0805/webservice";//url
+	private  String  url="http://10.1.139.1:9080/webcash/webservice";//url
 	private  String  nameSpace="http://service.timer.cashman.poka.cn";//地址空间
 
 	private  String  EtnameSpace_three="http://service.pda.cashman.poka.cn";
-	private  String   Eturl_three="http://172.16.3.1:8888/cashman/webservice";
+	private  String   Eturl_three="http://10.1.139.1:9080/cash/webservice";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
