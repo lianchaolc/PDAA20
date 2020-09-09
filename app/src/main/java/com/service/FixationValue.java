@@ -28,9 +28,10 @@ public class FixationValue {
 // 	public static String url = "http://192.168.1.131:8080/CashWebServices/webservice";
 // 	public static String url = "http://172.16.3.1:8888/cashman/webservice"; /// 邱工 三期上线地址
 	// webservice地址
-	public static String URL = url + "/cash_pdaHDHE";// ATM钞箱模块以及 登录、指纹验证接口 对应 IPdaOperateService.java接口
-	public static String URL2 = url + "/cash_boxHDHE";// 款箱模块（早送、晚收） 对应 IPdaOperateService.java接口
-
+	public static String URL = url + "/cash_pda";// ATM钞箱模块以及 登录、指纹验证接口 对应 IPdaOperateService.java接口//改  7./22
+//	public static String URL = url + "/cash_pda";// ATM钞箱模块以及 登录、指纹验证接口 对应 IPdaOperateService.java接口
+	public static String URL2 = url + "/cash_box";// 款箱模块（早送、晚收） 对应 IPdaOperateService.java接口	//改  7./22
+//	public static String URL2 = url + "/cash_box";// 款箱模块（早送、晚收） 对应 IPdaOperateService.java接口	//改  7./22
 	public static String URL3 = url + "/cash_cm"; // 对应请领上缴模块中的 清分员操作 对应 ICleaningManService.java
 
 	public static String URL4 = url + "/cash_cmanagement";// 对应请领上缴模块中的 清分管理员操作 对应ICleaningManagementService.java
