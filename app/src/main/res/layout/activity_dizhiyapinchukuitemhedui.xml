@@ -120,7 +120,7 @@
                 android:layout_height="@dimen/dimen_45y"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="已扫描:"
+                android:text="待扫描:"
                 android:textColor="@color/back"
                 android:textSize="@dimen/text_size_28" />
 
