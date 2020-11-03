@@ -11,6 +11,11 @@ public class UpdateAndGetAddMoneySumService {
 
 	public BoxDetail updateAndGetAddMoneySum(String planNum, String cashboxNum, String userId1, String userId2,
 			String corpId) throws Exception {
+//		planNum="BC04202007210";
+//		cashboxNum="ZH0003";
+//		userId1="12001002";
+//		userId2="12001002";
+//		corpId="988050000";
 
 		String methodName = "updateAndGetAddMoneySum";
 		WebParameter[] param = { new WebParameter<String>("arg0", planNum),
