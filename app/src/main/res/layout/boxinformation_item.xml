@@ -14,10 +14,10 @@
 
         <TextView
             android:id="@+id/brand"
-            android:textSize="@dimen/text_size_25"
+            android:textSize="@dimen/text_size_20"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="@color/transparency"
             android:gravity="center"
             android:text="品牌信息"
