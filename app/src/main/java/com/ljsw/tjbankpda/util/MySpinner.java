@@ -27,7 +27,7 @@ public class MySpinner extends PopupWindow {
 	protected List<String> list;
 	protected LayoutInflater inflater;
 	public static String str;
-
+	private String chooseText;
 	public MySpinner() {
 	}
 
@@ -81,9 +81,9 @@ public class MySpinner extends PopupWindow {
 //				System.out.print("str" + str);
 //				if (str.equals("纸100元（5套）")) {
 //					sendyibaiyuan();
-
+//				chooseText = MySpinner.this.list.get(arg2);
 				tv.setText(str);
-
+				chooseText=str;
 				MySpinner.this.dismiss();
 			}
 
@@ -110,8 +110,12 @@ public class MySpinner extends PopupWindow {
 	 * /** 显示popupWindow
 	 * 
 	 * @param parent
+	 *
+	 * 或取得结果
 	 */
-
+	public String getChooseText() {
+		return chooseText;
+	}
 	public void showPopupWindow(View parent) {
 		int[] location = new int[2];
 		parent.getLocationOnScreen(location);// 获得指定控件的坐标
