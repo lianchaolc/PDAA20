@@ -71,6 +71,7 @@
                 android:id="@+id/listview_boxdetial"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dimen_20y"
                 android:layout_weight="1" >
             </ListView>
         </RelativeLayout>
