@@ -155,8 +155,10 @@ public class KuanxiangChuruActivity extends Activity {
 			case R.id.churu_shuaxin:
 				wanrulist.clear();
 				zaochulist.clear();
+				manager.getRuning().runding(KuanxiangChuruActivity.this, "数据加载中...");
 				getDate();// 获取日期
 				// getZaoChuInfo();
+
 				break;
 			case R.id.zaochu:
 				listZaochu.setVisibility(View.VISIBLE);
@@ -312,7 +314,7 @@ public class KuanxiangChuruActivity extends Activity {
 	 * 获取款箱早送出库明细
 	 */
 	public void getMingXi() {
-		manager.getRuning().runding(KuanxiangChuruActivity.this, "数据获取中...");
+//		manager.getRuning().runding(KuanxiangChuruActivity.this, "数据获取中...");
 		new Thread() {
 			@Override
 			public void run() {
@@ -354,7 +356,7 @@ public class KuanxiangChuruActivity extends Activity {
 	 * 获取任务日期
 	 */
 	public void getDate() {
-		manager.getRuning().runding(KuanxiangChuruActivity.this, "日期获取中...");
+//		manager.getRuning().runding(KuanxiangChuruActivity.this, "日期获取中...");
 		new Thread() {
 			@Override
 			public void run() {
@@ -402,6 +404,7 @@ public class KuanxiangChuruActivity extends Activity {
 				updateLitView();
 				break;
 			case 1:
+				manager.getRuning().remove();
 				zaochulist.clear();// 刷新时起作用
 				zaochulist.addAll(GApplication.zaosonglist);
 				getWanRuInfo();
@@ -527,6 +530,15 @@ public class KuanxiangChuruActivity extends Activity {
 			case 11:
 				System.out.println("---------------11");
 				manager.getRuning().remove();
+				manager.getAbnormal().timeout(KuanxiangChuruActivity.this, "加载超时,重试?", new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						manager.getAbnormal().remove();
+						getDate();
+						return;
+					}
+				});
 				break;
 			case 12:
 				System.out.println("---------------12");
@@ -552,7 +564,7 @@ public class KuanxiangChuruActivity extends Activity {
 
 	public void getZaoChuInfo() {
 		System.out.println("------------------2");
-		manager.getRuning().runding(KuanxiangChuruActivity.this, "数据加载中...");
+//		manager.getRuning().runding(KuanxiangChuruActivity.this, "数据加载中...");
 		new Thread() {
 
 			@Override
