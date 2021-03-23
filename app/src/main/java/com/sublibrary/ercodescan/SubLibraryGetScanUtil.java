@@ -31,18 +31,20 @@ public class SubLibraryGetScanUtil implements INotify {
         Log.e("!!number!!!!!", number);
         number = number.trim();
         Log.i("number", number);
-        if (number == null) {
+        if (number == null || number.equals("")) {
             return;
+        } else {
+            m = handler.obtainMessage();
+            m.what = 1;
+            Bundle b = new Bundle();
+            b.putString("money", number);
+            b.putInt("moneyToal", money);
+            m.setData(b);
+                handler.sendMessage(m);
+
         }
 
 
-        m = handler.obtainMessage();
-        m.what = 1;
-        Bundle b = new Bundle();
-        b.putString("money", number);
-        b.putInt("moneyToal", money);
-        m.setData(b);
-        handler.sendMessage(m);
     }
 
 
