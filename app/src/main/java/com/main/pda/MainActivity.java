@@ -36,7 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class MainActivity extends PrivilegeActivity implements OnTouchListener {
-	// 主界面
+	// 主界面1
 
 	ImageView home; // 主菜单
 	ImageView systemset; // 系统设置
