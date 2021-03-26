@@ -3,13 +3,19 @@ package com.clearadmin.pda;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +24,7 @@ import android.widget.Toast;
 
 import com.application.GApplication;
 import com.clearadmin.biz.AddMoneyConfirmBiz;
-import com.clearadmin.biz.GetAddMoneySumBiz;
+//import com.clearadmin.biz.GetAddMoneySumBiz;
 import com.example.pda.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,6 +47,7 @@ import org.w3c.dom.Text;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import a20.cn.uhf.admin.Tools;
@@ -70,10 +77,10 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
     // 筛选数据
     private String StrintCode;//传递的号码
 
-
+    private boolean mRegisterFlag = false;
     AddMoneygetNum scanbox = new AddMoneygetNum(); // 钞箱编号扫描类 ///rfid
     GetMoneyNum scanMoneyNum = new GetMoneyNum(); // 钱捆编号扫描类
-    SubLibraryGetScanUtil scanUtil = new SubLibraryGetScanUtil();//  新二维码扫描数据20201223
+    SubLibraryGetScanUtil SubLibraryGetScanUtil = new SubLibraryGetScanUtil();//  新二维码扫描数据20201223
 
     // 筛选数据
     private AddMoneygetNum addMoneygetNum;
@@ -96,19 +103,10 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
         return addMoneyConfirm = addMoneyConfirm == null ? new AddMoneyConfirmBiz() : addMoneyConfirm;
     }
 
-    private GetAddMoneySumBiz getAddMoneySum;
-
-    GetAddMoneySumBiz getGetAddMoneySum() {
-        return getAddMoneySum = getAddMoneySum == null ? new GetAddMoneySumBiz() : getAddMoneySum;
-    }
-
     private SubLibraryGetScanUtil subLibraryGetScanUtil;
 
-    SubLibraryGetScanUtil getScantwo1() {
-        return subLibraryGetScanUtil = subLibraryGetScanUtil == null ? new SubLibraryGetScanUtil() : subLibraryGetScanUtil;
-    }
 
-    SubLibraryScanTwoServer SubLibraryScanTwoServer;
+    SubLibraryScanTwoServer SubLibraryScanTwoServer;   // 服务类
 
     SubLibraryScanTwoServer SubLibraryScanTwoServer() {
         return SubLibraryScanTwoServer = SubLibraryScanTwoServer == null ? new SubLibraryScanTwoServer() : SubLibraryScanTwoServer;
@@ -130,7 +128,7 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
     private Button librarytwocode_update;
     private ImageView iv_twoblack;
     View.OnClickListener onclickreplace, onClick;
-
+    private KeyReceiver keyReceiver;
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +141,7 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
         managerClass.getGolbalView().Init(this);
         UhfManager = UhfManager.getInstance();
         if (UhfManager == null) {
-            Toast.makeText(getApplicationContext(), "串口初始化失败", 400).show();
+            Toast.makeText(getApplicationContext(), "串口初始化失败", Toast.LENGTH_SHORT).show();
             return;
         }
         initView();
@@ -151,7 +149,6 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
         btnupcode.setOnClickListener(this);
         sonlibraytvshwo = findViewById(R.id.sonlibraytvshwo);
         sonlibraytvshwo.setOnClickListener(this);
-
         makeandrreadcard = (TextView) findViewById(R.id.makeandrreadcard);
         Util.initSoundPool(this);//  声音位置
         manager = new ManagerClass();
@@ -163,8 +160,21 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
                 NetInfoTwocode();
             }
         };
+        keyReceiver = new KeyReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.rfid.FUN_KEY");
+        filter.addAction("android.intent.action.FUN_KEY");
+        registerReceiver(keyReceiver , filter);
+        mRegisterFlag = true;
+
+    }
+
+    private void ScannerAction() {
         getRfid().stop_a20();
-        getScantwo1().handler = new Handler() {
+//        // 打开二维码扫描
+        SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+        managerClass.getRfid().scanOpen();
+        SubLibraryGetScanUtil.handler = new Handler() {
             Bundle bundlemoney;
 
             @SuppressLint("LongLogTag")
@@ -198,52 +208,9 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
                             sonlibraymadekar.setVisibility(View.VISIBLE);
                         }
 
-                        getRfid().addNotifly(scanUtil);
-                        // 打开二维码扫描
-                        managerClass.getRfid().scanOpen();
-                        break;
-                }
-            }
-        };
+                        managerClass.getRfid().stop_a20();// 拿到值后就关闭一位码扫描
+// 需求打开打开一次扫描的代码所以注销掉   完成 扫描共两个步骤  加载串口2 开启扫描
 
-        getGetAddMoneySum().handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                managerClass.getRuning().remove();
-
-                switch (msg.what) {
-                    case 1:
-                        // 当前钞箱金额
-                        Double moneyToal = Double.parseDouble(GetAddMoneySumBiz.box.getMoney());
-                        netreusltcode.setText((moneyToal / 10000) + "万");
-
-                        // 钞箱编号和品牌
-                        netreusltcode.setText(GetAddMoneySumBiz.box.getNum() + "    " + GetAddMoneySumBiz.box.getBrand());
-
-                        // 增加二维码接口通知
-                        getRfid().addNotifly(scanMoneyNum);
-                        // 打开二维码扫描
-                        SoundUtil.mContext = SonLibraryCodeScanActivity.this;
-                        managerClass.getRfid().scanOpen();
-
-                        break;
-                    case 0:
-                        managerClass.getSureCancel().makeSuerCancel(SonLibraryCodeScanActivity.this, "没有这个钞箱的记录",
-                                new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View arg0) {
-                                        managerClass.getSureCancel().remove();
-                                        // 开始扫描
-                                        getRfid().start_a20();
-                                    }
-                                }, true);
-                        break;
-                    case -1:
-                        managerClass.getAbnormal().timeout(SonLibraryCodeScanActivity.this, "连接异常!", null);
-                        break;
-                    case -4:
-                        managerClass.getAbnormal().timeout(SonLibraryCodeScanActivity.this, "连接超时!", null);
                         break;
                 }
             }
@@ -397,8 +364,8 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
         if (data != null && data.length > 1) {
             String dataStr = Tools.Bytes2HexString(data, data.length);
 //					Toast.makeText(getApplicationContext(),dataStr, 0).show();
-//            ReaderCardTranfance(dataStr);
-            cardresult.setText(dataStr);
+            ReaderCardTranfance(dataStr);
+//            cardresult.setText(dataStr);
         } else {
             if (data != null) {
                 cardresult.append("读数据失败，错误码：" + (data[0] & 0xff) + "\n");
@@ -557,7 +524,7 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-
+        getRfid().stop_a20();
         // 开启RFID扫描，只代码在同一生命周期里面只执行一次
         if (first) {
             first = false;
@@ -566,9 +533,19 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
             // 打开扫描，进行钞箱扫描
             getRfid().open_a20();
         }
-        getRfid().addNotifly(scanUtil);
         // 打开二维码扫描
-        managerClass.getRfid().scanOpen();
+//        getRfid().addNotifly(SubLibraryGetScanUtil);
+//        managerClass.getRfid().scanOpen();
+
+//        getRfid().addNotifly(SubLibraryGetScanUtil);
+//        // 打开二维码扫描
+//        SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+//        managerClass.getRfid().scanOpen();
+//        ScanAcion();
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        getRfid().stop_a20();
+//        ScannerAction();
     }
 
     @Override
@@ -581,6 +558,195 @@ public class SonLibraryCodeScanActivity extends Activity implements View.OnClick
          */
         getRfid().scanclose();
         // modify by wangmeng 2017-8-29
+
+
+        if (mRegisterFlag) {
+            unregisterReceiver(keyReceiver);
+            mRegisterFlag = false;
+        }
+        super.onDestroy();
+        managerClass.getRfid().scanOpen();
+//        getRfid().stop_a20();
+//        getRfid().addNotifly(SubLibraryGetScanUtil);
+//        // 打开二维码扫描
+//        SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+
     }
 
+
+//    public  void  ScanAcion(){
+//        SubLibraryGetScanUtil.handler = new Handler() {
+//            Bundle bundlemoney;
+//
+//            @SuppressLint("LongLogTag")
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//
+//                switch (msg.what) {
+//                    case 1:
+//                        netreusltcode.setText("");
+//                        netreuslttype.setText("");//  类型find
+//                        netreusltcontroller.setText("");// 机构
+//                        netreusltbianno.setText("");
+//                        netreusltcoutrsname.setText("");
+//                        netreusltnum.setText("");
+//                        //扫描到一二维码, 语音提示
+//                        Util.play(1, 0);
+//                        Log.e(TAG, "!!!!!!!!!!!!!!!" + msg.getData());
+//                        bundlemoney = msg.getData();
+//                        if (bundlemoney != null) {
+//                            // 接收统计扫描钞捆的总金额
+//                            StrintCode = bundlemoney.getString("money");//  获取上个工具类扫描的值
+//                        }
+//
+//                        // 当前扫描总金额
+//                        sonlibraytvshwo.setText(StrintCode);
+//                        if (null == StrintCode || StrintCode.equals("")) {
+//                        } else {
+//                            sonlibraymadekar.setFocusable(true);
+////                            sonlibraymadekar.setBackgroundResource(R.drawable.buttom_select_press);
+//                            sonlibraymadekar.setVisibility(View.VISIBLE);
+//                        }
+//
+//                        getRfid().addNotifly(SubLibraryGetScanUtil);
+//                        // 打开二维码扫描
+//                        managerClass.getRfid().scanOpen();
+//                        break;
+//                }
+//            }
+//        };
+//    }
+
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK) {
+            Log.e(TAG, "!!!!!!!!!!!!!!!" );
+
+//            getRfid().close_a20();
+            /**
+             * 2015-7-13 增
+             */
+//            getRfid().scanclose();
+            // modify by wangmeng 2017-8-29
+
+
+            if (mRegisterFlag) {
+                unregisterReceiver(keyReceiver);
+                mRegisterFlag = false;
+            }
+            super.onDestroy();
+              SonLibraryCodeScanActivity.this.finish();
+            return true;
+
+        } else if (keyCode == event.KEYCODE_MENU) {
+            Log.e(TAG, "!!!!!!!!!!!!!!!" );
+            return true;
+
+//        } else if (keyCode == event.KEYCODE_VOLUME_UP) {
+//            Log.e(TAG, "!!!!!!!!!!!!!!!" );
+//            return true;
+//
+//        } else if (keyCode == event.KEYCODE_VOLUME_DOWN) {
+//
+//            Log.e(TAG, "!!!!!!!!!!!!!!!");
+//            return true;
+//
+//        } else if (keyCode == event.getScanCode()) {
+//            Log.e(TAG, "!!!!!!!!!!!!!!!" );
+//            return super.onKeyDown(keyCode, event);
+        }
+        return false;
+    }
+
+    /***
+     * 拿到按键监听
+     */
+
+
+    private long prelongTim = 0;//定义上一次单击的时间
+    private long curTime = 0;//定义上第二次单击的时间
+    private boolean mIsPressed = false;
+    private class KeyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int keyCode = intent.getIntExtra("keyCode", 0);
+            // 为兼容早期版本机器
+            if (keyCode == 0) {
+                keyCode = intent.getIntExtra("keycode", 0);
+            }
+            boolean keyDown = intent.getBooleanExtra("keydown", false);
+            getRfid().stop_a20();
+            if (!keyDown && !mIsPressed) {
+                // 根据需要在对应的按键的键值中开启扫描,
+                switch (keyCode) {
+                    case KeyEvent.KEYCODE_F1:
+                        break;
+                    case KeyEvent.KEYCODE_F2:
+                        break;
+                    case KeyEvent.KEYCODE_F3:
+                        break;
+                    case KeyEvent.KEYCODE_F4:
+                        break;
+                    case KeyEvent.KEYCODE_F5:
+                        getRfid().stop_a20();
+//                        // 关闭扫描
+//                        getRfid().close_a20();
+//                        // 关闭一维码扫描
+//                        managerClass.getRfid().scanclose();
+                        break;
+                    default:
+                        //开启扫描
+                        // 关闭扫描
+                        getRfid().stop_a20();
+//                        getRfid().close_a20();
+//                        // 关闭一维码扫描
+//                        managerClass.getRfid().scanclose();
+                        break;
+                }
+            }else {
+//                managerClass.getRfid().stop_a20();// 拿到值后就关闭一位码扫描'
+                getRfid().stop_a20();
+                if (prelongTim == 0) {//第一次单击时间
+                    prelongTim = (new Date()).getTime();
+                    managerClass.getRfid().scanOpen();
+                    getRfid().addNotifly(SubLibraryGetScanUtil);
+                    // 打开二维码扫描
+                    SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+
+                    ScannerAction();
+                } else {
+                    curTime = (new Date()).getTime();//本地单击的时间
+                    Log.d("onclick", "点击的时间" + (curTime - prelongTim));
+                    prelongTim = curTime; //当前点击时间变为上次时间
+                    if ((curTime - prelongTim) > 2000) {
+                        prelongTim = 0;
+                        //ToastUtil.showToast(mContext, "已经点击登录,请稍候.");
+
+
+                        managerClass.getRfid().scanOpen();
+                        getRfid().addNotifly(SubLibraryGetScanUtil);
+                        // 打开二维码扫描
+                        SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+
+                        ScannerAction();
+                        return;
+                    }
+
+                }
+                getRfid().stop_a20();
+//                managerClass.getRfid().scanOpen();
+//                getRfid().addNotifly(SubLibraryGetScanUtil);
+//            // 打开二维码扫描
+//                SoundUtil.mContext = SonLibraryCodeScanActivity.this;
+//
+//                ScannerAction();
+                mIsPressed = false;
+            }
+    }
+
+}
 }
