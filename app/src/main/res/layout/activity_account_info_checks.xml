@@ -96,7 +96,7 @@
                     android:layout_height="@dimen/dimen_60y"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="已扫描:"
+                    android:text="未扫描:"
                     android:textColor="@color/back"
                     android:textSize="@dimen/text_size_28" />
 
@@ -125,7 +125,8 @@
                     android:layout_height="@dimen/dimen_60y"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="未扫描:"
+
+                    android:text="已扫描:"
                     android:textColor="@color/back"
                     android:textSize="@dimen/text_size_28" />
 
