@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
     android:versionCode="1"
-    android:versionName="1.22">
+    android:versionName="1.30">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -24,9 +24,10 @@
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <protected-broadcast android:name="android.rfid.FUN_KEY"/>
-    <protected-broadcast android:name="android.intent.action.FUN_KEY"/>
+    <protected-broadcast android:name="android.rfid.FUN_KEY" />
+    <protected-broadcast android:name="android.intent.action.FUN_KEY" />
 
     <application
         android:name="com.application.GApplication"
@@ -47,13 +48,11 @@
         <!-- 主界面 -->
         <activity
             android:name="com.main.pda.MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/app_name"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name="com.main.pda.HomeMenu" />
         <activity android:name="com.main.pda.SystemLogin" />
         <activity android:name="com.moneyboxadmin.pda.BankDoublePersonLogin" />
@@ -604,8 +603,49 @@
             android:name=".homemagnetopackge.OutsourcingLoginActivity"
             android:label="@string/title_activity_account_info_checks" />
         <activity android:name="afu.util.PrivilegeActivity" />
-        <!--适配3代设备录入登陆人的信息新增 07.24-->
-        <activity android:name="com.main.pda.FingerGatherEditeSeltDataActivity"></activity>
+        <!-- 适配3代设备录入登陆人的信息新增 07.24 -->
+        <activity android:name="com.main.pda.FingerGatherEditeSeltDataActivity" />
+
+        <!-- 20201215 增加钞袋功能代码 -->
+        <activity
+            android:name="com.sql.CashBagCheckActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <!-- 整钞代码sql数据库的录入 -->
+        <activity
+            android:name="com.sql.CashBagCheckZhengChaoActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+
+        <!-- 押品扫描代码  分库贴标签代码扫描二维码后读取标签并显示 -->
+        <activity android:name="com.clearadmin.pda.SonLibraryCodeScanActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+            <!--2021.3.3  清分管理上缴符合的业务  在1.30版本中不上线-->
+        </activity>
+        <activity android:name="com.ljsw.tjbankpad.baggingin.activity.turnoverboxcheck.GetTurnoverboxchecketLineinfoActivity">
+
+        </activity>
+        <!---2021.3.3 清分管理员符合 那个箱子和提交数据在1.30版本中不上线-->
+        <activity
+            android:name="com.ljsw.tjbankpad.baggingin.activity.turnoverboxcheck.turnoverboxcheckActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!---2021.3.3 清分管理员复查合计  明细  不允许点击更新 那个箱子和提交数据在1.30版本中不上线-->
+        <activity android:name="com.ljsw.tjbankpad.baggingin.activity.turnoverboxcheck.TurnOverInfoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
