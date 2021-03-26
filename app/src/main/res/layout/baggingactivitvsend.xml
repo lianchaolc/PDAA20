@@ -263,7 +263,7 @@
                 android:background="@drawable/buttom_selector_bg"
                 android:text="复制"
                 android:textColor="@color/back"
-                android:textSize="30px" />
+                android:textSize="@dimen/text_size_30" />
             <Button
                 android:id="@+id/updata_btn"
                 android:layout_width="@dimen/dimen_60x"
