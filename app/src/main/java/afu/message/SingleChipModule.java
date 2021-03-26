@@ -30,7 +30,7 @@ public class SingleChipModule implements PsamSingleInterface {
 	}
 
 	private SingleChipModule() {
-		singleChipPsamMessage = SingleChipPsam.getInitSingleChipMessage();
+		singleChipPsamMessage =   SingleChipPsam.getInitSingleChipMessage();
 		singleChipPsamMessage.setSingleClipPsamByte(DeviceInfo.SinglePSAM.SINGLE_HEAD_END, this);
 	}
 
