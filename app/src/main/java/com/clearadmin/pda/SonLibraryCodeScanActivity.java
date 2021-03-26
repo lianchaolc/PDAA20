@@ -61,8 +61,8 @@ import hdjc.rfid.operator.RFID_Device;
  * 2  cunzai
  *
  * DZ202021001093539471
- *
- * 一次扫描完成二维码有时间间隔 大约5s
+ *2021.3.28
+ * 二维码扫描并制作标签
  */
 public class SonLibraryCodeScanActivity extends Activity implements View.OnClickListener {
 
