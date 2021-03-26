@@ -2,14 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/dimen_2y"
+    android:layout_marginTop="@dimen/dimen_2y"
     android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/lboxdodetail_item"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60y"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/dimen_6y"
+        android:layout_marginTop="@dimen/dimen_6y"
         android:orientation="horizontal" >
 
         <TextView
@@ -17,7 +21,7 @@
             android:textSize="@dimen/text_size_25"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:background="@color/transparency"
             android:gravity="center"
             android:text="品牌信息"
