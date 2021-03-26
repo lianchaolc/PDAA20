@@ -35,8 +35,11 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+/***
+ * 验证
+ */
 public class MainActivity extends PrivilegeActivity implements OnTouchListener {
-	// 主界面12
+	// 主界面
 
 	ImageView home; // 主菜单
 	ImageView systemset; // 系统设置
