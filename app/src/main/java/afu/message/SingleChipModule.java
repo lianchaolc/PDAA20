@@ -17,7 +17,7 @@ import static afu.util.DeviceInfo.headEndSingle;
 
 public class SingleChipModule implements PsamSingleInterface {
 
-	protected static final String TAG = "SingleChipModule";
+	protected static final String TAG = "  SingleChipModule";
 
 	private static SingleChipModule singleChipModule;
 	private SingleChipPsam singleChipPsamMessage; // 单片机操作对象
