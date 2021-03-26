@@ -359,6 +359,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url15 = sub + "/cd";
 				FixationValue.url16 = sub + "/ckc";
 				FixationValue.URL17 = sub + "/cash_sk";
+				FixationValue.url18 = sub + "/clearingCheck";
 
 			} else {
 				FixationValue.URL6 = getsaveinfo + "/pda";
@@ -370,6 +371,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url15 = getsaveinfo + "/cd";
 				FixationValue.url16 = getsaveinfo + "/ckc";
 				FixationValue.URL17 = getsaveinfo + "/cash_sk";
+				FixationValue.url18 = getsaveinfo + "/clearingCheck";
 			}
 			System.out.println("地址2：" + FixationValue.URL6);
 			System.out.println("地址7：" + FixationValue.URL7);
