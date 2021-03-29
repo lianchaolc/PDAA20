@@ -459,6 +459,7 @@ public class WanShouXiangActivity extends Activity implements OnClickListener {
 		    //关闭rfid 扫描
 
 			manager.getRuning().runding(WanShouXiangActivity.this, "正在启动指纹扫描,请稍后...");
+			manager.getRuning().remove();
 			Skip.skip(WanShouXiangActivity.this, KuanXiangJiaoJieActivity.class, null, 0);
 			break;
 		case R.id.wanshou_cs:
