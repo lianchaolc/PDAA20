@@ -168,7 +168,7 @@ public class ClearMachineResult extends Activity implements OnTouchListener {
 		if (MotionEvent.ACTION_UP == even.getAction()) {
 			switch (view.getId()) {
 			// 清机加钞结果确定
-			case R.id.sure_clearresult:
+			case R.id.sure_clearresult: managerClass.getRuning().remove();// 加
 				clearmachine.setBackgroundResource(R.drawable.buttom_selector_bg);
 				managerClass.getGolbalutil().gotoActivity(ClearMachineResult.this, OrderWork.class, null,
 						GolbalUtil.ismover);
