@@ -1,5 +1,7 @@
 package com.o.service;
 
+import android.util.Log;
+
 import org.ksoap2.serialization.SoapObject;
 
 import com.entity.WebParameter;
@@ -12,6 +14,7 @@ import com.service.WebService;
  * 
  */
 public class ChuKuCaoZuoSerivce {
+	public static  String  TAG="ChuKuCaoZuoSerivce";
 	public String saveBoxSendOutEarly(String lineNum, String boxes, String date, String corpId, String roleId,
 			byte[] cValue, String userIds) throws Exception {
 
@@ -36,6 +39,7 @@ public class ChuKuCaoZuoSerivce {
 	public String saveBoxSendOutEarly(String lineNum, String boxes, String date, String corpId, String roleId,
 			byte[] cValue, String userIds, String userId, String pwd) throws Exception {
 		String methodName = "saveBoxSendOutEarly";
+		Log.e(TAG,"方法名称 :"+"saveBoxSendOutEarly");
 		WebParameter[] param = { new WebParameter<String>("arg0", lineNum), new WebParameter<String>("arg1", boxes),
 				new WebParameter<String>("arg2", date), new WebParameter<String>("arg3", corpId),
 				new WebParameter<String>("arg4", roleId), new WebParameter<byte[]>("arg5", cValue),
@@ -58,6 +62,7 @@ public class ChuKuCaoZuoSerivce {
 	public String saveBoxStorageLate(String lineNum, String boxes, String corpId, String roleId, byte[] cValue,
 			String userIds, String userId, String pwd) throws Exception {
 		String methodName = "saveBoxStorageLate";
+		Log.e(TAG,"方法名称 :"+"saveBoxStorageLate");
 		WebParameter[] param = { new WebParameter<String>("arg0", lineNum), new WebParameter<String>("arg1", boxes),
 				new WebParameter<String>("arg2", corpId), new WebParameter<String>("arg3", roleId),
 				new WebParameter<byte[]>("arg4", cValue), new WebParameter<String>("arg5", userIds),
@@ -70,12 +75,16 @@ public class ChuKuCaoZuoSerivce {
 		System.out.println("-------saveBoxStorageLate传参：" + userIds);
 		System.out.println("-------saveBoxStorageLate传参：" + userId);
 		System.out.println("-------saveBoxStorageLate传参：" + pwd);
+		Log.e(TAG,"lineNum:"+lineNum);
+		Log.e(TAG,"pwd:"+pwd);
+		Log.e(TAG,"userId:"+userId);
 		SoapObject soap = null;
 		soap = WebService.getSoapObject2(methodName, param);
 		System.out.println("[soap:----]" + soap);
 		String code = soap.getProperty("code").toString();
 		if (code.equals("00")) {
 			System.out.println("成功");
+			Log.e(TAG,"code:"+code);
 			return code;
 		}
 		return null;
