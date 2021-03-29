@@ -444,6 +444,7 @@ public class ZaoSongshenqingActivity extends Activity
 			 */
 			manager.getRuning().runding(ZaoSongshenqingActivity.this, "数据获取中...");
 			GApplication.curDate = zaoDate.getText().toString();
+			manager.getRuning().remove();
 			Skip.skip(ZaoSongshenqingActivity.this, WanShouXiangActivity.class, null, 0);
 			break;
 		/*
