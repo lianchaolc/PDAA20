@@ -73,6 +73,7 @@ public class ZhouzhuanxiangMenu extends Activity implements OnTouchListener {
         if ("7".equals(GApplication.user.getLoginUserId()) || "17".equals(GApplication.user.getLoginUserId())) { // 如果清分员或者清分管理员
             ll1.setVisibility(View.GONE);
 
+
             ll_zhanghuziliao_menu_yayun.setVisibility(View.GONE);
             ll_account_menu_yayun.setVisibility(View.GONE);
             ll2.setOrientation(LinearLayout.HORIZONTAL);
@@ -87,9 +88,11 @@ public class ZhouzhuanxiangMenu extends Activity implements OnTouchListener {
             if ((FixationValue.waibaoQingfenString).equals(GApplication.user.getLoginUserId())) {
                 ll_zhanghuziliao_menu_yayun.setVisibility(View.GONE);
                 ll_account_menu_yayun.setVisibility(View.GONE);
+                ll_library_menu_yayun.setVisibility(View.GONE);
             } else {
                 ll_zhanghuziliao_menu_yayun.setVisibility(View.VISIBLE);
                 ll_account_menu_yayun.setVisibility(View.VISIBLE);
+                ll_library_menu_yayun.setVisibility(View.GONE);
             }
 
             llQingfen.setVisibility(View.GONE);
@@ -110,7 +113,9 @@ public class ZhouzhuanxiangMenu extends Activity implements OnTouchListener {
             llYayun.setVisibility(View.GONE);
             ll_zhanghuziliao_menu_yayun.setVisibility(View.VISIBLE);
             ll_account_menu_yayun.setVisibility(View.VISIBLE);
-            ll_library_menu_yayun.setVisibility(View.VISIBLE);
+            ll_library_menu_yayun.setVisibility(View.GONE);
+        }else{
+            ll_library_menu_yayun.setVisibility(View.GONE);
         }
 
     }
