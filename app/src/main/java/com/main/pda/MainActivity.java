@@ -36,7 +36,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 /***
- * 验1
+ * 第一次
  */
 public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	// 主界面
