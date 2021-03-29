@@ -15,6 +15,7 @@
 	<color name="back_2b">#cc2b2b2b</color>
 	<color name="blue_text_bg">#69b4e9</color>
 	<color name="green">#20E84A</color>
+	<color name="gray01">#E0DEDE</color>
 
 	<!-- l 外边框颜色 -->
 	<color name="black_boder">#E6E5E5</color>
