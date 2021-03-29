@@ -320,6 +320,8 @@ import com.poka.device.ShareUtil;
 		super.onDestroy();
 		S_application.wrong = null;
 		managerClass.getResultmsg().remove();
+//		 可以在这加入清空方法
+//		S_application.s_userYayun = null;// 修改2021.3.30
 	}
 
 	private void submit() {
