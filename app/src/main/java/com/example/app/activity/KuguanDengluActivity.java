@@ -118,6 +118,7 @@ public class KuguanDengluActivity extends BaseFingerActivity {
                     if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
                         manager.getRuning().runding(this, "验证完成,数据加载中...");
                         Skip.skip(KuguanDengluActivity.this, KuanxiangChuruActivity.class, null, 0);
+                        manager.getRuning().remove();
                     }
                 }
             }
@@ -265,7 +266,7 @@ public class KuguanDengluActivity extends BaseFingerActivity {
                             if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
                                 manager.getRuning().runding(KuguanDengluActivity.this, "验证完成，数据加载中...");
                                 Skip.skip(KuguanDengluActivity.this, KuanxiangChuruActivity.class, null, 0);
-                            }
+                        }
 
                         }
                     }

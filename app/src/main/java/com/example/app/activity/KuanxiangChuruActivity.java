@@ -549,6 +549,7 @@ public class KuanxiangChuruActivity extends Activity {
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						getDate();
+						manager.getRuning().remove();
 						return;
 					}
 				});
@@ -556,6 +557,7 @@ public class KuanxiangChuruActivity extends Activity {
 			case 13:
 				manager.getRuning().remove();
 				getZaoChuInfo();
+				manager.getRuning().remove();
 				break;
 			}
 		}

@@ -174,6 +174,7 @@ public class JiaoJieActivity extends Activity {
 
 		@Override
 		public void handleMessage(Message msg) {
+			manager.getRuning().remove();
 			switch (msg.what) {
 			// 0 早送异常 重新拿数据 1 查询是否早送出错 重新跑
 			case 0:
@@ -306,6 +307,7 @@ public class JiaoJieActivity extends Activity {
 			case 10:
 				System.out.println("KKKK--" + 10);
 				GApplication.jiaojiestate = 1; // 早送交接跳转晚收款箱页面
+				manager.getRuning().remove();
 				Skip.skip(JiaoJieActivity.this, WanShouXiangActivity.class, null, 0);
 				break;
 			case 11:

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.application.GApplication;
 import com.example.app.entity.User;
@@ -145,6 +146,8 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     }
                     if (zsisOk != null) {
                         handler.sendEmptyMessage(17);
+                    } else if(zsisOk.equals("30")) {
+                        handler.sendEmptyMessage(12);
                     } else {
                         handler.sendEmptyMessage(16);
                     }
@@ -254,6 +257,8 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     } else if (code.equals("99")) {
                         System.out.println("晚收失败!");
                         handler.sendEmptyMessage(5);
+                    }else{
+                        handler.sendEmptyMessage(20);// 提交失败
                     }
                 } catch (SocketTimeoutException e) {
                     System.out.println("晚收失败6");
@@ -335,8 +340,14 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     }
                     if (wisOk.equals("99") || wisOk.equals("97")) {
                         handler.sendEmptyMessage(9);
-                    } else {
-                        handler.sendEmptyMessage(8);
+                    } else if(wisOk.equals("30")){
+                        //  角色信息不正确
+                        handler.sendEmptyMessage(12);
+
+                    } else if (wisOk.equals ("00")) {
+                        handler.sendEmptyMessage(8);// 提交成功
+                    }else{
+                        handler.sendEmptyMessage(20);// 提交成功
                     }
                 } catch (SocketTimeoutException e) {
                     e.printStackTrace();
@@ -544,6 +555,26 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                                 }
                             });
                     break;
+                case 12:
+//                    Toast.makeText(KuanXiangJiaoJieYaYunActivity.this, "角色信息不正确,请使用账号登录", Toast.LENGTH_SHORT).show();
+                    if (GApplication.userInfo != null) {
+                        GApplication.userInfo = new UserInfo("", "");
+                    }
+                    manager.getRuning().remove();
+                    manager.getAbnormal().timeout(KuanXiangJiaoJieYaYunActivity.this, "角色信息不正确,请使用账号登录?",
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//                                    Intent intent = new Intent();
+//                                    Bundle budnle = new Bundle();
+//                                    budnle.putString("FLAG", "jiaojie");
+//                                    intent.putExtras(budnle);
+//                                    Skip.skip(KuanXiangJiaoJieYaYunActivity.this, YayunCheckFingerActivity.class, budnle, 0);
+                                    manager.getAbnormal().remove();
+                                    finger.setImageDrawable(null);
+                                }
+                            });
+                    break;
                 case 16:
                     manager.getRuning().remove();
                     manager.getAbnormal().timeout(KuanXiangJiaoJieYaYunActivity.this, "早送提交失败,重试?",
@@ -579,6 +610,7 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                                 // 启动异步提交数据 然后获取数据
                                 Skip.skip(KuanXiangJiaoJieYaYunActivity.this, JiaoJieActivity.class, null, 0);
                                 dialog.dismiss();
+
                             }
                         });
                     }
@@ -595,6 +627,11 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                                     manager.getAbnormal().remove();
                                 }
                             });
+                    break;
+                case 20:
+                    manager.getRuning().remove();
+                                    manager.getAbnormal().remove();
+                    Toast.makeText(KuanXiangJiaoJieYaYunActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
