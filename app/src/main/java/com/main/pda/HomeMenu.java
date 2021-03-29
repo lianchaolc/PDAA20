@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.application.GApplication;
+import com.clearadmin.pda.SonLibraryCodeScanActivity;
 import com.example.app.activity.KuanxiangCaidanActivity;
 import com.example.pda.CashtopackageSelectActivity;
 import com.example.pda.HomeMangeerToCenterDataScanActivity;
@@ -23,6 +24,7 @@ import com.example.pda.inventory.InventoryActivity;
 import com.golbal.pda.GolbalUtil;
 import com.ljsw.tjbankpad.baggingin.activity.DiZhiYaPinKuangJiaActivity;
 import com.ljsw.tjbankpad.baggingin.activity.cash.BaggingActivitySend;
+import com.ljsw.tjbankpad.baggingin.activity.turnoverboxcheck.GetTurnoverboxchecketLineinfoActivity;
 import com.ljsw.tjbankpda.main.ZhouzhuanxiangMenu;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
@@ -70,7 +72,8 @@ public class HomeMenu extends Activity implements OnTouchListener {
 	private LinearLayout home_menu_layout_homemanger_watershow;// 库管员水牌处理
 
 	private GolbalUtil getUtil;
-
+    private LinearLayout home_menu_layout_sublibrarytwocode;//  f分库
+	private LinearLayout home_menu_layout_cleanmanger;//  清分管理员
 	public GolbalUtil getGetUtil() {
 		if (getUtil == null) {
 			getUtil = new GolbalUtil();
@@ -103,7 +106,10 @@ public class HomeMenu extends Activity implements OnTouchListener {
 		home_menu_img_accountcenter = (ImageView) findViewById(R.id.home_menu_img_accountcenter);
 		home_menu_img_accountcenter.setOnTouchListener(this);
 		textViewaccountcenter = (TextView) findViewById(R.id.textViewaccountcenter);
-
+		home_menu_layout_sublibrarytwocode=findViewById(R.id.home_menu_layout_sublibrarytwocode);
+		home_menu_layout_sublibrarytwocode.setOnTouchListener(this);
+		home_menu_layout_cleanmanger=findViewById(R.id.home_menu_layout_cleanmanger);
+		home_menu_layout_cleanmanger.setOnTouchListener(this);
 		if (GApplication.user.getLoginUserId().equals("4")) {
 			dizhioraccountintiontitle.setText("档案柜管理");
 			textView7.setText("周转箱管理");
@@ -287,7 +293,19 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			case R.id.home_menu_layout_homemanger_watershow:// 库管员处理水牌
 				getGetUtil().gotoActivity(HomeMenu.this, InventoryActivity.class, null, getGetUtil().ismover);
 				break;
+
+				case R.id.home_menu_layout_sublibrarytwocode:// 分库二维码扫描
+					getGetUtil().gotoActivity(HomeMenu.this, SonLibraryCodeScanActivity.class, null, getGetUtil().ismover);
+
+					break;
+
+				case R.id.home_menu_layout_cleanmanger:// q清分管理员核对
+					getGetUtil().gotoActivity(HomeMenu.this, GetTurnoverboxchecketLineinfoActivity.class, null, getGetUtil().ismover);
+
+					break;
+
 			}
+
 
 			getGetUtil().ismover = 0;
 		}
@@ -342,6 +360,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+
 			/*
 			 * 清楚查库服务按钮，下同
 			 * 
@@ -349,6 +368,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			 */
 			ll_look_storage.setVisibility(View.GONE); // 查库服务
 			home_menu_layout_accountcenter.setVisibility(View.GONE);
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
 		case FixationValue.warehouse: // 管库员
 			latmboxadmin.setVisibility(View.VISIBLE); // ATM钞箱管理
@@ -360,11 +380,12 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			ll_look_storage.setVisibility(View.GONE); // 查库服务 // 去掉查库 reviseed by zhangxuewei
 			llaydizhiyapinmanager.setVisibility(View.VISIBLE);// 抵制押品
 			home_menu_layout_accountcenter.setVisibility(View.GONE);
-			llchecklibrarysupplement.setVisibility(View.VISIBLE);// 库存管理
+			llchecklibrarysupplement.setVisibility(View.GONE);// 库存管理
 			home_menu_layout_cash_topackege.setVisibility(View.VISIBLE);
 			home_menu_layout_cleantohome.setVisibility(View.VISIBLE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.VISIBLE);//  fenku 二维码扫描
 			break;
 		case 5: // 加钞人员
 			latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
@@ -381,6 +402,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
 		case 6: // 网点加钞
 			latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
@@ -397,6 +419,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
 		case FixationValue.clearer: // 清分员
 			latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
@@ -413,6 +436,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.VISIBLE);//  fenku 二维码扫描
 			break;
 		case FixationValue.supercargo: // 押运员
 			latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
@@ -429,6 +453,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
 		case FixationValue.waibaoqingfen: // 外包清分员
 			latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
@@ -445,6 +470,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
 
 		case 27:/// 账户中心
@@ -463,7 +489,27 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
 			break;
+			case 17:/// 清分管理员
+				latmboxadmin.setVisibility(View.GONE); // ATM钞箱管理
+				lsystemmanager.setVisibility(View.GONE); // 系统管理
+				lclearmanager.setVisibility(View.GONE); // 清分管理
+				loutjoin.setVisibility(View.GONE); // 出库交接
+				kxgl.setVisibility(View.GONE);
+				zzxgl.setVisibility(View.GONE);
+				ll_look_storage.setVisibility(View.GONE); // 查库服务
+				llaydizhiyapinmanager.setVisibility(View.GONE);// 抵制押品
+				// 账户中心
+				llchecklibrarysupplement.setVisibility(View.GONE);// 库存管理///
+				home_menu_layout_cash_topackege.setVisibility(View.GONE); /////
+				home_menu_layout_accountcenter.setVisibility(View.GONE);
+				home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
+				homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
+				home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+				home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
+				home_menu_layout_cleanmanger.setVisibility(View.GONE); //清分管理员核对数据明细
+				break;
 
 		default:
 			home_menu_layout_accountcenter.setVisibility(View.GONE);
@@ -481,6 +527,8 @@ public class HomeMenu extends Activity implements OnTouchListener {
 			home_menu_layout_cleantohome.setVisibility(View.GONE);// 装袋（正钞和尾零）
 			homemangertopacke.setVisibility(View.GONE);/// 库管员处理中银行的钱
 			home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
+			home_menu_layout_sublibrarytwocode.setVisibility(View.GONE);//  fenku 二维码扫描
+			home_menu_layout_cleanmanger.setVisibility(View.GONE); //清分管理员核对数据明细
 			break;
 		}
 	}
