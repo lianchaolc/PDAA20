@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.ljsw.tjbankpad.baggingin.activity.turnoverboxcheck.GetTurnoverboxchecketLineinfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/blue_title"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:src="@drawable/user_order" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:text="线路明细"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_50"
+            tools:ignore="all" />
+
+        <Button
+            android:id="@+id/gtnovebox_update"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_marginTop="@dimen/dimen_4y"
+            android:background="@drawable/replace" />
+
+        <ImageView
+            android:id="@+id/gtnovebox_back"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:src="@drawable/back_cirle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="操作人:"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all" />
+
+        <TextView
+            android:id="@+id/gtnovebox_user"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="张三"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:layout_marginTop="@dimen/dimen_10x"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvtobc_xianjin"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="现金"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <CheckBox
+            android:id="@+id/ck_xianjin"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ck_system"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvtobc_zongkong"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="重空"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <CheckBox
+            android:id="@+id/ck_zongkong"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ck_system"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvtobc_dizhiyapin"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="抵押"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <CheckBox
+            android:id="@+id/ck_dizhiyapin"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ck_system"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_seclect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60x"
+        android:background="@drawable/buttom_selector_bg"
+        android:text="查询"
+        android:textSize="@dimen/text_size_30" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60y"
+        android:layout_marginRight="@dimen/dimen_8x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="线路"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all" />
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_20x"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="箱子数量"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            tools:ignore="all" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/zaochu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:background="@color/bule_main">
+
+        <ImageView
+            android:id="@+id/updatepass"
+            android:layout_width="@dimen/dimen_60x"
+            android:layout_height="@dimen/dimen_60y"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_30x"
+            android:src="@drawable/user_order"
+            tools:ignore="all" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_11x"
+            android:layout_toRightOf="@+id/updatepass"
+            android:text="周转箱复查核对"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40" />
+
+        <TextView
+            android:id="@+id/tv_001"
+            android:layout_width="@dimen/dimen_50x"
+            android:layout_height="@dimen/dimen_40y"
+            android:layout_alignBaseline="@+id/tv_002"
+            android:layout_alignBottom="@+id/tv_002"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/tv_002"
+            android:background="@drawable/business_number"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_25"
+            tools:ignore="all" />
+
+        <TextView
+            android:id="@+id/tv_002"
+            android:layout_width="@dimen/dimen_50x"
+            android:layout_height="@dimen/dimen_40y"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_20x"
+            android:background="@drawable/business_number2"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_25" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview_gtnovebox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"></ListView>
+</LinearLayout>
