@@ -140,11 +140,45 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 						intent.putExtras(bundle);
 						String flag = bundle.getString("FLAG");
 						if (flag.equals("chuku")) {// 跳到出入库押运员处的验证
-							managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
-							Skip.skip(YayunCheckFingerActivity.this, YayunJiaojieActivity.class, bundle, 0);
+//   修该20210302
+							if(GApplication.user.getLoginUserId().equals("9")){
+								managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
+								Skip.skip(YayunCheckFingerActivity.this, YayunJiaojieActivity.class, bundle, 0);
+
+							}else{
+//								System.out.println("网点登录匹配机构id：" + GApplication.sk.getNetId());
+								managerClass.getAbnormal().timeout(YayunCheckFingerActivity.this, "请使用押运人员帐号登录",
+										new OnClickListener() {
+											@Override
+											public void onClick(View arg0) {
+												managerClass.getAbnormal().remove();
+												editname.setText("");
+												editpwd.setText("");
+											}
+										});
+							}
+
+
+
 						} else if (flag.equals("jiaojie")) {// 跳到款箱交接押运员处的验证
-							managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
-							Skip.skip(YayunCheckFingerActivity.this, KuanXiangJiaoJieYaYunActivity.class, bundle, 0);
+//   修该20210302
+//
+							if(GApplication.user.getLoginUserId().equals("9")){
+								managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
+								Skip.skip(YayunCheckFingerActivity.this, KuanXiangJiaoJieYaYunActivity.class, bundle, 0);
+
+							}else{
+//								System.out.println("网点登录匹配机构id：" + GApplication.sk.getNetId());
+								managerClass.getAbnormal().timeout(YayunCheckFingerActivity.this, "请使用押运人员帐号登录",
+										new OnClickListener() {
+											@Override
+											public void onClick(View arg0) {
+												managerClass.getAbnormal().remove();
+												editname.setText("");
+												editpwd.setText("");
+											}
+										});
+							}
 						}
 					}
 
