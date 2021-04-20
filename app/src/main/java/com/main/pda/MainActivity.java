@@ -21,6 +21,9 @@ import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.service.FixationValue;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.nfc.TagLostException;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -34,6 +37,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /***
  * 第一次
@@ -58,6 +62,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	private  String  EtnameSpace_three="http://service.pda.cashman.poka.cn";
 	private  String   Eturl_three="http://10.1.139.1:9080/cash/webservice";
 
+	private TextView showversion;//  显示 版本号
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +76,8 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		home = (ImageView) findViewById(R.id.home);
 		systemset = (ImageView) findViewById(R.id.systeset);
 		version = (ImageView) findViewById(R.id.version);
-
+		showversion=(TextView) findViewById(R.id.showversion);//设置版本号组件
+		showversion.setText("版本号"+getVersion()+"");//设置版本号
 		// 触摸事件
 		home.setOnTouchListener(this);
 		systemset.setOnTouchListener(this);
@@ -524,4 +530,24 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		}
 	}
 
+	/**
+	 * 显示当前的版本
+ * @return
+	 */
+	public String getVersion() {
+		String versioncode = "";
+		PackageManager packageManager = MainActivity.this.getPackageManager();
+		PackageInfo info;
+		try {
+			info = packageManager.getPackageInfo(MainActivity.this.getPackageName(), 0);
+			// 当前版本号
+			versioncode = info.versionName;
+			Log.i("versioncode当前版本号", versioncode + "");
+		} catch (PackageManager.NameNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
+		return versioncode;
+	}
 }
