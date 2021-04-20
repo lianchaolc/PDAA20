@@ -6,6 +6,7 @@ import com.application.GApplication;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
 import com.ljsw.tjbankpda.db.application.o_Application;
+import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
@@ -341,6 +342,8 @@ public class SystemLogin extends Activity implements OnTouchListener {
 		editpwd.setFocusableInTouchMode(true);
 		GApplication.loginJidouId = "";
 		GApplication.jigouid = "";
+
+//		S_application.getApplication().s_userYayun = null;//   清空押运员缓存2021.3.29
 		// SharedPreferences preferences = this.getPreferences(0);
 		// String nametext = preferences.getString("uid", "");
 		// editname.setText(nametext);
