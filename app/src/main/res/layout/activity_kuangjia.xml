@@ -170,7 +170,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dimen_11x"
                     android:layout_toRightOf="@+id/updatepass"
-                    android:text="抵制押品入库"
+                    android:text="抵质押品入库"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_30" />
 
