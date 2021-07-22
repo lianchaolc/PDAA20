@@ -175,7 +175,9 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
                                 }
 
                             });
-                            dialog.show();
+                            if(!isFinishing()) {
+                                dialog.show();
+                            }
                         } else {
                             Toast.makeText(AccountCenterByHomemangerFingerActivity.this, "您提交的太快了稍后重试", Toast.LENGTH_SHORT).show();
                         }
@@ -197,7 +199,9 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
 
                             });
                         }
-                        dialogfa.show();
+                        if(!isFinishing()) {
+                            dialogfa.show();
+                        }
                         break;
                 }
             }
