@@ -37,10 +37,13 @@ public class AccountDataScanningUntil implements INotify {
 				}
 				int aa = -1;
 				for (int i = 0; i < o_Application.qlruku.getZhouzhuanxiang().size(); i++) {
+					if(null==o_Application.qlruku.getZhouzhuanxiang()||o_Application.qlruku.getZhouzhuanxiang().equals("")){
+						System.out.println("---------我是空的" );
+					}else{
 					if (o_Application.qlruku.getZhouzhuanxiang().get(i).equals(str)) {
 						aa = i;
 						break;
-					}
+					}}
 				}
 				System.out.println("=============扫描完成，aa为：" + aa);
 				if (aa != -1) {
