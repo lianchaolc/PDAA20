@@ -91,6 +91,7 @@ public class UpdatePwd extends Activity implements OnTouchListener {
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
 							managerClass.getGolbalutil().gotoActivity(UpdatePwd.this, SystemManager.class, null, 0);
+							managerClass.getGoBack().remove();// 密码修改成成功后不消失
 							UpdatePwd.this.finish();
 						}
 					});
@@ -213,7 +214,20 @@ public class UpdatePwd extends Activity implements OnTouchListener {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+		managerClass.getGoBack().remove();
 		this.finish();
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		managerClass.getGoBack().remove();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		managerClass.getGoBack().remove();
+
+	}
 }
