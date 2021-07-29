@@ -279,7 +279,13 @@ public class BoxDoDetail extends Activity {
 				// 有数据成功返回
 				if (msg.what == 1) {
 					// 更取到品牌后更新listview数据
-					ad.notifyDataSetChanged();
+					if(null!=ad){
+						ad.notifyDataSetChanged();
+					}else{
+
+					}
+
+
 				}
 			}
 
