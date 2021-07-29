@@ -1,5 +1,4 @@
 package com.entity;
-
 /**
  * 系统登陆 消息类
  * 
