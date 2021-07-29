@@ -166,6 +166,8 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 							});
 						}
 					} else {
+
+
 						if (S_application.getApplication().s_userYayun == null) {
 							// 修改
 							Intent intent = new Intent();
@@ -409,7 +411,7 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 					loginUser = getSystemLogin().login(name, pwd);
 					if (loginUser != null) { // 成功获取
 						GApplication.user = loginUser;// 系统登录
-						S_application.getApplication().s_yayunJigouId = GApplication.user.getOrganizationId();
+						S_application.getApplication().s_yayunJigouId = GApplication.user.getOrganizationId();// 付海清业务专用
 						S_application.getApplication().s_userYayunName = GApplication.user.getLoginUserName();
 						msg.what = 1;
 					} else { // 未成功获取
