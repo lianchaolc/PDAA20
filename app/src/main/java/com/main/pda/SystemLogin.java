@@ -266,6 +266,9 @@ public class SystemLogin extends Activity implements OnTouchListener {
 				name = editname.getText().toString();
 				pwd = editpwd.getText().toString();
 				login.setBackgroundResource(R.drawable.buttom_selector_bg);
+				long lastClick=0;
+
+					lastClick = System.currentTimeMillis();
 				// 非空验证
 				if (isnull(name, pwd)) {
 					// 有网络才可以执行登录操作
@@ -273,6 +276,7 @@ public class SystemLogin extends Activity implements OnTouchListener {
 					if (network) {
 						// 提示
 						try {
+
 							managerClass.getRuning().runding(SystemLogin.this, "正在登录...");
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -281,6 +285,10 @@ public class SystemLogin extends Activity implements OnTouchListener {
 
 						// 登陆方法
 						getSystemLogin().login(name, pwd);
+						if (System.currentTimeMillis() - lastClick >= 5000){
+							managerClass.getRuning().remove()	;
+							System.out.println("大于等于5m 移除遮罩");
+						}
 					} else {
 						managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
 						// Toast.makeText(this,"网络没有连通，无法登录",
