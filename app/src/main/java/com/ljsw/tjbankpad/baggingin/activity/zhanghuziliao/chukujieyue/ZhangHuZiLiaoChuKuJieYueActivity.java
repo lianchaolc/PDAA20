@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.ljsw.tjbankpad.baggingin.activity.dizhiyapinruku.DiZhiYaPinRuKu;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.util.TurnListviewHeight;
@@ -122,7 +124,13 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 						List<OutboundBorrowingTaskListEntity> listobtlentity = Arrays.asList(obbtlelenth);
 						List arrList = new ArrayList(listobtlentity);
 						Outboundtasklist.addAll(arrList);
-						handler.sendEmptyMessage(2);
+						if(null==Outboundtasklist){
+							handler.sendEmptyMessage(3);
+						}else{
+							handler.sendEmptyMessage(2);
+
+						}
+
 					} else {
 						handler.sendEmptyMessage(3);
 					}
@@ -156,9 +164,15 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				Intent mIntent = new Intent(ZhangHuZiLiaoChuKuJieYueActivity.this,
 						ZhangHuZiLiaoChuRuKuMingXiActivity.class);
-				mIntent.putExtra("cvoun", Outboundtasklist.get(arg2).getCVOUN());// 传值的cvoun号
-				mIntent.putExtra("FLAG", Outboundtasklist.get(arg2).getFLAG());// 类型
-				startActivity(mIntent);
+				if(Outboundtasklist.get(arg2).getCVOUN().equals("")||Outboundtasklist.get(arg2).getFLAG().equals("")){
+					Toast.makeText(ZhangHuZiLiaoChuKuJieYueActivity.this,"数据不正确",Toast.LENGTH_SHORT).show();
+				}else{
+					Log.i(TAG, "账户名称===" + Outboundtasklist.get(arg2).getCVOUN()+"!!!!!!!!!!!"+Outboundtasklist.get(arg2).getFLAG()); // /网络请求
+					mIntent.putExtra("cvoun", Outboundtasklist.get(arg2).getCVOUN());// 传值的cvoun号
+					mIntent.putExtra("FLAG", Outboundtasklist.get(arg2).getFLAG());// 类型
+					startActivity(mIntent);
+				}
+
 
 			}
 		});
@@ -179,7 +193,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 				manager.getAbnormal().timeout(ZhangHuZiLiaoChuKuJieYueActivity.this, "网络连接失败,重试?", OnClick1);
 				break;
 			case 2:
-				getData();
+//				getData();
 				adapter.notifyDataSetChanged();
 				zhanghuziliaorenwuliebiao.setAdapter(adapter);
 //				new TurnListviewHeight(zhanghuziliaorenwuliebiao);// 放开
@@ -195,9 +209,9 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 				});
 				break;
 
-			case 4:
-				getData();
-				break;
+//			case 4:
+//				getData();
+//				break;
 
 			default:
 				break;
@@ -209,9 +223,9 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 	/****
 	 * 添加数据
 	 */
-	private void getData() {
-
-	}
+//	private void getData() {
+//
+//	}
 
 	class QingLingAdapter extends BaseAdapter {
 		LayoutInflater lf = LayoutInflater.from(ZhangHuZiLiaoChuKuJieYueActivity.this);
