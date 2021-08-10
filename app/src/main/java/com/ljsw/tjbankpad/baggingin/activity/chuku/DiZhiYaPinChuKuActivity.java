@@ -143,6 +143,11 @@ public class DiZhiYaPinChuKuActivity extends Activity implements OnClickListener
 			case 2:
 				manageractivity.getRuning().remove();
 				getData();
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				adapter.notifyDataSetChanged();
 				dzyp_outlistview.setAdapter(adapter);
 				// new TurnListviewHeight(listview);
@@ -265,7 +270,6 @@ public class DiZhiYaPinChuKuActivity extends Activity implements OnClickListener
 				for (int j = 0; j < arraycleanList.get(i).getDetailList().size(); j++) {
 					detailist.clear();
 				}
-
 				o_Application.qinglingruku.add(new QingLingRuKu(arraycleanList.get(i).getCLEARTASKNUM() + "",
 						arraycleanList.get(i).getCOUNT(), getcopyboxlist));
 
