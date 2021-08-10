@@ -299,7 +299,10 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                                 }
                             });
                         }
-                        dialog.show();
+                        if (!isFinishing()) {
+                            dialog.show();
+                        }
+
 
                         break;
                     case 12:
@@ -318,7 +321,11 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                                 }
                             });
                         }
-                        dialogfa.show();
+
+
+                        if (!isFinishing()) {
+                            dialogfa.show();
+                        }
                         break;
                 }
             }
@@ -527,6 +534,13 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
         f2 = null;
         f1 = null;
         firstSuccess = false;
+
+        if (null != dialog) {
+            dialog.dismiss();
+        }
+        if (null != dialogfa) {
+            dialogfa.dismiss();
+        }
     }
 
     /***
