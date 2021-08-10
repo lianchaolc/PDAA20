@@ -144,7 +144,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center|left"
-            android:text="4"
+            android:text=""
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_30" >
         </TextView>
