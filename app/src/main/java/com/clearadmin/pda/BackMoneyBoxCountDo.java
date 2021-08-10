@@ -39,6 +39,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * // 回收钞箱清点操作
+ */
 public class BackMoneyBoxCountDo extends Activity {
 	// 回收钞箱清点
 
@@ -58,6 +61,7 @@ public class BackMoneyBoxCountDo extends Activity {
 	String planNum;
 	Bundle bundle; //
 	TextView nowbox;
+	private   Button  backbox_checkebtn;//确认复核数据 按钮
 
 	public static boolean hadfindbox;
 
@@ -138,6 +142,10 @@ public class BackMoneyBoxCountDo extends Activity {
 
 		suer.setOnTouchListener(new Touch());
 		back.setOnTouchListener(new Touch());
+		//组件
+
+		backbox_checkebtn=(Button) findViewById(R.id.backbox_checkebtn);
+		backbox_checkebtn.setOnTouchListener(new Touch());
 
 		// 清点重试单击事件
 		click = new View.OnClickListener() {
@@ -239,7 +247,9 @@ public class BackMoneyBoxCountDo extends Activity {
 			}
 
 		};
-
+//		box.setBrand(array[0]);
+//		box.setNum(array[1]);
+//		box.setMoney(array[2]);
 		// 获取钞箱信息重试单击事件
 		getboxclick = new View.OnClickListener() {
 			@Override
@@ -310,6 +320,11 @@ public class BackMoneyBoxCountDo extends Activity {
 				case R.id.count_suer:
 					suer.setBackgroundResource(R.drawable.buttom_select_press);
 					break;
+					case  R.id.backbox_checkebtn://  fuqing
+
+
+
+						break;
 
 				}
 			}
