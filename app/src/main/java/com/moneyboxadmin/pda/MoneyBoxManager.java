@@ -412,4 +412,10 @@ public class MoneyBoxManager extends Activity implements OnTouchListener {
 	// return false;
 	// }
 
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		magagerClass.getRuning().remove();
+	}
 }
