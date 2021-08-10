@@ -329,4 +329,9 @@ public class PlanWay_fragment extends Fragment implements PlanFragment {
 
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		managerClass.getRuning().remove();
+	}
 }
