@@ -48,6 +48,7 @@ import afu.util.BaseFingerActivity;
  */
 public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouchListener{
 
+    private static final String TAG ="BankDoublePersonLogin" ;
     ImageView backimg;
     TextView name1; // 名字1
     TextView name2; // 名字2
@@ -244,6 +245,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                         // 指纹登录操作及提示
                         firstSuccess = true;
                         fingerDo();
+                        Log.e(TAG,"指纹验证");
                         break;
                     case -1:
                         resultmsg.setText("验证异常，请重按");
