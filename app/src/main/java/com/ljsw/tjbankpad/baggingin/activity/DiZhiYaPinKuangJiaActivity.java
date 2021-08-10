@@ -28,6 +28,7 @@ import com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.guihuan.ruku.ZhangHuZ
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.qf.entity.QingLingRuKu;
 import com.ljsw.tjbankpda.util.Skip;
+import com.main.pda.SystemLogin;
 import com.manager.classs.pad.ManagerClass;
 import com.service.FixationValue;
 
@@ -45,6 +46,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static java.lang.Integer.parseInt;
 
 /***
  * 抵制押品最外层框架 条目点击
@@ -105,11 +108,17 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	private AccountInfoInHandoverEntity aiihEntity = new AccountInfoInHandoverEntity();
 	public static DiZhiYaPinKuangJiaActivity instance = null;
 
+	private ManagerClass managerClass;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_kuangjia);
-		permission = GApplication.user.getLoginUserId();
+		setContentView(R.layout.activity_kuangjia);try {
+			permission = GApplication.user.getLoginUserId();
+		}catch (Exception e){
+			System.out.print("DiZhiYaPinKuangJiaActivity"+e);
+		}
+
 		initView();
 		instance = this;
 //		账户资料交接入库的第一个页面：查询待做的线路数
@@ -122,6 +131,10 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 //					getAccountTurnOverLineCount();// 网络请求
 			}
 		};
+
+		managerClass = new ManagerClass();
+		// 公共视图文件初始化
+		managerClass.getGolbalView().Init(this);
 	}
 
 	@Override
@@ -136,6 +149,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 			getClearCollateralTaskListAndCount();// 获取任务数量
 		} else if (GApplication.user.getLoginUserId().equals("4")) {// 库管员
 			// 获取的账户中心
+			managerClass.getRuning().runding(DiZhiYaPinKuangJiaActivity.this, "正在获取数据...");
 			getWarehouseTaskListAndCount();// 管库员查看档案柜任务列表（包括抵质押品和账户资料）
 			tvTitleItem.setText("档案柜");
 		} else if (GApplication.user.getLoginUserId().equals("27")) {
@@ -390,7 +404,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		if (GApplication.user.getLoginUserId() != null) {
 
 			System.out.print("id====" + GApplication.user.getLoginUserId());
-			show(Integer.parseInt(GApplication.user.getLoginUserId()));
+			show(parseInt(GApplication.user.getLoginUserId()));
 		}
 
 	}
@@ -512,15 +526,30 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 			startActivity(i7);
 			break;
 		case R.id.zhanghuziliaoguihuan: // 账户资料归还
+			int  return_int=0;
+			return_int=wtlac.getAccountReturnCount();
+
+			if(return_int==0){
+				Toast.makeText(DiZhiYaPinKuangJiaActivity.this, "没有任务请刷新", 500).show();
+			}else{
+
 			Intent i8 = new Intent(DiZhiYaPinKuangJiaActivity.this, ZhangHuZiLiaoGuiHuanActivity.class);
 			Log.e("", "===" + "ZhangHuZiLiaoChuKuJieYueActivity");
+
 			startActivity(i8);
+			}
 			break;
 		// 账户资料待归还
 		case R.id.zhanghuziliaoguihuanrukudairuku: // 账户资料待归还
+			String netcoutn=returnofaccountinformation_tv.getText().toString().trim();
+		     int  newcount =parseInt(netcoutn);
+			if(newcount>0){
 			Intent i9 = new Intent(DiZhiYaPinKuangJiaActivity.this, ZhangHuZiLiaoZhangHuDaiGuiHuanActivity.class);
 			Log.e("", "===" + "ZhangHuZiLiaoChuKuJieYueActivity");
 			startActivity(i9);
+			}else{
+				Toast.makeText(DiZhiYaPinKuangJiaActivity.this, "没有任务请刷新", 500).show();
+			}
 			break;
 		// /账户中心入账中心
 		case R.id.ruzhanghuzhongxin:
@@ -622,7 +651,8 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 				if (wtlac.getAccountInCount() != 0) {
 					getAccountUnHandoverCountAndList();// 入库交接的网络请求——库管员
 				}
-
+				managerClass.getRuning().remove();
+				managerClass.getAbnormal().remove();
 				break;
 			case 9:
 //				mClearCollateralTaskListAndCount.getCollateralBaggingCount()
