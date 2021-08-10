@@ -38,7 +38,9 @@ public class Head_fragment extends Fragment {
 		name = (TextView) getActivity().findViewById(R.id.head_name);
 		address = (TextView) getActivity().findViewById(R.id.head_address);
 		if (GApplication.user != null) {
-			name.setText("欢迎你:" + GApplication.user.getLoginUserName());
+			name.setText("欢迎你:" + GApplication.loginUsername);// 修改2021.8.3 显示为最外层登录人员
+//			"欢迎你："
+//			name.setText("欢迎你:" + GApplication.user.getLoginUserName());
 			address.setText(GApplication.user.getOrganizationName());
 		}
 
