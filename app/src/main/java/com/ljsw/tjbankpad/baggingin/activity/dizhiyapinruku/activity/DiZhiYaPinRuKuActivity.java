@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.os.SystemClock;
 import android.widget.*;
 import com.application.GApplication;
@@ -93,8 +94,8 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 				super.run();
 				try {
 					dzyprkparms = new GetResistCollateralBaggingService().GetResistCollateralBaggingCleanList();
-					Log.e(TAG, "测试数据源!!!!!!!!!!!!!!!!!!getRuKu" + dzyprkparms.toString());
-					if (!dzyprkparms.equals("")) {
+					Log.e(TAG, "测试数据源!!!!!!!!!!!!!!!!!!getRuKu" + dzyprkparms);
+					if (null!=dzyprkparms||!dzyprkparms.equals("")) {
 						Gson gson = new Gson();
 						DiZhiYaPinRuKu[] mDiZhiYaPinRuKu = gson.fromJson(dzyprkparms, DiZhiYaPinRuKu[].class);
 						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[0]);
@@ -134,6 +135,7 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 		ql_ruku_back.setOnClickListener(this);
 		// / 点击时条目跳转
 		dzypitemListView.setOnItemClickListener(new OnItemClickListener() {
+			@SuppressLint("WrongConstant")
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				if (dzyprukuArrayList != null && dzyprukuArrayList.get(arg2) != null
