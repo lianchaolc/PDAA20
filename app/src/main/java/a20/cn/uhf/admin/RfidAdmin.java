@@ -6,7 +6,9 @@ import hdjc.rfid.operator.RFID_Device;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import android.widget.ListView;
 import a20.android_serialport_api.SerialPort;
@@ -17,6 +19,7 @@ import android.os.Message;
 import android.util.Log;
 import android_rfid_control.powercontrol;
 import poka_global_constant.GlobalConstant;
+
 
 public class RfidAdmin {
 
@@ -29,7 +32,7 @@ public class RfidAdmin {
 	private static final String TAG = "MainActivityRFID";
 	public Handler hand = null;
 	Bundle bundle;
-
+	public   static    boolean   booleanstrnewThread=false;
 	public RfidAdmin() {
 		if (facilityGPIO == null)
 			facilityGPIO = new GPIO(GlobalConstant.IO_RFID_POWER);
@@ -135,7 +138,7 @@ public class RfidAdmin {
 			try {
 				while (runFlag) {
 					if (startFlag) {
-						Log.d(TAG, "==========InventoryThread============");
+						Log.d(TAG, "==========InventoryThread============" + Thread.currentThread().getName());
 //					manager.stopInventoryMulti()
 						epcList = manager.inventoryRealTime();
 
@@ -150,10 +153,15 @@ public class RfidAdmin {
 									bundle = new Bundle();
 								}
 								m.what = RFID_Device.rdid_a20;
+								if(booleanstrnewThread){ //开启子线程fangfa2021.8.18
+									m.what = RFID_Device.rdid_a20_newthread;
+								}else{
+								}
 								bundle.putString("number", epcStr);
 								m.setData(bundle);
 								Log.i("hand", hand + "");
 								hand.sendMessage(m);
+
 
 							}
 						}
@@ -164,6 +172,7 @@ public class RfidAdmin {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+
 					}
 				}
 			} catch (Exception e) {
