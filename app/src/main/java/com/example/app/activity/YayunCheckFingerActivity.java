@@ -5,6 +5,7 @@ import com.example.app.entity.UserInfo;
 import com.example.app.util.Skip;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
+import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
@@ -20,6 +21,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class YayunCheckFingerActivity extends Activity implements OnTouchListener {
 	Button login; // 登陆按钮
@@ -61,6 +64,9 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 		return systemLogin;
 	}
 
+	private String  usernamebyYayunyuan;//  解决押运员甲 登录账号后押运员乙  用者账号的问题导致无法做业务
+//	解决方法  每次进入   之前  存下账号与登录后做进行对比
+	private String  userPwbyYayunyuan;
 	@SuppressLint("HandlerLeak")
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +125,7 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 			}
 		};
 
-		// Hand通知操作
+		// Hand通知操作  这里我看到是系统登录我感觉应该是局部的押运员登录2021.7.29
 		getSystemLogin().handler_login = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -132,7 +138,18 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 
 					Intent intent = getIntent();
 					Bundle bundle = intent.getExtras();
-					if (bundle != null) {
+					usernamebyYayunyuan=GApplication.user.getYonghuZhanghao();
+					if (bundle != null) {   //  优化 押运员账号不一致的问题
+
+						Log.e("YayunCheckFinger","两个 人指纹一致");
+						if(null!=usernamebyYayunyuan&&usernamebyYayunyuan.equals(name)){
+//							//  当前的两个账号相同
+//							Toast.makeText(YayunCheckFingerActivity.this, "当前的两个账号相执行原节点下业务逻辑", Toast.LENGTH_SHORT).show();
+						}else{
+////							 登录人和这个业务节点的  账号不一致
+//							Toast.makeText(YayunCheckFingerActivity.this, " 登录人和这个业务节点的  账号不一致执行  清除账号并对现在输入账号进行清除并提示", Toast.LENGTH_SHORT).show();
+						Log.e("YayunCheckFinger","请输入登录人账号");
+							}
 						UserInfo u = new UserInfo(name, pwd);
 						GApplication.userInfo = u;// 保存押运员的账号和密码
 						// 把登陆后的押运员的姓名传过去；
@@ -142,6 +159,7 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 						if (flag.equals("chuku")) {// 跳到出入库押运员处的验证
 //   修该20210302
 							if(GApplication.user.getLoginUserId().equals("9")){
+
 								managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
 								Skip.skip(YayunCheckFingerActivity.this, YayunJiaojieActivity.class, bundle, 0);
 
@@ -164,6 +182,10 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 //   修该20210302
 //
 							if(GApplication.user.getLoginUserId().equals("9")){
+								S_application.s_userbycar_yaun=	GApplication.userInfo.getNameZhanghao();
+								S_application.s_userbycar_yaun_Id=GApplication.user.getLoginUserId();
+								S_application.userbycar_yaun_name=GApplication.user.getLoginUserName();
+					            S_application.userbycar_yaun_pwd= GApplication.userInfo.getPwd();
 								managerClass.getRuning().runding(YayunCheckFingerActivity.this, "正在验证用户名和密码...");
 								Skip.skip(YayunCheckFingerActivity.this, KuanXiangJiaoJieYaYunActivity.class, bundle, 0);
 
@@ -176,6 +198,7 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 												managerClass.getAbnormal().remove();
 												editname.setText("");
 												editpwd.setText("");
+												Bundle bundle=null;// 2021.7.29 设置为null
 											}
 										});
 							}
@@ -369,7 +392,23 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 		super.onStop();
 		managerClass.getRuning().remove();
 		YayunCheckFingerActivity.this.finish();
+
 	}
 
-	// login.setOnClickListener(this);
+	/***
+	 * 你登录没成功 即 是你登录没成功 我给你返回的就是budle 返回为null  两个押运员验证时 都要相同方法
+	 * 2021.7.29
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == event.KEYCODE_BACK) {
+				// 回退是直接返回到指纹交接
+			    Bundle bundle=null;// 2021.7.29 设置为null
+				YayunCheckFingerActivity.this.finish();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+// login.setOnClickListener(this);
 }
