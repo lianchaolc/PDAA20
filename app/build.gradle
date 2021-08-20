@@ -9,7 +9,7 @@ android {
         targetSdkVersion 28
 
         ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips", 'armeabi-v8a'
         }
     }
 
@@ -30,7 +30,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.google.code.gson:gson:2.1'
-
+    implementation 'org.greenrobot:greendao:3.0.1'
     implementation 'com.elvishew:xlog:1.6.1'
     implementation 'com.hjq:xxpermissions:5.5'
     implementation files('libs/android-async-http-1.4.9.jar')
