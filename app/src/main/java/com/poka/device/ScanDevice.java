@@ -37,6 +37,9 @@ public class ScanDevice extends Thread {
 
 	private Timer mTimer;
 
+	/***
+	 * 二维码扫描串口方法在这里20210312
+	 */
 	/**
 	 * if throw exception, serialport initialize fail.
 	 *
@@ -56,6 +59,7 @@ public class ScanDevice extends Thread {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			System.out.print("异常："+e);
 		}
 		/** clear useless data **/
 		byte[] temp = new byte[1024];
