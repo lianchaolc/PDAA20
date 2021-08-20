@@ -78,8 +78,8 @@ public class YayunSelectTaskActivity extends Activity implements OnClickListener
 				try {
 					Log.e(TAG, "----GApplication.use.getUserzhanghu()" + GApplication.use.getUserzhanghu());
 					// 用户账号
-//					String userZhanghu = GApplication.use.getUserzhanghu();
-					String userZhanghu = S_application.getApplication().s_userYayun;
+					String userZhanghu = GApplication.use.getUserzhanghu();
+//					String userZhanghu = S_application.getApplication().s_userYayun;
 					String netresultClean = new AccountAndResistCollateralService().getnotastlindata(userZhanghu);
 					Log.e(TAG, "返回原数据" + netresultClean.toString());
 					if (!netresultClean.equals("") || netresultClean != null
