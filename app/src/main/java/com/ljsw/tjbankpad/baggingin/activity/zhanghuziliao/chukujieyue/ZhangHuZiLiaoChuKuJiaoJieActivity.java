@@ -71,6 +71,7 @@ public class ZhangHuZiLiaoChuKuJiaoJieActivity extends FragmentActivity implemen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_zhanghuziliaochukujiaojiel);
 		Intent mIntent = getIntent();
+		Bundle  bundle=this.getIntent().getExtras();
 		accrossCvoun = mIntent.getStringExtra("cvoun");
 		FLAG = mIntent.getStringExtra("FLAG");
 		instance = this;
@@ -272,7 +273,7 @@ public class ZhangHuZiLiaoChuKuJiaoJieActivity extends FragmentActivity implemen
 
 		@Override
 		public int getCount() {
-			Log.e("o_Application.numberlist.size()", "测试" + o_Application.numberlist.size());
+			Log.e("TAGo_Application.numberlist.size()", "测试" + o_Application.numberlist.size());
 			return o_Application.numberlist.size();
 		}
 
