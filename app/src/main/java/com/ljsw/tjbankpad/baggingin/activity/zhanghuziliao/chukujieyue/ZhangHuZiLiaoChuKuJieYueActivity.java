@@ -8,6 +8,8 @@ import java.util.List;
 import com.application.GApplication;
 import com.example.pda.R;
 import com.google.gson.Gson;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +48,6 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 	private ListView zhanghuziliaorenwuliebiao;
 	private ImageView ivblack;
 	private Button ql_ruku_update;// 更新请求
-	private List<String> itemlist = new ArrayList<String>();
 	/// 变量
 	private String userZhangHu = "";// 传输的登录人员
 	private String netResultTask = "";// 网络返回的任务列表
@@ -60,7 +61,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 	// 适配器
 	private QingLingAdapter adapter;
 	public static ZhangHuZiLiaoChuKuJieYueActivity instance = null;
-
+	private ManagerClass managerClass;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +71,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 		adapter = new QingLingAdapter();
 
 		manager = new ManagerClass();
-
+		managerClass = new ManagerClass();
 		OnClick1 = new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -87,10 +88,11 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 		if (o_Application.qinglingruku.size() > 0) {
 			o_Application.qinglingruku.clear();
 		}
-//		adapter.notifyDataSetChanged();
-		zhanghuziliaorenwuliebiao.setAdapter(adapter);
-
 		getOutboundBorrowingTaskList();// 网络请求();
+//		adapter.notifyDataSetChanged();
+//		zhanghuziliaorenwuliebiao.setAdapter(adapter);
+
+
 		OnClick1 = new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -106,11 +108,13 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 
 	public void getOutboundBorrowingTaskList() {
 		new Thread() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void run() {
 				super.run();
 				try {
 					// 账号
+					managerClass.getRuning().runding(ZhangHuZiLiaoChuKuJieYueActivity.this, "正在登录...");
 					userZhangHu = GApplication.user.getYonghuZhanghao();
 					Log.i(TAG, "账户名称===" + userZhangHu); // /网络请求
 					netResultTask = new AccountInfomationReturnService().getAccountOutTaskList(userZhangHu);
@@ -123,6 +127,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 
 						List<OutboundBorrowingTaskListEntity> listobtlentity = Arrays.asList(obbtlelenth);
 						List arrList = new ArrayList(listobtlentity);
+						Outboundtasklist.clear();
 						Outboundtasklist.addAll(arrList);
 						if(null==Outboundtasklist){
 							handler.sendEmptyMessage(3);
@@ -160,6 +165,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 		zhanghuziliaorenwuliebiao = (ListView) findViewById(R.id.zhanghuziliaorenwuliebiao);
 		zhanghuziliaorenwuliebiao.setOnItemClickListener(new OnItemClickListener() {
 
+			@SuppressLint("LongLogTag")
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				Intent mIntent = new Intent(ZhangHuZiLiaoChuKuJieYueActivity.this,
@@ -182,6 +188,7 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 
 		@Override
 		public void handleMessage(Message msg) {
+			managerClass.getRuning().remove();
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case 0:
@@ -193,10 +200,11 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 				manager.getAbnormal().timeout(ZhangHuZiLiaoChuKuJieYueActivity.this, "网络连接失败,重试?", OnClick1);
 				break;
 			case 2:
-//				getData();
-				adapter.notifyDataSetChanged();
+
+				manager.getRuning().remove();
 				zhanghuziliaorenwuliebiao.setAdapter(adapter);
-//				new TurnListviewHeight(zhanghuziliaorenwuliebiao);// 放开
+				new TurnListviewHeight(zhanghuziliaorenwuliebiao);// 放开
+				adapter.notifyDataSetChanged();
 				break;
 			case 3:
 				manager.getRuning().remove();
@@ -209,10 +217,6 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 				});
 				break;
 
-//			case 4:
-//				getData();
-//				break;
-
 			default:
 				break;
 			}
@@ -223,9 +227,6 @@ public class ZhangHuZiLiaoChuKuJieYueActivity extends Activity implements OnClic
 	/****
 	 * 添加数据
 	 */
-//	private void getData() {
-//
-//	}
 
 	class QingLingAdapter extends BaseAdapter {
 		LayoutInflater lf = LayoutInflater.from(ZhangHuZiLiaoChuKuJieYueActivity.this);
