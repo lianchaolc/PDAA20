@@ -1,6 +1,8 @@
 package com.ljsw.tjbankpda.util;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.strings.tocase.CaseString;
@@ -12,6 +14,8 @@ import android.util.Log;
 import hdjc.rfid.operator.INotify;
 
 public class ZzxLuruSaomaoUtil implements INotify {
+
+	private static final String TAG ="ZzxLuruSaomaoUtil" ;
 	private Handler handler;
 	private String nowNumber = "";
 	private String newNumber;
@@ -24,7 +28,8 @@ public class ZzxLuruSaomaoUtil implements INotify {
 		}
 		System.out.println("扫到的标签为=" + number + "/" + CaseString.getBoxNum2(number));
 		newNumber = number;
-
+Log.e(TAG,"周转箱子扫工具类");
+//		Log.e(TAG,"周转箱子扫工具类"+new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
 		if (nowNumber.equals(newNumber)) {
 			return;
 		}
@@ -44,6 +49,7 @@ public class ZzxLuruSaomaoUtil implements INotify {
 		bundle.putString("Num", boxNum);
 		m.setData(bundle);
 		m.what = 1;
+//		Log.e(TAG,"周转箱子扫工具类"+new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
 		handler.sendMessage(m);
 
 	}
