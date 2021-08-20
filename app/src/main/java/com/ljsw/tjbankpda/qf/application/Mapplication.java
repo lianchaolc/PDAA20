@@ -39,7 +39,7 @@ public class Mapplication {
 	public List<Box> boxLtZhongkong = new ArrayList<Box>();
 	public List<String> boxLtDizhi = new ArrayList<String>();
 	public List<String> boxLtNumber = new ArrayList<String>();// 存放扫描到的箱子
-	public List<String> boxremberNumberDizhi = new ArrayList<String>();// 扫到箱子总数 记录核心做对比
+    public List<String> boxremberNumberDizhi = new ArrayList<String>();// 扫到箱子总数 记录核心做对比 	o_Application.numberlist.
 	public List<String> boxremberDizhi = new ArrayList<String>();// 目的记录上个页面传过来的 记录
 	public List<String> boxremberDizhi1 = new ArrayList<String>();// 目的记录上个页面传过来的 记录传一半的情况
 	public String renwudan;// 任务单号
