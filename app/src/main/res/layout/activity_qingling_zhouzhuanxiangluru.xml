@@ -4,13 +4,13 @@
     android:layout_width="@dimen/dimen_480x"
     android:layout_height="@dimen/dimen_800y"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
         android:background="#00aeFF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <fragment
             android:id="@+id/fg_qingling_zhouzhuanxiangluru_loginUserInfo"
@@ -22,7 +22,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
-        android:background="@color/bule_main" >
+        android:background="@color/bule_main">
 
         <TextView
             android:id="@+id/textView1"
@@ -57,12 +57,12 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen_620y" >
+        android:layout_height="@dimen/dimen_620y">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,17 +100,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_35x"
-		    android:text=""
+                    android:text=""
                     android:textColor="@color/back"
-		    android:textSize="@dimen/text_size_40" />
+                    android:textSize="@dimen/text_size_40" />
             </LinearLayout>
 
-<!-- 2020-05-22-查看2 -->
+            <!-- 2020-05-22-查看2 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_20y"
-                android:layout_marginTop="@dimen/dimen_20y" >
+                android:layout_marginTop="@dimen/dimen_20y">
 
                 <TextView
                     android:layout_width="0dp"
@@ -121,8 +121,7 @@
                     android:gravity="center"
                     android:text="请扫描周转箱"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/text_size_35" >
-                </TextView>
+                    android:textSize="@dimen/text_size_35"></TextView>
 
                 <Button
                     android:id="@+id/btn_qinglingzhou"
@@ -135,8 +134,7 @@
                     android:gravity="center"
                     android:text="重新扫描"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_35" >
-                </Button>
+                    android:textSize="@dimen/text_size_35"></Button>
             </LinearLayout>
 
             <ListView
@@ -147,7 +145,8 @@
                 android:layout_marginLeft="@dimen/dimen_10x"
                 android:layout_marginRight="@dimen/dimen_10x"
                 android:layout_marginTop="@dimen/dimen_10y" />
-              <View
+
+            <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_marginBottom="5dp"
@@ -158,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10y"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="@dimen/dimen_0x"
@@ -181,7 +180,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_qingling_zhouzhuanxiangluru_suokoubianhao"
@@ -210,7 +209,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10y"
-                android:orientation="horizontal" >
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/ed_qingling_zhouzhuanxiangluru_suokoubianhao"
@@ -222,6 +223,7 @@
                     android:background="@drawable/money_count"
                     android:ems="10"
                     android:paddingLeft="@dimen/dimen_5x"
+
                     android:textSize="@dimen/text_size_35" />
             </LinearLayout>
 
@@ -229,7 +231,7 @@
                 android:layout_width="@dimen/dimen_460x"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_15y" >
+                android:layout_marginTop="@dimen/dimen_15y">
 
                 <TextView
                     android:layout_width="@dimen/dimen_0x"
@@ -256,18 +258,17 @@
             </LinearLayout>
 
             <ListView
-                android:layout_marginTop="@dimen/dimen_10y"
                 android:id="@+id/lv_qingling_zhouzhuanxiangluru_zhuangxiangInfo"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_gravity="center" >
-            </ListView>
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_10y"></ListView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="@dimen/dimen_30x" >
+                android:layout_marginRight="@dimen/dimen_30x">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -295,7 +296,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_30y"
-                android:layout_marginTop="@dimen/dimen_30y" >
+                android:layout_marginTop="@dimen/dimen_30y">
 
                 <Button
                     android:id="@+id/btn_qingling_zhouzhuanxiangluru_tongji"
