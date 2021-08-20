@@ -27,6 +27,7 @@ import com.entity.SystemUser;
 import com.example.app.entity.User;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
+import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.db.service.SecondLogin;
 import com.ljsw.tjbankpda.main.ZhouzhuanxiangMenu;
 import com.ljsw.tjbankpda.util.Skip;
@@ -154,7 +155,8 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 					Log.e(TAG, " S_application.getApplication().s_userYayun-----"
 							+ S_application.getApplication().s_userYayun);
 					error = 3;
-					if (GApplication.user != null && !GApplication.user.getLoginUserId().equals("9")) {
+//					GApplication.user
+					if (o_Application.yayunyuan != null && !o_Application.yayunyuan.getLoginUserId().equals("9")) {
 						if (S_application.getApplication().s_userYayun == null) {
 							managerClass.getAbnormal().timeout(YayunDenglu.this, "请使用押运员身份!!!", new OnClickListener() {
 								@Override
@@ -175,7 +177,7 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 							intent.putExtra("name", name);
 							GApplication.use = new User();
 							GApplication.use.setUserzhanghu(name);
-							GApplication.use.setUsername(GApplication.user.getLoginUserName());
+							GApplication.use.setUsername(o_Application.yayunyuan.getLoginUserName());
 							YayunDenglu.this.setResult(YayunDenglu.this.RESULT_OK, intent);
 							YayunDenglu.this.finish();
 						} else if (S_application.getApplication().s_userYayun != null
@@ -186,7 +188,7 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 							intent.putExtra("name", name);
 							GApplication.use = new User();
 							GApplication.use.setUserzhanghu(name);
-							GApplication.use.setUsername(GApplication.user.getLoginUserName());
+							GApplication.use.setUsername(o_Application.yayunyuan.getLoginUserName());
 							YayunDenglu.this.setResult(YayunDenglu.this.RESULT_OK, intent);
 							YayunDenglu.this.finish();
 						} else {
@@ -410,9 +412,11 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 				} else {
 					loginUser = getSystemLogin().login(name, pwd);
 					if (loginUser != null) { // 成功获取
-						GApplication.user = loginUser;// 系统登录
-						S_application.getApplication().s_yayunJigouId = GApplication.user.getOrganizationId();// 付海清业务专用
-						S_application.getApplication().s_userYayunName = GApplication.user.getLoginUserName();
+						o_Application.yayunyuan=null;
+						o_Application.yayunyuan = loginUser;
+//						GApplication.user = loginUser;// 系统登录 2021.8.3
+						S_application.getApplication().s_yayunJigouId =o_Application.yayunyuan.getOrganizationId();
+						S_application.getApplication().s_userYayunName = o_Application.yayunyuan.getLoginUserName();
 						msg.what = 1;
 					} else { // 未成功获取
 						msg.what = 0;
