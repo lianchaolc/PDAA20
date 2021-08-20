@@ -43,7 +43,7 @@ import com.poka.device.ShareUtil;
  * @author Administrator 仿 押运员 上缴 lc 202004120
  */
 public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity {
-    protected static final String TAG = "ACFingerActivity";
+    protected static final String TAG = "AccountCenterByHomemangerFingerActivity";
     private TextView top, fname, bottom, logintitle, dzypyy_usertextView1;// 顶部提示 指纹对应人员姓名 底部提示,标题头, 人员名称
     private ImageView finger;// 指纹图片
     private ManagerClass managerClass;
@@ -85,9 +85,18 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
                          * revised by zhangxuewei 2016-8-25 add frame confirm
                          */
                         finger.setImageBitmap(ShareUtil.finger_gather);
-                        fname.setText(result_user.getUsername());
+                        try{
 
-                        dzypyy_usertextView1.setText(result_user.getUsername());
+                            if(null==result_user.getUsername()||result_user.getUsername().equals("")){}else{
+                                fname.setText(result_user.getUsername());
+                                dzypyy_usertextView1.setText(result_user.getUsername());
+                            }
+
+                        }catch (Exception e){
+                            System.out.print("异常："+e);
+                        }
+
+
                         getRuKuByAccount();// 提交数据到账户中心
 
                         break;
@@ -279,7 +288,7 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
                 System.out.println("yyl============" + GApplication.user.getOrganizationId());
                 if (result_user != null) {// 验证成功
                     GApplication.use = result_user;
-                    S_application.s_userguankuyaun = result_user/// 这里更改可能出错
+                    S_application.s_zhanghuzhonginguanliyaun = result_user/// 这里更改可能出错
                             .getUserzhanghu();
 
 //					连个方法传递参数
@@ -328,7 +337,7 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
                 finger.setImageResource(R.drawable.result_isok);
                 bottom.setText("验证成功!");
                 if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
-                    S_application.s_userYayun = bundle.getString("name");
+                    S_application.s_zhanghuzhongxinguanliname = bundle.getString("name");
                 }
 //				getRuKu() ;// 重新网络请求
                 // 跳转下一个页面
@@ -343,7 +352,7 @@ public class AccountCenterByHomemangerFingerActivity extends BaseFingerActivity 
 //				}	
 
                 //// 又上一个页面返回来的时候进行方法
-                FingerUser = S_application.s_userYayun;
+                FingerUser = S_application.s_zhanghuzhongxinguanliname;
                 dzypyy_usertextView1.setText(bundle.getString("name"));
                 if (FingerUser.equals("")) {
 
