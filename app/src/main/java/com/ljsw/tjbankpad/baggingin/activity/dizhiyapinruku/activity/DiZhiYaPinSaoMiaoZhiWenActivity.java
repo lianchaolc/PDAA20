@@ -73,6 +73,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
 
     private String userId = "";
 
+    private Intent dizhiyapinIntent;
 
     @SuppressLint("HandlerLeak")
     @Override
@@ -81,8 +82,9 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
         setContentView(R.layout.activity_dizhiyapinjiaojie);
         initView();
         /// 账户资料归还时传过得集合和任务号
-        Tasknumber = getIntent().getStringExtra("tasknumber");
-        returnaccountinteninfolist = (List<String>) getIntent().getSerializableExtra("list");
+        dizhiyapinIntent = getIntent();
+        Tasknumber = dizhiyapinIntent.getStringExtra("tasknumber");
+        returnaccountinteninfolist = (List<String>) dizhiyapinIntent.getSerializableExtra("list");
         // 判断应该走哪个方法
 
         try {
@@ -93,12 +95,13 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
             // TODO: handle exception
         }
 
-        intent = new Intent();
+
         managerClass = new ManagerClass();
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+        Intent        intentlogin = new Intent();
                 super.handleMessage(msg);
                 isFlag = true;
                 switch (msg.what) {
@@ -126,7 +129,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                             long now = System.currentTimeMillis();
                             if (now - lastClickTime > 1000) {
                                 lastClickTime = now;
-                                getRuKu();// 调用提交接口抵制押品提交
+                                getRuKuBysecurityLibrary();// 调用提交接口抵制押品提交
                             } else {
                                 return;
                             }
@@ -140,8 +143,8 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                         top.setText("验证失败" + fingerCount + "次，请重按");
                         if (fingerCount >= ShareUtil.three) {
                             // 跳用户登录
-                            intent.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
-                            DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intent, 1);
+                            intentlogin.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
+                            DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intentlogin, 1);
                             top.setText("");
                             fingerCount = 0;
                         }
@@ -154,8 +157,8 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                         top.setText("验证失败" + fingerCount + "次，请重按");
                         if (fingerCount >= ShareUtil.three) {
                             // 跳用户登录
-                            intent.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
-                            DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intent, 1);
+                            intentlogin.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
+                            DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intentlogin, 1);
                             top.setText("");
                             fingerCount = 0;
                         }
@@ -212,14 +215,17 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                                     startActivity(intent);
 
 								/*if (rfid != null) {
-									getRfid().close_a20();
+                                    getRfid().close_a20();
 								}*/
                                     DiZhiYaPinSaoMiaoZhiWenActivity.this.finish();
                                 }
 
                             });
                         }
-                        dialogforreturnaccountinten.show();
+                        if (!isFinishing()) {
+                            dialogforreturnaccountinten.show();
+                        }
+
                         break;
                     case 998:// 提交失败显示dialog
                         dialogfa = new Dialog(DiZhiYaPinSaoMiaoZhiWenActivity.this);
@@ -236,7 +242,10 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                             }
 
                         });
-                        dialogfa.show();
+                        if (!isFinishing()) {
+                            dialogfa.show();
+                        }
+
 //	            	  更改显示的弹窗  需要测试
 //	            	managerClass.getResultmsg().resultmsg(null, "提交数据失败",false);
 
@@ -253,6 +262,20 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
     protected void onResume() {
         super.onResume();
         isFlag = true;
+        Log.e(TAG, "number");
+        if(returnaccountinteninfolist==null){
+            returnaccountinteninfolist=   (List<String>)dizhiyapinIntent.getSerializableExtra("list");
+
+        }
+        Log.e(TAG, "number"+returnaccountinteninfolist);
+        Log.e(TAG, "Tasknumber"+Tasknumber);
+        try {
+            if (!Tasknumber.equals("") && Tasknumber != null) {
+                flag = true;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     private void initView() {
@@ -323,7 +346,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                 System.out.println("yyl============" + GApplication.user.getOrganizationId());
                 if (result_user != null) {// 验证成功
                     GApplication.use = result_user;
-                    S_application.s_userguankuyaun = result_user.getUserzhanghu();/// 这里更改可能出错
+//                    S_application.s_userguankuyaun = result_user.getUserzhanghu();/// 这里更改可能出错
 
                     if (flag) {
                         userId = result_user.getUserzhanghu();
@@ -339,7 +362,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                 m.what = -4;// 超时验证
             } catch (Exception e) {
                 e.printStackTrace();
-                m.what = -1;// 验证异常
+                m.what = -0;// 验证异常
             } finally {
                 handler.sendMessage(m);
                 GolbalUtil.onclicks = true;
@@ -369,11 +392,11 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
             Bundle bundle = data.getExtras();
             String isOk = bundle.getString("isOk");
             if (isOk.equals("success")) {
-                fname.setText(o_Application.yayunyuan.getLoginUserName());
+                fname.setText(o_Application.LibraryCentreuser.getLoginUserName());
                 finger.setImageResource(R.drawable.result_isok);
                 bottom.setText("验证成功!");
                 if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
-                    S_application.s_userYayun = bundle.getString("name");
+                    S_application.s_librarycenthander_yaun = bundle.getString("name");
                 }
 //				当账号密码登陆成功后的网络请求判断190402
 //				userId=o_Application.yayunyuan.getYonghuZhanghao();/// 登录账户
@@ -381,11 +404,15 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
 
                 if (flag) {
                     userId = bundle.getString("name");
+                    if (returnaccountinteninfolist == null) {
+                        returnaccountinteninfolist = (List<String>) dizhiyapinIntent.getSerializableExtra("list");
+
+                    }
                     undateAccountReturnFromCenterToWareHouse(); // 账户中心归还任务列表提交数据
                 } else {
                     number = bundle.getString("name");
                     ;
-                    getRuKu();// 调用提交接口抵制押品
+                    getRuKuBysecurityLibrary();// 调用提交接口抵制押品
                 }
 
                 // 跳转下一个页面
@@ -409,7 +436,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
     /**
      * 抵制押品入库提交数据网络请求 库管员
      */
-    public void getRuKu() {
+    public void getRuKuBysecurityLibrary() {
 //		manager.getRuning()
 //				.runding(DiZhiYaPinSaoMiaoZhiWenActivity.this, "数据加载中...");
         new Thread() {
@@ -418,8 +445,9 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                 super.run();
                 try {
                     number = GApplication.loginname;
+                    String updataNum = o_Application.qlruku.getDanhao();
                     Log.e(TAG, "number" + o_Application.qlruku.getDanhao() + "==" + number);
-                    updataresult = new GetResistCollateralBaggingService().GetUpdata(o_Application.qlruku.getDanhao(),
+                    updataresult = new GetResistCollateralBaggingService().GetUpdata(updataNum,
                             number);
                     Log.e(TAG, "测试" + updataresult.toString());
                     if (updataresult.equals("00")) {// 返回结果为00 表示成功 显示提交成功 否者返回失败或者是没有任务
