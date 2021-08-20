@@ -111,7 +111,7 @@ public class ClearAddMoneyOutDo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 禁止休睡眠
+		// 禁止休睡眠1
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.addmomey_out_detail);
