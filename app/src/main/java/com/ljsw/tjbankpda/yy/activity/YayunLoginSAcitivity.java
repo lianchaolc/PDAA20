@@ -301,7 +301,7 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
             Bundle bundle = data.getExtras();
             String isOk = bundle.getString("isOk");
             if (isOk.equals("success")) {
-                fname.setText(GApplication.use.getUsername());
+                fname.setText(GApplication.use.getUsername());//  返回系统登录人员lianchao 20201.3.31jilu  无修改
                 finger.setImageResource(R.drawable.result_isok);
                 bottom.setText("验证成功!");
                 if (bundle.getString("name") != null
