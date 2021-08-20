@@ -27,8 +27,8 @@ public class SystemSet extends Activity {
 		netset.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+//				new GolbalUtil().gotoActivity(SystemSet.this, InputPWBychangAdressActivity.class, null, 0);  当前类代码修改前会输入账号money当前版本不上
 				new GolbalUtil().gotoActivity(SystemSet.this, Service_Address.class, null, 0);
-
 			}
 		});
 //		rfid��д
