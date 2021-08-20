@@ -104,7 +104,7 @@
                 android:layout_height="@dimen/dimen_60y"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bottom_gray"
-                android:text="抵制押品"
+                android:text="抵质押品"
                 android:textSize="@dimen/text_size_35" />
         </LinearLayout>
 
