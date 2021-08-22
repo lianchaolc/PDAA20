@@ -4,10 +4,13 @@ import afu.util.SoundUtil;
 import hdjc.rfid.operator.RFID_Device;
 
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,13 +18,20 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.example.app.activity.KuanxiangChuruActivity;
+import com.example.app.activity.YayunJiaojieActivity;
 import com.example.app.util.Skip;
 import com.example.pda.R;
+import com.ljsw.tjbankpad.baggingin.activity.QualitativeWareScanningbyDiZhi;
 import com.ljsw.tjbankpda.qf.application.Mapplication;
 import com.ljsw.tjbankpda.qf.entity.QuanbieXinxi;
 import com.ljsw.tjbankpda.qf.fragment.QinglingZhuangxiangDizhiFragment;
@@ -31,12 +41,15 @@ import com.ljsw.tjbankpda.qf.service.QingfenRenwuService;
 import com.ljsw.tjbankpda.util.Table;
 import com.manager.classs.pad.ManagerClass;
 
+
 /**
  * 请领装箱 界面
  * 
  * @author FUHAIQING ceshi
  */
 public class QinglingZhuangxiangActivity extends FragmentActivity {
+	protected static final String TAG = "QinglingZhuangxiangActivity";
+
 	private Button btnXianjin;
 	private Button btnZhongkong;
 	private Button btnDizhi;
@@ -64,6 +77,8 @@ public class QinglingZhuangxiangActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		SoundUtil.mContext = QinglingZhuangxiangActivity.this;
 		getRfid().scanOpen();
 		bundle = super.getIntent().getExtras();// 接收从上个界面（QinglingZhuangxiangInfoActivity.class）传入的bundle
@@ -78,7 +93,14 @@ public class QinglingZhuangxiangActivity extends FragmentActivity {
 		ivBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				QinglingZhuangxiangActivity.this.finish();
+				manager.getAbnormal().timeout(QinglingZhuangxiangActivity.this, "确定返回上一层页面已扫描数据将会清除", new OnClickListener() {
+					@Override
+					public void onClick(View arg0) {
+						manager.getAbnormal().remove();
+						QinglingZhuangxiangActivity.this.finish();
+					}
+				});
+
 			}
 		});
 
@@ -133,11 +155,20 @@ public class QinglingZhuangxiangActivity extends FragmentActivity {
 			}
 		});
 		btnLuru.setOnClickListener(new OnClickListener() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void onClick(View arg0) {
-				manager.getRuning().runding(QinglingZhuangxiangActivity.this, "正在开启RIFI,请稍等...");
 				getRfid().scanclose();
+				Log.e(TAG,"地址押品结束开启周转箱"+new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
+				manager.getRuning().runding(QinglingZhuangxiangActivity.this, "正在开启RIFI,请稍等...");
+
 				Skip.skip(QinglingZhuangxiangActivity.this, QinglingZhouzhuanxiangluruActivity.class, bundle, 0);
+				if(null!=manager){
+					manager.getRuning().remove();
+				}
+
+				System.gc();
+
 			}
 		});
 		btnTongji.setOnClickListener(new OnClickListener() {
@@ -273,4 +304,31 @@ public class QinglingZhuangxiangActivity extends FragmentActivity {
 
 	}
 
+	/***
+	 * 这里返回提示不远返回自带方法 直接返回true拦截这次消耗
+	 * @param keyCode
+	 * @param event
+	 * @return
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			manager.getAbnormal().timeout(QinglingZhuangxiangActivity.this, "确定返回上一层页面已扫描数据将会清除", new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					manager.getAbnormal().remove();
+					QinglingZhuangxiangActivity.this.finish();
+
+				}
+			});
+
+		}
+		return true;
+	}
+
+
+
+
 }
+
