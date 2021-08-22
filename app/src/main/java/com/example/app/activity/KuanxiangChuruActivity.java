@@ -71,7 +71,8 @@ public class KuanxiangChuruActivity extends Activity {
 
 		load();
 		Listener();
-		zaoAdapter = new ZaochuAdapter();
+		if(zaoAdapter==null){zaoAdapter = new ZaochuAdapter();}else{zaoAdapter.notifyDataSetChanged();}//  xiugai 20201.3.30  避免刷新崩溃
+
 		wanAdapter = new WanruAdapter();
 
 	}
@@ -79,6 +80,7 @@ public class KuanxiangChuruActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		manager.getRuning().remove();//解决上个页面无法关闭问题
 		if (GApplication.zaosonglist != null) {
 			GApplication.zaosonglist.clear();
 		}
@@ -158,6 +160,11 @@ public class KuanxiangChuruActivity extends Activity {
 				manager.getRuning().runding(KuanxiangChuruActivity.this, "数据加载中...");
 				getDate();// 获取日期
 				// getZaoChuInfo();
+				if(null==zaoAdapter){
+
+				}else{
+					zaoAdapter.notifyDataSetChanged();
+			}
 
 				break;
 			case R.id.zaochu:
@@ -712,8 +719,14 @@ public class KuanxiangChuruActivity extends Activity {
 			}
 			Skip.skip(KuanxiangChuruActivity.this, KuanxiangCaidanActivity.class, null, 0);
 			KuanxiangChuruActivity.this.finish();
+			manager.getRuning().remove();
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		manager.getRuning().remove();
+	}
 }

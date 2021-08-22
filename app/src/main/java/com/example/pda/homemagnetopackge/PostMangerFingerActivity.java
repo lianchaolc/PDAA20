@@ -327,9 +327,9 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
                 System.out.println("yyl============" + GApplication.user.getLoginUserId());
                 System.out.println("yyl============" + GApplication.user.getOrganizationId());
                 if (result_user != null) {// 验证成功
-                    GApplication.use = result_user;
-                    S_application.s_userguankuyaun = result_user.getUserzhanghu();// / 这里更改可能出错
-                    FingerUser = S_application.s_userguankuyaun;
+                    GApplication.use = result_user;//  这里没有user
+                    S_application.s_zhanghuzhonginguanliyaun = result_user.getUserzhanghu();// / 这里更改可能出错
+                    FingerUser = S_application.s_zhanghuzhonginguanliyaun;
                     if (flag) {
 
                     } else {
@@ -394,8 +394,8 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
                 }
 //				
                 if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
-                    S_application.getApplication().s_userYayun = bundle.getString("name");
-                    FingerUser = S_application.getApplication().s_userYayun;
+                    S_application.getApplication().s_zhanghuzhonginguanliyaun = bundle.getString("name");
+                    FingerUser = S_application.getApplication().s_zhanghuzhonginguanliyaun;
                 }
                 // 当账号密码登陆成功后的网络请求判断190402
                 // userId=o_Application.yayunyuan.getYonghuZhanghao();/// 登录账户

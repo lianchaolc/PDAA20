@@ -23,12 +23,15 @@ import com.example.app.entity.User;
 import com.example.app.entity.UserInfo;
 import com.example.app.util.Skip;
 import com.example.pda.R;
+import com.ljsw.tjbankpda.yy.application.S_application;
 import com.manager.classs.pad.ManagerClass;
 import com.o.service.KuanxiangjiaojieService;
 import com.o.service.YanZhengZhiWen;
 import com.poka.device.ShareUtil;
 
 import afu.util.BaseFingerActivity;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
     private ImageView finger;// 回退 指纹图片
@@ -95,7 +98,21 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
     /**
      * 早送
      */
+    String userbycarid = "";
+    String userbycarpw = "";
+
     public void saveBoxinfo() {
+        if (null == S_application.s_userbycar_yaun || S_application.s_userbycar_yaun.equals("")) {
+
+        } else {
+            userbycarid = S_application.s_userbycar_yaun;
+        }
+        if (null == S_application.userbycar_yaun_pwd || S_application.userbycar_yaun_pwd.equals("")) {
+
+        } else {
+            userbycarpw = S_application.userbycar_yaun_pwd;
+
+        }
         manager.getRuning().runding(KuanXiangJiaoJieYaYunActivity.this, "提交中...");
         new Thread() {
 
@@ -116,7 +133,8 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                         zsisOk = kj.saveBoxHandover(GApplication.kxc.getXianlubianhao(),
                                 Box.substring(0, Box.length() - 1), GApplication.sk.getNetId(), // listView列表对象的网点号
                                 GApplication.loginJidouId, GApplication.loginjueseid, ShareUtil.ivalBack, userIds,
-                                GApplication.userInfo.getNameZhanghao(), GApplication.userInfo.getPwd());// 此处修改添加指纹验证失败的帐号登录信息
+//                                GApplication.userInfo.getNameZhanghao(), GApplication.userInfo.getPwd());// 此处修改添加指纹验证失败的帐号登录信息
+                                userbycarid, userbycarpw);// 此处修改添加指纹验证失败的帐号登录信息, GApplication.userInfo.getPwd());// 此处修改添加指纹验证失败的帐号登录信息
                     } else if (ShareUtil.zhiwenid_left != null && ShareUtil.zhiwenid_right == null) {
                         // 第一个人验证成功，第二个人验证失败
                         // 款箱早送交接
@@ -145,10 +163,16 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                                 GApplication.userInfo.getNameZhanghao(), GApplication.userInfo.getPwd());// 此处修改添加指纹验证失败的帐号登录信息
                     }
                     if (zsisOk != null) {
-                        handler.sendEmptyMessage(17);
-                    } else if(zsisOk.equals("30")) {
-                        handler.sendEmptyMessage(12);
-                    } else {
+                        Log.e(TAG, "zsisOk" + zsisOk);
+                        if (zsisOk.equals("30")) {
+                            handler.sendEmptyMessage(12);
+                        } else if (zsisOk.equals("早送款箱交接成功！")) {
+                            Log.e(TAG, "16zou");
+                            handler.sendEmptyMessage(17);
+                        }
+
+
+                    } else {//shibai
                         handler.sendEmptyMessage(16);
                     }
                 } catch (SocketTimeoutException e) {
@@ -257,7 +281,7 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     } else if (code.equals("99")) {
                         System.out.println("晚收失败!");
                         handler.sendEmptyMessage(5);
-                    }else{
+                    } else {
                         handler.sendEmptyMessage(20);// 提交失败
                     }
                 } catch (SocketTimeoutException e) {
@@ -340,14 +364,14 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     }
                     if (wisOk.equals("99") || wisOk.equals("97")) {
                         handler.sendEmptyMessage(9);
-                    } else if(wisOk.equals("30")){
+                    } else if (wisOk.equals("30")) {
                         //  角色信息不正确
                         handler.sendEmptyMessage(12);
 
-                    } else if (wisOk.equals ("00")) {
+                    } else if (wisOk.equals("00")) {
                         handler.sendEmptyMessage(8);// 提交成功
-                    }else{
-                        handler.sendEmptyMessage(20);// 提交成功
+                    } else {
+                        handler.sendEmptyMessage(20);// 提交失败
                     }
                 } catch (SocketTimeoutException e) {
                     e.printStackTrace();
@@ -630,7 +654,7 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
                     break;
                 case 20:
                     manager.getRuning().remove();
-                                    manager.getAbnormal().remove();
+                    manager.getAbnormal().remove();
                     Toast.makeText(KuanXiangJiaoJieYaYunActivity.this, "提交失败", Toast.LENGTH_SHORT).show();
                     break;
                 default:
@@ -723,5 +747,11 @@ public class KuanXiangJiaoJieYaYunActivity extends BaseFingerActivity {
         ShareUtil.finger_gather = img;
 
         yanzhengFinger();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        manager.getRuning().remove();//
     }
 }

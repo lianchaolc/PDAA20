@@ -19,6 +19,7 @@ import com.manager.classs.pad.ManagerClass;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -173,6 +174,7 @@ public class QinglingWangdianActivity extends FragmentActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_qingfenrenwu_qinling_wangdian);
 		lvWangdian = (ListView) findViewById(R.id.lv_qingfenrenwu_qingling_wangdian_Info);
+		lvWangdian.setCacheColorHint(Color.TRANSPARENT);
 		tvXianluName = (TextView) findViewById(R.id.tv_qingfenrenwu_qingling_wangdian_zhihangName);
 		ivBack = (ImageView) findViewById(R.id.iv_qingfenrenwu_qingling_wangdian_back);
 		ivBack.setOnClickListener(new OnClickListener() {

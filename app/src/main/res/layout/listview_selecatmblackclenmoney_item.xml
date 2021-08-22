@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/dimen_10x"
+    android:layout_marginRight="@dimen/dimen_10x"
+    android:layout_marginTop="@dimen/dimen_10y"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#CCCCCC" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="@dimen/dimen_45y"
+            android:background="#CCCCCC" >
+        </View>
+        <TextView
+            android:id="@+id/lvselectatm_id"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_45y"
+            android:layout_marginRight="@dimen/dimen_15x"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="11"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_20" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="@dimen/dimen_45y"
+            android:background="#CCCCCC" >
+        </View>
+
+        <TextView
+            android:id="@+id/lvselectatm_name"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_45y"
+            android:layout_marginRight="@dimen/dimen_30x"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="FB0000001"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_20" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="@dimen/dimen_45y"
+            android:background="#CCCCCC" >
+        </View>
+
+        <TextView
+            android:id="@+id/lvselectatm_atm"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="@dimen/dimen_45y"
+            android:layout_marginLeft="@dimen/dimen_15x"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="A区5号柜4层404"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_20" />
+
+        <View
+            android:layout_width="@dimen/dimen_1x"
+            android:layout_height="@dimen/dimen_45y"
+            android:background="#CCCCCC" >
+        </View>
+    </LinearLayout>
+
+ <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1y"
+        android:background="#CCCCCC" >
+    </View>
+</LinearLayout>

@@ -73,6 +73,7 @@ public class InAccountCenterFingerActivity extends BaseFingerActivity{
 		setContentView(R.layout.activity_dizhiyapinjiaojie);
 		intent = getIntent();
 		accountInfolist = (List<String>) getIntent().getSerializableExtra("list");
+		Log.e(TAG, "测试" );
 		initView();
 		if (accountInfolist == null) {
 			Flags = false;

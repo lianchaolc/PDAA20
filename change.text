@@ -1,0 +1,102 @@
+CashToPackgersActivity
+
+HomeMangerToAddCashToPackgersActivity
+添加集合  完成显示
+ShangJiaoQingFen_o_qf
+activity_shangjiaoqingfen_qf
+MySpinner
+QingfenRenwuService
+ShangJiaoQingFen_o_qf_Print_Entity
+
+
+2021.3.3
+清分管里员进行符合代码  在1.3 上线版本进行隐藏 y_home_menus.xml  AndroidManifest.xml
+
+超超:
+1getTaskAndMissCount 2getMoneyType 3 updateReScan 4getReScanDetail  5queryUnHandleCdnos
+
+超超:
+只要看下后台是否在使用就好
+头像是猫啊:
+帮你看了，这些接口都再，没有被标记弃用
+超超:
+那就是现在还在使用？
+《现钞管理系统的这个项目》
+头像是猫啊:
+我没法告诉你是否在使用是否有效
+好的
+头像是猫啊:
+接口在现钞系统这个项目
+CheckLibrarySupplementActivity  进行隐藏
+
+1  修改 mainactivity   底部显示版本号不正确代码 和不全
+2  优化制卡 显示字体不正确
+3  修改刷机后二维码扫描 首次进入不正长启动问题
+
+
+2021.3.23
+
+YyrwJjYanzhengActivity lei
+可以在这加入清空方法
+//		 可以在这加入清空方法
+//		S_application.s_userYayun = null;// 修改2021.3.30  weishixian
+
+
+
+
+款箱,周转箱    要求登录人和指纹的人要一致 2021.3.31
+问题 是上面两个模块的押运员是不可以被替换的
+
+
+YayunCheckFingerActivity   可以写一个变量  接受值在登录钱下当前账号密码作为对比依据
+
+待完成    版本更新按住home 后应该结束进度条停止下载
+
+已经添加
+晚收交接  KuanXiangJiaoJieYaYunActivity     manager.getRuning().remove();//
+
+
+
+2021.5.12
+xinjin
+com.clearadmin.pda.SelectATMByBlcakMoneyBoxCountDoActivity
+
+2021.7.27
+
+GApplication.user.getYonghuZhanghao()  带user为 系统
+
+operator =result_user.getUserid();// 当前页面将账户名进行传入  或者GApplication.use.getYonghuZhanghao()
+
+ final  Intent intent1=getIntent();
+
+
+ 2021.8.10
+                     o_Application.LibraryCentreuser = loginUser;
+                         S_application.getApplication().s_librarycenthander_Id = o_Application.LibraryCentreuser.getOrganizationId();
+                         S_application.getApplication().s_librarycenthander_name = o_Application.LibraryCentreuser.getLoginUserName();
+                         Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_Id);
+                         Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_yaun);
+
+
+
+
+                         <!--android:theme="@style/myAppThem2"-->
+
+                      android java.lang.OutOfMemoryError: Failed to allocat
+
+                      硬件加速
+                      https://blog.csdn.net/qq_34450601/article/details/80383059?utm_medium=
+                      distribute.pc_relevant.none-task-blog-2~default~baidujs_title~defa
+                      ult-0.control&spm=1001.2101.3001.4242
+
+
+                      2021.8.18
+                        java.lang.IllegalStateException: The content of the adapter has changed but ListView did
+                        not receive a notification. Make sure the content of your adapter is not modified from a
+                        background thread, but only from the UI thread. Make sure your adapter calls notifyDataSetChanged()
+                         when its content changes. [in ListView(2131297230, class android.widget.ListView)
+                          with Adapter(class com.ljsw.tjbankpda.qf.fragment.QinglingZhuangxiangDizhiFragment$RightAdapter)]
+
+
+                gittokn
+                          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

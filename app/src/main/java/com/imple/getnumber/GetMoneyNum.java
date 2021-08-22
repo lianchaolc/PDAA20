@@ -27,7 +27,7 @@ public class GetMoneyNum implements INotify {
 	 */
 	@Override
 	public void getNumber(String number) {
-
+		Log.e("!!number!!!!!", number);
 	    number = number.trim();
 		Log.i("number", number);
 		if (number == null || !checkNum(number)) {

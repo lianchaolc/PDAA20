@@ -48,9 +48,11 @@ public class GApplication extends Application {
 	public static List<KuanXiangBox> boxHandoverList = new ArrayList<KuanXiangBox>();
 	public static KuanXiangBox sk;
 	public static KuanXiangChuRu kxc;
-	public static SystemUser user; // 系统最外层登录人员
+	public static SystemUser user; // 系统最外层登录人员   第一个操作人人登录实体代码
 	public static User use;// 库管员
-	public static UserInfo userInfo;
+	public static UserInfo userInfo;// 有关押运员最多——miam  密码
+
+
 	public static Finger finger_left;// 出库指纹验证左人员信息
 	public static Finger finger_right;// 出库指纹验证右人员信息
 	public static User wd_user1;// 网点人员一
@@ -172,7 +174,7 @@ public class GApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		CrashHandler.getInstance().init(this);
+//		CrashHandler.getInstance().init(this); 2021.8.3 注释掉
 //		Util.initSoundPool(this);
 
 		initLog();

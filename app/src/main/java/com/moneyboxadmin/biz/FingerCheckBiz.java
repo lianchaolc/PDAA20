@@ -88,7 +88,7 @@ public class FingerCheckBiz {
 			hand_finger.sendMessage(m);
 		}
 
-		// 异步后台操作
+		// 异步后台操作 这里库管员指纹但是押运员可以验证成功一个人
 		@Override
 		protected Object doInBackground(Object... arg0) {
 			try {

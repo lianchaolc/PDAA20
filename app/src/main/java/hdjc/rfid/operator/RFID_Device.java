@@ -19,6 +19,7 @@ public class RFID_Device implements IRFID_Device {
 	public static final int fingerIval = 0x224;
 	public static final int fingerPraper = 0x222;
 	public static final int rdid_a20 = 99;
+	public static final int rdid_a20_newthread = 98;
 	private RfidAdmin rfid_a20;
 	private boolean opanAndColse = true;
 
@@ -34,9 +35,11 @@ public class RFID_Device implements IRFID_Device {
 	private static final String parameterWireless = "wireless";
 	private static final String parameterMicro = "micro";
 
+
+
 	final Handler h = new Handler(new Handler.Callback() {
 		@Override
-		public boolean handleMessage(Message msg) {
+		public boolean handleMessage(final Message msg) {
 
 			switch (msg.what) {
 			case ScanDevice.SCAN:
@@ -110,6 +113,20 @@ public class RFID_Device implements IRFID_Device {
 					readData.sendMessage(message);
 				}
 				break;
+
+				case rdid_a20_newthread:
+					// 加入到子线
+
+//					new Thread(new Runnable() {
+//						@Override
+//						public void run() {
+					Log.d("RFID_Device", "==========InventoryThread============rdid_a20_newthread+" + Thread.currentThread().getName());
+					Bundle bnewthread = msg.getData();
+					String numbernewthread = bnewthread.getString("number");
+					RFID_Device.this.notify(numbernewthread);
+//						}
+//					}).start();
+					break;
 			default:
 
 				break;
@@ -171,6 +188,8 @@ public class RFID_Device implements IRFID_Device {
 	 * 通知外部，调用方得到编号
 	 */
 	private void notify(String number) {
+		Log.d("RFID_Device", "==========InventoryThread============notify+" + Thread.currentThread().getName());
+
 		Log.e("TAG", "liu_rui, notify: " + notifys + number);
 		if (notifys != null)
 			notifys.getNumber(number);//
@@ -301,7 +320,7 @@ public class RFID_Device implements IRFID_Device {
 
 	/**
 	 * 模块电源，使能是否关闭（当前只有指纹模块）
-	 * 
+	 *
 	 * @param ID  需要操作的模块 如：GlobalConstant.IO_RFID_POWER
 	 * @param val 0 = 关闭，1 = 打开
 	 */
@@ -311,7 +330,7 @@ public class RFID_Device implements IRFID_Device {
 
 	/***
 	 * 后加入
-	 * 
+	 *
 	 * @param b
 	 */
 	public void setVoice(boolean b) {

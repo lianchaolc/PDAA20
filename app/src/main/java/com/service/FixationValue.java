@@ -20,10 +20,9 @@ public class FixationValue {
 //	public static String url_zh = "http://172.16.3.1:8888/cashman/webservice";   //邱工二期及以前
 //	public static String url_zh = "http://192.168.1.182:8080/cash/webservice";
 //	public static String url_zh = "http://192.168.1.131:8088/Cash20201124/webservice";//
-
-    //	public static String url_zh = "http://3212g13a06.zicp.vip/cashman/webservice";//
-    public static String url_zh = "http://192.168.1.145:8081/cashman/webservice/";//
-
+public static String url_zh = "http://361de15631.wicp.vip/webcash/webservice";  //  gaohogn
+//    	public static String url_zh = "http://3212g13a06.zicp.vip/cashman/webservice";//
+//    public static String url_zh = "http://192.168.1.145:8081/cashman/webservice/";//
 
 //	http://192.168.1.131:8088/Cash20201124/webservice/ckc/getMoneyEditionList
 //	public static String url_zls="http://192.168.1.161:8081/cash/webservice";//  昝老师的url

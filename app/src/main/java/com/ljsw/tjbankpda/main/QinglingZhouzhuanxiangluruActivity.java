@@ -5,7 +5,9 @@ import com.example.pda.R;
 import hdjc.rfid.operator.RFID_Device;
 
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ljsw.tjbankpda.db.application.o_Application;
@@ -19,6 +21,7 @@ import com.ljsw.tjbankpda.util.TurnListviewHeight;
 import com.ljsw.tjbankpda.util.ZzxLuruSaomaoUtil;
 import com.manager.classs.pad.ManagerClass;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -41,6 +44,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 /**
  * 周转箱录入界面
@@ -84,6 +88,7 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 
 	// 进入判断传入周转箱的号码是否符合上传的要求
 	private Handler handler = new Handler() {
+		@SuppressLint("LongLogTag")
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -91,10 +96,6 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 			case 1:
 
 				String no = msg.getData().getString("Num");
-				//
-				// for (int i = 0; i < zzxluruList.size(); i++) {
-				// System.out.print("========"+ zzxluruList.get(i));
-				// }
 				if (zzxluruList.contains(no)) {
 					return;
 				} else {
@@ -138,8 +139,6 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 							}
 						}
 
-						// if(zzxluruList.contains(object))
-						// zzxluruList.add(no);
 					} else {
 						Log.d(TAG, "周转箱不符合规则");// 未测试
 					}
@@ -223,18 +222,20 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_qingling_zhouzhuanxiangluru);
-
 		bundle = super.getIntent().getExtras();
 		orderNum = bundle.getString("qlNum");
 		Mapplication.getApplication().renwudan = bundle.getString("renwudan");
 		Mapplication.getApplication().jigouid = bundle.getString("jigouid");
 		System.out.println("周转箱界面--订单号=" + orderNum);
+		initView();
 
+		loadData();
 		listviewqinglingzhuouzhuanxingluru = (ListView) findViewById(R.id.listviewqinglingzhuouzhuanxingluru);
 		showselecttv = (TextView) findViewById(R.id.showselecttv);
 		btn_qinglingzhou = (Button) findViewById(R.id.btn_qinglingzhou);
 		btn_qinglingzhou.setOnClickListener(new OnClickListener() {
 
+			@SuppressLint("LongLogTag")
 			@Override
 			public void onClick(View v) {
 				if (null != zzxluruList) {
@@ -251,23 +252,7 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 
 			}
 		});
-		tvNo = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_bianhao);
-		edOnceNo = (EditText) findViewById(R.id.ed_qingling_zhouzhuanxiangluru_suokoubianhao);
-		tvAdd = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_luru);
-		lvInfo = (ListView) findViewById(R.id.lv_qingling_zhouzhuanxiangluru_zhuangxiangInfo);
-		tvTotal = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_total);
-		btnTongji = (Button) findViewById(R.id.btn_qingling_zhouzhuanxiangluru_tongji);
-		btnOk = (Button) findViewById(R.id.btn_qingling_zhouzhuanxiangluru_wancheng);
-		btnOk.setEnabled(false);
-		btnOk.setBackgroundResource(R.drawable.button_gray);
-		ivBack = (ImageView) findViewById(R.id.iv_qingling_zhouzhuanxiangluru_back);
-		ivBack.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				getRfid().close_a20();
-				QinglingZhouzhuanxiangluruActivity.this.finish();
-			}
-		});
+
 		if (Mapplication.getApplication().IsDizhiOK && Mapplication.getApplication().IsXianjingOK
 				&& Mapplication.getApplication().IsZhongkongOK
 				&& Mapplication.getApplication().ltZzxNumber.size() > 0) {
@@ -279,8 +264,7 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 		}
 
 		dysmUtil.setHand(handler);
-		za = new ZhuangxiangInfoAdapter(ltZhouzhuanxiang);
-		lvInfo.setAdapter(za);
+
 		// 判断是否有录入周转箱,如果没有,确认按钮为不可点击状态
 		tvAdd.setOnClickListener(new OnClickListener() {
 			@Override
@@ -346,6 +330,7 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 					o_Application.numberlist.clear();
 					// 添加修改
 				}
+
 			}
 		});
 		btnTongji.setOnClickListener(new OnClickListener() {
@@ -355,6 +340,36 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 			}
 		});
 
+
+
+	}
+
+	private void loadData() {
+		za = new ZhuangxiangInfoAdapter(ltZhouzhuanxiang);
+		lvInfo.setAdapter(za);
+
+	}
+
+
+
+	private void initView() {
+		tvNo = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_bianhao);
+		edOnceNo = (EditText) findViewById(R.id.ed_qingling_zhouzhuanxiangluru_suokoubianhao);
+		tvAdd = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_luru);
+		lvInfo = (ListView) findViewById(R.id.lv_qingling_zhouzhuanxiangluru_zhuangxiangInfo);
+		tvTotal = (TextView) findViewById(R.id.tv_qingling_zhouzhuanxiangluru_total);
+		btnTongji = (Button) findViewById(R.id.btn_qingling_zhouzhuanxiangluru_tongji);
+		btnOk = (Button) findViewById(R.id.btn_qingling_zhouzhuanxiangluru_wancheng);
+		btnOk.setEnabled(false);
+		btnOk.setBackgroundResource(R.drawable.button_gray);
+		ivBack = (ImageView) findViewById(R.id.iv_qingling_zhouzhuanxiangluru_back);
+		ivBack.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				getRfid().close_a20();
+				QinglingZhouzhuanxiangluruActivity.this.finish();
+			}
+		});
 	}
 
 	@Override
@@ -364,6 +379,7 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 		getRfid().addNotifly(dysmUtil);
 		getRfid().open_a20();
 		new TurnListviewHeight(lvInfo);
+		manager.getRuning().remove();
 	}
 
 	@Override

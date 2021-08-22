@@ -169,6 +169,8 @@ public class KuanxiangjiaojieService {
 		String msg = soap.getProperty("msg").toString();
 		if (code.equals("00")) {
 			return msg;
+		}else if(code.equals("30")){
+			return code;
 		}
 
 		return null;

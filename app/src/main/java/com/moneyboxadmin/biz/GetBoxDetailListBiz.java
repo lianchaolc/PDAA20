@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.application.GApplication;
 import com.entity.BoxDetail;
+import com.entity.BoxInfoByEmply;
 import com.golbal.pda.GolbalUtil;
 import com.moneyboxadmin.service.GetBoxDetailListService;
 import com.moneyboxadmin.service.GetEmptyRecycleCashboxInDetailService;
@@ -22,6 +23,7 @@ import com.moneyboxadmin.service.GetemptyCashBoxOutDetailService;
 public class GetBoxDetailListBiz {
 
 	public static List<BoxDetail> list = null; // 箱子明细集合
+	public static List<BoxInfoByEmply> boxInfoByEmplylist=null;//  空钞箱集合
 
 	public Handler hand_detail;
 	public static int boxCount = 0; // 空钞箱出库数量
@@ -37,7 +39,7 @@ public class GetBoxDetailListBiz {
 		return getUtil = getUtil == null ? new GolbalUtil() : getUtil;
 	}
 
-	// 已清回收钞箱明细
+	// 已清回收钞箱明细2021.4.26
 	GetEmptyRecycleCashboxInDetailService getEmptyRecycleCashboxInDetail;
 
 	GetEmptyRecycleCashboxInDetailService getGetEmptyRecycleCashboxInDetail() {
@@ -148,19 +150,22 @@ public class GetBoxDetailListBiz {
 					// 空钞箱出库明细
 				} else if ("空钞箱出库".equals(bizName)) {
 
-					Map<String, Object> map = getEmptyCashBoxOutDetail().getemptyCashBoxOutDetail(planNum);
+//					Map<String, Object> map = getEmptyCashBoxOutDetail().getemptyCashBoxOutDetail(planNum);
+					Map<String, Object> map=getEmptyCashBoxOutDetail().getemptyCashBoxOutDetailinfo(planNum);
 					list = (ArrayList<BoxDetail>) map.get("list");
+//					boxInfoByEmplylist = (ArrayList<BoxInfoByEmply>) map.get("list");
 					cqEupCount = (String) map.get("count");
 					boxCount = 0;
 					// 获取总钞箱数量
 					for (int i = 0; i < list.size(); i++) {
 						boxCount = boxCount + Integer.parseInt(list.get(i).getNum()); // 箱子数量
+//						boxCount = boxCount +Integer.parseInt(boxInfoByEmplylist.get(i).getBrandcount());
 					}
 
 					Log.i("222", bizName);
 					//
 				} else {
-					list = getBoxDetailList().getCashBoxDetail(planNum, type);
+					list = getBoxDetailList().getCashBoxDetail(planNum, type);  //java.lang.NullPointerException: Attempt to invoke interface method 'int java.util.List.size()' on a null object reference
 					boxCount = list.size(); // 箱子数量
 					Log.i("333", bizName);
 				}

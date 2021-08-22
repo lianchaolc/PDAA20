@@ -244,6 +244,7 @@ public class PostmansAccountCheckerActivity extends Activity implements OnClickL
 		if (rfid != null) {
 			getRfid().close_a20();
 		}
+		Log.d(TAG, "!!!!!!!!!!!!!!!!!");
 	}
 
 	/**
