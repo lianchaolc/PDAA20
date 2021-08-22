@@ -753,6 +753,8 @@ public class JiaoJieActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+		manager.getAbnormal().remove();
+		manager.getRuning().remove();
         handler.removeCallbacksAndMessages(null);
     }
 }
