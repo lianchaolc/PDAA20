@@ -210,12 +210,11 @@ public class ZhangHuZiLiaoGuiHuanJiaojieActivity extends Activity implements OnC
 			listinttent.clear();/// 传送的锁好每次清除
 			listinttent.addAll(o_Application.numberlist);
 			intent.putExtra("list", (Serializable) listinttent);
-			startActivity(intent);
 			Log.e(TAG, "====" + TaskNumberStr + "==" + listinttent.size());
-			startActivity(intent);
 			if (rfid != null) {
 				getRfid().close_a20();
 			}
+			startActivity(intent);
 		default:
 			break;
 		}
