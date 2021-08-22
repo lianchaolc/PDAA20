@@ -669,10 +669,12 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <!--通过加密码方式不让人随意修改密码-->
+        <!--通过加密码方式不让人随意修改密码未启用4期时-->
         <activity android:name="com.main.pda.InputPWBychangAdressActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+        <!--清分员角色变成管库员（王姐）-->
     </application>
 
 </manifest>
