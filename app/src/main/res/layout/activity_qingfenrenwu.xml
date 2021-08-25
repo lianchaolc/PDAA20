@@ -162,6 +162,7 @@
 	                android:layout_width="@dimen/dimen_450x"
 	                android:layout_gravity="center"
 	                android:dividerHeight="5px"
+                    android:cacheColorHint="#00000000"
 	                android:layout_height="@dimen/dimen_235y" >
 	            </ListView>
 	            
@@ -285,6 +286,7 @@
 	                android:layout_width="match_parent"
 	                android:divider="@color/bule_main"
 	                android:dividerHeight="1px"
+                    android:cacheColorHint="#00000000"
 	                android:layout_height="@dimen/dimen_240y" >
 	            </ListView>
 
