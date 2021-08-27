@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
     android:versionCode="1"
-    android:versionName="1.34">
+    android:versionName="1.35">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -35,10 +35,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar"
-
-        android:hardwareAccelerated = "false"
-        android:largeHeap = "true"
-
         tools:ignore="AllowBackup">
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -186,17 +182,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangInfoActivity"
-        android:hardwareAccelerated="false"
-            android:theme="@style/myAppThem2"
-            />
+        <activity android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangInfoActivity" />
         <activity
             android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.ljsw.tjbankpda.main.QinglingZhouzhuanxiangluruActivity"
-         android:hardwareAccelerated="false"
-        android:theme="@style/myAppThem2"
-            />
+        <activity android:name="com.ljsw.tjbankpda.main.QinglingZhouzhuanxiangluruActivity" />
         <activity
             android:name="com.ljsw.tjbankpda.main.QinglingZhuangxiangTongjiActivity"
             android:launchMode="singleTask" />
@@ -280,6 +270,7 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.BaggingActivity"
             android:label="@string/title_activity_bagging" />
+
 
         <!-- 盘查库制卡lc -->
         <activity
@@ -669,12 +660,23 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <!--通过加密码方式不让人随意修改密码未启用4期时-->
-        <activity android:name="com.main.pda.InputPWBychangAdressActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+        <!-- 通过加密码方式不让人随意修改密码未启用4期时 -->
+        <activity
+            android:name="com.main.pda.InputPWBychangAdressActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!--清分员角色变成管库员（王姐）-->
+        <!-- 清分员角色变成管库员（王姐） -->
+        <!-- 盘查库任务补录2021.8.25 -->
+        <activity android:name="com.ljsw.pdachecklibrary.CheckLibraryByCollMangerActivity" />
+        <activity
+            android:name="com.ljsw.pdachecklibrary.CheackLibraryshowTableActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.ljsw.pdachecklibrary.CheckLibraryLatticeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.ljsw.pdachecklibrary.CheckLibraryUpdataActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
