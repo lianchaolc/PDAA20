@@ -260,10 +260,14 @@ public class CaseString {
 //		if (number.length() < 14) {
 //			return "";
 //		}
-		if (number == null || number.length() < 19) {
+		if(number == null|| number.length() <=0 ){
+			return "";
+		}
+		if (number == null || number.length() <=19) {
 			Log.i("转化传进来的2", "标签不合法");
 			return "";
 		}
+
 		String num = number.substring(0, 21);
 		Log.i("转化传进来的2", num);
 		StringBuffer sb = new StringBuffer();
