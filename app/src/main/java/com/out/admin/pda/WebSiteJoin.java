@@ -208,7 +208,7 @@ public class WebSiteJoin extends Activity implements OnTouchListener {
 			}
 		};
 
-		// 根据所在位置获取交接钞箱数量 重试事件
+		// 根据所在位置获取交接钞箱数量 重试事件  加钞0         回收为1
 		click_getNum = new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
