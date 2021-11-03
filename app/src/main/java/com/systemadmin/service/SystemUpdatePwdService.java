@@ -33,4 +33,29 @@ public class SystemUpdatePwdService {
 		}
 		return false;
 	}
+	/***
+	 *四期代码
+	 * 1 获取服务端的版本号并下载
+	 * 以往版本是手动触发现在要求每次进入后 自动对比数据并升级
+	 */
+
+
+	public String  updataSelfApt(String apkversion) throws Exception {
+
+		System.out.println("自动更新版本号");
+		System.out.println("修改密码传参");
+		System.out.println("userid:" + apkversion);
+		String method = "changePassword";
+		// 封装参数
+		WebParameter[] Paras = { new WebParameter<String>("arg0", apkversion) };
+
+		SoapObject soapObject = WebService.getSoapObject(method, Paras);
+		//  这里要修改
+		if (soapObject.getProperty("code").toString().equals("00")) {
+			return soapObject.getProperty("code").toString();
+		}else{
+			return "";
+		}
+
+	}
 }
