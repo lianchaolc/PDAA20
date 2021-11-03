@@ -141,13 +141,14 @@ public class DiZhiYaPinChuKuActivity extends Activity implements OnClickListener
                     manageractivity.getAbnormal().timeout(DiZhiYaPinChuKuActivity.this, "网络连接失败,重试?", OnClick1);
                     break;
                 case 2:
-                    manageractivity.getRuning().remove();
+
                     getData();
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    manageractivity.getRuning().remove();
                     adapter.notifyDataSetChanged();
                     dzyp_outlistview.setAdapter(adapter);
                     // new TurnListviewHeight(listview);
@@ -246,7 +247,12 @@ public class DiZhiYaPinChuKuActivity extends Activity implements OnClickListener
                 view = (ViewHodler) arg1.getTag();
             }
             view.danhao.setText((arg0 + 1) + "");
-            view.riqi.setText(arraycleanList.get(arg0).getCLEARTASKNUM());
+            if(null==arraycleanList||arraycleanList.size()==0){
+
+            }else{
+                view.riqi.setText(arraycleanList.get(arg0).getCLEARTASKNUM());
+            }
+
             view.count.setText(arraycleanList.get(arg0).getDetailList().size() + "");
             return arg1;
         }
