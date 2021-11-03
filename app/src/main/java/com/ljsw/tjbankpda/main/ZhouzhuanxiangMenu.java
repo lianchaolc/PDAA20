@@ -114,6 +114,7 @@ public class ZhouzhuanxiangMenu extends Activity implements OnTouchListener {
             ll_zhanghuziliao_menu_yayun.setVisibility(View.VISIBLE);
             ll_account_menu_yayun.setVisibility(View.VISIBLE);
             ll_library_menu_yayun.setVisibility(View.GONE);
+
         }else{
             ll_library_menu_yayun.setVisibility(View.GONE);
         }
