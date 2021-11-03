@@ -682,4 +682,10 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		}
 
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		managerClass.getRuning().remove();
+	}
 }
