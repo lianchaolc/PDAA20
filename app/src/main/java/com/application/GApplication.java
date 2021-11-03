@@ -174,7 +174,7 @@ public class GApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-//		CrashHandler.getInstance().init(this); 2021.8.3 注释掉
+		CrashHandler.getInstance().init(this);
 //		Util.initSoundPool(this);
 
 		initLog();
