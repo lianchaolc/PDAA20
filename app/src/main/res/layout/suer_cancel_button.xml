@@ -11,7 +11,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="@dimen/dimen_400x"
-        android:layout_height="@dimen/dimen_130y" >
+        android:layout_height="@dimen/dimen_340y" >
 
         <LinearLayout
             android:layout_marginBottom="@dimen/dimen_20y"
@@ -28,8 +28,7 @@
 
             <TextView
                 android:singleLine="false"
-                android:textSize="@dimen/text_size_25"
-                android:id="@+id/suercanceltext"
+                android:textSize="@dimen/text_size_30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -37,15 +36,41 @@
                 android:textColor="@color/back" />
 
         </LinearLayout>
-
+        <TextView
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/suercanceltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/back" />
+        <TextView
+            android:singleLine="false"
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/suercanceltextuser"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_60y"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/back" />
+        <TextView
+            android:singleLine="false"
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/suercanceltextid"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_70y"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/back" />
         <LinearLayout
+            android:layout_marginTop="@dimen/dimen_21y"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <Button
                 android:layout_marginRight="@dimen/dimen_20x"
-                android:textSize="@dimen/text_size_22"
+                android:textSize="@dimen/text_size_30"
                 android:textColor="@color/white"
                 android:background="@drawable/buttom_selector_bg"
                 android:id="@+id/suerbtn"
@@ -55,7 +80,7 @@
 
             <Button
                 android:id="@+id/cancelbtn"
-                android:textSize="@dimen/text_size_22"
+                android:textSize="@dimen/text_size_30"
                 android:textColor="@color/white"
                 android:background="@drawable/buttom_selector_bg"
                 android:layout_width="@dimen/dimen_120x"
