@@ -58,6 +58,8 @@ public static String url_zh = "http://361de15631.wicp.vip/webcash/webservice";  
     public static String url16 = url_zh + "/ckc";
     public static String url18 = url_zh + "/clearingCheck"; ///  清分管理员核对和url
 
+    public static  String url19= url_zh+"/cash_csk";//  抵质押品管库员 2021.9.16
+
     // 钞箱操作类型参数
 
     // 钞箱操作类型参数
