@@ -224,13 +224,6 @@ public class OutLibraryToAccountCenterFingerActivity extends BaseFingerActivity 
     protected void onResume() {
         super.onResume();
         isFlag = true;
-//        if (covun == null || covun.equals("")) {
-//            Log.e(TAG, "onResume我是空操作");
-//            covun = intent1.getStringExtra("cvoun");
-//            Log.e(TAG, "onResume我是空操作"+covun);
-//        } else {
-//
-//        }
         Log.e(TAG, "onResume  covun======"+covun);
     }
 
