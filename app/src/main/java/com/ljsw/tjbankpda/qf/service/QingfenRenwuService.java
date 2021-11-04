@@ -14,6 +14,7 @@ import com.ljsw.tjbankpda.qf.entity.TianJiaZhongKong;
 import com.ljsw.tjbankpda.util.Table;
 import com.ljsw.tjbankpda.util.WebServiceFromThree;
 import com.service.FixationValue;
+import com.service.WebService;
 
 /**
  * 清分员任务数据获取Service类
@@ -108,6 +109,7 @@ public class QingfenRenwuService {
 	 * @throws Exception
 	 */
 	public String getParams(String inputParams, String methodName) throws Exception {
+		Log.e(TAG,"inputParams"+inputParams);
 		WebParameter[] param = { new WebParameter<String>("arg0", inputParams) };// 传入参数
 		SoapObject soap = null;// 创建返回值接收对象
 		soap = WebServiceFromThree.getSoapObject(methodName, param, FixationValue.NAMESPACE, FixationValue.URL3);// 根据路径获得返回值
@@ -508,5 +510,44 @@ public class QingfenRenwuService {
 			return msg;
 		}
 	}
+	//http://localhost:8089/cash/webservice/cash_csk/collateralHandOverClearResultAndCheck?arg0=RW0000020211013102604&arg1=90202010020211013102356&arg2=100029&arg3=asdqwbianhao:1085DY000152_1085DY000153
 
+//2021.10.13 抵质押品打印新接口   100029  抵质押品管库员 归王姐所有
+
+	/***
+	 *
+	 * @param RW0000020211013102604
+	 * @param 90202010020211013102356
+	 * @param 100029
+	 * @param asdqwbianhao
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean collateralHandOverClearResultAndCheck(String taskno,String psno,String controlleruserno,String dznos ) throws Exception {
+		String methodName = "collateralHandOverClearResultAndCheck";// 接口方法
+		Log.d(TAG, "======" + "arg0=" + taskno);
+		Log.d(TAG, "===arg1===" + psno);
+		Log.d(TAG, "======" + "arg2=" + controlleruserno);
+		Log.d(TAG, "===arg3===" + dznos);
+		WebParameter[] param = {
+				new WebParameter<String>("arg0", taskno),// 配送单ID
+				new WebParameter<String>("arg1", psno),
+				new WebParameter<String>("arg2", controlleruserno),// 配送单ID
+				new WebParameter<String>("arg3", dznos)};
+		SoapObject soap = null;// 创建返回值接收对象
+//		soap = WebService.getSoapObjectDZLiabraryManger(methodName, param,
+//				FixationValue.NAMESPACEZH, FixationValue.url19);// 根据路径获得返回值
+		soap = WebServiceFromThree.getSoapObjectDZLiabraryMangerbyThree(methodName, param,
+				FixationValue.NAMESPACEZH, FixationValue.url19);
+		String code = soap.getProperty("code").toString();
+		String msg = soap.getProperty("msg").toString();
+		String params = soap.getProperty("params").toString();
+		System.out.println("params-->:" + params);
+		System.out.println("code=" + code);
+		if ("00".equals(code)) {// code=00->成功,code=99->失败
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
