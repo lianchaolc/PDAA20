@@ -20,6 +20,7 @@ import com.golbal.pda.GolbalUtil;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.service.FixationValue;
+import com.systemadmin.service.SystemUpdatePwdService;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -122,6 +123,30 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			inputSDCardURLThree();
 		} else {
 			Log.e("地址读取", "地址读取err");
+		}
+
+//		检查当前的版本 号并自动的更行农商行四期
+
+		CheckSelfVersion();
+
+	}
+
+	/***
+	 * 检查当前的版本并自动更新
+	 */
+	private void CheckSelfVersion() {
+//		1   每次进行网络请求获取服务端的版本号
+//		getServiceAPKVersion();
+
+
+	}
+//  2获取服务端版本号这样对比并下载
+	private void getServiceAPKVersion() {
+		SystemUpdatePwdService dd=	new SystemUpdatePwdService();
+		try {
+		String result=	dd.updataSelfApt(getVersion());//  获取 服务端的版本号
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -369,6 +394,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url16 = sub + "/ckc";
 				FixationValue.URL17 = sub + "/cash_sk";
 				FixationValue.url18 = sub + "/clearingCheck";
+				FixationValue.url19 = sub + "/cash_csk";
 
 			} else {
 				FixationValue.URL6 = getsaveinfo + "/pda";
@@ -381,6 +407,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url16 = getsaveinfo + "/ckc";
 				FixationValue.URL17 = getsaveinfo + "/cash_sk";
 				FixationValue.url18 = getsaveinfo + "/clearingCheck";
+				FixationValue.url19 = getsaveinfo + "/cash_csk";
 			}
 			System.out.println("地址2：" + FixationValue.URL6);
 			System.out.println("地址7：" + FixationValue.URL7);
@@ -391,6 +418,8 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			System.out.println("地址16：" + FixationValue.url16);
 			System.out.println("地址11：" + FixationValue.url11);
 			System.out.println("地址17：" + FixationValue.URL17);
+			System.out.println("地址18：" + FixationValue.url18);
+			System.out.println("地址19：" + FixationValue.url19);
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
