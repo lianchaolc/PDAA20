@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
     android:versionCode="1"
-    android:versionName="1.35">
+    android:versionName="1.40">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -28,7 +28,9 @@
 
     <protected-broadcast android:name="android.rfid.FUN_KEY" />
     <protected-broadcast android:name="android.intent.action.FUN_KEY" />
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name="com.application.GApplication"
         android:allowBackup="true"
@@ -270,7 +272,6 @@
         <activity
             android:name="com.ljsw.tjbankpad.baggingin.activity.BaggingActivity"
             android:label="@string/title_activity_bagging" />
-
 
         <!-- 盘查库制卡lc -->
         <activity
@@ -676,7 +677,21 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name="com.ljsw.pdachecklibrary.CheckLibraryUpdataActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 抵质押品库管理员清分任务2021.8.30 -->
+        <activity
+            android:name="com.ljsw.collateraladministratorsorting.activity.SelectTaskByCollateralActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name="com.ljsw.collateraladministratorsorting.activity.CleanMangeCheckTaskListActivity"></activity>
+
+
+   <!--新增29 抵质押品选任务列表2021.9.16-->
+        <activity android:name="com.ljsw.collateraladministratorsorting.activity.CleanMangeCheckTaskQingfenRenwuActivity">
+
+            <!-- 2021.3.3  清分管理上缴符合的业务  在1.30版本中不上线 -->
+        </activity>
+        <!--代码节点1.40抵质押品选任务列表-->
+
     </application>
 
 </manifest>
