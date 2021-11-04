@@ -130,7 +130,7 @@ public class GetResistCollateralBaggingService {
 //		
 		@SuppressWarnings("rawtypes")
 		WebParameter[] parameter = { new WebParameter<String>("arg0", clearTaskNum),
-				new WebParameter<String>("arg1", userId), };
+					new WebParameter<String>("arg1", userId), };
 		SoapObject soap = WebService.getSoapObjectZH(methodName, parameter);
 		Log.i("arg0", soap.getProperty("code").toString());
 
@@ -296,6 +296,69 @@ public class GetResistCollateralBaggingService {
 		if (soap.getProperty("code").toString().equals("00")) {
 			System.out.print("======" + soap.getProperty("params").toString());
 			return soap.getProperty("code").toString();
+		} else {
+			System.out.print("======" + soap.getProperty("params").toString());
+			return soap.getProperty("msg").toString();
+		}
+
+	}
+
+
+
+	/****
+	 * 2021.9.16
+	 * 获取地址押品的任务列表    分类上缴和请领取
+	 * 传递登录人  即操作人员
+	 *
+	 * 位置放错了 应该在
+	 * com.ljsw.collateraladministratorsorting.activity;
+	 */
+
+	public   String getListClearingWork(String  userId) throws Exception {
+		String methodName = "getListClearingWork";//
+		Log.i("方法名", "getListClearingWork");
+		Log.i("arg0", userId);
+
+		@SuppressWarnings("rawtypes")
+		WebParameter[] parameter = {
+				new WebParameter<String>("arg0", userId),
+	 };
+		SoapObject soap = WebService.getSoapObjectDZLiabraryManger(methodName, parameter);
+		Log.i("arg0", soap.getProperty("code").toString());
+
+		if (soap.getProperty("code").toString().equals("00")) {
+			System.out.print("======" + soap.getProperty("params").toString());
+			return soap.getProperty("params").toString();
+		} else {
+			System.out.print("======" + soap.getProperty("params").toString());
+			return soap.getProperty("msg").toString();
+		}
+
+	}
+
+	/****
+	 * 获取数据列表
+	 * @param Tasknum   任务号
+	 *  @param Tasktype   sj，ql 类型
+	 * @return
+	 * @throws Exception
+	 */
+	public   String getListClearingWorkDetail(String  Tasknum,String Tasktype ) throws Exception {
+		String methodName = "getListClearingWorkDetail";//
+		Log.i("方法名", "getListClearingWorkDetail");
+		Log.i("arg0", Tasknum);
+		Log.i("arg1", Tasktype);
+		@SuppressWarnings("rawtypes")
+		WebParameter[] parameter = {
+				new WebParameter<String>("arg0", Tasknum),
+				new WebParameter<String>("arg1", Tasktype+""),
+		};
+		SoapObject soap = WebService.getSoapObjectDZLiabraryManger(methodName, parameter);
+		Log.i("arg0", soap.getProperty("code").toString());
+
+		if (soap.getProperty("code").toString().equals("00")) {
+			System.out.print("======" + soap.getProperty("params").toString());
+			return soap.getProperty("params").toString();
 		} else {
 			System.out.print("======" + soap.getProperty("params").toString());
 			return soap.getProperty("msg").toString();
