@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.ljsw.pdachecklibrary.CheackLibraryshowTableActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,33 +46,7 @@
             android:layout_marginLeft="@dimen/dimen_10x"
             android:src="@drawable/back_cirle" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_80y"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dimen_10x"
-        android:layout_marginRight="@dimen/dimen_10x"
-        android:orientation="horizontal">
-    <TextView
-        android:layout_width="@dimen/dimen_0x"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="操作人:"
-        android:textColor="@color/back"
-        android:textSize="@dimen/text_size_30" />
 
-    <TextView
-        android:id="@+id/tv_controllerchecklibryuser"
-        android:layout_width="@dimen/dimen_0x"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="张某"
-        android:textColor="@color/back"
-        android:textSize="@dimen/text_size_30" />
-
-</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
@@ -80,6 +54,36 @@
         android:layout_marginRight="@dimen/dimen_10x"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="操作人:"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/tv_controllerchecklibryuser"
+            android:layout_width="@dimen/dimen_0x"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="张某"
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80y"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="match_parent"
@@ -101,13 +105,15 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
-        android:gravity="center_vertical"
         android:layout_marginLeft="@dimen/dimen_10x"
         android:layout_marginRight="@dimen/dimen_10x"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="match_parent"
@@ -129,13 +135,15 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60y"
-        android:gravity="center_vertical"
+        android:layout_height="@dimen/dimen_70y"
         android:layout_marginLeft="@dimen/dimen_10x"
         android:layout_marginRight="@dimen/dimen_10x"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="match_parent"
@@ -156,13 +164,22 @@
             android:textSize="@dimen/text_size_30" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_2x"
+        android:layout_marginLeft="@dimen/dimen_10x"
+        android:layout_marginRight="@dimen/dimen_10x"
+        android:background="@color/back_2b"></View>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_60y"
-        android:gravity="center_vertical"
         android:layout_marginLeft="@dimen/dimen_10x"
         android:layout_marginRight="@dimen/dimen_10x"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="@dimen/dimen_0x"
             android:layout_height="match_parent"
@@ -186,7 +203,7 @@
     <ListView
         android:id="@+id/listview_showtable"
         android:layout_width="match_parent"
+        android:layout_height="312dp"
         android:layout_marginLeft="@dimen/dimen_10x"
-        android:layout_marginRight="@dimen/dimen_10x"
-        android:layout_height="262dp"></ListView>
+        android:layout_marginRight="@dimen/dimen_10x"></ListView>
 </LinearLayout>
