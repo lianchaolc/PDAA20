@@ -88,6 +88,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 	String dizhiMsg;// 抵质押品msg
 	String zhongkongSubmit; // 重空提交msg
 
+	String  newdizhiMSg;
 	private StringGetNum getnum = new StringGetNum(); // 截取数字工具类
 	private BiaohaoJiequ jiequ = new BiaohaoJiequ(); // 截取编号工具类
 
@@ -948,6 +949,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 
 					List<ShangJiaoQingFen_o_qf_Print_Entity> listPrint = gson.fromJson(PrintInfo,
 							type);
+
 					printsacelist.clear();
 //					printsacelist = listPrint;
 					printsacelistmap.clear();
@@ -1037,6 +1039,57 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 			}
 		}).start();
 	}
+
+	/****
+	 * 单独提交抵质押品的数据 100029 王姐
+	 * 这里只提交抵质押品其它几项 不提交需要判断
+	 */
+	public void submitByDZcollateralHandOverClearResultAndCheck() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("调用存储过程的方法------->开始");
+				togerDate();// 拼接数据
+				try {
+					System.out.println("任务单号:" + orderNum);
+					System.out.println("清分员帐号:" + GApplication.user.getLoginUserName());
+					System.out.println("清分员帐号:" + GApplication.user.getLoginUserName());
+					System.out.println("现金-->" + xianjingMsg);
+					System.out.println("------------------------------数据上传");
+					System.out.println("ShangJiaoQingFen_o_qf:" + GApplication.user);
+					/*
+					 * revised by zhangxuewei 后台传值name 改为ID 是否需要符合
+					 */
+					boolean isOk = new QingfenRenwuService().collateralHandOverClearResultAndCheck(orderNum, peisongId,
+							(GApplication.getApplication().app_hash.get("login_username")).toString(), newdizhiMSg);
+					if (isOk) {
+						System.out.println("------------------------------上传成功");
+						okHandle.sendEmptyMessage(0);
+					} else {
+						okHandle.sendEmptyMessage(2);
+					}
+				} catch (SocketTimeoutException e) {
+					e.printStackTrace();
+					System.out.println("上传超时");
+					timeoutHandle.sendEmptyMessage(00);
+				} catch (NullPointerException e) {
+					e.printStackTrace();
+					System.out.println("没有任务");
+					timeoutHandle.sendEmptyMessage(12);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("上传失败");
+					timeoutHandle.sendEmptyMessage(10);
+				}
+			}
+		}).start();
+
+	}
+
+
+
+
 
 	/**
 	 * 获取清分登记信息
@@ -1378,6 +1431,18 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 				sbD.append(BianyiType.xiahuaxian);
 			}
 		}
+		//  这里单纯复制上面内容预防修修改
+		StringBuffer sbD2 = new StringBuffer();
+//		sbD2.append("dizhibianhao:");
+		flag = 0;
+		for (String dizhi : dizhilist) {
+			flag++;
+			sbD2.append(dizhi);
+			if (flag < dizhilist.size()) {
+				sbD2.append(BianyiType.xiahuaxian);
+			}
+		}
+		newdizhiMSg="asdqwbianhao:"+sbD2;
 		xianjingMsg = sbX_quanbie + BianyiType.fenge + sbX_cansun + BianyiType.fenge + sbX_count;// 现金msg
 		zhongkongMsg = sbZ_leibie + BianyiType.fenge + sbZ_leibieName + BianyiType.fenge + sbZ_kaishishu
 				+ BianyiType.fenge + sbZ_jieshushu; // 重空msg
@@ -1514,7 +1579,13 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+
+						if(cash.size()>0||importlist.size()>0){
+								submit();
+
+						}else if(!dizhishunum.equals("0")){
+							submitByDZcollateralHandOverClearResultAndCheck();
+						}
 					}
 				});
 			}
@@ -1582,7 +1653,11 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					Toast.makeText(ShangJiaoQingFen_o_qf.this, "有现金|重空|抵制押品三者不能同时为空", Toast.LENGTH_SHORT).show();
 					manager.getRuning().remove();
 				} else {
-					submit();
+					if((cash.size()>0||importlist.size()>0)){// 这里单独把抵质押品数据踢出去
+						submit();
+					}else if(!dizhishunum.equals("0")){
+						submitByDZcollateralHandOverClearResultAndCheck();
+					}
 				}
 			}
 			if (msg.what == 1) {
@@ -1623,7 +1698,12 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+//						submit();
+						if((cash.size()>0||importlist.size()>0)){// 这里单独把抵质押品数据踢出去
+							submit();
+						}else if(!dizhishunum.equals("0")){
+							submitByDZcollateralHandOverClearResultAndCheck();
+						}
 					}
 				});
 			}
@@ -1634,7 +1714,12 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+//						submit();
+						if((cash.size()>0||importlist.size()>0)){// 这里单独把抵质押品数据踢出去
+							submit();
+						}else if(!dizhishunum.equals("0")){
+							submitByDZcollateralHandOverClearResultAndCheck();
+						}
 
 					}
 				});
