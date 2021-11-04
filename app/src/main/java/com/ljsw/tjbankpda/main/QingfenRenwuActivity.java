@@ -285,7 +285,7 @@ public class QingfenRenwuActivity extends FragmentActivity implements OnTouchLis
 					// 调用接口获得全部数据
 					System.out.println("上传的参数（清分员1）=" + Mapplication.getApplication().UserId);
 					params = new QingfenRenwuService().getQingfenRenwu(Mapplication.getApplication().UserId);
-					System.out.println("返回的结果:");
+					System.out.println("返回的结果:"+params);
 					// 解析字符串
 					RenwuData = Table.doParse(params);
 					Message msg = okHandle.obtainMessage();
@@ -492,4 +492,8 @@ public class QingfenRenwuActivity extends FragmentActivity implements OnTouchLis
 		// TODO Auto-generated method stub
 		return super.onKeyDown(keyCode, event);
 	}
+
+
+
+
 }
