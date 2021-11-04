@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dimen_480x"
+    android:layout_height="@dimen/dimen_800y"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.ljsw.collateraladministratorsorting.activity.SelectTaskByCollateralActivity">
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_480x"
+            android:layout_height="@dimen/dimen_80y"
+            android:background="@color/bule_main">
+
+            <ImageView
+                android:id="@+id/iv_selecttaskbycollateral_back"
+                android:layout_width="@dimen/dimen_64x"
+                android:layout_height="@dimen/dimen_64y"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_14x"
+                android:src="@drawable/back_change" />
+
+            <ImageView
+                android:id="@+id/iv_selecttaskbycollateral_refresh"
+                android:layout_width="@dimen/dimen_74x"
+                android:layout_height="@dimen/dimen_74y"
+                android:layout_alignTop="@+id/iv_qingfenrenwu_back"
+                android:layout_marginStart="11dp"
+                android:layout_toEndOf="@+id/TextView01"
+                android:src="@drawable/replace" />
+
+            <ImageView
+                android:id="@+id/selectImageView02"
+                android:layout_width="@dimen/dimen_50x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/user_order" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/selectImageView02"
+                android:text="押品任务列表"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_text_size" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00aeFF"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/fg_qingfenrenwu_loginUserInfo"
+                android:name="com.ljsw.collateraladministratorsorting.loginuser.LoginControInfoFragment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60y" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_qingfenrenwu_qingling_titleselecttaskbycollateralql"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80y"
+            android:background="@color/bule_main">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dimen_50x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:src="@drawable/user_order" />
+
+            <TextView
+                android:id="@+id/tv_item_qingfenrenwu_qingling_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView1"
+                android:text="请领装箱"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_35" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_qingfenrenwu_ql"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_443y"
+            android:orientation="vertical"
+
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_10y"
+                android:layout_marginTop="@dimen/dimen_10y">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="任务单号"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_30" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_1y"
+                android:layout_marginBottom="@dimen/dimen_5y"
+                android:layout_marginTop="@dimen/dimen_5y"
+                android:background="@drawable/gradient_white_gray" />
+
+            <ListView
+                android:id="@+id/lv_qingfenrenwu_qingling"
+                android:layout_width="@dimen/dimen_450x"
+                android:layout_height="@dimen/dimen_315y"
+                android:layout_gravity="center"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/bule_main"
+                android:background="@color/black_boder"
+                android:dividerHeight="1px"></ListView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_qingfenrenwu_qingling_titleselecttaskbycollateralsj"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80y"
+            android:layout_marginTop="@dimen/dimen_2y"
+            android:background="@color/bule_main">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/dimen_50x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:src="@drawable/user_order" />
+
+            <TextView
+                android:id="@+id/tv_qingfenrenwu_shangjiao_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView2"
+                android:text="上缴清分"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_35" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_qingfenrenwu_sj"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_443y"
+            android:orientation="vertical"
+
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_10y"
+                android:layout_marginTop="@dimen/dimen_10y">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="任务单号"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_30"
+                    tools:ignore="all" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_1y"
+                android:background="@drawable/gradient_white_gray" />
+
+
+            <ListView
+                android:id="@+id/lv_selecttaskbycollate_shangjiao"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_315y"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/bule_main"
+                android:background="@color/black_boder"
+                android:dividerHeight="1px"></ListView>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
