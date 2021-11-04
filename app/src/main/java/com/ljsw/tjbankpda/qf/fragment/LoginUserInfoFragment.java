@@ -17,8 +17,8 @@ public class LoginUserInfoFragment extends Fragment {
 		if (Mapplication.getApplication().user1 != null && Mapplication.getApplication().user2 != null) {
 			TextView tvUser1Name = (TextView) view.findViewById(R.id.tv_fg_qingfendenglu_user1);
 			TextView tvUser2Name = (TextView) view.findViewById(R.id.tv_fg_qingfendenglu_user2);
-			tvUser1Name.setText(Mapplication.getApplication().user1.getLoginUserName());
-			tvUser2Name.setText(Mapplication.getApplication().user2.getLoginUserName());
+			tvUser1Name.setText(Mapplication.getApplication().user1.getLoginUserName()+"");
+			tvUser2Name.setText(Mapplication.getApplication().user2.getLoginUserName()+"");
 		}
 		return view;
 	}
