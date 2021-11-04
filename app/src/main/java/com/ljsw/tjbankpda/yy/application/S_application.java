@@ -9,6 +9,7 @@ import android.app.Application;
 
 /**
  * 2021.7.27   未知 扫描类application
+ * 当前类为辅助类  不存登录信息只存 交接时用户信息
  */
 public class S_application {
     public static S_application s_application;
