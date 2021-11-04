@@ -133,6 +133,7 @@
         android:layout_marginTop="@dimen/dimen_14x"
         android:background="@drawable/buttom_selector_bg"
         android:text="查询"
+        android:textSize="@dimen/text_size_30"
         android:textColor="@color/white" />
 
     <LinearLayout

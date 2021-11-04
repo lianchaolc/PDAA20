@@ -19,7 +19,8 @@
             android:layout_width="@dimen/dimen_60x"
             android:layout_height="@dimen/dimen_60y"
             android:layout_marginLeft="@dimen/dimen_15x"
-            android:src="@drawable/user_order" />
+            android:src="@drawable/user_order"
+            />
 
         <TextView
             android:id="@+id/check_libraryupdata_textView1"
@@ -37,7 +38,8 @@
             android:layout_height="@dimen/dimen_60y"
             android:layout_marginLeft="@dimen/dimen_15x"
             android:layout_marginTop="@dimen/dimen_4y"
-            android:background="@drawable/replace" />
+            android:background="@drawable/replace"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/check_libraryupdata_back"
@@ -72,7 +74,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60y">
+        android:layout_height="@dimen/dimen_80y">
 
         <TextView
             android:layout_width="@dimen/dimen_0x"
@@ -89,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="张某"
+            android:text=""
             android:textColor="@color/back"
             android:textSize="@dimen/text_size_30" />
     </LinearLayout>
