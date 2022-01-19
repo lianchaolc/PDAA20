@@ -134,7 +134,6 @@ public class AccountInfoInHandoverActivity extends FragmentActivity implements O
 				radapter.notifyDataSetChanged();
 				listleft.setAdapter(ladapter);
 				listright.setAdapter(radapter);
-
 				break;
 			}
 
