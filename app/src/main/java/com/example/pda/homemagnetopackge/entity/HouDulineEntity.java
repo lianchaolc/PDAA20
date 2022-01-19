@@ -60,8 +60,27 @@ public class HouDulineEntity implements Serializable {
 		this.count = count;
 	}
 
+
+
+	public HouDulineEntity(String linenum, String linename, String count, String linstate, String statedate, boolean isChecked) {
+		this.linenum = linenum;
+		this.linename = linename;
+		this.count = count;
+		this.linstate = linstate;
+		this.statedate = statedate;
+		this.isChecked = isChecked;
+	}
+
+	public String getStatedate() {
+		return statedate;
+	}
+
+	public void setStatedate(String statedate) {
+		this.statedate = statedate;
+	}
 	private String linename; // 线路名称
 	private String count; // 线路周转箱数量
 	private String linstate;// 线路的状态
+	private  String statedate;//时间
 	private boolean isChecked = false;
 }
