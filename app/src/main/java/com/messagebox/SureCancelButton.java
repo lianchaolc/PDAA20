@@ -106,16 +106,16 @@ public class SureCancelButton {
 	public void makeSuerCancel3(Activity a, String msg,String msg2,String msg3, OnClickListener click, boolean can) {
 
 		if (v3 == null) {
-			v3 = GolbalView.getLF(a).inflate(R.layout.big_suer_cancel_button, null);
+			v3 = GolbalView.getLF(a).inflate(R.layout.big_suer_cancel_buttonver3, null);
 		}
-		TextView text = (TextView) v3.findViewById(R.id.big_suercanceltext);
+		TextView text = (TextView) v3.findViewById(R.id.big_suercanceltext_v3);
 		text.setText("指纹识别姓名:"+msg);
-		TextView  textViewuser=v3.findViewById(R.id.tv_user);
+		TextView  textViewuser=v3.findViewById(R.id.tv_user_v3);
 		textViewuser.setText("押运员编号:"+msg3);
 
 
-		Button suer = (Button) v3.findViewById(R.id.big_suerbtn);
-		Button cancel = (Button) v3.findViewById(R.id.big_cancelbtn);
+		Button suer = (Button) v3.findViewById(R.id.big_suerbtn_v3);
+		Button cancel = (Button) v3.findViewById(R.id.big_cancelbtn_v3);
 		cancel.setText("重新录入");
 		if (can) {
 			cancel.setVisibility(View.GONE);
@@ -149,19 +149,19 @@ public class SureCancelButton {
 	public void makeSuerCancel4(Activity a, String msg,String msg1,String msg2, OnClickListener click, boolean can) {
 
 		if (v4 == null) {
-			v4 = GolbalView.getLF(a).inflate(R.layout.suer_cancel_button, null);
+			v4 = GolbalView.getLF(a).inflate(R.layout.suer_cancel_buttonvfoure, null);
 		}
-		TextView text = (TextView) v4.findViewById(R.id.suercanceltext);
+		TextView text = (TextView) v4.findViewById(R.id.suercanceltextvfoure);
 		text.setText(msg);
-		TextView textView =v4.findViewById(R.id.suercanceltextuser);
+		TextView textView =v4.findViewById(R.id.suercanceltextuservfoure);
 		textView.setText("绑定账号:"+msg1);
-		TextView textView0 =v4.findViewById(R.id.suercanceltext);
+		TextView textView0 =v4.findViewById(R.id.suercanceltextvfoure);
 		textView0.setText("绑定人员:"+msg);
 
-		TextView textView1=v4.findViewById(R.id.suercanceltextid);
+		TextView textView1=v4.findViewById(R.id.suercanceltextidvfoure);
 		textView1.setText(msg2);
-		Button suer = (Button) v4.findViewById(R.id.suerbtn);
-		Button cancel = (Button) v4.findViewById(R.id.cancelbtn);
+		Button suer = (Button) v4.findViewById(R.id.suerbtnvfoure);
+		Button cancel = (Button) v4.findViewById(R.id.cancelbtnvfoure);
 		cancel.setText("取消");
 		if (can) {
 			cancel.setVisibility(View.GONE);

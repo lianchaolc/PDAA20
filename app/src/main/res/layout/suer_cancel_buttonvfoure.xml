@@ -11,7 +11,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="@dimen/dimen_400x"
-        android:layout_height="@dimen/dimen_280y" >
+        android:layout_height="@dimen/dimen_340y" >
 
         <LinearLayout
             android:layout_marginBottom="@dimen/dimen_20y"
@@ -38,11 +38,29 @@
         </LinearLayout>
         <TextView
             android:textSize="@dimen/text_size_30"
-            android:id="@+id/suercanceltext"
+            android:id="@+id/suercanceltextvfoure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="1111"
+            android:textColor="@color/back" />
+        <TextView
+            android:singleLine="false"
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/suercanceltextuservfoure"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_60y"
+            android:gravity="center"
+            android:text="111"
+            android:textColor="@color/back" />
+        <TextView
+            android:singleLine="false"
+            android:textSize="@dimen/text_size_30"
+            android:id="@+id/suercanceltextidvfoure"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_70y"
+            android:gravity="center"
+            android:text="111"
             android:textColor="@color/back" />
         <LinearLayout
             android:layout_marginTop="@dimen/dimen_21y"
@@ -55,13 +73,13 @@
                 android:textSize="@dimen/text_size_30"
                 android:textColor="@color/white"
                 android:background="@drawable/buttom_selector_bg"
-                android:id="@+id/suerbtn"
+                android:id="@+id/suerbtnvfoure"
                 android:layout_width="@dimen/dimen_120x"
                 android:layout_height="@dimen/dimen_50y"
                 android:text="确定" />
 
             <Button
-                android:id="@+id/cancelbtn"
+                android:id="@+id/cancelbtnvfoure"
                 android:textSize="@dimen/text_size_30"
                 android:textColor="@color/white"
                 android:background="@drawable/buttom_selector_bg"
