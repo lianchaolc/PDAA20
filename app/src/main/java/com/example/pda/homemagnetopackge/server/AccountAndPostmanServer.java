@@ -133,26 +133,43 @@ public class AccountAndPostmanServer {
 	 * @param userId
 	 * @return
 	 * @throws Exception http://192.168.1.131:8089/cash/webservice/cash_sk/
-	 *                   sjUnHandleDistributionBoxnumByLinenums?arg0=43534&arg1=BC02
-	 *                   http://192.168.1.131:8089/cash/webservice/cash_sk/
-	 *                   sjUnHandleDistributionBoxnumByLinenumsInFileCenter
-	 *                   ?arg0=43534&arg1=BC02
 	 */
+//b备份
+//	public String PostmanZZData(String usernumber, String strdata) throws Exception {
+//		String methodName = "sjUnHandleDistributionBoxnumByLinenumsInFileCenter";
+//		Log.i("arg0", usernumber);
+//		Log.i("arg1", strdata);
+//		Log.i("arg2",)
+//		@SuppressWarnings("rawtypes")
+//		WebParameter[] parameter = { new WebParameter<String>("arg0", usernumber),
+//				new WebParameter<String>("arg1", strdata) };
+//		SoapObject soap = WebService.getSoapObjectAccountAndPostman(methodName, parameter);
+//
+//		if (soap.getProperty("code").toString().equals("00")) {
+//			System.out.print("======" + soap.getProperty("params").toString());
+//			return soap.getProperty("params").toString();
+//		} else {
+//			return null;
+//		}
+//	}
 
-	public String PostmanZZData(String usernumber, String strdata) throws Exception {
+	public String PostmanZZData(String usernumber, String strdata,String lineandtime) throws Exception {
 		String methodName = "sjUnHandleDistributionBoxnumByLinenumsInFileCenter";
 		Log.i("arg0", usernumber);
 		Log.i("arg1", strdata);
+		Log.i("arg2",lineandtime);
 		@SuppressWarnings("rawtypes")
-		WebParameter[] parameter = { new WebParameter<String>("arg0", usernumber),
-				new WebParameter<String>("arg1", strdata) };
+		WebParameter[] parameter = {
+				new WebParameter<String>("arg0", usernumber),
+				new WebParameter<String>("arg1", strdata),
+				new WebParameter<String>("arg2", lineandtime)};
 		SoapObject soap = WebService.getSoapObjectAccountAndPostman(methodName, parameter);
 
 		if (soap.getProperty("code").toString().equals("00")) {
 			System.out.print("======" + soap.getProperty("params").toString());
 			return soap.getProperty("params").toString();
 		} else {
-			return null;
+			return soap.getProperty("msg").toString();
 		}
 	}
 
@@ -163,17 +180,54 @@ public class AccountAndPostmanServer {
 	 * handleSJUnHandleInOrderAccount?
 	 * arg0=666666&arg1=43534&arg2=ZH000001ZZ&arg3=BC02
 	 */
-	public String PostmanUpData(String usernumber, String postmanaccounnumber, String BoxNum, String linnum)
+//	public String PostmanUpData(String usernumber, String postmanaccounnumber, String BoxNum, String linnum)
+//			throws Exception {
+//		String methodName = "handleSJUnHandleInFileCenter";
+//		Log.i("arg0", usernumber);
+//		Log.i("arg1", postmanaccounnumber);
+//		Log.i("arg2", BoxNum);
+//		Log.i("arg3", linnum);
+//		@SuppressWarnings("rawtypes")
+//		WebParameter[] parameter = { new WebParameter<String>("arg0", usernumber),
+//				new WebParameter<String>("arg1", postmanaccounnumber), new WebParameter<String>("arg2", BoxNum),
+//				new WebParameter<String>("arg3", linnum)
+//
+//		};
+//		SoapObject soap = WebService.getSoapObjectAccountAndPostman(methodName, parameter);
+//
+//		if (soap.getProperty("code").toString().equals("00")) {
+//			System.out.print("======" + soap.getProperty("params").toString());
+//			// 返回提交成功或者失败
+//			return soap.getProperty("code").toString();
+//		} else {
+//			return soap.getProperty("msg").toString();
+//		}
+//	}
+
+	/**
+	 *
+	 * @param usernumber
+	 * @param postmanaccounnumber
+	 * @param BoxNum
+	 * @param linnum
+	 * @return
+	 * @throws Exception
+	 */
+	public String PostmanUpData(String usernumber, String postmanaccounnumber, String BoxNum, String linnum,String linandTime)
 			throws Exception {
 		String methodName = "handleSJUnHandleInFileCenter";
 		Log.i("arg0", usernumber);
 		Log.i("arg1", postmanaccounnumber);
 		Log.i("arg2", BoxNum);
 		Log.i("arg3", linnum);
+		Log.i("arg4", linandTime);
 		@SuppressWarnings("rawtypes")
-		WebParameter[] parameter = { new WebParameter<String>("arg0", usernumber),
-				new WebParameter<String>("arg1", postmanaccounnumber), new WebParameter<String>("arg2", BoxNum),
-				new WebParameter<String>("arg3", linnum)
+		WebParameter[] parameter = {
+				new WebParameter<String>("arg0", usernumber),
+				new WebParameter<String>("arg1", postmanaccounnumber),
+				new WebParameter<String>("arg2", BoxNum),
+				new WebParameter<String>("arg3", linnum),
+				new WebParameter<String>("arg4", linandTime)
 
 		};
 		SoapObject soap = WebService.getSoapObjectAccountAndPostman(methodName, parameter);
