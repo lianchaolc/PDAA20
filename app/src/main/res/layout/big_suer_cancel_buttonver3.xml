@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_460x"
+        android:layout_height="@dimen/dimen_375y"
+        android:background="@color/gray_background"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20y"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dimen_25x"
+                android:layout_height="@dimen/dimen_25y"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:background="@drawable/message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="false"
+                android:text="要提示的内容"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_85y"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/big_suercanceltext_v3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="false"
+                android:text=""
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30" />
+            <TextView
+                android:id="@+id/tv_user_v3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="登录人"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_31y"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/big_suerbtn_v3"
+                android:layout_width="@dimen/dimen_120x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_marginRight="@dimen/dimen_20x"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_30" />
+
+            <Button
+                android:id="@+id/big_cancelbtn_v3"
+                android:layout_width="@dimen/dimen_120x"
+                android:layout_height="@dimen/dimen_50y"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_30" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout><!-- 应刘  要求需要显示 执行的线路 人员名称 编号  所执行的线路名称-->
