@@ -229,13 +229,14 @@ public class AccountinformationSelectMainActivity extends Activity implements On
 				holder.dizhiyapincheboxresult = (TextView) v.findViewById(R.id.postmancountresult1);
 				holder.postmancounttv = (TextView) v.findViewById(R.id.postmancounttv);
 				holder.mCheckBox = (CheckBox) v.findViewById(R.id.dzyp_chebox);
-
+				holder.postmanstatetimetv=(TextView)v.findViewById(R.id.postmanstatetimetv);// 显示时间
 				v.setTag(holder);
 			} else {
 				holder = (ViewHolderAdapterWailk) v.getTag();
 			}
 
 			// 显示任务的单号 只有一个订单号
+			holder.postmanstatetimetv.setVisibility(View.VISIBLE);
 			holder.dizhiyapincheboxresult.setText(accountinfoList.get(position).getLinename());
 			holder.postmancounttv.setText(accountinfoList.get(position).getCount());
 			// 显示是否被选中
@@ -266,6 +267,7 @@ public class AccountinformationSelectMainActivity extends Activity implements On
 		public TextView dizhiyapincheboxtype;
 		public TextView postmancounttv;
 		public CheckBox mCheckBox;
+		private TextView postmanstatetimetv;
 	}
 
 	class SelectListen implements OnCheckedChangeListener {
