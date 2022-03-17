@@ -77,6 +77,8 @@ public class GApplication extends Application {
 	public static String curDate;// 选择的早送日期
 	public static int jiaojiestate = 0;// 1 早送交接 2 晚收交接 0 啥也不是 3 晚收交接(有早送) 指纹验证后的提交时用
 	public static String jigouid;// 交接最后提交用
+	public static  String  jigouidwangdian1;// 款箱网点1新增2022.3.
+	public static  String  jigouidwangdian2;// 款箱网点1新增
 	public static int churuShow = 0;// 出入库显示 1.表示早送列表点击后的显示 2.表示晚入列表点击后的显示
 	public static int chukubiaoshi = 0;// 1 早送交接 2 晚收交接 0 啥也不是 指纹验证后的提交时用
 	public static List<String> smlist = new ArrayList<String>();// 选中需要早送的款箱
