@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/dimen_400x"
+        android:layout_height="@dimen/dimen_270y"
+        android:background="@color/gray_background"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20y"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dimen_25x"
+                android:layout_height="@dimen/dimen_25y"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:background="@drawable/message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="false"
+                android:text="要提示的内容"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/suercanceltext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30" />
+
+        <TextView
+            android:id="@+id/suercanceltextuser"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_60y"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text=""
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/suercanceltextid"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_70y"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text=""
+            android:textColor="@color/back"
+            android:textSize="@dimen/text_size_30"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_21y"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/suerbtn"
+                android:layout_width="@dimen/dimen_120x"
+                android:layout_height="@dimen/dimen_50y"
+                android:layout_marginRight="@dimen/dimen_20x"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_30" />
+
+            <Button
+                android:id="@+id/cancelbtn"
+                android:layout_width="@dimen/dimen_120x"
+                android:layout_height="@dimen/dimen_50y"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_30" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
