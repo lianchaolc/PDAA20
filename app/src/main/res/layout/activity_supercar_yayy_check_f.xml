@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.moneyboxadmin.pda.SupercarYayyCheckFActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/loginparent"
+        android:layout_width="@dimen/dimen_480x"
+        android:layout_height="@dimen/dimen_800y"
+        android:background="#43536e"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:id="@+id/netmsg"
+            android:layout_width="@dimen/dimen_430x"
+            android:layout_height="@dimen/dimen_70y"
+            android:layout_marginBottom="@dimen/dimen_10y"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/netmsgtext1"
+                android:layout_width="@dimen/dimen_430x"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_system_bg"
+                android:gravity="center"
+                android:padding="15px"
+                android:text="当前网络连接失败"
+                android:textColor="@color/back"
+                android:textSize="@dimen/text_size_30"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_430x"
+            android:layout_height="@dimen/dimen_352y"
+            android:background="@drawable/login_system_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_165y"
+                android:layout_marginTop="@dimen/dimen_18y"
+                android:background="@drawable/edit_bottom"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/dimen_70x"
+                    android:layout_height="@dimen/dimen_70y"
+                    android:layout_marginBottom="@dimen/dimen_25y"
+                    android:layout_marginLeft="@dimen/dimen_10x"
+                    android:layout_marginRight="@dimen/dimen_70x"
+                    android:src="@drawable/loginimage" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_25y"
+                    android:layout_marginTop="@dimen/dimen_13y"
+                    android:text="押运登录"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_35" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_80y"
+                android:background="@drawable/edit_bottom"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/yayun_name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_65y"
+                    android:background="@drawable/wihte_bg"
+                    android:drawableLeft="@drawable/user_login_bg"
+                    android:ems="10"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_35">
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_75y"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/yayun_pwd1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_65y"
+                    android:background="@drawable/wihte_bg"
+                    android:drawableLeft="@drawable/pwd_bg"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10px"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_35"
+
+                    ></EditText>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_57y"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/yayun_login_btn1"
+                android:layout_width="@dimen/dimen_170x"
+                android:layout_height="@dimen/dimen_70y"
+                android:layout_marginRight="@dimen/dimen_70x"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_35" />
+
+            <Button
+                android:id="@+id/yayun_login_cancel1"
+                android:layout_width="@dimen/dimen_170x"
+                android:layout_height="@dimen/dimen_70y"
+                android:background="@drawable/buttom_selector_bg"
+                android:text="取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_35" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
