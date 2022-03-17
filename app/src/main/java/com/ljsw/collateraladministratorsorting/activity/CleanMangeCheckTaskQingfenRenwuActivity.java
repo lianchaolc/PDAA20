@@ -210,6 +210,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 
     @Override
     protected void onResume() {
+        Mapplication.getApplication().IsDiZhiOnly=true;// 设置走那个提交数据
         // TODO Auto-generated method stub
         super.onResume();
         System.out.println("调用getDate");
@@ -276,10 +277,10 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Bundle bundle = new Bundle();
-                String xianluId = RenwuData[1].get("xianluId").get(arg2);
-                bundle.putString("XianluName", ltQLRenwu.get(arg2).getName());
-                bundle.putString("XianluId", xianluId);
-                bundle.putString("renwudan", qlNum);
+                String xianluId =CleanltQLRenwulist.get(arg2).getLINENUM();
+                bundle.putString("XianluName", CleanltQLRenwulist.get(arg2).getLINENAME());
+                bundle.putString("XianluId",  CleanltQLRenwulist.get(arg2).getLINENUM());
+                bundle.putString("renwudan", strqlnum);
 
                 Skip.skip(CleanMangeCheckTaskQingfenRenwuActivity.this, QinglingWangdianActivity.class, bundle, 0);
             }
@@ -308,7 +309,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
             @Override
             public void onClick(View arg0) {
                 Bundle bundle = new Bundle();
-                bundle.putString("qlNum", qlNum); //strqlnum
+                bundle.putString("qlNum", strqlnum); //strqlnum
                 // bundle.putString("tvSJNo", tvSJNo.getText().toString());
                 bundle.putInt("biaoqian", 0);
                 Skip.skip(CleanMangeCheckTaskQingfenRenwuActivity.this, QinglingZhuangxiangInfoActivity.class, bundle, 0);
@@ -416,8 +417,10 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                 btnZhuangxiang.setEnabled(true);
                 btnZhuangxiang.setBackgroundResource(R.drawable.buttom_selector_bg);
             }
-            vh.tvName.setText(lt.get(position).getLineName());
-            vh.tvCount.setText("" + lt.get(position).getBoxCount());
+
+
+            vh.tvName.setText(lt.get(position).getLINENAME());
+            vh.tvCount.setText("" + lt.get(position).getORGNUM()+"");
             return v;
         }
 
@@ -590,7 +593,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                         handler.sendEmptyMessage(4);
                     }
 
-
+//[{"ORGNUM":1,"LINENAME":"西青六线","LINENUM":"0029"}]
                     parms = new GetResistCollateralBaggingService().getListClearingWorkDetail(upnum, gettype);
                     Log.e(TAG, "测试" + parms);
                     // 返回的类型anyType{}需要进行判断
