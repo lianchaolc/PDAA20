@@ -1,25 +1,38 @@
 package com.main.pda;
 
 import cn.poka.util.SharedPreUtil;
+import okhttp3.Call;
 
 import com.application.GApplication;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
+import com.golbal.pda.GolbalView;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
+import com.online.update.biz.GetPDA;
+import com.online.update.biz.VersionInfo;
 import com.service.FixationValue;
 import com.service.NetService;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.FileCallBack;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -33,8 +46,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.text.DecimalFormat;
 
 public class SystemLogin extends Activity implements OnTouchListener {
 	// 系统登陆界面
@@ -69,6 +86,26 @@ public class SystemLogin extends Activity implements OnTouchListener {
 		}
 		return systemLogin;
 	}
+	private GetPDA Pda;
+
+	GetPDA getPda() {
+		if (Pda == null) {
+			Pda = new GetPDA();
+		}
+		return Pda;
+	}
+
+	Handler handler = null; // 获取版本号
+	private Context context;
+	private GolbalView g;
+
+	GolbalView getG() {
+		if (g == null) {
+			g = new GolbalView();
+		}
+		return g;
+	}
+	private  String  serViceVersion;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +240,65 @@ public class SystemLogin extends Activity implements OnTouchListener {
 
 		// 把当前activity放进集合
 		GApplication.addActivity(this, "1system");
+
+//		比对版本
+
+		// 获取版本号并更新
+		handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch (msg.what) {
+					case -1:
+						managerClass.getSureCancel().makeSuerCancel5(SystemLogin.this, "获取版本号失败,是否重新获取？",
+								new OnClickListener() {
+									@Override
+									public void onClick(View arg0) {
+										getPda().getpath(handler, SystemLogin.this);
+										managerClass.getSureCancel().remove5();
+									}
+								}, new OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										managerClass.getSureCancel().remove5();
+										SystemLogin.this.finish();
+									}
+								}, false);
+						break;
+					case 99:
+						AlertDialog dialog = new AlertDialog.Builder(SystemLogin.this).setTitle
+								("提示：").setMessage("apk有新版发布请更新")
+								.setNeutralButton("取消", new DialogInterface
+												.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												dialog.dismiss();
+												SystemLogin.this.finish();
+											}
+										}
+								)
+								.setNegativeButton("更新", new DialogInterface
+										.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										downloadAPK();
+
+									}
+								}).show();
+						dialog.setCanceledOnTouchOutside(false);//可选
+						dialog.setCancelable(false);//可选
+
+
+						break;
+					case 44:
+//                        GolbalView.toastShow(SystemLogin.this, "目前已是最高版本");
+						break;
+				}
+
+			}
+
+		};
+
 	}
 
 	@Override
@@ -409,5 +505,141 @@ public class SystemLogin extends Activity implements OnTouchListener {
 	public void onBackPressed() {
 		super.onBackPressed();
 	}
+	private View v;
+	ProgressBar bar;
+	TextView percentText;
+	public void downloadAPK() {
 
+		if (v == null) {
+			v = GolbalView.getLF(context).inflate(R.layout.loading, null);
+		}
+		bar = (ProgressBar) v.findViewById(R.id.progress_version);
+		percentText = (TextView) v.findViewById(R.id.percentText);
+		try {
+
+			Log.d("SystemLogin", "!!!!!!!" +  VersionInfo.URL);
+		} catch (Exception e) {
+
+		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+				OkHttpUtils
+						.get()
+						.url(VersionInfo.URL)
+						.build()
+						.execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "PDA.apk") {//保存路径      APK名称
+							@Override
+							public void onError(Call call, Exception e, int id) {
+							}
+
+							@Override
+							public void inProgress(float progress, long total, int id) {
+								super.inProgress(progress, total, id);
+								Log.d("SystemLogin", "progress" + progress);
+								Log.d("SystemLogin", "total" + total);
+								Log.d("SystemLogin", "id" + id);
+//                                String p = null;
+//                                double percent =progress;
+//                                if (total <= 0) {
+//                                    p = "0.00";
+//                                }
+//
+//                                try {
+//                                    if (percent >= 100) {
+//                                        p = "100";
+//                                    } else {
+//                                        p = (percent + "").substring(0, (percent + "").indexOf(".") + 3);
+//                                    }
+//
+//                                } catch (Exception e) {
+//                                    System.out.println(e.getMessage());
+//                                }
+//                                Log.i("percent", percent + "");
+								DecimalFormat fnum   =   new   DecimalFormat("##0.00");
+								String   dd=fnum.format(progress);
+//                                long localintdata = Long.parseLong(str);//返回long基本数据类型
+								percentText.setText(dd+"%");
+//                                Toast.makeText(context,""+localintdata,50).show();
+							}
+
+							@Override
+							public void onResponse(File response, int id) {
+								Log.d("response", "response::" + response.getAbsolutePath());
+								Log.d("response", "id::" + id);
+								try {
+									Thread.sleep(3000);
+									showSelectAPK(context);
+									getG().removeV(v);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+
+							}
+
+						});
+
+			}
+
+		}).start();
+		getG().createFloatView(context, v);
+
+	}
+
+	private void showSelectAPK(Context context) {
+
+
+		File apkFile = new File(Environment.getExternalStorageDirectory() + "/" + VersionInfo.APKNAME);
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+//Android 7.0 系统共享文件需要通过 FileProvider 添加临时权限，否则系统会抛出 FileUriExposedException .
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			Uri contentUri = FileProvider.getUriForFile(context, "com.example.pda.FileProvider", apkFile);
+			intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+			if(RESULT_CANCELED==0){
+				Log.d("SystemLogin","!!!!程序被添加"+RESULT_CANCELED);
+				SystemLogin.this.finish();
+			}else{
+				Toast.makeText(SystemLogin.this, "程序安装..", Toast.LENGTH_SHORT).show();
+			}
+
+
+		} else {
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setDataAndType(
+					Uri.fromFile(apkFile),
+					"application/vnd.android.package-archive");
+		}
+
+
+		context.startActivity(intent);
+	}
+//    private boolean isForeground() {
+//        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+//        String currentPackageName = cn.getPackageName();
+//        if (!TextUtils.isEmpty(currentPackageName) && currentPackageName.equals(getPackageName())) {
+//            return true;
+//        }
+//        return false;
+//    }
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_CANCELED) {
+			Toast.makeText(SystemLogin.this, "程序被替换..", Toast.LENGTH_SHORT).show();
+
+		}
+		if (requestCode==RESULT_OK){
+			Toast.makeText(SystemLogin.this, "取消..", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		getG().removeV(v);
+		managerClass.getSureCancel().remove5();
+	}
 }
