@@ -83,8 +83,15 @@ public class MoneyBoxOutDoBiz {
 	 */
 	public void getemptyMoneyBoxoutdo(String bizName, List<BoxDetail> list, String planNum, String assessor,
 			String assessors, String corpId, String bizNum, int isfirst) {
-		Log.i("gggassessor", assessor);
-		Log.i("gggassessors", assessors);
+		Log.i("bizName", bizName);
+		Log.i("list", ""+list.size());
+//		Log.i("planNum", planNum);
+		Log.i("assessor", assessor);
+		Log.i("gggassessor", assessors);
+		Log.i("corpId", corpId);
+		Log.i("bizNum", bizNum);
+		Log.i("isfirst", isfirst+"");
+
 		if (getGolbalUtil().onclicks) {
 			String cbinfo = getCbinfo(bizName, list, planNum, assessor, assessors, corpId, bizNum, isfirst);
 			Log.i("cbinfo", cbinfo);
