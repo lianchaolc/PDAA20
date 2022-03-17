@@ -267,6 +267,7 @@ public class SelectTaskByCollateralActivity extends FragmentActivity implements 
                 super.run();
                 try {
                     String number = GApplication.loginname;
+                    Mapplication.getApplication().UserId = number;
 //                    String number="05005";
                     parms = new GetResistCollateralBaggingService().getListClearingWork(number);
                     Log.e(TAG, "测试" + parms);
