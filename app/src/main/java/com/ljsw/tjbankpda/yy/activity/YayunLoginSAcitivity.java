@@ -104,6 +104,7 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                                         S_application.s_userYayun = result_user
                                                 .getUserzhanghu();
                                         getescortselectTask();
+
                                     }
 
 
@@ -197,28 +198,32 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
 
 
                     case 15:
-                        managerClassbutn = new ManagerClass();
+                        if(null!=managerClassbutn){
+
+                        }else{
+                            managerClassbutn = new ManagerClass();
+                        }
                         managerClass.getRuning().remove();
                         managerClassbutn.getSureCancel().makeSuerCancel4(
                                 YayunLoginSAcitivity.this, result_user.getUsername(), result_user.getUserzhanghu(), "本次领取任务线路：" + linename,
                                 new View.OnClickListener() {
                                     @Override
                                     public void onClick(View arg0) {
-//                                        managerClassbutn.getSureCancel().remove();
-//                                        managerClassbutn.getRuning().runding(YayunLoginSAcitivity.this,
 //                                                "即将请稍后...");
                                         Log.d(TAG, "===GApplication.use" + GApplication.use.getUserzhanghu());
-//                                        S_application.s_userYayun = result_user
-//                                                .getUserzhanghu();
+                                        managerClass.getSureCancel().remove4();
+                                        managerClassbutn.getSureCancel().remove4();
+
                                         Skip.skip(YayunLoginSAcitivity.this,
                                                 YayunSelectRewuUseActivity.class, null, 0);
-//                                        managerClassbutn.getRuning().remove();
-                                        managerClassbutn.getSureCancel().remove();
+
                                     }
 
 
                                 }, false);
-
+                        //移除上一一个遮罩
+                        managerClass.getSureCancel().remove3();
+                        managerClassbutn.getSureCancel().remove3();
                         break;
 
                     case 17:
@@ -749,6 +754,14 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        managerClassbutn = new ManagerClass();
         managerClass.getRuning().remove();
+        managerClass.getSureCancel().remove4();
+        managerClassbutn.getSureCancel().remove4();
+
+        managerClassbutn.getSureCancel().remove3();
+        managerClass.getSureCancel().remove3();
+
     }
 }
