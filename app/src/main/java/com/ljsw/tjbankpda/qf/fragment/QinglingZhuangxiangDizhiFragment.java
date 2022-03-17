@@ -131,7 +131,9 @@ public class QinglingZhuangxiangDizhiFragment extends Fragment implements OnTouc
     @Override
     public void onResume() {
         super.onResume();
-        RfidAdmin.booleanstrnewThread=true;
+        RfidAdmin r=new RfidAdmin();
+        r.booleanstrnewThread=true;
+//        RfidAdmin.booleanstrnewThread=true;
         // 如果请领装箱详细信息（QinglingZhuangxiangInfoActivity） 没有传值到集合就直接return出去不做扫描操作
         if (Mapplication.getApplication().boxremberDizhi.size() == 0) {
             Log.d(TAG, "数据为null 不进行扫描");
@@ -256,7 +258,9 @@ public class QinglingZhuangxiangDizhiFragment extends Fragment implements OnTouc
             getRfid().close_a20();
 
         }
-        RfidAdmin.booleanstrnewThread=false;
+//        RfidAdmin.booleanstrnewThread=false;
+        RfidAdmin r=new RfidAdmin();
+        r.booleanstrnewThread=false;
     }
 
     /****
@@ -405,8 +409,6 @@ public class QinglingZhuangxiangDizhiFragment extends Fragment implements OnTouc
 
         @Override
         public int getCount() {
-//			Log.e("o_Application.numberlist.size()", "测试长度：：：：：" + o_Application.numberlist.size());
-//			return o_Application.numberlist.size();
             return null == rightData ? 0 : rightData.size();
         }
 
