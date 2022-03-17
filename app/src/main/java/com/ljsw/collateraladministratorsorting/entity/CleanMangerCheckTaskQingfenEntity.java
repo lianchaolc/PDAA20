@@ -55,4 +55,44 @@ public class CleanMangerCheckTaskQingfenEntity implements Serializable {
     private  String lineNum;
     private  String boxCount;
     private  String orgCount;
+
+    public String getORGNUM() {
+        return ORGNUM;
+    }
+
+    public void setORGNUM(String ORGNUM) {
+        this.ORGNUM = ORGNUM;
+    }
+
+    public String getLINENAME() {
+        return LINENAME;
+    }
+
+    public void setLINENAME(String LINENAME) {
+        this.LINENAME = LINENAME;
+    }
+
+    public String getLINENUM() {
+        return LINENUM;
+    }
+
+    public void setLINENUM(String LINENUM) {
+        this.LINENUM = LINENUM;
+    }
+
+    private String ORGNUM;
+    private String LINENAME;;
+
+    private String LINENUM;
+
+    public CleanMangerCheckTaskQingfenEntity(String lineName, String lineNum, String boxCount, String orgCount, String ORGNUM, String LINENAME, String LINENUM) {
+        this.lineName = lineName;
+        this.lineNum = lineNum;
+        this.boxCount = boxCount;
+        this.orgCount = orgCount;
+        this.ORGNUM = ORGNUM;
+        this.LINENAME = LINENAME;
+        this.LINENUM = LINENUM;
+    }
+    //    [{"ORGNUM":1,"LINENAME":"西青六线","LINENUM":"0029"}]
 }
