@@ -18,6 +18,8 @@ public class AssignService {
 	 * @throws Exception
 	 */
 	public OrderDetail getAssign(String userId, String type) throws Exception {
+		Log.i("userid", userId);
+		Log.i("type", type + "");
 		String methodName = "getAssign2";
 		WebParameter[] param = { new WebParameter<String>("arg0", userId), new WebParameter<String>("arg1", type) };
 
