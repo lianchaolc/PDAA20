@@ -88,7 +88,6 @@ public class ClearMachineResult extends Activity implements OnTouchListener {
 					name.setText(WebSiteJoin.spinnerText);
 					num.setText(arr[1]);
 					corpid.setText(WebSiteJoin.corp);
-					Log.i("ClearMachineIngBiz.list.size", ClearMachineIngBiz.list.size() + "");
 					break;
 				case -1:
 					managerClass.getAbnormal().timeout(ClearMachineResult.this, "查找异常！", new View.OnClickListener() {
