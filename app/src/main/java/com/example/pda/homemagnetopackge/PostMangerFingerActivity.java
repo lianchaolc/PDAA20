@@ -67,7 +67,7 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
 
     private String FingerUser;// 指纹验证人员
 
-
+private String lineandtime;//
     @SuppressLint("HandlerLeak")
     @SuppressWarnings("unchecked")
     @Override
@@ -78,6 +78,8 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
         // / 账户资料归还时传过得集合和任务号
         Tasknumber = getIntent().getStringExtra("intLinmnum");
         returnaccountinteninfolist = (List<String>) getIntent().getSerializableExtra("postmanlist");
+
+        lineandtime=getIntent().getStringExtra("lineandtime");
         // 判断应该走哪个方法
 
         Log.d(TAG, "Tasknumber=============" + Tasknumber);
@@ -222,7 +224,9 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
 
                             });
                         }
-                        dialogforreturnaccountinten.show();
+                        if (!isFinishing()) {
+                            dialogforreturnaccountinten.show();
+                        }
                         break;
                     case 998:// 提交失败显示dialog
                         dialogfa = new Dialog(PostMangerFingerActivity.this);
@@ -239,10 +243,10 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
                             }
 
                         });
-                        dialogfa.show();
-                        // 更改显示的弹窗 需要测试
-                        // managerClass.getResultmsg().resultmsg(null,
-                        // "提交数据失败",false);
+                        if (!isFinishing()) {
+                            dialogfa.show();
+                        }
+
 
                         break;
                     case 997:
@@ -462,7 +466,7 @@ public class PostMangerFingerActivity extends BaseFingerActivity {
                     Log.d(TAG, "---" + updata1);
                     Log.d(TAG, "----" + linnum);
 
-                    updataresult = new AccountAndPostmanServer().PostmanUpData(FingerUser, number, updata1, linnum);
+                    updataresult = new AccountAndPostmanServer().PostmanUpData(FingerUser, number, updata1, linnum,lineandtime);
 
                     Log.e(TAG, "测试" + updataresult.toString());
                     if (updataresult.equals("00")) {// 返回结果为00 表示成功 显示提交成功
