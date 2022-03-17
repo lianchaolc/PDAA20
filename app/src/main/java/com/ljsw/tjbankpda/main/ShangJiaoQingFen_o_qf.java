@@ -40,6 +40,7 @@ import com.application.GApplication;
 import com.example.pda.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ljsw.collateraladministratorsorting.activity.SelectTaskByCollateralActivity;
 import com.ljsw.tjbankpda.qf.entity.QuanbieXinxi;
 import com.ljsw.tjbankpda.qf.entity.ShangJiaoQingFen_o_qf_Print_Entity;
 import com.ljsw.tjbankpda.qf.entity.TianJiaXianJin;
@@ -1058,7 +1059,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					System.out.println("------------------------------数据上传");
 					System.out.println("ShangJiaoQingFen_o_qf:" + GApplication.user);
 					/*
-					 * revised by zhangxuewei 后台传值name 改为ID 是否需要符合
+					 * revised by zhangxuewei 后台传值name 改为ID 是否需要符合1
 					 */
 					boolean isOk = new QingfenRenwuService().collateralHandOverClearResultAndCheck(orderNum, peisongId,
 							(GApplication.getApplication().app_hash.get("login_username")).toString(), newdizhiMSg);
@@ -1486,7 +1487,12 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 			if (msg.what == 0) {
 				manager.getRuning().remove();
 				System.out.println("------------------------------页面跳转");
+				if(dizhishunum.equals("0") ){
 				Skip.skip(ShangJiaoQingFen_o_qf.this, QingFenJinDu_qf.class, null, 0);
+				}else {
+					Skip.skip(ShangJiaoQingFen_o_qf.this, SelectTaskByCollateralActivity.class, null, 0);
+					//2022.1.25 这里添加后跳转抵质数大于且不为0时
+				}
 			}
 			if (msg.what == 1) {
 				getPritInfoHander();//  每次进入都会获取到打印机的数据
@@ -1572,7 +1578,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 			}
 			if (msg.what == 2) {
 				alllinear.setVisibility(View.VISIBLE);
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaa");
+				System.out.println("aaaaaaaaaaaaaaaaaaaaaa == 2");
 				manager.getRuning().remove();
 				manager.getAbnormal().timeout(ShangJiaoQingFen_o_qf.this, "提交失败", new OnClickListener() {
 					@Override
