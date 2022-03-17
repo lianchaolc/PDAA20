@@ -21,6 +21,7 @@ import com.application.GApplication;
 import com.example.app.entity.User;
 import com.example.app.util.Skip;
 import com.example.pda.R;
+import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.yy.activity.YayunDenglu;
 import com.manager.classs.pad.ManagerClass;
 import com.o.service.YanZhengZhiWen;
@@ -79,7 +80,6 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
     private void load() {
         img_left = (ImageView) findViewById(R.id.jj_finger_leftcollect);
         img_right = (ImageView) findViewById(R.id.jj_finger_right_collect);
-//         back_bank = (ImageView) findViewById(R.id.back_bank);
         name_left = (TextView) findViewById(R.id.jj_login_name_left);
         name_right = (TextView) findViewById(R.id.jj_login_name_right_collect);
         bottomtext = (TextView) findViewById(R.id.jj_show);
@@ -100,7 +100,7 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                     if (result_user != null) {
                         checkRuanAction = true;
                         saveCropId = ShareUtil.WdId;
-
+                   userid1=result_user.getUserzhanghu();
                         handler.sendEmptyMessage(0);
                     } else {
                         handler.sendEmptyMessage(1);
@@ -132,7 +132,7 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
 
                         Log.d("", "saveCropId为null" +
                                 "" + saveCropId);
-                        saveCropId = GApplication.user.getOrganizationId();
+                        saveCropId= o_Application.netpoint.getLoginUserId();
                     } else {
 
                         result_user = yz.yanzhengfinger("", saveCropId, ShareUtil.ivalBack);
@@ -221,16 +221,10 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                             }
 
                             manager.getRuning().runding(KuanXiangNetPointCollectActivity.this, "即将自动跳转");
-                            /*try {
-                                Thread.sleep(2000);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }*/
                             fname_left = null;
                             fname_right = null;
                             if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
                                 intentA.putExtra("netpoincollect", "账号验证成功");
-//                                startActivity(intentA);
                                 setResult(REQUEST_CODE_B, intentA);
                                 finish();
                             }
@@ -240,14 +234,13 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                     break;
                 case 1:
                 case 2:
-                case 3:
+                case 3:// 跳转到网点账号录入
                     manager.getRuning().remove();
 
                     // 累计验证失败的次数
                     texttop.setText("验证失败");
                     if (!firstSuccess) {// 失败就累加次数
                         one++;
-                        // System.out.println("one :+++++++++++:"+one);
                         Toast.makeText(KuanXiangNetPointCollectActivity.this,
                                 /**
                                  * 3 改为FixationValue.PRESS，用FixationValue.PRESS来控制按压次数
@@ -255,7 +248,6 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                                 "验证失败，您还有" + (FixationValue.PRESS - one) + "次机会", Toast.LENGTH_SHORT).show();
                     } else {
                         two++;
-                        // System.out.println("two :+++++++++++:"+two);
                         Toast.makeText(KuanXiangNetPointCollectActivity.this, "验证失败，您还有" + (FixationValue.PRESS - two) + "次机会", Toast.LENGTH_SHORT)
                                 .show();
                     }
@@ -264,14 +256,12 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                         Intent intent = new Intent();
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("FLAG", "wangdianone");
+                        bundle2.putString("zhanghao", "wangdianone");
                         ShareUtil.ivalBack = null;
                         ShareUtil.w_finger_bitmap_left = null;
                         intent.putExtras(bundle2);
 
-//                        Skip.skip(KuanXiangNetPointCollectActivity.this, WangdianCheckFingerNetPointColletcActivity.class, bundle2, 0);
-//                        KuanXiangNetPointCollectActivity.this.finish();
                         Intent intent1 = new Intent(KuanXiangNetPointCollectActivity.this, WangdianCheckFingerNetPointColletcActivity.class);
-//                            intent .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent1.putExtras(bundle2);
                         startActivityForResult(intent1, 5);
 
@@ -284,11 +274,8 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                             GApplication.map = ShareUtil.w_finger_bitmap_left;
                         bundle2.putString("left", fname_left);
                         intent.putExtras(bundle2);
-//                        Skip.skip(KuanXiangNetPointCollectActivity.this, WangdianCheckFingerNetPointColletcActivity.class, bundle2, 0);
-//                        KuanXiangNetPointCollectActivity.this.finish();
 
                         Intent intent1 = new Intent(KuanXiangNetPointCollectActivity.this, WangdianCheckFingerNetPointColletcActivity.class);
-//                            intent .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent1.putExtras(bundle2);
                         startActivityForResult(intent1, 5);
                     }
@@ -313,12 +300,6 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
             if (ShareUtil.zhiwenid_right != null) {
                 ShareUtil.zhiwenid_right = null;
             }
-            if (GApplication.wd_user1 != null) {
-                GApplication.wd_user1 = null;
-            }
-            if (GApplication.wd_user2 != null) {
-                GApplication.wd_user2 = null;
-            }
             Skip.skip(KuanXiangNetPointCollectActivity.this, JiaoJieActivity.class, null, 0);
             KuanXiangNetPointCollectActivity.this.finish();
         }
@@ -332,91 +313,6 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
             firstSuccess = false;
         }
 
-        /**
-         * SM修改部分
-         */
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-
-        if (bundle != null) {
-            String flag = bundle.getString("FLAG");
-
-            if (flag.equals("wangdianone")) {
-                img_left.setImageResource(R.drawable.sccuss);
-                fname_left = GApplication.wd_user1.getUsername();
-                name_left.setText(fname_left);
-                f1 = "1";
-                one = 0;
-                firstSuccess = true;
-                bottomtext.setText("请第二位网点人员按压手指...");
-                texttop.setText("第一位验证成功");
-                saveCropId = GApplication.user.getLoginUserId();
-                Log.e("kkk", GApplication.wd_user1.getUserzhanghu());
-                dialogforreturnaccountinten = new Dialog(KuanXiangNetPointCollectActivity.this);
-                LayoutInflater inflaterforreturnaccountinten = LayoutInflater.from(KuanXiangNetPointCollectActivity.this);
-                View vforreturnaccountinten = inflaterforreturnaccountinten.inflate(R.layout.dialog_success, null);
-                Button butforreturnaccountinten = (Button) vforreturnaccountinten.findViewById(R.id.success);
-                butforreturnaccountinten.setText("指纹验证成功!");
-                dialogforreturnaccountinten.setCancelable(false);
-                dialogforreturnaccountinten.setContentView(vforreturnaccountinten);
-                if (butforreturnaccountinten != null) {
-                    butforreturnaccountinten.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View arg0) {
-                            intentA = new Intent(KuanXiangNetPointCollectActivity.this, JiaoJieActivity.class);
-                            intentA.putExtra("netpoincollect", "账号验证成功");
-                            intentA.putExtra("netpointright", GApplication.wd_user1.getUserzhanghu());
-//                            intentC.putExtra("netpointleft",GApplication.wd_user2.getUserzhanghu());
-                            KuanXiangNetPointCollectActivity.this.setResult(REQUEST_CODE_B, intentA);
-                            KuanXiangNetPointCollectActivity.this.finish();
-//                            Intent  istart=new Intent(KuanXiangNetPointCollectActivity.this,JiaoJieActivity.class);
-//                            startActivity(istart);
-                            dialogforreturnaccountinten.dismiss();
-
-                        }
-
-                    });
-                }
-                dialogforreturnaccountinten.show();
-            }
-            if (flag.equals("wangdiantwo")) {
-                fname_right = GApplication.wd_user2.getUsername();
-                fname_left = bundle.getString("left");
-                img_right.setImageResource(R.drawable.sccuss);
-                // System.out.println("one is :"+one);
-                if (GApplication.wd_user1 == null) {
-                    GApplication.wd_user1 = new User();
-                }
-                if (GApplication.wd_user1.getUsername() != null && GApplication.map != null) {
-                    img_left.setImageBitmap(GApplication.map);
-                } else {
-                    img_left.setImageResource(R.drawable.sccuss);
-                }
-                name_left.setText(fname_left);
-                name_right.setText(fname_right);
-                f1 = "1";
-                f2 = "2";
-                texttop.setText("第二位验证成功");
-                bottomtext.setText("验证成功！");
-
-                Log.e("kkk", GApplication.wd_user2.getUserzhanghu());
-
-                if (fname_left.equals(fname_right)) {
-                    Toast.makeText(KuanXiangNetPointCollectActivity.this, "请两位网点人员进行验证！", Toast.LENGTH_SHORT).show();
-                } else {
-                    firstSuccess = false;
-                    fname_left = null;
-                    fname_right = null;
-
-                    if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
-
-
-                    }
-
-                }
-            }
-
-        }
     }
 
 
@@ -432,10 +328,14 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
 
 
                 if (flag.equals("wangdianone")) {
+                    String  netpoincollect=data.getStringExtra("netpoincollect");
+                    String  zhanghao=data.getStringExtra("zhanghao");
+                    String  netpoinnamecollect=data.getStringExtra("name");
                     img_left.setImageResource(R.drawable.sccuss);
                     if (GApplication.wd_user1.getUsername().isEmpty()) {
+                        System.out.print("GApplication.wd_user1不为空");
                     } else {
-
+                        System.out.print("GApplication.wd_user1"+GApplication.wd_user1);
                     }
                     fname_left = GApplication.wd_user1.getUsername();
                     name_left.setText(fname_left);
@@ -444,22 +344,24 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                     firstSuccess = true;
                     bottomtext.setText("请第二位网点人员按压手指...");
                     texttop.setText("第一位验证成功");
-                    saveCropId = GApplication.user.getLoginUserId();
+                    saveCropId = o_Application.netpoint.getLoginUserId();
                     Log.e("kkk", GApplication.wd_user1.getUserzhanghu());
 
                 }
                 if (flag.equals("wangdiantwo")) {
                     fname_right = GApplication.wd_user2.getUsername();
-                    fname_left = data.getStringExtra("left");
                     img_right.setImageResource(R.drawable.sccuss);
-                    // System.out.println("one is :"+one);
                     if (GApplication.wd_user1 == null) {
                         GApplication.wd_user1 = new User();
+                    }
+                    if(null==fname_left){
+                        fname_left=GApplication.wd_user1.getUsername();
                     }
                     if (GApplication.wd_user1.getUsername() != null && GApplication.map != null) {
                         img_left.setImageBitmap(GApplication.map);
                     } else {
-                        img_left.setImageResource(R.drawable.sccuss);
+                        img_left.setImageBitmap(ShareUtil.w_finger_bitmap_left);
+                        GApplication.wd_user1.setUserzhanghu(ShareUtil.zhiwenid_left);
                     }
                     name_left.setText(fname_left);
                     name_right.setText(fname_right);
@@ -492,9 +394,14 @@ public class KuanXiangNetPointCollectActivity extends BaseFingerActivity {
                                     public void onClick(View arg0) {
                                         intentA = new Intent(KuanXiangNetPointCollectActivity.this, JiaoJieActivity.class);
                                         intentA.putExtra("netpoincollect", "账号验证成功");
-                                        String wd_user1= GApplication.wd_user1.getUserzhanghu();
-                                        String wd_user2= GApplication.wd_user2.getUserzhanghu();
 
+                                        String wd_user1= GApplication.wd_user1.getUserzhanghu();
+                                        if(null==wd_user1){
+                                            wd_user1=KuanXiangNetPointCollectActivity.userid1;
+                                        }
+                                        String wd_user2= GApplication.wd_user2.getUserzhanghu();
+                                        System.out.print(wd_user1);
+                                        System.out.print(wd_user2);
                                         if(null==wd_user1){
                                             wd_user1=ShareUtil.zhiwenid_left ;
                                         }
