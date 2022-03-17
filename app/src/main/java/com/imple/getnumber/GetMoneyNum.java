@@ -29,7 +29,7 @@ public class GetMoneyNum implements INotify {
         Log.e("!!number!!!!!", number);
         number = number.trim();
         Log.i("number", number);
-        if (number == null || !checkNum(number)) {
+        if (number == null ) {
             return;
         }
         if (number.length() == 24) {
