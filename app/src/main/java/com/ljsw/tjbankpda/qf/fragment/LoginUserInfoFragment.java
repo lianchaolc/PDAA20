@@ -1,5 +1,6 @@
 package com.ljsw.tjbankpda.qf.fragment;
 
+import com.application.GApplication;
 import com.example.pda.R;
 import com.ljsw.tjbankpda.qf.application.Mapplication;
 
@@ -19,6 +20,19 @@ public class LoginUserInfoFragment extends Fragment {
 			TextView tvUser2Name = (TextView) view.findViewById(R.id.tv_fg_qingfendenglu_user2);
 			tvUser1Name.setText(Mapplication.getApplication().user1.getLoginUserName()+"");
 			tvUser2Name.setText(Mapplication.getApplication().user2.getLoginUserName()+"");
+		}else{
+			if(null!=GApplication.user){
+				if(GApplication.user.getLoginUserId().equals("29")){
+				TextView textView1=(TextView)view.findViewById(R.id.textView1);
+				TextView textView4=(TextView)view.findViewById(R.id.textView4);
+				TextView tvUser1Name = (TextView) view.findViewById(R.id.tv_fg_qingfendenglu_user1);
+				TextView tvUser2Name = (TextView) view.findViewById(R.id.tv_fg_qingfendenglu_user2);
+				textView1.setText("抵质押品管理员:");
+				tvUser1Name.setText("");
+				tvUser2Name.setText(""+GApplication.user.getLoginUserName());
+				textView4.setText("");
+				}
+			}
 		}
 		return view;
 	}
