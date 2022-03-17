@@ -62,6 +62,51 @@ public class SaveAuthLogService {
 		return user;
 	}
 
+	/***
+	 * 通过账号密码方式进行
+	 * 提交数据
+	 */
+	public User saveAuthLogByPW(String planNum, String cashBoxNum, String corpId, String roleId, byte[] cValue,
+							String authType, String perNum, String sumPerNum,String userNo) throws Exception {
+
+		String methodName = "saveAuthLog";
+
+		WebParameter[] parameter = { new WebParameter<String>("arg0", planNum),
+				new WebParameter<String>("arg1", cashBoxNum), new WebParameter<String>("arg2", corpId),
+				new WebParameter<String>("arg3", roleId), new WebParameter<byte[]>("arg4", cValue),
+				new WebParameter<String>("arg5", authType), new WebParameter<String>("arg6", perNum),
+				new WebParameter<String>("arg7", sumPerNum),
+				new WebParameter<String>("arg8", userNo)};
+		User user = null;
+		Log.i("planNum", planNum + "");
+		Log.i("cashBoxNum", cashBoxNum);
+		Log.i("corpId", corpId);
+		Log.i("roleId", roleId);
+		Log.i("cValue", cValue + "");
+		Log.i("authType", authType);
+		Log.i("perNum", perNum);
+		Log.i("sumPerNum", sumPerNum);
+		Log.i("userNo", userNo);
+		SoapObject soap = WebService.getSoapObject(methodName, parameter);
+		Log.i("钞箱交接", "钞箱交接");
+
+		String code = soap.getProperty("code").toString();
+		String params = soap.getProperty("params").toString();
+		if ("00".equals(code) && !params.equals("anyType{}")) {
+			user = new User();
+			String[] str = params.split(";");
+			Log.i("setId", str[0]);
+			Log.i("setName", str[1]);
+			user.setId(str[0]);
+			user.setName(str[1]);
+		} else if ("01".equals(code)) { // 如果查询状态为01 抛出异常代办验证人省份不合法(离行押运交接)
+			throw new NumberFormatException();
+		}
+		Log.d("saveAuthLogByPW","code"+code);
+		return user;
+	}
+
+
 	/**
 	 * 检测加钞员是否处于空闲状态
 	 * 
