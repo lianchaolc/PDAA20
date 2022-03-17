@@ -23,7 +23,7 @@ import android.widget.TextView;
  * @author Administrator
  *
  */
-public class ServiceAddress extends Activity {
+public class ServiceAddress extends Activity implements View.OnTouchListener {
 
 	EditText space;
 	EditText webservice;
@@ -45,7 +45,7 @@ public class ServiceAddress extends Activity {
 		webservice = (EditText) findViewById(R.id.webservice);
 		btn = (Button) findViewById(R.id.changeweb);
 		back = (ImageView) findViewById(R.id.webserviceid);
-
+		back.setOnTouchListener(this);
 		sharepre = getSharedPreferences("web", Context.MODE_PRIVATE);
 
 		try {
@@ -111,7 +111,7 @@ public class ServiceAddress extends Activity {
 					break;
 				case MotionEvent.ACTION_UP:
 					back.setBackgroundResource(R.drawable.back_cirle);
-					// ServiceAddress.this.finish();
+					 ServiceAddress.this.finish();
 					break;
 
 				case MotionEvent.ACTION_CANCEL:
@@ -135,5 +135,10 @@ public class ServiceAddress extends Activity {
 		space.setText(sp);
 		webservice.setText(service);
 
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		return false;
 	}
 }
