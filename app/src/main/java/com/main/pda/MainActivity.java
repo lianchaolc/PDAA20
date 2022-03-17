@@ -124,31 +124,8 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		} else {
 			Log.e("地址读取", "地址读取err");
 		}
-
-//		检查当前的版本 号并自动的更行农商行四期
-
-		CheckSelfVersion();
-
 	}
 
-	/***
-	 * 检查当前的版本并自动更新
-	 */
-	private void CheckSelfVersion() {
-//		1   每次进行网络请求获取服务端的版本号
-//		getServiceAPKVersion();
-
-
-	}
-//  2获取服务端版本号这样对比并下载
-	private void getServiceAPKVersion() {
-		SystemUpdatePwdService dd=	new SystemUpdatePwdService();
-		try {
-		String result=	dd.updataSelfApt(getVersion());//  获取 服务端的版本号
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -178,9 +155,9 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		if (MotionEvent.ACTION_DOWN == even.getAction()) {
 			switch (view.getId()) {
 			// 版本
-//			case R.id.version:
-//				version.setImageResource(R.drawable.about_press);
-//				break;
+			case R.id.version:
+				version.setImageResource(R.drawable.about_press);
+				break;
 			// 主菜单
 			case R.id.home:
 				home.setImageResource(R.drawable.meun_money_press);
@@ -222,10 +199,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				managerClass.getGolbalutil().gotoActivity(MainActivity.this,
 //						BaggingActivity.class, null, GolbalUtil.ismover);  // 库管 入门式天线之前做的操作 库管员进行装袋操作
 						VersionCheck.class, null, GolbalUtil.ismover);
-//				managerClass.getGolbalutil().gotoActivity(MainActivity.this,
-//						BaggingActivity.class, null, GolbalUtil.ismover);
 //						   Intent intent = new Intent(MainActivity.this, BaggingActivitySend.class);
-//                startActivity(intent);
 				break;
 			}
 
@@ -445,8 +419,6 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 	/****
 	 * 打开程序时直接创建并写文件
 	 */
-//	EditText edit;
-//	String 	textname="2222";
 	public void outputSDCard(String textname, String edit) {
 		try {
 			boolean bool = fileIsExists(textname);
