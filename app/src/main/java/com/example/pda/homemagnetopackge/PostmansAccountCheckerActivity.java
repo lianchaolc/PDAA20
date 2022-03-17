@@ -66,6 +66,7 @@ public class PostmansAccountCheckerActivity extends Activity implements OnClickL
 	private List<String> houduActionlist = new ArrayList<String>();
 	private String uPstr = "";
 	String intLinmnum = "";// 传过来的线路
+	String linandTime="";//  线路和时间
 
 	private RFID_Device getRfid() {
 		if (rfid == null) {
@@ -88,9 +89,11 @@ public class PostmansAccountCheckerActivity extends Activity implements OnClickL
 		if (bundle != null) {
 			intentdatalist = (List<String>) bundle.getSerializable("houduActionlist");
 			intLinmnum = bundle.getString("linnum");
-
+			linandTime = bundle.getString("lineandtime");//  上一个页面传递线路名称和时间
 			System.out.println("houduActionlist:    ---" + intentdatalist.size());
 			Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + intentdatalist.size());
+			Log.d(TAG, "!!!!!!!!!!!linandTime" +linandTime);
+
 			if (intentdatalist.size() > 0 && !intLinmnum.equals("")) {
 				// for (int i = 0; i < intentdatalist.size(); i++) {
 
@@ -239,7 +242,7 @@ public class PostmansAccountCheckerActivity extends Activity implements OnClickL
 		Intent intetent3 = new Intent(PostmansAccountCheckerActivity.this, PostMangerFingerActivity.class);
 		intetent3.putStringArrayListExtra("postmanlist", (ArrayList<String>) houduActionlist);
 		intetent3.putExtra("intLinmnum", intLinmnum);
-
+		intetent3.putExtra("lineandtime", linandTime);
 		startActivity(intetent3);
 		if (rfid != null) {
 			getRfid().close_a20();
