@@ -84,6 +84,12 @@ public class ClearMachineIing extends Activity implements OnTouchListener {
 				// getClearMachineIngBiz().cleanAtmAddMoney(getBoxNumList(),
 				// GApplication.getApplication().user.getOrganizationId(),
 				// BankDoublePersonLogin.userid1, BankDoublePersonLogin.userid2);
+                System.out.println("请求数据");
+				System.out.print(getBoxNumList());
+				System.out.print( GApplication.getApplication().taskCorpId);
+				System.out.print(BankDoublePersonLogin.userid1);
+				System.out.print(BankDoublePersonLogin.userid2);
+
 				getClearMachineIngBiz().cleanAtmAddMoney(getBoxNumList(), GApplication.getApplication().taskCorpId,
 						BankDoublePersonLogin.userid1, BankDoublePersonLogin.userid2);
 				msgs.setText("正在进行清机加钞操作...");
