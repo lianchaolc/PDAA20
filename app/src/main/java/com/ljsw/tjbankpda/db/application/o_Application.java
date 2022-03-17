@@ -90,6 +90,8 @@ public class o_Application {
     public static SystemUser qingfenyuan;
     // 押运员登录
     public static SystemUser yayunyuan;
+    //网点人员
+    public static SystemUser netpoint;
 
     public static o_Application getApplication() {
         if (application == null) {
