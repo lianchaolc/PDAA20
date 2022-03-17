@@ -28,7 +28,7 @@ import com.manager.classs.pad.ManagerClass;
 import com.moneyboxadmin.biz.GetBoxDetailListBiz;
 
 /**
- * ATM加钞出库明细
+ * ATM加钞出库明细选线路
  * 
  * @author Administrator
  * 
