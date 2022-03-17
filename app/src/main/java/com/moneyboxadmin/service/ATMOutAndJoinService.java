@@ -45,5 +45,32 @@ public class ATMOutAndJoinService {
 		return user;
 
 	}
+//	最后一个参数  为押运员账号
+	public User saveAtmAddMoneyOutaddYaYY(String cbInfo, String corpId, String roleId, byte[] cValue, String jiachao1,
+								   String jiachao2,String Yayyy) throws Exception {
+		String methodName = "atmAddMoneyOut2";
 
+		WebParameter[] parameter = { new WebParameter<String>("arg0", cbInfo), new WebParameter<String>("arg1", corpId),
+				new WebParameter<String>("arg2", roleId), new WebParameter<byte[]>("arg3", cValue),
+				new WebParameter<String>("arg4", jiachao1), new WebParameter<String>("arg5", jiachao2),new WebParameter<String>("arg6", Yayyy) };
+
+		Log.i("cbInfo", cbInfo);
+		Log.i("corpId", corpId);
+		Log.i("roleId", roleId);
+		Log.i("cValue", cValue + "");
+		Log.i("Yayyy", Yayyy + "");
+		StringBuffer sb = new StringBuffer();
+		SoapObject soap = WebService.getSoapObject(methodName, parameter);
+		String code = soap.getProperty("code").toString();
+		User user = null;
+		if (code.equals("00")) {
+			String params = soap.getProperty("params").toString();
+			user = new User();
+			String[] arr = params.split(";");
+			user.setId(arr[0]);
+			user.setName(arr[1]);
+		}
+		return user;
+
+	}
 }
