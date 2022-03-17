@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80y"
-
         android:background="@color/blue_title"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -139,7 +138,7 @@
     <ListView
         android:id="@+id/showlistview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_390y"
+        android:layout_height="@dimen/dimen_430y"
         android:layout_marginLeft="@dimen/dimen_10x"
         android:layout_marginRight="@dimen/dimen_10x"></ListView>
 
