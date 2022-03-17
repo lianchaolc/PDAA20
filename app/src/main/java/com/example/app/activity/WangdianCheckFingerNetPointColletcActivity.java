@@ -23,29 +23,34 @@ import android.widget.Toast;
 
 import com.application.GApplication;
 import com.example.app.entity.User;
-import com.example.app.util.Skip;
 import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
+import com.ljsw.tjbankpda.db.application.o_Application;
+import com.ljsw.tjbankpda.db.service.SecondLogin;
+import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.poka.device.ShareUtil;
 import com.service.NetService;
 
+import java.net.SocketTimeoutException;
+
 import static com.example.app.activity.JiaoJieActivity.REQUEST_CODE_B;
 
 /****
  *
- * 网点指纹错误账号吗密码验证
+ * 网点指纹错误账号吗密码验证目的绑定
+ * 2020.3.4
  */
 public class WangdianCheckFingerNetPointColletcActivity extends Activity implements OnTouchListener {
-
     Button login; // 登陆按钮
     Button cancel; // 取消按钮
     EditText editname; // 用户名输入框 帐号
     EditText editpwd; // 密码输入框 密码
 
     TextView textlogin; // 网络状态提示
+    private String NetPointUserNo;
     String name = null; // 用户名
     String pwd = null; // 密码
     OnClickListener onclickreplace;
@@ -139,121 +144,6 @@ public class WangdianCheckFingerNetPointColletcActivity extends Activity impleme
             }
         };
 
-        // Hand通知操作
-        getSystemLogin().handler_login = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                managerClass.getRuning().remove();
-                super.handleMessage(msg);
-
-                switch (msg.what) {
-                    case 1:
-                        error = 3;
-                        Log.e("", "orgid===" + GApplication.user.getOrganizationId());
-                        //  第一个人只验证是否为网点人员就好第二个人需要验证是否和第一个人同意网点和角色5
-
-                        if (!"5".equals(GApplication.user.getLoginUserId())) {// 角色不为5
-                            System.out.println("网点登录匹配角色id：" + GApplication.user.getLoginUserId());
-                            managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "请使用网点人员帐号登录",
-                                    new OnClickListener() {
-                                        @Override
-                                        public void onClick(View arg0) {
-                                            managerClass.getAbnormal().remove();
-                                            editname.setText("");
-                                            editpwd.setText("");
-                                        }
-                                    });
-                        } else {
-
-                            GApplication.getApplication().app_hash.put("login_username", editname.getText());
-                            /**
-                             * SM得到传来的标识
-                             */
-                            Intent intent = getIntent();
-                            Bundle netpoincollect = intent.getExtras();
-                            Intent     intentC   = new Intent(WangdianCheckFingerNetPointColletcActivity.this, KuanXiangNetPointCollectActivity.class);
-                            if (netpoincollect != null) {
-                                String flag = netpoincollect.getString("FLAG");
-                                if (flag.equals("wangdianone")) {
-                                    netpoincollect.putString("FLAG", flag);
-                                    netpoincollect.putString("netpoincollect", "账号验证成功");
-                                    User u = new User();
-                                    u.setUserzhanghu(name);
-                                    u.setPwd(pwd);
-                                    u.setUsername(GApplication.user.getLoginUserName());
-                                    // ShareUtil.zhiwenid_left = name;
-                                    GApplication.wd_user1 = u;
-                                    // 网点人员的机构
-                                    GApplication.jigouid = GApplication.user.getOrganizationId();
-                                    System.out.println("网点人员的机构:" + GApplication.jigouid);
-                                    System.out.println("网点人员的机构2:" + GApplication.user.getOrganizationId());
-                                    intentC.putExtras(netpoincollect);
-                                    managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "用户名和密码验证成功");
-//                                    managerClass.getGolbalutil().gotoActivity(WangdianCheckFingerNetPointColletcActivity.this,
-//                                            KuanXiangNetPointCollectActivity.class, netpoincollect, GolbalUtil.ismover);
-
-                                    WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
-                                    WangdianCheckFingerNetPointColletcActivity.this.finish();
-                                }
-                                if (flag.equals("wangdiantwo")) {
-                                    netpoincollect.putString("FLAG", flag);
-                                    String left = netpoincollect.getString("left");
-                                    User u = new User();
-                                    u.setUserzhanghu(name);
-                                    u.setPwd(pwd);
-                                    u.setUsername(GApplication.user.getLoginUserName());
-                                    // ShareUtil.zhiwenid_right = name;
-                                    GApplication.wd_user2 = u;
-                                    System.out.println("GApplication.user.getLoginUserName()2  :"
-                                            + GApplication.user.getLoginUserName());
-                                    if (left.equals(GApplication.user.getLoginUserName())) {
-                                        Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        jigouidCheck = GApplication.jigouid;
-                                        String jigouidCheck3= GApplication.jigouidwangdian2;
-                                        String jigouidCheck4=GApplication.jigouidwangdian1;
-                                        jigouidCheck2 = GApplication.user.getOrganizationId();
-//                                        比对同一个机构号
-                                        if (jigouidCheck.equals(jigouidCheck2)||jigouidCheck2.equals(jigouidCheck4)) {
-                                            intentC.putExtras(netpoincollect);
-                                            managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在验证用户名和密码...");
-//                                            managerClass.getGolbalutil().gotoActivity(WangdianCheckFingerNetPointColletcActivity.this,
-//                                                    KuanXiangNetPointCollectActivity.class, netpoincollect, GolbalUtil.ismover);
-//                                            finish();
-
-                                            WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
-                                            WangdianCheckFingerNetPointColletcActivity.this.finish();
-                                        } else {
-                                            Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "两人不是同一个网点!", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 0:
-                        if (msg.obj != null) {
-                            managerClass.getGolbalView().toastShow(WangdianCheckFingerNetPointColletcActivity.this, msg.obj.toString());
-                        } else {
-                            managerClass.getGolbalView().toastShow(WangdianCheckFingerNetPointColletcActivity.this, "");
-                        }
-                        break;
-                    case -4:
-                        managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "登陆超时，重新链接？", onclickreplace);
-                        break;
-                    case -1:
-                        managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "登录出现异常", onclickreplace);
-                        break;
-                    case -3:
-                        managerClass.getGolbalView().toastShow(WangdianCheckFingerNetPointColletcActivity.this, "用户或密码为空！");
-                        break;
-
-                }
-
-            }
-
-        };
 
         share = this.getPreferences(0);
         editor = share.edit();
@@ -267,86 +157,6 @@ public class WangdianCheckFingerNetPointColletcActivity extends Activity impleme
         super.onStart();
         current = true;
         Log.i("1111", "11111");
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent even) {
-        // 按下的时候
-        if (MotionEvent.ACTION_DOWN == even.getAction()) {
-            switch (view.getId()) {
-                // 登陆
-                case R.id.wangdian_login_btn1:
-                    login.setBackgroundResource(R.drawable.buttom_select_press);
-                    break;
-                // 取消
-                case R.id.wangdian_login_cancel1:
-                    cancel.setBackgroundResource(R.drawable.buttom_select_press);
-                    break;
-            }
-        }
-
-        // 手指松开的时候
-        if (MotionEvent.ACTION_UP == even.getAction()) {
-            switch (view.getId()) {
-                // 登陆
-                case R.id.wangdian_login_btn1:
-                    name = editname.getText().toString();
-                    pwd = editpwd.getText().toString();
-                    login.setBackgroundResource(R.drawable.buttom_selector_bg);
-                    // 非空验证
-                    if (isnull(name, pwd)) {
-                        // 有网络才可以执行登录操作
-                        Log.i("network", network + "");
-                        if (network) {
-                            // 提示
-                            try {
-                                managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在登录...");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                // System.out.println(e.getMessage());
-                            }
-                            // System.out.println("开始调用登陆的方法========"+"checkFingerprint");
-                            // 登陆方法
-                            getSystemLogin().login(name, pwd);
-                        } else {
-                            managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
-                            // Toast.makeText(this,"网络没有连通，无法登录",
-                            // Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    break;
-                // 取消
-                case R.id.wangdian_login_cancel1:
-
-                    login.setBackgroundResource(R.drawable.buttom_select_press);
-                    editname.setText("");
-                    editpwd.setText("");
-                    break;
-
-            }
-            GolbalUtil.ismover = 0;
-        }
-        // 手指移动的时候
-        if (MotionEvent.ACTION_MOVE == even.getAction()) {
-            GolbalUtil.ismover++;
-        }
-
-        // 意外中断事件取消
-        if (MotionEvent.ACTION_CANCEL == even.getAction()) {
-            GolbalUtil.ismover = 0;
-            switch (view.getId()) {
-                // 登陆
-                case R.id.wangdian_login_btn1:
-                    login.setBackgroundResource(R.drawable.buttom_selector_bg);
-                    break;
-                // 取消
-                case R.id.wangdian_login_cancel1:
-                    cancel.setBackgroundResource(R.drawable.buttom_selector_bg);
-                    break;
-            }
-        }
-        return true;
     }
 
     @Override
@@ -403,21 +213,242 @@ public class WangdianCheckFingerNetPointColletcActivity extends Activity impleme
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (GApplication.wd_user1 != null) {
-                GApplication.wd_user1 = null;
-            }
-            if (GApplication.wd_user2 != null) {
-                GApplication.wd_user2 = null;
-            }
+//            if (GApplication.wd_user1 != null) {
+//                GApplication.wd_user1 = null;
+//            }
+//            if (GApplication.wd_user2 != null) {
+//                GApplication.wd_user2 = null;
+//            }
             if (ShareUtil.zhiwenid_left != null) {
                 ShareUtil.zhiwenid_left = null;
             }
             if (ShareUtil.zhiwenid_right != null) {
                 ShareUtil.zhiwenid_right = null;
             }
-//			Skip.skip(WangdianCheckFingerNetPointColletcActivity.this, JiaoJieActivity.class, null, 0);
             WangdianCheckFingerNetPointColletcActivity.this.finish();
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /***
+     * 非外层人员登录（系统登录人员）  节点人员的账号记录
+     */
+    @Override
+    public boolean onTouch(View view, MotionEvent even) {
+        // 按下的时候
+        if (MotionEvent.ACTION_DOWN == even.getAction()) {
+            switch (view.getId()) {
+                // 登陆
+                case R.id.wangdian_login_btn1:
+                    login.setBackgroundResource(R.drawable.buttom_select_press);
+                    break;
+                // 取消
+                case R.id.wangdian_login_cancel1:
+                    cancel.setBackgroundResource(R.drawable.buttom_select_press);
+                    break;
+            }
+        }
+
+
+
+            // 手指松开的时候
+            if (MotionEvent.ACTION_UP == even.getAction()) {
+                switch (view.getId()) {
+                    // 登陆
+                    case R.id.wangdian_login_btn1:
+                        NetPointUserNo = editname.getText().toString();
+                        pwd = editpwd.getText().toString();
+                        login.setBackgroundResource(R.drawable.buttom_selector_bg);
+                        // 非空验证
+                        if (isnull(NetPointUserNo, pwd)) {
+                            // 有网络才可以执行登录操作
+                            Log.i("network", network + "");
+                            if (network) {
+                                // 提示
+                                try {
+                                    managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在登录...");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    // System.out.println(e.getMessage());
+                                }
+                                LoginBynetPointUser();
+                            } else {
+                                managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
+                            }
+                        }
+
+                        break;
+                    // 取消
+                    case R.id.wangdian_login_cancel1:
+
+                        login.setBackgroundResource(R.drawable.buttom_select_press);
+                        editname.setText("");
+                        editpwd.setText("");
+                        break;
+
+                }
+                GolbalUtil.ismover = 0;
+            }
+            // 手指移动的时候
+            if (MotionEvent.ACTION_MOVE == even.getAction()) {
+                GolbalUtil.ismover++;
+            }
+
+            // 意外中断事件取消
+            if (MotionEvent.ACTION_CANCEL == even.getAction()) {
+                GolbalUtil.ismover = 0;
+                switch (view.getId()) {
+                    // 登陆
+                    case R.id.wangdian_login_btn1:
+                        login.setBackgroundResource(R.drawable.buttom_selector_bg);
+                        break;
+                    // 取消
+                    case R.id.wangdian_login_cancel1:
+                        cancel.setBackgroundResource(R.drawable.buttom_selector_bg);
+                        break;
+                }
+            }
+            return true;
+        }
+
+    /***
+     * 局部节点人员登录
+     */
+    private void LoginBynetPointUser() {
+        managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "登录中...");
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+
+                    o_Application.netpoint= new SecondLogin().login(NetPointUserNo, pwd);
+                    if (o_Application.netpoint != null) {
+                        handler.sendEmptyMessage(2);
+                    } else {
+                        handler.sendEmptyMessage(3);
+                    }
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(1);
+                }
+            }
+
+        }.start();
+    }
+
+    private Handler handler = new Handler() {
+
+        @SuppressWarnings("static-access")
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    managerClass.getRuning().remove();
+                    managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "登录超时,重试?", onclickreplace);
+                    break;
+                case 1:
+                    managerClass.getRuning().remove();
+                    managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "网络连接失败,重试?", onclickreplace);
+                    break;
+
+                case 2:
+                    managerClass.getRuning().remove();
+
+                    error = 3;
+                    //  第一个人只验证是否为网点人员就好第二个人需要验证是否和第一个人同意网点和角色5
+                    if (!"5".equals(o_Application.netpoint.getLoginUserId())) {// 角色不为5 网点人员
+                        System.out.println("网点登录匹配角色id：" +o_Application.netpoint.getLoginUserId());
+                        managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, "请使用网点人员帐号登录",
+                                new OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getAbnormal().remove();
+                                        editname.setText("");
+                                        editpwd.setText("");
+                                    }
+                                });
+                    } else {
+
+                        GApplication.getApplication().app_hash.put("login_username", editname.getText());
+                        /**
+                         * SM得到传来的标识
+                         */
+                        Intent intent = getIntent();
+                        Bundle netpoincollect = intent.getExtras();
+                        Intent     intentC   = new Intent(WangdianCheckFingerNetPointColletcActivity.this, KuanXiangNetPointCollectActivity.class);
+                        if (netpoincollect != null) {
+                            String flag = netpoincollect.getString("FLAG");
+                            if (flag.equals("wangdianone")) {
+                                Bundle bundlebdpcf=new Bundle();
+                                bundlebdpcf.putString("FLAG", flag);
+                                bundlebdpcf.putString("netpoincollect", "账号验证成功");
+                                bundlebdpcf.putString("zhanghao",NetPointUserNo);
+                                bundlebdpcf.putString("name",o_Application.netpoint.getLoginUserName());
+                                User u = new User();
+                                u.setUserzhanghu(NetPointUserNo);
+                                u.setPwd(pwd);
+                                u.setUsername(o_Application.netpoint.getLoginUserName());
+                                u.setUserzhanghu(o_Application.netpoint.getYonghuZhanghao());
+                                GApplication.wd_user1 = u;
+                                intentC.putExtras(bundlebdpcf);
+                                managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "用户名和密码验证成功");
+                                WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
+                                WangdianCheckFingerNetPointColletcActivity.this.finish();
+                            }
+                            if (flag.equals("wangdiantwo")) {
+                                Bundle bundlebdpcfwdt=new Bundle();
+                                bundlebdpcfwdt.putString("FLAG", flag);
+                                bundlebdpcfwdt.putString("name",o_Application.netpoint.getLoginUserName());
+                                bundlebdpcfwdt.putString("zhanghao",o_Application.netpoint.getYonghuZhanghao());
+                                String left = netpoincollect.getString("left");
+                                User u = new User();
+                                u.setUserzhanghu(NetPointUserNo);
+                                u.setPwd(pwd);
+                                u.setUsername(o_Application.netpoint.getLoginUserName());
+                                GApplication.wd_user2 = u;
+                                System.out.println("getLoginUserName()2"
+                                        + GApplication.user.getLoginUserName());
+                                if(null!=left){
+
+                                    if (left.equals(NetPointUserNo)) {
+                                        Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
+                                    } else if(o_Application.netpoint.getLoginUserName().equals(left)) {
+                                        Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
+
+                                    }else{
+                                        jigouidCheck = o_Application.netpoint.getOrganizationId();
+                                        intentC.putExtras(bundlebdpcfwdt);
+                                        managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在验证用户名和密码...");
+
+                                        WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
+                                        WangdianCheckFingerNetPointColletcActivity.this.finish();
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    managerClass.getRuning().remove();
+                    managerClass.getAbnormal().timeout(WangdianCheckFingerNetPointColletcActivity.this, S_application.wrong, new OnClickListener() {
+                        @Override
+                        public void onClick(View arg0) {
+                            editname.setText("");
+                            editpwd.setText("");
+                            managerClass.getAbnormal().remove();
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    };
 }
