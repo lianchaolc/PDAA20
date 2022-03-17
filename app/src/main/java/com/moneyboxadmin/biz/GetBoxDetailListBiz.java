@@ -150,16 +150,13 @@ public class GetBoxDetailListBiz {
 					// 空钞箱出库明细
 				} else if ("空钞箱出库".equals(bizName)) {
 
-//					Map<String, Object> map = getEmptyCashBoxOutDetail().getemptyCashBoxOutDetail(planNum);
 					Map<String, Object> map=getEmptyCashBoxOutDetail().getemptyCashBoxOutDetailinfo(planNum);
 					list = (ArrayList<BoxDetail>) map.get("list");
-//					boxInfoByEmplylist = (ArrayList<BoxInfoByEmply>) map.get("list");
 					cqEupCount = (String) map.get("count");
 					boxCount = 0;
 					// 获取总钞箱数量
 					for (int i = 0; i < list.size(); i++) {
 						boxCount = boxCount + Integer.parseInt(list.get(i).getNum()); // 箱子数量
-//						boxCount = boxCount +Integer.parseInt(boxInfoByEmplylist.get(i).getBrandcount());
 					}
 
 					Log.i("222", bizName);
