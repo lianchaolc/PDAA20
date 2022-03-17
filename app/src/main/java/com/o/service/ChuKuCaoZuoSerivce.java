@@ -45,7 +45,15 @@ public class ChuKuCaoZuoSerivce {
 				new WebParameter<String>("arg4", roleId), new WebParameter<byte[]>("arg5", cValue),
 				new WebParameter<String>("arg6", userIds), new WebParameter<String>("arg7", userId),
 				new WebParameter<String>("arg8", pwd) };
-
+		System.out.println("-------saveBoxSendOutEarly：" + lineNum);
+		System.out.println("-------saveBoxSendOutEarly：" + boxes);
+		System.out.println("-------saveBoxSendOutEarly：" + date);
+		System.out.println("-------saveBoxSendOutEarly：" + roleId);
+		System.out.println("-------saveBoxSendOutEarly：" + roleId);
+		System.out.println("-------saveBoxSendOutEarly：" + cValue);
+		System.out.println("-------saveBoxSendOutEarly：" + userIds);
+		System.out.println("-------saveBoxSendOutEarly：" + userId);
+		System.out.println("-------saveBoxSendOutEarlypwd：" + pwd);
 		System.out
 				.println("[bbbbbb]交接的传参:" + lineNum + boxes + date + corpId + roleId + cValue + userIds + userId + pwd);
 		SoapObject soap = null;
