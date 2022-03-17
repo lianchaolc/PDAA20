@@ -12,6 +12,7 @@ import com.manager.classs.pad.ManagerClass;
 import com.messagebox.Abnormal;
 import com.messagebox.MenuShow;
 import com.messagebox.Runing;
+import com.moneyboxadmin.pda.BankDoublePersonLogin;
 import com.moneyboxadmin.pda.BoxDoDetail;
 import com.moneyboxadmin.pda.ClearerUser;
 import com.moneyboxadmin.pda.SupercargoJoin;
@@ -104,7 +105,9 @@ public class OrderWork extends Activity implements OnTouchListener {
 			webback.setText("网点回收钞箱交接");
 
 		}
-
+//		上面名字不显示
+		BankDoublePersonLogin.textname1="";
+		BankDoublePersonLogin.textname2="";
 		orderwork.setOnTouchListener(this);
 		webadd.setOnTouchListener(this);
 		webback.setOnTouchListener(this);
