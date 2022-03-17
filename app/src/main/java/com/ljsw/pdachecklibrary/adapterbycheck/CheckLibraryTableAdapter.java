@@ -62,7 +62,7 @@ public class CheckLibraryTableAdapter extends BaseAdapter{
             convertView.setTag(convertView);
         }
         //面柜子
-        mVHAWailk.lv_checklibrarytaskno.setText(walkList.get(position).getFACENUMBER()+"-"+walkList.get(position).getCABINETNUMBER());
+        mVHAWailk.lv_checklibrarytaskno.setText(walkList.get(position).getCABINETNUMBER()+"-"+walkList.get(position).getFACENUMBER());
         mVHAWailk.lv_checklibrarytaskcounts.setText(walkList.get(position).getCOUNT()+"");
         return convertView;
     }

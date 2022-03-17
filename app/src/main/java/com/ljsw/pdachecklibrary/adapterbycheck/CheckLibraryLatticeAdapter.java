@@ -68,7 +68,7 @@ public class CheckLibraryLatticeAdapter extends BaseAdapter{
             mVHAWailk = (CheckLibraryLatticeAdapter.ViewHolderAdapterCheckLibraryAdapter) convertView.getTag();
             convertView.setTag(convertView);
         }
-        mVHAWailk.lv_checklibrarytaskno.setText(strtable+"-"+walkList.get(position).getGRIDNUMBER()+"");
+        mVHAWailk.lv_checklibrarytaskno.setText(strtable+"-"+walkList.get(position).getGRIDNUMBER());
         mVHAWailk.lv_checklibrarytaskcounts.setText(walkList.get(position).getCOUNT()+"");
         return convertView;
     }

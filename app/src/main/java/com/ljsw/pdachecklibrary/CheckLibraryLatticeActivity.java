@@ -62,7 +62,7 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
     private View.OnClickListener OnClick1;
     private String intenttable;
     private String Lattice;
-    List<CheckLibraryScannerEney> listPrint =new ArrayList<>();//  传递到下一页面的数据源
+    List<CheckLibraryScannerEney> listPrint = new ArrayList<>();//  传递到下一页面的数据源
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +87,14 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
 
     Intent intent;
     String strgeduanno;
+
     private void LoadData() {
         showlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(CheckLibraryLatticeActivity.this, CheckLibraryUpdataActivity.class);
 //拿到点击条目下的隔断号
-                 strgeduanno = latticeEntityList.get(position).getGRIDNUMBER();
+                strgeduanno = latticeEntityList.get(position).getGRIDNUMBER();
 
                 if (null == strgeduanno || strgeduanno.equals("")) {
 
@@ -242,8 +243,8 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
                     o_Application.qinglingruku.add(new QingLingRuKu(null,
                             null, unScanlist));
                     o_Application.qlruku = o_Application.qinglingruku.get(0);
-                    intent.putExtra("unScanlist", ( Serializable) listPrint);
-                    intent.putExtra("intenttable", intenttable);
+                    intent.putExtra("unScanlist", (Serializable) listPrint);
+                    intent.putExtra("intenttable", Lattice);
                     String Taskno = intenttable;// 传递的任务号
                     intent.putExtra("taskNo", Taskno);
                     intent.putExtra("geduan", strgeduanno);
@@ -329,12 +330,12 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
     /***
      * 把要扫描的数据和隔断分开
      */
-    private List<CheckLibraryScannerEney> CheckDZUnScanList(List<CheckLibraryScannerEney>  listPrint) {
+    private List<CheckLibraryScannerEney> CheckDZUnScanList(List<CheckLibraryScannerEney> listPrint) {
 
 
-        if(listPrint!=null&&listPrint.size()>0){
+        if (listPrint != null && listPrint.size() > 0) {
 
-            for (int i=0; i<listPrint.size(); i++){
+            for (int i = 0; i < listPrint.size(); i++) {
                 unScanlist.add(listPrint.get(i).getSTOCKCODE());
             }
         }

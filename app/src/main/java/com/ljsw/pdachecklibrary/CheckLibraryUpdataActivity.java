@@ -44,6 +44,7 @@ import hdjc.rfid.operator.RFID_Device;
 /***
  * 数据提交扫描页面提交数据
  * 2021.8.26
+ * 已经放在子线程中了
  */
 public class CheckLibraryUpdataActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final String TAG = "CheckLibraryUpdataActivity";
@@ -85,8 +86,10 @@ public class CheckLibraryUpdataActivity extends AppCompatActivity implements Vie
         intlist.clear();
         intlist = (List<CheckLibraryScannerEney>) getIntent().getSerializableExtra("unScanlist");
         TaskNo=getIntent().getStringExtra("taskNo");
-        geduanno=  getIntent().getStringExtra("taskNo");
-        RfidAdmin.booleanstrnewThread = true;
+        geduanno=  getIntent().getStringExtra("geduan");
+//        RfidAdmin.booleanstrnewThread = true;
+        RfidAdmin r=new RfidAdmin();
+        r.booleanstrnewThread=true;
         UtilsScan = new UtilsScanbyCheckLibrary();
         UtilsScan.setHandler(handler);
         manager = new ManagerClass();
@@ -106,21 +109,6 @@ public class CheckLibraryUpdataActivity extends AppCompatActivity implements Vie
     }
 
     private void Loadlocaldata() {
-//        CheckLibraryScanEntity entity = new CheckLibraryScanEntity();
-//        entity.setDZNo("DZ20200927105656711");
-//        CheckLibraryScanEntity entity2 = new CheckLibraryScanEntity();
-//        entity2.setDZNo("DZ20200927105656712");
-//        CheckLibraryScanEntity entity3 = new CheckLibraryScanEntity();
-//        entity3.setDZNo("DZ20200927105656713");
-//        CheckLibraryScanEntity entity4 = new CheckLibraryScanEntity();
-//        entity4.setDZNo("DZ20200927105656714");
-//        CheckLibraryScanEntity entity5 = new CheckLibraryScanEntity();
-//        entity5.setDZNo("DZ20200927105656715");
-//        scanlist.add(entity);
-//        scanlist.add(entity2);
-//        scanlist.add(entity3);
-//        scanlist.add(entity4);
-//        scanlist.add(entity5);
 
         upDataAdapter = new CheckLibraryUpDataAdapter(scanlist, CheckLibraryUpdataActivity.this);
         listview_checklibraryupata.setAdapter(upDataAdapter);
@@ -139,7 +127,7 @@ public class CheckLibraryUpdataActivity extends AppCompatActivity implements Vie
         check_libraryupdata_back = (ImageView) findViewById(R.id.check_libraryupdata_back);//  返回
         check_libraryupdata_back.setOnClickListener(this);
         tv_checklibraryupdatapointno=(TextView) findViewById(R.id.tv_checklibraryupdatapointno);
-        tv_checklibraryupdatapointno.setText(strlocationpoion);
+        tv_checklibraryupdatapointno.setText(strlocationpoion+"-"+geduanno);
 
         tv_checklibraryupdatauser=findViewById(R.id.tv_checklibraryupdatauser);
         tv_checklibraryupdatauser.setText(""+GApplication.loginname);
@@ -153,17 +141,14 @@ public class CheckLibraryUpdataActivity extends AppCompatActivity implements Vie
 
                 break;
             case R.id.checlibraryupdatabtn:
-//                if(TaskNo==null||strupdata==null||TaskNo.equals("")||strupdata.equals("")) {
-//                    Log.e(TAG, "测试" + strupdata + "===" + strupdata);
-//                    handler.sendEmptyMessage(4);
-//                }else{
                 if(btn_updatastop.getText().equals("开始扫描")){
 
                     getRfid().close_a20();
                     UpDataCheckLibraryResutlt();
                 }else{
 
-                    Toast.makeText(CheckLibraryUpdataActivity.this,"请停止扫描在提交",400).show();
+                    Toast.makeText(CheckLibraryUpdataActivity.this,"请停止扫描在提交",
+                            400).show();
                 }
 //                }
 
@@ -484,6 +469,8 @@ public class CheckLibraryUpdataActivity extends AppCompatActivity implements Vie
             getRfid().close_a20();
 
         }
-        RfidAdmin.booleanstrnewThread = false;
+        RfidAdmin r=new RfidAdmin();
+        r.booleanstrnewThread=false;
+//        RfidAdmin.booleanstrnewThread = false;
     }
 }
