@@ -51,6 +51,10 @@ public class Mapplication {
 	public boolean IsZhongkongOK;
 	/** 请领装箱抵质是否装完 **/
 	public boolean IsDizhiOK;
+	/***
+	 * 是否只有单独的的抵质押品区分（做业务时提交数据走那个分支）
+	 */
+	public boolean  IsDiZhiOnly=false;
 
 	private Mapplication() {
 	};
