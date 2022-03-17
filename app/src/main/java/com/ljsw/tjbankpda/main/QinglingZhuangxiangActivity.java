@@ -1,5 +1,6 @@
 package com.ljsw.tjbankpda.main;
 
+import a20.cn.uhf.admin.RfidAdmin;
 import afu.util.SoundUtil;
 import hdjc.rfid.operator.RFID_Device;
 
@@ -159,6 +160,8 @@ public class QinglingZhuangxiangActivity extends FragmentActivity {
 			@Override
 			public void onClick(View arg0) {
 				getRfid().scanclose();
+				RfidAdmin r=new RfidAdmin();
+				r.booleanstrnewThread=false;
 				Log.e(TAG,"地址押品结束开启周转箱"+new SimpleDateFormat("yyyyMMddHHmmssSSS") .format(new Date() ));
 				manager.getRuning().runding(QinglingZhuangxiangActivity.this, "正在开启RIFI,请稍等...");
 
