@@ -102,8 +102,14 @@ public class WebServiceFromThree {
 		// 调用webservice
 		String patch = FixationValue.url19 + "/" + methodName;
 		Log.e(TAG, "----------访问的地址：" + patch);
-		ht.call(patch, envelope);
-		// 返回结果集z
+		try {
+			ht.call(patch, envelope);
+			// 返回结果集z
+
+		}catch (Exception e){
+			Log.e(TAG, "----------e：" + e);
+
+		}
 
 		SoapObject soapObject = (SoapObject) envelope.getResponse();
 		Log.e(TAG, "----------soapObject：" + soapObject);
