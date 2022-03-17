@@ -32,7 +32,7 @@ public class RfidAdmin {
 	private static final String TAG = "MainActivityRFID";
 	public Handler hand = null;
 	Bundle bundle;
-	public   static    boolean   booleanstrnewThread=false;
+	public       boolean   booleanstrnewThread=false;
 	public RfidAdmin() {
 		if (facilityGPIO == null)
 			facilityGPIO = new GPIO(GlobalConstant.IO_RFID_POWER);
@@ -138,7 +138,7 @@ public class RfidAdmin {
 			try {
 				while (runFlag) {
 					if (startFlag) {
-						Log.d(TAG, "==========InventoryThread============" + Thread.currentThread().getName());
+						Log.d(TAG, "==========InventoryThread============rfidadm" + Thread.currentThread().getName());
 //					manager.stopInventoryMulti()
 						epcList = manager.inventoryRealTime();
 
@@ -156,6 +156,7 @@ public class RfidAdmin {
 								if(booleanstrnewThread){ //开启子线程fangfa2021.8.18
 									m.what = RFID_Device.rdid_a20_newthread;
 								}else{
+
 								}
 								bundle.putString("number", epcStr);
 								m.setData(bundle);

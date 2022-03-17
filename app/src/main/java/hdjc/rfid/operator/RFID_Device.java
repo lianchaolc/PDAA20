@@ -114,18 +114,14 @@ public class RFID_Device implements IRFID_Device {
 				}
 				break;
 
-				case rdid_a20_newthread:
+				case rdid_a20_newthread:// 不可注销注销后无法扫描请领装箱
+
 					// 加入到子线
 
-//					new Thread(new Runnable() {
-//						@Override
-//						public void run() {
 					Log.d("RFID_Device", "==========InventoryThread============rdid_a20_newthread+" + Thread.currentThread().getName());
 					Bundle bnewthread = msg.getData();
 					String numbernewthread = bnewthread.getString("number");
 					RFID_Device.this.notify(numbernewthread);
-//						}
-//					}).start();
 					break;
 			default:
 
