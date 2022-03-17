@@ -52,7 +52,7 @@ public class MoneyBoxDetial extends Activity implements OnTouchListener {
 				magagerClass.getGolbalView().replaceFragment(this, R.id.momeybox_detail_fragment, fragment, bundle);
 			} else {
 				fragment = new MoneyAndBoxNum_fragment();
-				magagerClass.getGolbalView().replaceFragment(this, R.id.momeybox_detail_fragment, fragment, bundle);
+				magagerClass.getGolbalView().replaceFragment(this, R.id.momeybox_detail_fragment, fragment, bundle);//明细未清回收
 			}
 		}
 
