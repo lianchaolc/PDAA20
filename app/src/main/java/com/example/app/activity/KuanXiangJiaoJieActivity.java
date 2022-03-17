@@ -49,7 +49,8 @@ public class KuanXiangJiaoJieActivity extends BaseFingerActivity {
         this.setContentView(R.layout.activity_kuguanjiaojie);
         load();
         manager = new ManagerClass();
-
+        GApplication.wd_user1 = new User();
+        GApplication.wd_user2 = new User();
         initDate();
     }
 
