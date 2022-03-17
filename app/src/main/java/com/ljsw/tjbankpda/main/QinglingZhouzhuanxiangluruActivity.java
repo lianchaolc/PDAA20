@@ -156,9 +156,6 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 					}
 				}
 				if (flag) {
-					// manager.getResultmsg().resultmsg(
-					// QinglingZhouzhuanxiangluruActivity.this, "该周转箱已扫描",
-					// false);
 					return;
 				} else {
 					if (no.contains("ZZ")) {// 显示下符合规则
@@ -269,6 +266,11 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 		tvAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				if(rfid!=null){
+					getRfid().close_a20();
+				}
+//				Intent intent = new Intent("com.ljsw.pda4.CleanMangeCheckTaskQingfenRenwuActivity");
+//				QinglingZhouzhuanxiangluruActivity.this.startActivity(intent);
 				int flag = 0;// 定义标识,默认为0
 				if (null == str_onitemselect || str_onitemselect.equals("")) {
 					Toast.makeText(QinglingZhouzhuanxiangluruActivity.this, "请先选中周转箱号", 300).show();
@@ -316,19 +318,45 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				manager.getResultmsg().submitZzxInfo(QinglingZhouzhuanxiangluruActivity.this,
-						QinglingZhouzhuanxiangluruActivity.this, "您确定提交吗?", true);
-				// //清除缓存lc20190428
-				Mapplication.getApplication().boxLtNumber.clear();
-				Mapplication.getApplication().boxremberDizhi.clear();
-				Mapplication.getApplication().boxremberNumberDizhi.clear();
-				Mapplication.getApplication().boxremberDizhi1.clear();
-				if (o_Application.qinglingruku.size() > 0) {
-					o_Application.qinglingruku.clear();
+				if(rfid!=null){
+					getRfid().close_a20();
 				}
-				if (o_Application.numberlist.size() > 0) {
-					o_Application.numberlist.clear();
-					// 添加修改
+				Log.d(TAG,Mapplication.getApplication().IsDiZhiOnly+"=====");
+				///只有抵质押品时候
+				if(Mapplication.getApplication().IsDiZhiOnly==true){
+					Log.d(TAG,"我走新版班----submitZzxInfoOnlyDZ");
+					manager.getResultmsg().submitZzxInfoOnlyDZ(QinglingZhouzhuanxiangluruActivity.this,
+							QinglingZhouzhuanxiangluruActivity.this, "您确定提交吗?", true);
+					// //清除缓存lc20190428
+					Mapplication.getApplication().boxLtNumber.clear();
+					Mapplication.getApplication().boxremberDizhi.clear();
+					Mapplication.getApplication().boxremberNumberDizhi.clear();
+					Mapplication.getApplication().boxremberDizhi1.clear();
+					if (o_Application.qinglingruku.size() > 0) {
+						o_Application.qinglingruku.clear();
+					}
+					if (o_Application.numberlist.size() > 0) {
+						o_Application.numberlist.clear();
+						// 添加修改
+					}
+
+				}else{
+					Log.d(TAG,"我走submitZzxInfo");
+					manager.getResultmsg().submitZzxInfo(QinglingZhouzhuanxiangluruActivity.this,
+							QinglingZhouzhuanxiangluruActivity.this, "您确定提交吗?", true);
+					// //清除缓存lc20190428
+					Mapplication.getApplication().boxLtNumber.clear();
+					Mapplication.getApplication().boxremberDizhi.clear();
+					Mapplication.getApplication().boxremberNumberDizhi.clear();
+					Mapplication.getApplication().boxremberDizhi1.clear();
+					if (o_Application.qinglingruku.size() > 0) {
+						o_Application.qinglingruku.clear();
+					}
+					if (o_Application.numberlist.size() > 0) {
+						o_Application.numberlist.clear();
+						// 添加修改
+					}
+
 				}
 
 			}
@@ -581,4 +609,9 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		manager.getResultmsg().remove();
+	}
 }
