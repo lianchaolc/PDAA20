@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
     android:versionCode="1"
-    android:versionName="1.40">
+    android:versionName="1.50">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -37,6 +37,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -681,16 +682,54 @@
         <!-- 抵质押品库管理员清分任务2021.8.30 -->
         <activity
             android:name="com.ljsw.collateraladministratorsorting.activity.SelectTaskByCollateralActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="com.ljsw.collateraladministratorsorting.activity.CleanMangeCheckTaskListActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="com.ljsw.pda4.CleanMangeCheckTaskQingfenRenwuActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
 
-   <!--新增29 抵质押品选任务列表2021.9.16-->
+            </intent-filter>
+        </activity>
+        <!--页面作废了-->
+        <activity android:name="com.ljsw.collateraladministratorsorting.activity.CleanMangeCheckTaskListActivity">
+
+        </activity>
+
+        <!-- 新增29 抵质押品选任务列表2021.9.16   22.3.10 自定启动那个activity-->
         <activity android:name="com.ljsw.collateraladministratorsorting.activity.CleanMangeCheckTaskQingfenRenwuActivity">
 
             <!-- 2021.3.3  清分管理上缴符合的业务  在1.30版本中不上线 -->
         </activity>
-        <!--代码节点1.40抵质押品选任务列表-->
+        <!-- 代码节点1.40抵质押品选任务列表 -->
+
+
+        <!-- 2022.1.14   四期代码款箱任务领取  押运员指纹和账号 -->
+        <activity
+            android:name="com.example.app.activity.KuanXiangNetPointCollectActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 2022.1.14   四期代码款箱任务领取  押运员指纹 -->
+        <activity
+            android:name="com.example.app.activity.WangdianCheckFingerNetPointColletcActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name="com.ljsw.checkcklibrarybydz.CheckLibrarybyDZActivity" />
+        <activity android:name="com.ljsw.checkcklibrarybydz.CheckLibraryFaceActivity" />
+        <activity android:name="com.moneyboxadmin.pda.SupercarYayyCheckFActivity"></activity>
+        <!--2022.3.3 you 网点人员进行指纹验证-->
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerNetPointCActivity"></activity>
+        <!--库管进行验证2022.3.7三次指纹错误验证-->
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerLibraryCActivity"></activity>
+        <!--清分人员账号指纹3.7-->
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerCleanmangCActivity"></activity>
+        <!--清分管理人员账号指   22.3。7-->
+
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerMangerCleanCActivity"></activity>
+        <!--未清回收钞箱指纹验证-->
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerClenWeiqingCActivity"></activity>
+        <!--空钞箱出库后有清分员按指纹验证22.3.8-->
+        <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerEmptAfterCleanActionCActivity"></activity>
 
     </application>
 
