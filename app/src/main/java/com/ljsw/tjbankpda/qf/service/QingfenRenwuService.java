@@ -161,6 +161,7 @@ public class QingfenRenwuService {
 	 */
 	public boolean submitZzxInfo(String renwudan, String userid, String boxNum, String dingdianID, String onceKeyNum,
 			String jigouid) throws Exception {
+		Log.e(TAG,"老方法----");
 		System.out.println("renwudan=" + renwudan);
 		System.out.println("userid=" + userid);
 		System.out.println("boxNum=" + boxNum);
@@ -173,6 +174,51 @@ public class QingfenRenwuService {
 				new WebParameter<String>("arg4", onceKeyNum), new WebParameter<String>("arg5", jigouid) };// 传入参数
 		SoapObject soap = null;// 创建返回值接收对象
 		soap = WebServiceFromThree.getSoapObject(methodName, param, FixationValue.NAMESPACE, FixationValue.URL3);// 根据路径获得返回值
+		String code = soap.getProperty("code").toString();
+		System.out.println("code=" + code);
+		if ("00".equals(code)) {// code=00->成功,code=99->失败
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/***
+	 * 请领装箱提交只有抵质押品的情况 100029
+	 */
+
+	/**
+	 * 请领装箱提交
+	 *arg0=corpId  904050100  目标机构
+	 arg1=userId  100029 登陆用户id
+	 arg2=clearTaskNum  RW1000020220225113658 清分任务编号
+	 arg3=passboxNums ZH000009ZZ-ZH000011ZZ- 周转箱(袋)编号 （要与下面的一次性锁编号的顺序一一对应）
+	 arg4=bundleNums 111-2222- 一次性锁扣编号
+	 arg5=cvounWds DZXD1211202202250002-  订单编号(清分任务下面的)
+
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean submitZzxInfoOnlyDZ(String cordid, String userId, String clearTaskNum, String passboxNums, String bundleNums,
+								 String cvounWds) throws Exception {
+		Log.e(TAG,"新方法");
+		System.out.println("cordid=" + cordid);
+		System.out.println("userid=" + userId);
+		System.out.println("clearTaskNum=" + clearTaskNum);
+		System.out.println("passboxNums=" + passboxNums);
+		System.out.println("bundleNums=" + bundleNums);
+		System.out.println("cvounWds=" + cvounWds);
+		String methodName = "setZhuangxiangSubmit";// 接口方法
+		WebParameter[] param = {
+				new WebParameter<String>("arg0", cordid),
+				new WebParameter<String>("arg1", userId),
+				new WebParameter<String>("arg2", clearTaskNum),
+				new WebParameter<String>("arg3", passboxNums),
+				new WebParameter<String>("arg4", bundleNums),
+				new WebParameter<String>("arg5", cvounWds) };// 传入参数
+		SoapObject soap = null;// 创建返回值接收对象
+//		soap = WebServiceFromThree.getSoapObject(methodName, param, FixationValue.NAMESPACE, FixationValue.url19);// 根据路径获得返回值  使用清分管理员角色
+		soap = WebServiceFromThree.getSoapObjectDZLiabraryMangerbyThree(methodName, param, FixationValue.NAMESPACE, FixationValue.url19);// 根据路径获得返回值
 		String code = soap.getProperty("code").toString();
 		System.out.println("code=" + code);
 		if ("00".equals(code)) {// code=00->成功,code=99->失败
@@ -296,6 +342,7 @@ public class QingfenRenwuService {
 	 */
 	public String getQingfenXiaozu(String userId) throws Exception {
 		String methodName = "getQingfenXiaozu";// 接口方法
+		System.out.print("userId="+userId);
 		WebParameter[] param = { new WebParameter<String>("arg0", userId) };// 清分员用户id
 		SoapObject soap = null;// 创建返回值接收对象
 		soap = WebServiceFromThree.getSoapObject(methodName, param, FixationValue.NAMESPACE, FixationValue.URL3);// 根据路径获得返回值
