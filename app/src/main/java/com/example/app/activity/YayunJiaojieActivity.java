@@ -122,7 +122,7 @@ public class YayunJiaojieActivity extends BaseFingerActivity {
                         // 第一个人验证成功，第二个人验证失败
                         ChuKuCaoZuoSerivce cc = new ChuKuCaoZuoSerivce();
                         code = cc.saveBoxSendOutEarly(GApplication.kxc.getXianlubianhao(), bianhao,
-                                GApplication.kxc.getPeisongdate(), GApplication.user.getOrganizationId(), "9", null,
+                                GApplication.kxc.getPeisongdate(), GApplication.user.getOrganizationId(), "9",  ShareUtil.ivalBack,
                                 ShareUtil.zhiwenid_left + "|" + GApplication.kuguan2.getUserzhanghu(),
                                 GApplication.userInfo.getNameZhanghao(), GApplication.userInfo.getPwd());
                     } else if (ShareUtil.zhiwenid_left == null && ShareUtil.zhiwenid_right != null) {
