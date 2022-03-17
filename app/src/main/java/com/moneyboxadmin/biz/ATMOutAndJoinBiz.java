@@ -28,11 +28,11 @@ public class ATMOutAndJoinBiz {
 	 * @throws Exception
 	 */
 	public void atmOutAndJoin(String cbInfo, String corpId, String roleId, byte[] cValue, String jiachao1,
-			String jiachao2) {
+			String jiachao2,String yayyid) {
 		System.out.println("atmOutAndJoin[jiaojie1]:" + jiachao1 + "[jiaojie2]" + jiachao2);
 		if (GolbalUtil.onclicks) {
 			GolbalUtil.onclicks = false;
-			new Thread(new Run(cbInfo, corpId, roleId, cValue, jiachao1, jiachao2)).start();
+			new Thread(new Run(cbInfo, corpId, roleId, cValue, jiachao1, jiachao2,yayyid)).start();
 		}
 	}
 
@@ -81,18 +81,20 @@ public class ATMOutAndJoinBiz {
 		byte[] cValue;
 		String jiachao1;
 		String jiachao2;
+		String  yayyid;
 		Message m;
 
 		public Run() {
 		};
 
-		public Run(String cbInfo, String corpId, String roleId, byte[] cValue, String jiachao1, String jiachao2) {
+		public Run(String cbInfo, String corpId, String roleId, byte[] cValue, String jiachao1, String jiachao2,String yayyid) {
 			this.cbInfo = cbInfo;
 			this.corpId = corpId;
 			this.roleId = roleId;
 			this.cValue = cValue;
 			this.jiachao1 = jiachao1;
 			this.jiachao2 = jiachao2;
+			this.yayyid=yayyid;
 			m = handler.obtainMessage();
 		};
 
@@ -100,7 +102,9 @@ public class ATMOutAndJoinBiz {
 		public void run() {
 			aTMOutAndJoinService = new ATMOutAndJoinService();
 			try {
-				user = aTMOutAndJoinService.saveAtmAddMoneyOut(cbInfo, corpId, roleId, cValue, jiachao1, jiachao2);
+
+//				user = aTMOutAndJoinService.saveAtmAddMoneyOut(cbInfo, corpId, roleId, cValue, jiachao1, jiachao2,yayyid);2022.3.2
+				user = aTMOutAndJoinService.saveAtmAddMoneyOutaddYaYY(cbInfo, corpId, roleId, cValue, jiachao1, jiachao2,yayyid);
 				if (user != null) {
 					m.what = 1;
 				} else {
