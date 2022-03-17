@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/clsudzno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="抵质押号"
+        android:gravity="center"
+        android:textColor="@color/back" />
+    <TextView
+        android:id="@+id/clsudznostate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="状态"
+        android:gravity="center"
+        android:textColor="@color/back" />
+</LinearLayout>
