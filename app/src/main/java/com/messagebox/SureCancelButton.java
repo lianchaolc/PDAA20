@@ -25,7 +25,7 @@ public class SureCancelButton {
 	View v;
 	View v3;
 	View v4;
-
+	View v5;
 	/**
 	 * 
 	 * @param a
@@ -184,4 +184,38 @@ public class SureCancelButton {
 	public void remove4() {
 		getG().removeV(v4);
 	}
+
+	public void makeSuerCancel5(Activity a, String msg5, OnClickListener click,OnClickListener cancancle, boolean can) {
+
+		if (v5 == null) {
+			v5 = GolbalView.getLF(a).inflate(R.layout.suer_cancel_buttonv_five, null);
+		}
+		TextView text = (TextView) v5.findViewById(R.id.suercanceltext);
+		text.setText(msg5+"");
+
+		Button suer = (Button) v5.findViewById(R.id.suerbtn);
+		Button cancel = (Button) v5.findViewById(R.id.cancelbtn);
+		if (can) {
+			cancel.setVisibility(View.GONE);
+			suer.setVisibility(View.VISIBLE);
+			Log.i("取消", "取消");
+		} else {
+			suer.setVisibility(View.VISIBLE);
+			cancel.setVisibility(View.VISIBLE);
+			cancel.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					remove5();
+
+				}
+			});
+		}
+		getG().createFloatView(a, v5);
+		suer.setOnClickListener(click);
+		cancel.setOnClickListener(cancancle);
+	}
+	public void remove5() {
+		getG().removeV(v5);
+	}
+
 }
