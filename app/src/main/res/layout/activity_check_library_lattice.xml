@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_10x"
-            android:text="补扫格子"
+            android:text="格子"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_40"
             tools:ignore="all" />
@@ -138,7 +138,7 @@
     <ListView
         android:id="@+id/showlistview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_430y"
+        android:layout_height="@dimen/dimen_460y"
         android:layout_marginLeft="@dimen/dimen_10x"
         android:layout_marginRight="@dimen/dimen_10x"></ListView>
 
