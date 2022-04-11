@@ -1,5 +1,4 @@
 package com.ljsw.pdachecklibrary.adapterbycheck;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.pda.R;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryScanEntity;
-import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryTableEntity;
 
 import java.util.List;
 
@@ -65,19 +63,16 @@ public class CheckLibraryUpDataAdapter extends BaseAdapter {
         }
         mVHAWailk.lv_checklibrarytaskno.setText(walkList.get(position).getDZPOin());
         mVHAWailk.lv_checklibrarytaskcounts.setText(walkList.get(position).getDZNo());
-        mVHAWailk.accountinfotion_listitem_tvtype.setText("");
-        if(null==walkList.get(position).getDZState()||walkList.get(position).getDZState().equals("")){
-//            mVHAWailk.accountinfotion_listitem_tvtype.setVisibility(View.INVISIBLE);
-            mVHAWailk.accountinfotion_listitem_tvtype.setText("");
-        }else{
+        if (null == walkList.get(position).getDZState() || walkList.get(position).getDZState().equals("")) {
+//            mVHAWailk.accountinfotion_listitem_tvtype.setText("");
+        } else {
             mVHAWailk.accountinfotion_listitem_tvtype.setText("已扫描");
-//            mVHAWailk.accountinfotion_listitem_tvtype.setVisibility(View.VISIBLE);
         }
 
         return convertView;
     }
 
-    class ViewHolderAdapterCheckLibraryAdapter {
+  static   class ViewHolderAdapterCheckLibraryAdapter {
         public TextView lv_checklibrarytaskno;
         public TextView lv_checklibrarytaskcounts;
         public TextView accountinfotion_listitem_tvtype;
