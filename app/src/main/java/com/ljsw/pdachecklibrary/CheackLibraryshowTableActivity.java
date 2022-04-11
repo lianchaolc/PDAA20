@@ -1,12 +1,14 @@
 package com.ljsw.pdachecklibrary;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,6 +25,8 @@ import com.ljsw.pdachecklibrary.adapterbycheck.CheckLibraryTableAdapter;
 import com.ljsw.pdachecklibrary.checklibraryservice.CheckLirabryService;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryEntity;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryTableEntity;
+import com.ljsw.tjbankpad.baggingin.activity.DiZhiYaPinKuangJiaActivity;
+import com.ljsw.tjbankpad.baggingin.activity.dizhiyapinruku.activity.DiZhiYaPinSaoMiaoZhiWenActivity;
 import com.manager.classs.pad.ManagerClass;
 
 import java.lang.reflect.Type;
@@ -53,6 +57,12 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
     private CheckLibraryTableAdapter checkLibraryTableAdapter;
     private ManagerClass manager;
     private View.OnClickListener OnClick1;
+    private View.OnClickListener OnClick2;
+    String str = "";
+    private Button cheachlibrary_finishtask;
+    private Dialog dialogforreturnaccountinten;
+    private  String  pancha="";
+    private  TextView check_librarytable_textView1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +71,13 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
         count = getIntent().getStringExtra("taskcount");
         cteatetime = getIntent().getStringExtra("createtime");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        pancha= getIntent().getStringExtra("pancha");
+
+
         String s = sdf.format(new Date());
+        str = cteatetime.substring(0, 9);
         try {
-            Date date =  sdf.parse(s);
+            Date date = sdf.parse(s);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -77,15 +91,22 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
                 GetCheckListbaryTask();
             }
         };
+        OnClick2 = new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                manager.getAbnormal().remove();
+                FinashTask();
+            }
+        };
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         GetCheckListbaryTask();
-        Log.d(TAG,"taskNo"+taskNo);
-        Log.d(TAG,"count"+count);
-        Log.d(TAG,"cteatetime"+cteatetime);
+        Log.d(TAG, "taskNo" + taskNo);
+        Log.d(TAG, "count" + count);
+        Log.d(TAG, "cteatetime" + cteatetime);
 
     }
 
@@ -98,9 +119,9 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intenttable = new Intent(CheackLibraryshowTableActivity.this, CheckLibraryLatticeActivity.class);
-                String  intTableNo=taskNo;
-                String  lattice=tablbelist.get(position).getCABINETNUMBER()+"-"+tablbelist.get(position).getFACENUMBER();
-                intenttable.putExtra("Tableno",intTableNo);
+                String intTableNo = taskNo;
+                String lattice = tablbelist.get(position).getCABINETNUMBER() + "-" + tablbelist.get(position).getFACENUMBER();
+                intenttable.putExtra("Tableno", intTableNo);
                 intenttable.putExtra("Lattice", lattice);
                 startActivity(intenttable);
             }
@@ -117,21 +138,84 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
         });
 
         tv_controllerchecklibryuser = (TextView) findViewById(R.id.tv_controllerchecklibryuser);
-        tv_controllerchecklibryuser.setText(""+GApplication.loginUsername);
+        tv_controllerchecklibryuser.setText("" + GApplication.loginUsername);
         cheachlibrary_taskno = (TextView) findViewById(R.id.cheachlibrary_taskno);// 任务号
         cheachlibrary_taskno.setText(taskNo);
         cheachlibrary_losscounts = findViewById(R.id.cheachlibrary_losscounts);// 缺失数量
         cheachlibrary_losscounts.setText(count);
         cheachlibrary_creattime = findViewById(R.id.cheachlibrary_creattime);
-        cheachlibrary_creattime.setText(cteatetime);
-        check_librarytable_update=findViewById(R.id.check_librarytable_update);
+        cheachlibrary_creattime.setText(str + "");
+        check_librarytable_update = findViewById(R.id.check_librarytable_update);
         check_librarytable_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GetCheckListbaryTask();
             }
         });
+//        点击这个就是结束任务
 
+        cheachlibrary_finishtask = findViewById(R.id.cheachlibrary_finishtask);
+        if(null==pancha||pancha.equals("")){
+         cheachlibrary_finishtask.setVisibility(View.GONE);
+        }else if (pancha.equals("盘查")){
+            cheachlibrary_finishtask.setVisibility(View.VISIBLE);
+        }
+        check_librarytable_textView1=(TextView)findViewById(R.id.check_librarytable_textView1);
+        if(null==pancha||pancha.equals("")){
+            check_librarytable_textView1.setText("补扫");
+        }else if (pancha.equals("盘查")){
+            check_librarytable_textView1.setText("盘查库");
+        }
+        cheachlibrary_finishtask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FinashTask();
+            }
+        });
+
+    }
+
+    /***
+     * 结束当前任务只有盘查库存在
+     */
+    private void FinashTask() {
+        new Thread() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    String ControllerNo = GApplication.loginname;
+                    Log.e(TAG, " ControllerNo" + ControllerNo);
+                    Log.e(TAG, "taskNo" + taskNo);
+                    ReturnNetResutl = new CheckLirabryService().finishTask(taskNo, ControllerNo);
+                    Log.e(TAG, "测试" + ReturnNetResutl);
+                    // 返回的类型anyType{}需要进行判断
+                    if (ReturnNetResutl != null && !ReturnNetResutl.equals("anyType{}")) {
+                        Gson gson = new Gson();
+                        if (tablbelist == null || tablbelist.size() == 0) {
+                            handler.sendEmptyMessage(4);
+                        } else {
+                            handler.sendEmptyMessage(6);
+                        }
+
+
+                    } else {
+                        handler.sendEmptyMessage(5);
+                    }
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(5);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(4);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(4);
+                }
+            }
+
+        }.start();
     }
 
 
@@ -154,23 +238,23 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
                 super.run();
                 try {
                     String ControllerNo = GApplication.loginname;
-                    String strTable =taskNo;
+                    String strTable = taskNo;
                     Log.e(TAG, " ControllerNo" + ControllerNo);
                     Log.e(TAG, "strTable" + strTable);
-                            ReturnNetResutl = new CheckLirabryService().CheckLibrarybyTable(strTable,ControllerNo);
+                    ReturnNetResutl = new CheckLirabryService().CheckLibrarybyTable(strTable, ControllerNo);
                     Log.e(TAG, "测试" + ReturnNetResutl);
                     // 返回的类型anyType{}需要进行判断
-                    if (ReturnNetResutl!= null && !ReturnNetResutl.equals("anyType{}")) {
+                    if (ReturnNetResutl != null && !ReturnNetResutl.equals("anyType{}")) {
                         Gson gson = new Gson();
                         tablbelist.clear();// 每次进入后清除
                         Type type = new TypeToken<ArrayList<CheckLibraryTableEntity>>() {
                         }.getType();
                         List<CheckLibraryTableEntity> listPrint = gson.fromJson(ReturnNetResutl,
                                 type);
-                        tablbelist=listPrint;
-                        if(tablbelist==null||tablbelist.size()==0){
+                        tablbelist = listPrint;
+                        if (tablbelist == null || tablbelist.size() == 0) {
                             handler.sendEmptyMessage(3);
-                        }else{
+                        } else {
                             handler.sendEmptyMessage(2);
                         }
 
@@ -226,6 +310,42 @@ public class CheackLibraryshowTableActivity extends AppCompatActivity {
                             manager.getAbnormal().remove();
                         }
                     });
+                    break;
+                case 4:
+                    manager.getRuning().remove();
+                    manager.getAbnormal().timeout(CheackLibraryshowTableActivity.this, "加载超时,重试?", OnClick2);
+                    break;
+                case 5:
+                    manager.getRuning().remove();
+                    manager.getAbnormal().timeout(CheackLibraryshowTableActivity.this, "网络连接失败,重试?", OnClick2);
+                    break;
+                case 6:
+//                    提交成功跳转首页
+
+                       dialogforreturnaccountinten = new Dialog(CheackLibraryshowTableActivity.this);
+                    LayoutInflater inflaterforreturnaccountinten = LayoutInflater
+                            .from(CheackLibraryshowTableActivity.this);
+                    View vforreturnaccountinten = inflaterforreturnaccountinten.inflate(R.layout.dialog_success, null);
+                    Button butforreturnaccountinten = (Button) vforreturnaccountinten.findViewById(R.id.success);
+                    butforreturnaccountinten.setText("提交成功");
+                    dialogforreturnaccountinten.setCancelable(false);
+                    dialogforreturnaccountinten.setContentView(vforreturnaccountinten);
+                    if (butforreturnaccountinten != null) {
+                        butforreturnaccountinten.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                dialogforreturnaccountinten.dismiss();
+                                // 跳转下一个页面
+
+                                CheackLibraryshowTableActivity.this.finish();
+                            }
+
+                        });
+                    }
+                    if (!isFinishing()) {
+                        dialogforreturnaccountinten.show();
+                    }
+
                     break;
                 default:
                     break;

@@ -10,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -69,11 +71,14 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
     private CheckLibraryAdapter checkLibraryAdapter;
     private View.OnClickListener OnClick1;
     private ImageView btnblack;
+    private String pancha = "";
+    private TextView checklibrarybydizhi_textView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_library_by_coll_manger);
+        pancha = getIntent().getStringExtra("pancha");
         manager = new ManagerClass();
         cal = Calendar.getInstance();
         initView();
@@ -95,16 +100,6 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
      */
     private void LoadData() {
         datalist.clear();
-//        CheckLibraryEntity checkLibraryEntity = new CheckLibraryEntity();
-//        checkLibraryEntity.setCheckLibraryCreateTime("2021-11-22");
-//        checkLibraryEntity.setChelibraryResutlCounts("34");
-//        checkLibraryEntity.setCheLibraryTaskNO("DZ9880500002021041500001");
-//        datalist.add(checkLibraryEntity);
-//        CheckLibraryEntity checkLibraryEntity1 = new CheckLibraryEntity();
-//        checkLibraryEntity1.setCheckLibraryCreateTime("2021-1-2");
-//        checkLibraryEntity1.setChelibraryResutlCounts("30");
-//        checkLibraryEntity1.setCheLibraryTaskNO("DZ9880500002021041500001");
-//        datalist.add(checkLibraryEntity);
         checkLibraryAdapter = new CheckLibraryAdapter(datalist, CheckLibraryByCollMangerActivity.this);
         listviewbycoll_manger.setAdapter(checkLibraryAdapter);
         //跳转
@@ -115,6 +110,7 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                 intnetaction.putExtra("tasknum", datalist.get(position).getId());
                 intnetaction.putExtra("taskcount", datalist.get(position).getMissingNum());
                 intnetaction.putExtra("createtime", datalist.get(position).getStarttime());
+                intnetaction.putExtra("pancha", pancha);
                 startActivity(intnetaction);
             }
         });
@@ -122,6 +118,7 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
 
     private void initView() {
         listviewbycoll_manger = (ListView) findView(R.id.listviewbycoll_manger);
+
         showControllerUser = (TextView) findViewById(R.id.tv_controller);
         String userName = GApplication.user.getLoginUserName();
         showControllerUser.setText(userName + "");
@@ -134,8 +131,15 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
         tv_EndTime.setOnClickListener(this);
         checklibrarybydizhi_gtnovebox_update = (Button) findViewById(R.id.checklibrarybydizhi_gtnovebox_update);
         checklibrarybydizhi_gtnovebox_update.setOnClickListener(this);
-        btnblack=(ImageView)findViewById(R.id.checklibrarybydizhi_gtnovebox_back);
+        btnblack = (ImageView) findViewById(R.id.checklibrarybydizhi_gtnovebox_back);
         btnblack.setOnClickListener(this);
+        checklibrarybydizhi_textView1 = (TextView) findViewById(R.id.checklibrarybydizhi_textView1);
+        if(null==pancha||pancha.equals("")){
+            checklibrarybydizhi_textView1.setText("补扫");
+        }else if (pancha.equals("盘查")){
+            checklibrarybydizhi_textView1.setText("盘查库");
+        }
+
     }
 
     @Override
@@ -158,8 +162,8 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
             case R.id.checklibrarybydizhi_gtnovebox_update:
                 GetCheckListbaryTask();
                 break;
-            case  R.id.checklibrarybydizhi_gtnovebox_back:
-               CheckLibraryByCollMangerActivity.this.finish();
+            case R.id.checklibrarybydizhi_gtnovebox_back:
+                CheckLibraryByCollMangerActivity.this.finish();
                 break;
             default:
                 break;
@@ -258,29 +262,28 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
         begintime = tv_StrartTime.getText().toString();//        开始时间
         endtime = tv_EndTime.getText().toString();//  结尾时间
 
-        if(begintime.equals("开始时间")&&endtime.equals("结束时间")) {
+        if (begintime.equals("开始时间") && endtime.equals("结束时间")) {
             begintime = "";
             endtime = "";
             Log.d(TAG, "当前时间为null");
-        }else  if(endtime.equals("结束时间")){
+        } else if (endtime.equals("结束时间")) {
             endtime = "";
-        }else if(begintime.equals("开始时间")){
-            Log.d(TAG,"有时间选择我啥也不做");
+        } else if (begintime.equals("开始时间")) {
+            Log.d(TAG, "有时间选择我啥也不做");
             begintime = "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date d1 = sdf.parse(begintime);
-            Date d2 = sdf.parse( endtime);
-            if(d2.before(d1)){
-                Toast.makeText(CheckLibraryByCollMangerActivity.this,"结尾时间不能早于开始时间",400).show();
+            Date d2 = sdf.parse(endtime);
+            if (d2.before(d1)) {
+                Toast.makeText(CheckLibraryByCollMangerActivity.this, "结尾时间不能早于开始时间", 400).show();
                 endtime = "";
                 return;
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
 
 
         manager.getRuning().runding(CheckLibraryByCollMangerActivity.this, "数据加载中...");
@@ -291,7 +294,11 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                 super.run();
                 try {
                     String number = GApplication.loginname;
-                    CheckLibraryResult = new CheckLirabryService().getChceckLibraryNum( begintime, endtime,number);
+                    if (null == pancha || pancha.equals("")) {
+                        CheckLibraryResult = new CheckLirabryService().getChceckLibraryNum(begintime, endtime, number);
+                    } else {
+                        CheckLibraryResult = new CheckLirabryService().getChceckLibraryNumbyPC(begintime, endtime, number, "1");
+                    }
                     Log.e(TAG, "测试==" + CheckLibraryResult);
                     // 返回的类型anyType{}需要进行判断
                     if (CheckLibraryResult != null && !CheckLibraryResult.equals("anyType{}")) {
@@ -304,7 +311,7 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                         List<CheckLibraryEntity> listPrint = gson.fromJson(CheckLibraryResult,
                                 type);
 //                        Log.e(TAG, "测试===" + CheckLibraryEntity.toString());
-                        datalist=listPrint;
+                        datalist = listPrint;
 
                         handler.sendEmptyMessage(2);
 
@@ -319,7 +326,7 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                     handler.sendEmptyMessage(1);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    handler.sendEmptyMessage(1);
+                    handler.sendEmptyMessage(4);
                 }
             }
 
@@ -353,6 +360,7 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                     checkLibraryAdapter = new CheckLibraryAdapter(datalist, CheckLibraryByCollMangerActivity.this);
                     listviewbycoll_manger.setAdapter(checkLibraryAdapter);
                     checkLibraryAdapter.notifyDataSetChanged();
+                    setListViewHeightBasedOnChildren(listviewbycoll_manger);
                     break;
                 case 3:
                     manager.getRuning().remove();
@@ -361,6 +369,17 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
                         @Override
                         public void onClick(View arg0) {
                             manager.getAbnormal().remove();
+                        }
+                    });
+                    break;
+                case 4:
+                    manager.getRuning().remove();
+                    manager.getAbnormal().timeout(CheckLibraryByCollMangerActivity.this, "查询任务失败请选时间或则重试", new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View arg0) {
+                            manager.getAbnormal().remove();
+                            GetCheckListbaryTask();
                         }
                     });
                     break;
@@ -381,5 +400,27 @@ public class CheckLibraryByCollMangerActivity extends BaseActivity implements Vi
     protected void onPause() {
         super.onPause();
         manager.getRuning().remove();
+    }
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        // 获取ListView对应的Adapter
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+            // listAdapter.getCount()返回数据项的数目
+            View listItem = listAdapter.getView(i, null, listView);
+            // 计算子项View 的宽高
+            listItem.measure(0, 0);
+            // 统计所有子项的总高度
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        // listView.getDividerHeight()获取子项间分隔符占用的高度
+        // params.height最后得到整个ListView完整显示需要的高度
+        listView.setLayoutParams(params);
     }
 }

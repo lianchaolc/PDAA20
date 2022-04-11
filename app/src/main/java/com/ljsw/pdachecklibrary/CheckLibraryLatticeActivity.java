@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.application.GApplication;
 import com.example.pda.R;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.ljsw.pdachecklibrary.adapterbycheck.CheckLibraryLatticeAdapter;
 import com.ljsw.pdachecklibrary.adapterbycheck.CheckLibraryTableAdapter;
@@ -25,18 +26,23 @@ import com.ljsw.pdachecklibrary.checklibraryservice.CheckLirabryService;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryEntity;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryLatticeEntity;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryScanEntity;
+import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryScannerBean;
 import com.ljsw.pdachecklibrary.entity.CheckLibraryEntity.CheckLibraryScannerEney;
 import com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.BaseActivity;
+import com.ljsw.tjbankpad.baggingin.activity.zhanghuziliao.chukujieyue.OutboundBorrowingTaskListEntity;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.qf.entity.QingLingRuKu;
 import com.manager.classs.pad.ManagerClass;
 
 import org.dom4j.Text;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /***
@@ -63,7 +69,9 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
     private String intenttable;
     private String Lattice;
     List<CheckLibraryScannerEney> listPrint = new ArrayList<>();//  传递到下一页面的数据源
-
+   private  String UNSCANNED      =   "";
+    private String SCANNED      =   "";
+    private  String TOTAL="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,6 +248,7 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
                     break;
                 case 4:
                     manager.getRuning().remove();
+                    o_Application.qinglingruku.clear();
                     o_Application.qinglingruku.add(new QingLingRuKu(null,
                             null, unScanlist));
                     o_Application.qlruku = o_Application.qinglingruku.get(0);
@@ -248,6 +257,10 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
                     String Taskno = intenttable;// 传递的任务号
                     intent.putExtra("taskNo", Taskno);
                     intent.putExtra("geduan", strgeduanno);
+                    intent.putExtra("UNSCANNED", UNSCANNED);
+                    intent.putExtra("SCANNED", SCANNED);
+                    intent.putExtra("TOTAL", TOTAL);
+
                     startActivity(intent);
                     break;
                 default:
@@ -294,15 +307,26 @@ public class CheckLibraryLatticeActivity extends BaseActivity implements View.On
                     Log.e(TAG, "测试" + UnScanResult);
                     // 返回的类型anyType{}需要进行判断
                     unScanlist.clear();
+                    listPrint.clear();
                     if (UnScanResult != null && !UnScanResult.equals("anyType{}")) {
-                        Gson gson = new Gson();
                         unScanlist.clear();// 每次进入后清除
                         listPrint.clear();
-                        Type type = new TypeToken<ArrayList<CheckLibraryScannerEney>>() {
-                        }.getType();
-                        listPrint = gson.fromJson(UnScanResult,
-                                type);
+                        Gson gson = new Gson();
+                        JSONObject jsonObject = new JSONObject(UnScanResult);
+                         UNSCANNED = jsonObject.getString("UNSCANNED");
+                         SCANNED = jsonObject.getString("SCANNED");
+                         TOTAL = jsonObject.getString("TOTAL");
+                        JSONArray hobbies = jsonObject.getJSONArray("list");
 
+                        for (int i = 0; i < hobbies.length(); i++) {
+
+                            CheckLibraryScannerEney eney = new CheckLibraryScannerEney();
+                            String PARTITIONNUMBER = hobbies.getJSONObject(i).get("PARTITIONNUMBER").toString();
+                            String STOCKCODE = hobbies.getJSONObject(i).get("STOCKCODE").toString();
+                            eney.setPARTITIONNUMBER(PARTITIONNUMBER);
+                            eney.setSTOCKCODE(STOCKCODE);
+                            listPrint.add(eney);
+                        }
 
                         CheckDZUnScanList(listPrint);
 
