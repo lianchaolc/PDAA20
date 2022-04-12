@@ -53,7 +53,6 @@ public class o_Application {
     // 请领入库
     public static List<QingLingRuKu> qinglingruku = new ArrayList<QingLingRuKu>();
 
-    //	public static List<LocationManagerCode>LocationManagerCode=new ArrayList<LocationManagerCode>();
     // 请领入库账户资料
     public static List<DiZhiYaPinChaiXiang> qinglingruku1 = new ArrayList<DiZhiYaPinChaiXiang>();
     // 抵制押品的入库
