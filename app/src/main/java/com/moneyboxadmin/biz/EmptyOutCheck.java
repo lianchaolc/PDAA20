@@ -185,7 +185,6 @@ public class EmptyOutCheck {
             }
         }
 
-        Log.e("EmptyOutCheck", "====" + listDetail2.size() + "");
 // 创建一个集合
         List<BoxDetail> list = new ArrayList<>();
         Map<String, Integer> mapAll = new HashMap<>();
