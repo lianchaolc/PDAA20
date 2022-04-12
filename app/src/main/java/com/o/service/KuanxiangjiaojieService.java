@@ -50,7 +50,7 @@ public class KuanxiangjiaojieService {
     }
 
     public List<KuanXiangBox> getBoxHandoverList(String lineNum) throws Exception {
-        Log.i("kuanxiangjiaojieservice+==Aarg0","lineNum="+lineNum);
+        Log.i("kuanxiangjiao=Aarg0","lineNum="+lineNum);
         KuanXiangBox kxcr = null;
         String methodName = "getBoxHandoverList";
         WebParameter[] param = {new WebParameter<String>("arg0", lineNum)};
