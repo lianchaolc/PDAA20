@@ -79,7 +79,6 @@ public class SelectTaskByCollateralActivity extends FragmentActivity implements 
     private QinglingBaseAdapter qinglingBaseAdapter;
     private ShangjiaoBaseAdapter sjBaseAdapter;
     private ManagerClass manager;
-
     private View.OnClickListener OnClick1;
 
     @Override
@@ -342,14 +341,14 @@ public class SelectTaskByCollateralActivity extends FragmentActivity implements 
                     sjBaseAdapter = new ShangjiaoBaseAdapter(AllTypeList);
                     lv_selecttaskbycollate_shangjiao.setAdapter(sjBaseAdapter);
 
-if(qinglingBaseAdapter==null){
-    qinglingBaseAdapter = new QinglingBaseAdapter(selectTaskBYCollaterallistql);//                    上缴
-    System.out.println("Adapter绑定");
-    Log.e(TAG, "测试" + selectTaskBYCollaterallistql.size());
-}else{
-    qinglingBaseAdapter.notifyDataSetChanged();
-    Log.e(TAG, "测试" + selectTaskBYCollaterallistql.size());
-}
+                    if (qinglingBaseAdapter == null) {
+                        qinglingBaseAdapter = new QinglingBaseAdapter(selectTaskBYCollaterallistql);//                    上缴
+                        System.out.println("Adapter绑定");
+                        Log.e(TAG, "测试" + selectTaskBYCollaterallistql.size());
+                    } else {
+                        qinglingBaseAdapter.notifyDataSetChanged();
+                        Log.e(TAG, "测试" + selectTaskBYCollaterallistql.size());
+                    }
 
                     // 绑定Adapter
                     lv_qingfenrenwu_qingling.setAdapter(qinglingBaseAdapter);//                    上缴
