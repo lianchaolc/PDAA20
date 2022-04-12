@@ -47,7 +47,39 @@ public class CheckLirabryService {
         }
         return null;
     }
+    /***1
+     *  通过时间查询查库任务降序方式
+     * @return
+     * @throws Exception
+     */
+    public String getChceckLibraryNumbyPC(String ControllerUser, String statrTime, String endTime,String canshu) throws Exception {
 
+        String methodName = "listMissingCollateralCheckStock";
+
+        Log.e(TAG, "方法名称 :" + "listMissingCollateralCheckStock");
+        Log.i(TAG, "参数1" + ControllerUser);
+        Log.i(TAG, "参数2" + statrTime);
+        Log.i(TAG, "参数3" + endTime);
+        Log.i(TAG, "参数4" + canshu);
+
+        WebParameter[] param = {
+                new WebParameter<String>("arg0", ControllerUser),
+                new WebParameter<String>("arg1", statrTime),
+                new WebParameter<String>("arg2", endTime),
+                new WebParameter<String>("arg3", canshu)};
+        SoapObject soap = null;
+        soap = WebService.getSoapObjectZH(methodName, param);
+        System.out.println("[soap:----]" + soap);
+        String code = soap.getProperty("code").toString();
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
+        if (code.equals("00")) {
+            System.out.println("返回 : " + msg);
+            System.out.println("返回 : " + params);
+            return params;
+        }
+        return null;
+    }
 
     /*****2
      * 获取时间和数量数量后 拿到每个table  柜子
@@ -191,6 +223,37 @@ public class CheckLirabryService {
             return null;
         }
     }
+    /***
+     * j结束任务需要确定
+     */
+//    cash/webservicea/finishTask?arg0=DZ9880300002022040700003&arg1=0001
+    public String finishTask(String Taskno,String ControllerUser) throws Exception {
 
+        String methodName = "finishTask";
+        Log.e(TAG, "方法名称 :" + "finishTask");
+        Log.d(TAG, "参数0" + Taskno);
+        Log.i(TAG, "参数1" + ControllerUser);
+
+        WebParameter[] param = {
+                new WebParameter<String>("arg0", Taskno),
+                new WebParameter<String>("arg1", ControllerUser),
+        };
+
+
+        SoapObject soap = null;
+        soap = WebService.getSoapObjectZH(methodName, param);
+        System.out.println("[soap:----]" + soap);
+        String code = soap.getProperty("code").toString();
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
+        System.out.println("返回 code: " + code);
+        System.out.println("返回 msg: " + msg);
+        System.out.println("返回 params: " + params);
+        if(code.equals("00")) {
+            return code;
+        }else{
+            return null;
+        }
+    }
 
 }
