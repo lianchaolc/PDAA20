@@ -34,6 +34,10 @@ public class UtilsScanbyCheckLibrary implements INotify {
         if (number == null) {
             return;
         }
+        if(number.contains("E2")){
+            Log.d("utis","e2");
+            return;
+        }
         str = number;
         str = CaseString.getBoxNumbycollateral(number);
 
