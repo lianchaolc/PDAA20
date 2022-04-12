@@ -235,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_10y"
-                            android:text="查库任务补扫"
+                            android:text="补扫"
                             android:textColor="@color/white"
                             android:textSize="@dimen/text_size_30" />
                     </LinearLayout>
@@ -485,10 +485,30 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/text_size_30" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/home_menu_layout_dizhimnagepanchapc"
+                        android:layout_width="@dimen/dimen_190x"
+                        android:layout_height="@dimen/dimen_180y"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
+                        <ImageView
+                            android:id="@+id/home_menu_img_dizhimnagepanchapc"
+                            android:layout_width="@dimen/dimen_110x"
+                            android:layout_height="@dimen/dimen_110y"
+                            android:src="@drawable/meun_money" />
+
+                        <TextView
+                            android:id="@+id/textViewdizhimnagepanchapc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_10y"
+                            android:text="盘查库"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_30" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
