@@ -266,11 +266,6 @@ public class QinglingZhouzhuanxiangluruActivity extends FragmentActivity {
 		tvAdd.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if(rfid!=null){
-					getRfid().close_a20();
-				}
-//				Intent intent = new Intent("com.ljsw.pda4.CleanMangeCheckTaskQingfenRenwuActivity");
-//				QinglingZhouzhuanxiangluruActivity.this.startActivity(intent);
 				int flag = 0;// 定义标识,默认为0
 				if (null == str_onitemselect || str_onitemselect.equals("")) {
 					Toast.makeText(QinglingZhouzhuanxiangluruActivity.this, "请先选中周转箱号", 300).show();
