@@ -161,8 +161,6 @@ public class HomeMenu extends Activity implements OnTouchListener {
         llchecklibrarysupplement.setOnTouchListener(this);
 //		kxgl=(LinearLayout)findViewById(R.id.zzxgl);
         // 抵制押品
-        llaydizhiyapinmanager = (LinearLayout) findViewById(R.id.home_menu_layout_dizhiyapin);
-        llaydizhiyapinmanager.setOnTouchListener(this);
         home_menu_layout_dizhimnagepancha = (LinearLayout) findViewById(R.id.home_menu_layout_dizhimnagepancha);// 盘查库
         home_menu_layout_dizhimnagepancha.setOnTouchListener(this);
         //	清分单独拿出来
@@ -191,7 +189,6 @@ public class HomeMenu extends Activity implements OnTouchListener {
             System.out.print("id====" + GApplication.user.getLoginUserId());
             show(Integer.parseInt(GApplication.user.getLoginUserId()));
         }
-        // show(Integer.parseInt(GApplication.user.getLoginUserId()));
     }
 
     // 触摸事件
@@ -600,7 +597,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
                 home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
                 home_menu_layout_sublibrarytwocode.setVisibility(View.VISIBLE);//  fenku 二维码扫描
                 home_menu_layout_cleanmanger.setVisibility(View.GONE); //清
-                llaydizhiyapinmanager.setVisibility(View.VISIBLE);
+                llaydizhiyapinmanager.setVisibility(View.GONE);
                 lsystemmanager.setVisibility(View.VISIBLE); // 系统管理
                 home_menu_layout_cash_topackege.setVisibility(View.GONE); /////制卡
                 home_menu_layout_dizhimnagepancha.setVisibility(View.VISIBLE);// 盘查库抵质押品
