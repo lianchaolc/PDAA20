@@ -278,6 +278,10 @@ public class HomeMenu extends Activity implements OnTouchListener {
 //							现金装袋
                         getGetUtil().gotoActivity(HomeMenu.this, CashtopackageSelectActivity.class, null,
                                 getGetUtil().ismover);
+                    }else if(GApplication.user.getLoginUserId().equals("29")){
+                        getGetUtil().gotoActivity(HomeMenu.this, DiZhiYaPinKuangJiaActivity.class, null,
+                                getGetUtil().ismover);
+
                     }
 
                     break;
@@ -597,7 +601,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
                 home_menu_layout_homemanger_watershow.setVisibility(View.GONE);/// 库管员处理水牌
                 home_menu_layout_sublibrarytwocode.setVisibility(View.VISIBLE);//  fenku 二维码扫描
                 home_menu_layout_cleanmanger.setVisibility(View.GONE); //清
-                llaydizhiyapinmanager.setVisibility(View.GONE);
+                llaydizhiyapinmanager.setVisibility(View.VISIBLE);
                 lsystemmanager.setVisibility(View.VISIBLE); // 系统管理
                 home_menu_layout_cash_topackege.setVisibility(View.GONE); /////制卡
                 home_menu_layout_dizhimnagepancha.setVisibility(View.VISIBLE);// 盘查库抵质押品
