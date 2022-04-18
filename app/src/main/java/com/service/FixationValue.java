@@ -81,7 +81,7 @@ public static String url_zh = "http://361de15631.wicp.vip/webcash/webservice";  
     public static final int examine = 3; // 审核员角色ID
     public static final int waibaoqingfen = 19; // 外包清分员
     public static final String waibaoQingfenString = waibaoqingfen + "";
-
+    public static final int cleanmanger = 29; // 抵质押品管库员管库
     public static int PRESS = 3; // 指纹验证次数
 
 
