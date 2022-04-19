@@ -216,10 +216,10 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 //					break;
 
 					managerClass.getRuning().remove();
-					if (!o_Application.qingfenyuan.getOrganizationId()
+					if (!o_Application.diziyuan.getOrganizationId()
 							.equals(o_Application.kuguan_db.getOrganizationId())
-							|| !o_Application.qingfenyuan.getLoginUserId().equals("7")) {
-						managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "请使用清分管理员身份!",
+							|| !o_Application.diziyuan.getLoginUserId().equals("29")) {
+						managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "请使用抵质押品管库员身份!",
 								new OnClickListener() {
 
 									@Override
@@ -231,7 +231,7 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 								});
 					} else {
 						if (o_Application.left_user != null) {
-							if (o_Application.qingfenyuan.getLoginUserName()
+							if (o_Application.diziyuan.getLoginUserName()
 									.equals(o_Application.left_user.getLoginUserName())) {
 								managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "重复验证!",
 										new OnClickListener() {
@@ -450,8 +450,8 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 					msg.what = -3; // 帐号或密码为空
 				} else {
 //					loginUser = getSystemLogin().login(name, pwd);
-					o_Application.qingfenyuan = new SecondLogin().login(name, pwd);
-					if (o_Application.qingfenyuan != null) { // 成功获取
+					o_Application.diziyuan = new SecondLogin().login(name, pwd);
+					if (o_Application.diziyuan != null) { // 成功获取
 //						GApplication.user = loginUser; // 
 						msg.what = 1;
 					} else { // 未成功获取
