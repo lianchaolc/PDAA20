@@ -517,6 +517,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     bundle3.putString("left", userid1);
                 }
                 intent2.putExtras(bundle3);
+
                 startActivityForResult(intent2, 0700);
             }
         }
@@ -581,7 +582,6 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
      * 2秒后自动跳下一个页面
      */
     public void towseconds() {
-
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -657,6 +657,9 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
         // 如果是同一个人
         if (username1.getText() != null && !(username1.getText() + "").equals("")) {
             num = 2;
+        }
+        if (username2.getText() != null && !(username2.getText() + "").equals("")) {
+            num =1;
         }
 
         switch (num) {
@@ -913,7 +916,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     if (GApplication.wd_user1.getUsername().isEmpty()) {
                     } else {
                         if (null == textname1 || textname1.equals("") && null != GApplication.user) {
-                            textname1 =admin+ username;
+                            textname1 = admin + username;
                         }
                     }
                     fname_left = username;
@@ -935,7 +938,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 }
                 if (flag.equals("wangdiantwo")) {
                     userid2 = GApplication.wd_user2.getUserzhanghu();
-                    textname2=admin+GApplication.wd_user2.getUsername();
+                    textname2 = admin + GApplication.wd_user2.getUsername();
                     fname_right = GApplication.wd_user2.getUsername();
                     fname_right = data.getStringExtra("name");
                     finger_right.setImageResource(R.drawable.sccuss);
@@ -1006,7 +1009,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     if (null != zhanghao || !zhanghao.equals("")) {
                         fingeruserone = zhanghao;
                     }
-                    if (null == userid1) {
+                    if (null == userid1||userid1.equals("")) {
                         userid1 = GApplication.user.getYonghuZhanghao();
                     }
                     finger_left.setImageResource(R.drawable.sccuss);
@@ -1026,7 +1029,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 }
                 if (flag.equals("kuguanyuanbykognchaoxiangtwo")) {
 
-                    if (null == userid2) {
+                    if (null == userid2||userid2.equals("")) {
                         userid2 = GApplication.user.getYonghuZhanghao();
                     }
                     String username = data.getStringExtra("name");
@@ -1414,9 +1417,9 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     f1 = "3";
                     one = 0;
                     firstSuccess = true;
-                    if (null != f1  && f1.equals("3") ) {
+                    if (null != f1 && f1.equals("3")) {
                         if (null != GApplication.user) {
-                            textname1 = admin+GApplication.user.getLoginUserName();
+                            textname1 = admin + GApplication.user.getLoginUserName();
                         }
                         if ("清分管理".equals(where) && GApplication.user.getLoginUserId().equals("7")) {
 
@@ -1433,6 +1436,8 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     }
                     fname_right = GApplication.user.getLoginUserName();
                     fname_right = data.getStringExtra("name");
+
+
                     finger_right.setImageResource(R.drawable.sccuss);
                     // System.out.println("one is :"+one);
                     Toast.makeText(BankDoublePersonLogin.this, "2！" + GApplication.user.getLoginUserName(), Toast.LENGTH_SHORT).show();
@@ -1466,7 +1471,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
 
                         Log.e("BankDoublePersonLogin", "账号新方法");
                         if (null != GApplication.user) {
-                            textname2 =  admin+GApplication.user.getLoginUserName();
+                            textname2 = admin + GApplication.user.getLoginUserName();
                         }
                         towseconds();//  跳转页面
                     }
