@@ -63,6 +63,7 @@ public class CleanMangerCokkateralQingfenLingqu_qf extends FragmentActivity impl
             // 绑定Adapter
             listMark.clear();
             leftlist = RenwuData[0].get("zhouzhuanxiang").getValues();
+            Mapplication.getApplication().ltQflkBoxNum.clear();
             Mapplication.getApplication().ltQflkBoxNum.addAll(leftlist);
             for (String str : leftlist) {
                 listMark.add(str);
