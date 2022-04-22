@@ -109,6 +109,7 @@ public class AccountAndResistCollateralService {
 			System.out.print("======" + soap.getProperty("params").toString());
 			return soap.getProperty("msg").toString();
 		} else {
+			System.out.print("======" + soap.getProperty("code").toString());
 			return soap.getProperty("msg").toString();
 		}
 
