@@ -1,5 +1,6 @@
 package com.ljsw.tjbankpda.main;
 
+import com.application.GApplication;
 import com.example.pda.R;
 
 import hdjc.rfid.operator.RFID_Device;
@@ -241,7 +242,15 @@ public class ZhouZhuanXiangSaoMiao_qf extends FragmentActivity implements OnClic
 			super.run();
 			String params;
 			try {
-				zhouzhuanxiangId = S_application.getApplication().bianhao;
+				// 当是29时需要传递周转箱子哦好 2022.4.18
+				if (GApplication.loginjueseid.equals("29")){// 当角色是抵质押品管理员
+					zhouzhuanxiangId=S_application.bianhaobyDZyapinguanliyuan;
+					System.out.print("抵质押品管理："+zhouzhuanxiangId);
+				}else{
+
+					zhouzhuanxiangId = S_application.getApplication().bianhao;
+				}
+
 				params = new QingfenRenwuService().getParams(zhouzhuanxiangId, "getZhouzhuanxiangXinxi");
 				Table[] RenwuData = Table.doParse(params);
 				peisongId = RenwuData[0].get("peisongdan").get(0);
