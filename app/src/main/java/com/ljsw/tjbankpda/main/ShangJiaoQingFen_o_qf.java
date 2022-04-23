@@ -1378,6 +1378,18 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 				sbD.append(BianyiType.xiahuaxian);
 			}
 		}
+		//  这里单纯复制上面内容预防修修改
+//		StringBuffer sbD2 = new StringBuffer();
+//		sbD2.append("dizhibianhao:");
+//		flag = 0;
+//		for (String dizhi : dizhilist) {
+//			flag++;
+//			sbD2.append(dizhi);
+//			if (flag < dizhilist.size()) {
+//				sbD2.append(BianyiType.xiahuaxian);
+//			}
+//		}
+//		newdizhiMSg="asdqwbianhao:"+sbD2;
 		xianjingMsg = sbX_quanbie + BianyiType.fenge + sbX_cansun + BianyiType.fenge + sbX_count;// 现金msg
 		zhongkongMsg = sbZ_leibie + BianyiType.fenge + sbZ_leibieName + BianyiType.fenge + sbZ_kaishishu
 				+ BianyiType.fenge + sbZ_jieshushu; // 重空msg
@@ -1514,7 +1526,13 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+
+//						if(cash.size()>0||importlist.size()>0){
+								submit();
+
+//						}else if(!dizhishunum.equals("0")){
+//							submitByDZcollateralHandOverClearResultAndCheck();
+//						}
 					}
 				});
 			}
@@ -1582,7 +1600,11 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					Toast.makeText(ShangJiaoQingFen_o_qf.this, "有现金|重空|抵制押品三者不能同时为空", Toast.LENGTH_SHORT).show();
 					manager.getRuning().remove();
 				} else {
-					submit();
+//					if((cash.size()>0||importlist.size()>0)){// 这里单独把抵质押品数据踢出去
+						submit();
+//					}else if(!dizhishunum.equals("0")){
+//						submitByDZcollateralHandOverClearResultAndCheck();
+//					}
 				}
 			}
 			if (msg.what == 1) {
@@ -1623,7 +1645,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+							submit();
 					}
 				});
 			}
@@ -1634,7 +1656,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 					public void onClick(View arg0) {
 						manager.getAbnormal().remove();
 						manager.getRuning().runding(ShangJiaoQingFen_o_qf.this, "提交中...");
-						submit();
+							submit();
 
 					}
 				});
