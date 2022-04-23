@@ -218,6 +218,9 @@ public class AccountCenterManagerLoginActivity extends Activity implements OnTou
                     case -3:
                         managerClass.getGolbalView().toastShow(AccountCenterManagerLoginActivity.this, "用户或密码为空！");
                         break;
+                    case -5:
+                        managerClass.getGolbalView().toastShow(AccountCenterManagerLoginActivity.this, "密码不正确！");
+                            break;
 
                 }
 
@@ -428,7 +431,7 @@ public class AccountCenterManagerLoginActivity extends Activity implements OnTou
 
 
                     } else { // 未成功获取
-                        msg.what = 0;
+                        msg.what = -5;
                     }
                 }
             } catch (SocketTimeoutException ee) {
