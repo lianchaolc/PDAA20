@@ -710,4 +710,10 @@ public class ClearAddMoneyOutDo extends Activity {
 		getGetMoneyNum().list.clear();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		getGetMoneyNum().list_save.clear();
+		getGetMoneyNum().list.clear();
+	}
 }
