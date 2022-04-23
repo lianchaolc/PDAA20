@@ -15,7 +15,7 @@ public class S_application {
     public static S_application s_application;
     public static String wrong;// 扫面的中间变量 | 密码提示信息
     public static String bianhao;// 扫面的周转箱中间变量
-
+    public static String bianhaobyDZyapinguanliyuan;// 扫面的周转箱中间变量
 //	public static String yayunOrizatuion;
 
     public static List<String> leftlist = new ArrayList<String>();// 左款箱码集合
