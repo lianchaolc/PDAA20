@@ -405,9 +405,9 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
             System.out.println("网点指纹特征值:" + ShareUtil.ivalBack);
             try {
                 // 网络请求
-                result_user = yanzheng.checkFingerprint("988050000", // 机构编号
-                        7 + "", // 网点人员角色Id
-                        ShareUtil.ivalBack); // 指纹的特征
+               result_user = yanzheng.checkFingerprint("988030000", // 机构编号
+						7 + "", // 网点人员角色Id
+						ShareUtil.ivalBack); // 指纹的特征
                 Log.e(TAG, "==" + cleanmmangerone);
                 if (result_user != null) {
                     System.out.println("我是帐号吗==" + result_user.getLoginUserId());
