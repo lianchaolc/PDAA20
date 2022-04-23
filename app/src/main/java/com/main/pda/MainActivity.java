@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import afu.util.PrivilegeActivity;
+import cn.poka.util.CrashHandler;
 import cn.poka.util.SharedPreUtil;
 
 import com.service.NetService;
@@ -20,6 +21,7 @@ import com.golbal.pda.GolbalUtil;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.service.FixationValue;
+import com.systemadmin.service.SystemUpdatePwdService;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -87,17 +89,16 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		GApplication.addActivity(this, "1main");
 		boolean bool = fileIsExists(text_url);//
 		if(!bool){
-//			Thread  thread=new Thread();
 			outputSDCard(text_url, url);
 			outputSDCard(text_namespace, nameSpace);
 
 			outputSDCard(text_urlthree, Eturl_three);
 			outputSDCard(text_namespacethree, EtnameSpace_three);
 
-//			thread.start();
 
 
 		}
+//		CrashHandler crashHandler=CrashHandler.getInstance();
 
 	}
 
@@ -123,7 +124,31 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		} else {
 			Log.e("地址读取", "地址读取err");
 		}
+
+//		检查当前的版本 号并自动的更行农商行四期
+
+		CheckSelfVersion();
+
 	}
+
+	/***
+	 * 检查当前的版本并自动更新
+	 */
+	private void CheckSelfVersion() {
+//		1   每次进行网络请求获取服务端的版本号
+//		getServiceAPKVersion();
+
+
+	}
+////  2获取服务端版本号这样对比并下载
+//	private void getServiceAPKVersion() {
+//		SystemUpdatePwdService dd=	new SystemUpdatePwdService();
+//		try {
+//		String result=	dd.updataSelfApt(getVersion());//  获取 服务端的版本号
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,9 +178,9 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		if (MotionEvent.ACTION_DOWN == even.getAction()) {
 			switch (view.getId()) {
 			// 版本
-//			case R.id.version:
-//				version.setImageResource(R.drawable.about_press);
-//				break;
+			case R.id.version:
+				version.setImageResource(R.drawable.about_press);
+				break;
 			// 主菜单
 			case R.id.home:
 				home.setImageResource(R.drawable.meun_money_press);
@@ -195,12 +220,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				list_version = new ArrayList<Activity>();
 				list_version.add(MainActivity.this);
 				managerClass.getGolbalutil().gotoActivity(MainActivity.this,
-//						BaggingActivity.class, null, GolbalUtil.ismover);  // 库管 入门式天线之前做的操作 库管员进行装袋操作
 						VersionCheck.class, null, GolbalUtil.ismover);
-//				managerClass.getGolbalutil().gotoActivity(MainActivity.this,
-//						BaggingActivity.class, null, GolbalUtil.ismover);
-//						   Intent intent = new Intent(MainActivity.this, BaggingActivitySend.class);
-//                startActivity(intent);
 				break;
 			}
 
@@ -369,6 +389,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url16 = sub + "/ckc";
 				FixationValue.URL17 = sub + "/cash_sk";
 				FixationValue.url18 = sub + "/clearingCheck";
+				FixationValue.url19 = sub + "/cash_csk";
 
 			} else {
 				FixationValue.URL6 = getsaveinfo + "/pda";
@@ -381,6 +402,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.url16 = getsaveinfo + "/ckc";
 				FixationValue.URL17 = getsaveinfo + "/cash_sk";
 				FixationValue.url18 = getsaveinfo + "/clearingCheck";
+				FixationValue.url19 = getsaveinfo + "/cash_csk";
 			}
 			System.out.println("地址2：" + FixationValue.URL6);
 			System.out.println("地址7：" + FixationValue.URL7);
@@ -391,6 +413,8 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			System.out.println("地址16：" + FixationValue.url16);
 			System.out.println("地址11：" + FixationValue.url11);
 			System.out.println("地址17：" + FixationValue.URL17);
+			System.out.println("地址18：" + FixationValue.url18);
+			System.out.println("地址19：" + FixationValue.url19);
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
