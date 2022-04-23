@@ -41,7 +41,9 @@
         tools:ignore="AllowBackup">
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.pda.FileProvider"
+
+        android:authorities="${applicationId}.FileProvider"
+
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
