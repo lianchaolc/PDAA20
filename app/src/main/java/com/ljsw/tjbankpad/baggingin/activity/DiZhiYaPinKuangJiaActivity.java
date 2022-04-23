@@ -11,6 +11,7 @@ import com.application.GApplication;
 import com.example.pda.R;
 import com.google.gson.Gson;
 
+import com.google.gson.JsonSyntaxException;
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.AccountAndResistCollateralService;
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.entity.AccountTaskListAndCountEntity;
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.entity.ClearCollateralTaskListAndCount;
@@ -145,7 +146,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		GApplication.user.getOrganizationId();
 		// 进入时判断不同用户进行网络请求
 		if (GApplication.user.getLoginUserId().equals("7")) {// 清分员
-			tvTitleItem.setText("抵制押品");
+			tvTitleItem.setText("抵质押品");
 			getClearCollateralTaskListAndCount();// 获取任务数量
 		} else if (GApplication.user.getLoginUserId().equals("4")) {// 库管员
 			// 获取的账户中心
@@ -157,6 +158,10 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 			// 账户资料装袋和如账户中心网络请求方法
 			getIncenterandAccountintiontopackges();
 			;
+		}else  if(GApplication.user.getLoginUserId().equals("29")){
+			tvTitleItem.setText("抵质押品");
+			getWarehouseTaskListAndCount();// 获取任务数量
+
 		}
 
 		OnClick1 = new OnClickListener() {
@@ -198,6 +203,9 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 					e.printStackTrace();
 					Log.e(TAG, "**===" + e);
 					handler.sendEmptyMessage(3);
+				}catch (JsonSyntaxException e){
+					e.printStackTrace();
+					handler.sendEmptyMessage(10);
 				} catch (Exception e) {
 					e.printStackTrace();
 					Log.e(TAG, "***===" + e);
@@ -307,7 +315,6 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 					// 用户账号
 					String number = GApplication.user.getYonghuZhanghao();
 					Log.e(TAG, "网络请求====" + number);
-
 					netresult = new AccountAndResistCollateralService().getWarehouseTaskListAndCount(number);
 					Log.e(TAG, "管库员获取数据源" + netresult.toString());
 					if (netresult != null && !netresult.equals("anyType{}")) {
@@ -470,6 +477,23 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 			zhanghuziliaoguihuan.setVisibility(View.VISIBLE);//
 			zhaunghuziliaoguihuandaiguihuanziliaoruku.setVisibility(View.GONE);
 			break;
+
+			case  FixationValue.cleanmanger://  抵质押品管库员2022.4.17
+				relazhaungdai.setVisibility(View.GONE);
+				relazhuangxiang.setVisibility(View.GONE);
+				relachuku.setVisibility(View.VISIBLE); //
+				relayruku.setVisibility(View.VISIBLE);
+				zhanghuziliaozhuangdai.setVisibility(View.GONE);
+				zhanghuziliaoruku.setVisibility(View.GONE);
+				zhanghuziliaochukujieyue.setVisibility(View.GONE);
+				zhanghuziliaoguihuan.setVisibility(View.GONE);
+				zhaunghuziliaoguihuandaiguihuanziliaoruku.setVisibility(View.GONE);
+				ruzhanghuzhongxin.setVisibility(View.GONE);
+				break;
+
+				default:
+
+					break;
 
 		}
 	}
@@ -660,6 +684,16 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 				resistpledgebagging_tv.setText("" + mClearCollateralTaskListAndCount.getCollateralBaggingCount());
 				resistcollateralpacking.setText("" + mClearCollateralTaskListAndCount.getCollateralPacketCount());// 装箱
 				break;
+				case  10:
+					manager.getRuning().remove();
+					manager.getAbnormal().timeout(DiZhiYaPinKuangJiaActivity.this, "数据解析失败", new OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							manager.getAbnormal().remove();
+						}
+					});
+					break;
 			default:
 				break;
 			}
