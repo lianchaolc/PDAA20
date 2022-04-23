@@ -139,12 +139,16 @@ public class JiaoJieActivity extends Activity {
 				listZaosong.setVisibility(View.VISIBLE);
 				break;
 			case R.id.jiaojie_shuaxin:
-				if (null == GApplication.kxc) {
-					System.out.println("走了获取线路吗?");
-					getLineNum();// 获取线路
-				} else {
-					getInfo();
+				long lastClick=0;
+				if (System.currentTimeMillis() - lastClick >= 3000){//防止点击过快崩溃
+					if (null == GApplication.kxc) {
+						System.out.println("走了获取线路吗?");
+						getLineNum();// 获取线路
+					} else {
+						getInfo();
+					}
 				}
+
 
 				break;
 			}
@@ -250,6 +254,9 @@ public class JiaoJieActivity extends Activity {
 				});
 				break;
 			case 7:
+
+
+				manager.getRuning().remove();
 				if (zkcount != 0) {
 					zkcount = 0;
 				}
@@ -274,7 +281,8 @@ public class JiaoJieActivity extends Activity {
 						}
 					}
 				}
-				manager.getRuning().remove();
+//				if(zlist.size()>0||wlist.size()>0){
+
 				listZaosong.setAdapter(zaoAdapter);
 				wanAdapter.notifyDataSetChanged();
 				zaoAdapter.notifyDataSetChanged();
@@ -283,6 +291,10 @@ public class JiaoJieActivity extends Activity {
 				zkuanxiangNum.setText("" + zlist.size());// 早送款箱总数
 				wwangdianNum.setText("" + wkcount);// 反了 凑合用
 				wkuanxiangNum.setText("" + wlist.size());
+//				}else{
+//				Log.d("JiaoJieActivity","长度为0不执行更新");
+
+//				}
 				break;
 			case 8:
 				manager.getRuning().remove();
@@ -757,4 +769,5 @@ public class JiaoJieActivity extends Activity {
 		manager.getRuning().remove();
         handler.removeCallbacksAndMessages(null);
     }
+
 }
