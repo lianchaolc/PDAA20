@@ -49,7 +49,7 @@
         android:layout_alignBottom="@+id/tv_fg_qingfendenglu_user1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dimen_11x"
-        android:text="傅小青"
+        android:text=""
         android:textSize="@dimen/text_size_22"
         android:textColor="@color/white" />
 
