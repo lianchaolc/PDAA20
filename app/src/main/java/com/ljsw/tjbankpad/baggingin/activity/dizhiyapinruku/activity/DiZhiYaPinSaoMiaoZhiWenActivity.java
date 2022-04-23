@@ -396,7 +396,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                 finger.setImageResource(R.drawable.result_isok);
                 bottom.setText("验证成功!");
                 if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
-                    S_application.s_librarycenthander_yaun = bundle.getString("name");
+                    S_application.s_userYayun  = bundle.getString("name");
                 }
 //				当账号密码登陆成功后的网络请求判断190402
 //				userId=o_Application.yayunyuan.getYonghuZhanghao();/// 登录账户
