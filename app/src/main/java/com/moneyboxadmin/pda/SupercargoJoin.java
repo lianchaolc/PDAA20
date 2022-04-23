@@ -144,6 +144,14 @@ public class SupercargoJoin extends BaseFingerActivity implements OnTouchListene
                     case 0:
 
                         count++;
+                        Toast.makeText(SupercargoJoin.this,
+                                /**
+                                 * 3 改为FixationValue.PRESS，用FixationValue.PRESS来控制按压次数
+                                 */
+                                "验证失败，您还有" + (FixationValue.PRESS - count) + "次机会", Toast.LENGTH_SHORT).show();
+
+
+
 
 
                         if (count >= 3) {
@@ -162,6 +170,7 @@ public class SupercargoJoin extends BaseFingerActivity implements OnTouchListene
                             intent1.putExtras(bundle2);
                             startActivityForResult(intent1, 6);
                         }
+                        supertext.setText("验证失败，请重按");
                         break;
 
 
@@ -463,7 +472,7 @@ public class SupercargoJoin extends BaseFingerActivity implements OnTouchListene
         /*
          * revised by zhangXueWei @2016/8/15
          */
-        supertext.setText("正在验证.." + "验证失败" + (3 - count) + "次机会");
+        supertext.setText("正在验证.." );
         Finger finger = new Finger();
         finger.setCorpId(GApplication.user.getOrganizationId()); // 机构ID
         finger.setRoleId("9"); // 押运员角色ID=9
