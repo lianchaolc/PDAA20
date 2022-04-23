@@ -281,7 +281,12 @@ public class InAccountCenterFingerActivity extends BaseFingerActivity{
 			IPdaOfBoxOperateService yz = new IPdaOfBoxOperateService();
 			try {
 				// 押运员的机构id默认 等于最开始登录用户的机构id
-				S_application.s_yayunJigouId = GApplication.user.getOrganizationId();
+				try {
+					S_application.s_yayunJigouId = GApplication.user.getOrganizationId();
+				}catch (Exception e){
+					System.out.print(TAG+"异常：："+e);
+				}
+
 				System.out.println("GApplication:" + "货位" + 26 + "===" + S_application.s_yayunJigouId);
 				System.out.println("GApplication:" + "" + GApplication.user.getLoginUserId());
 				result_user = yz.checkFingerprint(S_application.s_yayunJigouId,
