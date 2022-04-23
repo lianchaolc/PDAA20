@@ -153,8 +153,9 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                 switch (msg.what) {
                     case 1:
                         error = 3;
-                        if (o_Application.LibraryCentreuser != null && !o_Application.LibraryCentreuser.getLoginUserId().equals("4")) {// 变成库管员
-                            if (S_application.getApplication().s_librarycenthander_yaun == null) {// 管库员后加
+                        if (o_Application.yayunyuan != null && !o_Application.yayunyuan.getLoginUserId().equals("4")) {// 变成库管员
+
+                            if (S_application.getApplication().s_userguankuyaun == null) {// 管库员后加员后加
                                 managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使库管员身份!",
                                         new OnClickListener() {
                                             @Override
@@ -166,9 +167,8 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                                         });
                             }
                         } else {
-                            System.out.print("______else" + name);
-                            Log.e(TAG,"数据不空"+name);
-                            if (S_application.getApplication().s_librarycenthander_yaun == null) {
+                            System.out.print("______" + name);
+                            if (S_application.getApplication().s_userguankuyaun == null) {
                                 // 修改
                                 Intent intent = new Intent();
                                 intent.putExtra("isOk", "success");
@@ -179,10 +179,9 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                                 KuGuanYuanByZhangHuzhongxinLogin.this
                                         .setResult(KuGuanYuanByZhangHuzhongxinLogin.this.RESULT_OK, intent);
                                 KuGuanYuanByZhangHuzhongxinLogin.this.finish();
-                            } else if (S_application.getApplication().s_librarycenthander_yaun != null
-                                    && S_application.getApplication().s_librarycenthander_yaun.equals(name)) {
+                            } else if (S_application.getApplication().s_userguankuyaun != null
+                                    && S_application.getApplication().s_userguankuyaun.equals(name)) {
                                 // 修改
-                                Log.e(TAG,"数据不为空返回值"+name);
                                 Intent intent = new Intent();
                                 intent.putExtra("isOk", "success");
                                 intent.putExtra("name", name);
@@ -193,7 +192,7 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                                         .setResult(KuGuanYuanByZhangHuzhongxinLogin.this.RESULT_OK, intent);
                                 KuGuanYuanByZhangHuzhongxinLogin.this.finish();
                             } else {
-                                System.out.println("s_userYayun:" + S_application.getApplication().s_librarycenthander_yaun);
+                                System.out.println("s_userYayun:" + S_application.getApplication().s_userguankuyaun);
                                 System.out.println("name:" + name);
                                 managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使用库管员本人登录!!!!",
                                         new OnClickListener() {
@@ -221,6 +220,9 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                         break;
                     case -3:
                         managerClass.getGolbalView().toastShow(KuGuanYuanByZhangHuzhongxinLogin.this, "用户或密码为空！");
+                        break;
+                    case -5:
+                        managerClass.getGolbalView().toastShow(KuGuanYuanByZhangHuzhongxinLogin.this,"请使用正确的角色");
                         break;
 
                 }
@@ -415,16 +417,12 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                 if (("").equals(name) || ("").equals(pwd)) {
                     msg.what = -3; // 帐号或密码为空
                 } else {
-//					S_application.getApplication().s_userguankuyaun
                     Log.e("TSG", "S_application" + S_application.getApplication().s_userguankuyaun);
                     loginUser = getSystemLogin().login(name, pwd);
                     if (loginUser != null) { // 成功获取
-//						o_Application.yayunyuan = loginUser;
-                        o_Application.LibraryCentreuser = loginUser;
-                        S_application.getApplication().s_librarycenthander_Id = o_Application.LibraryCentreuser.getOrganizationId();
-                        S_application.getApplication().s_librarycenthander_name = o_Application.LibraryCentreuser.getLoginUserName();
-                        Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_Id);
-                        Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_yaun);
+                        o_Application.yayunyuan = loginUser;
+                        S_application.getApplication().s_yayunJigouId = o_Application.yayunyuan.getOrganizationId();
+                        S_application.getApplication().s_userYayunName = o_Application.yayunyuan.getLoginUserName();
                         msg.what = 1;
                     } else { // 未成功获取
                         msg.what = 0;
