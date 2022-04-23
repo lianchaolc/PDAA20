@@ -150,8 +150,7 @@ public class GetBoxDetailListBiz {
 					// 空钞箱出库明细
 				} else if ("空钞箱出库".equals(bizName)) {
 
-//					Map<String, Object> map = getEmptyCashBoxOutDetail().getemptyCashBoxOutDetail(planNum);
-					Map<String, Object> map=getEmptyCashBoxOutDetail().getemptyCashBoxOutDetailinfo(planNum);
+					Map<String, Object> map = getEmptyCashBoxOutDetail().getemptyCashBoxOutDetail(planNum);//2022.1.6 接口变更了回退版本
 					list = (ArrayList<BoxDetail>) map.get("list");
 //					boxInfoByEmplylist = (ArrayList<BoxInfoByEmply>) map.get("list");
 					cqEupCount = (String) map.get("count");
