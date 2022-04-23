@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.application.GApplication;
 import com.strings.tocase.CaseString;
 
 /**
@@ -34,7 +35,14 @@ public class ZzxSaomiaoUtil implements INotify {
 				return;
 			}
 			// 十进制转换成字符
-			S_application.getApplication().bianhao = CaseString.getBoxNum2(number);
+//2022.4.18
+			if(GApplication.loginjueseid.equals("29")){
+				S_application.getApplication().bianhaobyDZyapinguanliyuan=CaseString.getBoxNum2(number);
+			}else{
+				S_application.getApplication().bianhao = CaseString.getBoxNum2(number);
+			}
+
+			System.out.println("扫描的结果:" +S_application.getApplication().bianhaobyDZyapinguanliyuan );
 			System.out.println("扫描的结果:" + S_application.getApplication().bianhao);
 			Message m = handler.obtainMessage();
 			bun = new Bundle();
