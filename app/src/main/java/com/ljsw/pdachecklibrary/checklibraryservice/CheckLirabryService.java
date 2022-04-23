@@ -24,9 +24,9 @@ public class CheckLirabryService {
      */
     public String getChceckLibraryNum(String ControllerUser, String statrTime, String endTime) throws Exception {
 
-        String methodName = "getChceckLibraryNum";
+        String methodName = "listMissingCollateralCheckStock";
 
-        Log.e(TAG, "方法名称 :" + "getChceckLibraryNum");
+        Log.e(TAG, "方法名称 :" + "listMissingCollateralCheckStock");
         Log.i(TAG, "参数1" + ControllerUser);
         Log.i(TAG, "参数2" + statrTime);
         Log.i(TAG, "参数3" + endTime);
@@ -35,14 +35,15 @@ public class CheckLirabryService {
                 new WebParameter<String>("arg1", statrTime),
                 new WebParameter<String>("arg2", endTime)};
         SoapObject soap = null;
-        soap = WebService.getSoapObject2(methodName, param);
+        soap = WebService.getSoapObjectZH(methodName, param);
         System.out.println("[soap:----]" + soap);
         String code = soap.getProperty("code").toString();
         String msg = soap.getProperty("msg").toString();
-        // String params = soap.getProperty("params").toString();
+        String params = soap.getProperty("params").toString();
         if (code.equals("00")) {
             System.out.println("返回 : " + msg);
-            return code;
+            System.out.println("返回 : " + params);
+            return params;
         }
         return null;
     }
@@ -56,25 +57,30 @@ public class CheckLirabryService {
      * @return
      * @throws Exception
      */
-    public String CheckLibrary(String ControllerUser, String ChecklibaryraTasknum) throws Exception {
-        String methodName = "saveBoxSendOutEarly";
-        Log.e(TAG, "方法名称 :" + "saveBoxSendOutEarly");
-        Log.i(TAG, "参数1" + ControllerUser);
-        Log.i(TAG, "参数2" + ChecklibaryraTasknum);
-        WebParameter[] param = {new WebParameter<String>("arg0", ControllerUser),
-                new WebParameter<String>("arg1", ChecklibaryraTasknum),
+    public String CheckLibrarybyTable( String ChecklibaryraTasknum,String ControllerUser) throws Exception {
+        String methodName = "countListMissingCollateralByTask";
+        Log.e(TAG, "方法名称 :" + "countListMissingCollateralByTask");
+        Log.i(TAG, "参数2==" + ControllerUser);
+        Log.i(TAG, "参数1==" + ChecklibaryraTasknum);
+        WebParameter[] param = {
+                new WebParameter<String>("arg0", ChecklibaryraTasknum),
+                new WebParameter<String>("arg1", ControllerUser),
         };
-
-
         SoapObject soap = null;
-        soap = WebService.getSoapObject2(methodName, param);
+        soap = WebService.getSoapObjectZH(methodName, param);
         System.out.println("[soap:----]" + soap);
         String code = soap.getProperty("code").toString();
-        // String msg = soap.getProperty("msg").toString();
-        String params = soap.getProperty("msg").toString();
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
+        System.out.println("返回 : " + code);
+        System.out.println("返回 : " + msg);
+        System.out.println("返回 : " + params);
+        if (code.equals("00")) {
+            System.out.println("返回 : " + params);
+            return params;
+        }
 
-        return code + "_" + params;
-
+        return null;
     }
 
 
@@ -84,53 +90,106 @@ public class CheckLirabryService {
      * @para
      * @param
      * @return
-     * @throws Exception
+     * @throws Exception-
      */
-    public String CheckLibrarylattice(String ControllerUser, String ChecklibaryraTasknum) throws Exception {
-        String methodName = "saveBoxSendOutEarly";
-        Log.e(TAG, "方法名称 :" + "saveBoxSendOutEarly");
-        Log.i(TAG, "参数1" + ControllerUser);
-        Log.i(TAG, "参数2" + ChecklibaryraTasknum);
-        WebParameter[] param = {new WebParameter<String>("arg0", ControllerUser),
-                new WebParameter<String>("arg1", ChecklibaryraTasknum),
+    public String CheckLibrarylattice(String ChecklibaryraTasknum, String uplattice,String ControllerUser) throws Exception {
+        String methodName = "countListMissingCollateralByTaskAndFaceNumber";
+        Log.e(TAG, "方法名称 :" + "countListMissingCollateralByTaskAndFaceNumber");
+
+        Log.i(TAG, "参数1=" + ChecklibaryraTasknum);
+        Log.i(TAG, "参数2=" + uplattice);
+        Log.i(TAG, "参数3=" + ControllerUser);
+        WebParameter[] param = {
+                new WebParameter<String>("arg0", ChecklibaryraTasknum),
+                new WebParameter<String>("arg1", uplattice),
+                new WebParameter<String>("arg2", ControllerUser),
         };
-
-
         SoapObject soap = null;
-        soap = WebService.getSoapObject2(methodName, param);
+        soap = WebService.getSoapObjectZH(methodName, param);
         System.out.println("[soap:----]" + soap);
         String code = soap.getProperty("code").toString();
-        // String msg = soap.getProperty("msg").toString();
-        String params = soap.getProperty("msg").toString();
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
 
-        return code + "_" + params;
+        if (code.equals("00")) {
+            System.out.println("返回 : " + params);
+            return params;
+        }
+
+        return null;
 
     }
 
+
+    /***4
+     * 获取隔断数据
+     * @param ControllerUser
+     * @param upDZNo
+     * @return
+     * @throws Exception
+     *
+     * http://361de15631.wicp.vip/cash/webservice/pda/listMissingCollateralByTaskAndFaceGridNumber?arg0=DZ9880500002021041500001&arg1=G1-A&arg2=13&arg3=0001
+     */
+    public String listMissingCollateralByTaskAndFaceGridNumber( String upDZNo,String latticeNo,String geduan,String ControllerUser) throws Exception {
+
+        String methodName = "listMissingCollateralByTaskAndFaceGridNumber";
+        Log.e(TAG, "方法名称 :" + "listMissingCollateralByTaskAndFaceGridNumber");
+        Log.i(TAG, "参数2" + upDZNo);
+        Log.i(TAG, "参数2" + latticeNo);
+        Log.i(TAG, "参数3" + geduan);
+        Log.i(TAG, "参数4" + ControllerUser);
+        WebParameter[] param = {new WebParameter<String>("arg0", upDZNo),
+                new WebParameter<String>("arg1", latticeNo),
+                new WebParameter<String>("arg2", geduan),
+                new WebParameter<String>("arg3", ControllerUser),
+        };
+        SoapObject soap = null;
+        soap = WebService.getSoapObjectZH(methodName, param);
+        System.out.println("[soap:----]" + soap);
+        String code = soap.getProperty("code").toString();
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
+        if (code.equals("00")) {
+            System.out.println("返回 : " + params);
+            return params;
+        }
+
+        return null;
+    }
     /**
-     * 4
+     * 5
      * 提交数据
      */
 
-    public String upChecklibraryScanData(String ControllerUser, String upDZNo) throws Exception {
+    public String upChecklibraryScanData(String Taskno, String upDZNo ,String ControllerUser) throws Exception {
 
-        String methodName = "upChecklibraryScanData";
-        Log.e(TAG, "方法名称 :" + "upChecklibraryScanData");
-        Log.i(TAG, "参数1" + ControllerUser);
-        Log.i(TAG, "参数2" + upDZNo);
-        WebParameter[] param = {new WebParameter<String>("arg0", ControllerUser),
+        String methodName = "recordMissCollateral";
+        Log.e(TAG, "方法名称 :" + "recordMissCollateral");
+        Log.d(TAG, "参数0" + Taskno);
+        Log.i(TAG, "参数1" + upDZNo);
+        Log.i(TAG, "参数2" + ControllerUser);
+
+        WebParameter[] param = {
+                new WebParameter<String>("arg0", Taskno),
                 new WebParameter<String>("arg1", upDZNo),
+                new WebParameter<String>("arg2", ControllerUser),
         };
 
 
         SoapObject soap = null;
-        soap = WebService.getSoapObject2(methodName, param);
+        soap = WebService.getSoapObjectZH(methodName, param);
         System.out.println("[soap:----]" + soap);
         String code = soap.getProperty("code").toString();
-        // String msg = soap.getProperty("msg").toString();
-        String params = soap.getProperty("msg").toString();
-
-        return code;
+        String msg = soap.getProperty("msg").toString();
+        String params = soap.getProperty("params").toString();
+        System.out.println("返回 code: " + code);
+        System.out.println("返回 msg: " + msg);
+        System.out.println("返回 params: " + params);
+        if(code.equals("00")) {
+            return code;
+        }else{
+            return null;
+        }
     }
 
 
