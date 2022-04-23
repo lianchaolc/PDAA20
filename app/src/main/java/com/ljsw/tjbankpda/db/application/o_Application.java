@@ -91,7 +91,8 @@ public class o_Application {
     public static SystemUser yayunyuan;
     //网点人员
     public static SystemUser netpoint;
-
+    //抵质押品管库员
+    public static SystemUser diziyuan;
     public static o_Application getApplication() {
         if (application == null) {
             application = new o_Application();
