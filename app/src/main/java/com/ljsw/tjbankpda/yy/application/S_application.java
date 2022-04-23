@@ -9,6 +9,7 @@ import android.app.Application;
 
 /**
  * 2021.7.27   未知 扫描类application
+ * 当前类为辅助类  不存登录信息只存 交接时用户信息
  */
 public class S_application {
     public static S_application s_application;
@@ -53,9 +54,9 @@ public class S_application {
     public static String s_zhanghuzhonginguanliId; // 账户中心机构id lc
     public static String s_zhanghuzhongxinguanliname; // 账户中心管理员
     //交接时候启用的管库员变量
-    public static String s_librarycenthander_yaun; // 管库员lc
-    public static String s_librarycenthander_Id; // 管库员机构id lc
-    public static String s_librarycenthander_name; // 管库员名称
+//    public static String s_librarycenthander_yaun; // 管库员lc
+//    public static String s_librarycenthander_Id; // 管库员机构id lc
+//    public static String s_librarycenthander_name; // 管库员名称
 
     // 押运员 账号和密码非系统登录认证局部业务操作变量
     public static String s_userbycar_yaun; // 押运员管理员lc
