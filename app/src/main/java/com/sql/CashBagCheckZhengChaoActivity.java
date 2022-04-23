@@ -334,9 +334,9 @@ public class CashBagCheckZhengChaoActivity extends FragmentActivity implements O
                 // 后台数据的券别和当前读取券别要求一致
                 Log.e(TAG, "!!!!!!!!!!!!!!!" + readqumbei + moneyid);
                 // if("完整".equals(cansunwanczheng)){
-                Intent intent = new Intent(CashBagCheckZhengChaoActivity.this, CashBagCheckActivity.class);
+//                Intent intent = new Intent(CashBagCheckZhengChaoActivity.this, CashBagCheckActivity.class);
 //                    intent.putExtra("cardid", intentvalue);
-                startActivity(intent);
+//                startActivity(intent);
 
 //                } else {
                 if (intentvalue.equals("")) {
