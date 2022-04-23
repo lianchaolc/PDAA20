@@ -595,6 +595,8 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 
 		@Override
 		public void handleMessage(Message msg) {
+			managerClass.getRuning().remove();
+
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case 0:
@@ -603,6 +605,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 				break;
 			case 1:
 				manager.getRuning().remove();
+				managerClass.getAbnormal().remove();
 				manager.getAbnormal().timeout(DiZhiYaPinKuangJiaActivity.this, "网络连接失败,重试?", OnClick1);
 				break;
 			case 2:
@@ -681,5 +684,11 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 			Log.e(TAG, "====" + o_Application.qlruku.getZhouzhuanxiang() + "====");
 		}
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		managerClass.getRuning().remove();
 	}
 }
