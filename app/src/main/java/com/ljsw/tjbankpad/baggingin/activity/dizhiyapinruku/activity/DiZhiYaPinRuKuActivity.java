@@ -83,7 +83,7 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 
 	}
 
-	/****
+	/****[]
 	 * 开启线程进行扫描网络
 	 */
 	private void getRuKu() {
@@ -94,18 +94,24 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 				super.run();
 				try {
 					dzyprkparms = new GetResistCollateralBaggingService().GetResistCollateralBaggingCleanList();
-					Log.e(TAG, "测试数据源!!!!!!!!!!!!!!!!!!getRuKu" + dzyprkparms);
+					Log.e(TAG, "测试数据源!!!!!!getRuKu===" + dzyprkparms);
+
 					if (null!=dzyprkparms||!dzyprkparms.equals("")) {
+
 						Gson gson = new Gson();
 						DiZhiYaPinRuKu[] mDiZhiYaPinRuKu = gson.fromJson(dzyprkparms, DiZhiYaPinRuKu[].class);
+						if(mDiZhiYaPinRuKu.length>0){
 						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[0]);
-//						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[1]);
 						for (int i = 0; i < mDiZhiYaPinRuKu.length; i++) {
 							dzyprukuArrayList = Arrays.asList(mDiZhiYaPinRuKu);
 						}
 						handler.sendEmptyMessage(2);
+						}else{
+							handler.sendEmptyMessage(3);
+						}
 					} else {
-						handler.sendEmptyMessage(3);
+							handler.sendEmptyMessage(3);
+
 					}
 				} catch (SocketTimeoutException e) {
 					e.printStackTrace();
@@ -230,6 +236,7 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 
 		@Override
 		public void handleMessage(Message msg) {
+			manager.getAbnormal().remove();
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case 0:
