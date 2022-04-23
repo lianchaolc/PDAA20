@@ -59,6 +59,12 @@ public class QingFenLingQu_qf extends FragmentActivity implements OnClickListene
 			// 绑定Adapter
 			listMark.clear();
 			leftlist = RenwuData[0].get("zhouzhuanxiang").getValues();
+
+
+			for (int i=0; i<leftlist.size(); i++){
+				System.out.println("QingFenLingQu_qf 我要扫描的"+leftlist.get(i)+"====");
+			}
+			Mapplication.getApplication().ltQflkBoxNum.clear();
 			Mapplication.getApplication().ltQflkBoxNum.addAll(leftlist);
 			for (String str : leftlist) {
 				listMark.add(str);
@@ -327,7 +333,7 @@ public class QingFenLingQu_qf extends FragmentActivity implements OnClickListene
 			public void run() {
 				String params;
 				try {
-					params = new QingfenRenwuService().getParams(orderNum, "getQfZhouzhuanxiangID");
+					params = new QingfenRenwuService().getParams(orderNum, "getQfZhouzhuanxiangID");//RW0000020220418152949
 					RenwuData = Table.doParse(params);
 
 					okHandle.sendEmptyMessage(0);
