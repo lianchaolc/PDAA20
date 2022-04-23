@@ -45,6 +45,7 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
 
     private Intent intent;
     private ManagerClass managerClass;
+    private ManagerClass managerClassbutn;
 
     public Handler handler;
     private boolean isFlag = true;
@@ -65,6 +66,10 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                if (managerClass == null) {
+                    managerClass = new ManagerClass();
+                }
+
                 super.handleMessage(msg);
                 managerClass.getRuning().remove();
                 isFlag = true;
@@ -181,8 +186,64 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                         break;
 
 
-                    default:
+//                    case 15:
+//                        managerClassbutn = new ManagerClass();
+//                        managerClass.getRuning().remove();
+//                        managerClassbutn.getSureCancel().makeSuerCancel4(
+//                                YayunLoginSAcitivity.this, result_user.getUsername(), result_user.getUserzhanghu(), "本次领取任务线路：",
+//                                new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View arg0) {
+////                                        managerClassbutn.getSureCancel().remove();
+////                                        managerClassbutn.getRuning().runding(YayunLoginSAcitivity.this,
+////                                                "即将请稍后...");
+//                                        Log.d(TAG, "===GApplication.use" + GApplication.use.getUserzhanghu());
+////                                        S_application.s_userYayun = result_user
+////                                                .getUserzhanghu();
+//                                        Skip.skip(YayunLoginSAcitivity.this,
+//                                                YayunSelectRewuUseActivity.class, null, 0);
+////                                        managerClassbutn.getRuning().remove();
+//                                        managerClassbutn.getSureCancel().remove();
+//                                    }
+//
+//
+//                                }, false);
+//
+//                        break;
 
+//                    case 17:
+//                        GetHadTask();
+//                        break;
+
+                    case 18:   ///  w网络请求失败查询是否有任务
+                        managerClass.getSureCancel().makeSuerCancel(
+                                YayunLoginSAcitivity.this, "网络请求失败",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "网络请求失败");
+                                        managerClass.getRuning().remove();
+                                        getescortselectTask();
+                                    }
+                                }, false);
+                        break;
+                    case 19:   ///  w网络请求失败查询是否有任务
+                        managerClass.getSureCancel().makeSuerCancel(
+                                YayunLoginSAcitivity.this, "服务器链接超时",
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View arg0) {
+                                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                                "服务器链接超时");
+                                        managerClass.getRuning().remove();
+                                        getescortselectTask();
+                                    }
+                                }, false);
+                        break;
+
+                    default:
+                        managerClass.getRuning().remove();
 
                         break;
                 }
@@ -361,7 +422,13 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                             Skip.skip(YayunLoginSAcitivity.this,
                                     YayunSelectTaskActivity.class, null, 0);//  无任务押运员身上是否有任务   有任务：0 无任务：1
                             Log.e(TAG, "任务----");
+//                            managerClass.getSureCancel().remove3();
                         } else if (netresultClean.equals("0")) {
+                            Log.e(TAG, "跳转任务----");
+//                            managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+//                                    "正在查询...");
+//
+//                            handler.sendEmptyMessage(17);
                             Skip.skip(YayunLoginSAcitivity.this,
                                     YayunSelectRewuUseActivity.class, null, 0);
                             Log.e(TAG, "没有任务----");
@@ -371,52 +438,308 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                     e.printStackTrace();
                     Log.e("", "**===" + e);
 
-                    managerClass.getSureCancel().makeSuerCancel(
-                            YayunLoginSAcitivity.this, "网络请求失败",
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View arg0) {
-                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
-                                            "连接超时");
-                                    managerClass.getRuning().remove();
-                                }
-                            }, false);
-
+//                    managerClass.getSureCancel().makeSuerCancel(
+//                            YayunLoginSAcitivity.this, "网络请求失败",
+//                            new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View arg0) {
+//                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+//                                            "连接超时");
+//                                    managerClass.getRuning().remove();
+//                                }
+//                            }, false);
+                    handler.sendEmptyMessage(19);
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     Log.e("TAG", "**===" + e);
                     selectTast = false;
-
-                    managerClass.getSureCancel().makeSuerCancel(
-                            YayunLoginSAcitivity.this, "服务器没数据",
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View arg0) {
-                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
-                                            "网络请求失败");
-                                    managerClass.getRuning().remove();
-                                }
-
-
-                            }, false);
+//                    managerClass = new ManagerClass();
+//                    managerClass.getSureCancel().makeSuerCancel(
+//                            YayunLoginSAcitivity.this, "服务器没数据",
+//                            new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View arg0) {
+//                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+//                                            "网络请求失败");
+//                                    managerClass.getRuning().remove();
+//                                }
+//
+//
+//                            }, false);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("TAG", "***===" + e);
-                    managerClass.getSureCancel().makeSuerCancel(
-                            YayunLoginSAcitivity.this, "网络请求失败",
-                            new View.OnClickListener() {
-                                @Override
-                                public void onClick(View arg0) {
-                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
-                                            "网络请求失败");
-                                    managerClass.getRuning().remove();
-                                }
-                            }, false);
+//                    managerClass = new ManagerClass();
+//                    managerClass.getSureCancel().makeSuerCancel(
+//                            YayunLoginSAcitivity.this, "网络请求失败",
+//                            new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View arg0) {
+//                                    managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+//                                            "网络请求失败");
+//                                    managerClass.getRuning().remove();
+//                                }
+//                            }, false);
+                    handler.sendEmptyMessage(18);
+
                 }
             }
 
         }.start();
         return selectTast;
+    }
+
+
+    /***
+     * 押运员有任务了显示所选线路
+     */
+//    private String linname = "";
+//    private List<YayunSelectRenwuUserDispatchList> disoatchlist = new ArrayList<YayunSelectRenwuUserDispatchList>();// 派工单集合
+//    private List<YayunyuanSelectRenWuUserCodeEntity> yyysrwycodelist = new ArrayList<YayunyuanSelectRenWuUserCodeEntity>();// 更改数据结构后的外层list
+//    private List<YayunSelectRewuUserEntity> YayunSelectRewuUserList = new ArrayList<YayunSelectRewuUserEntity>();
+//    private List<YaYunLb> list = new ArrayList<YaYunLb>();
+//    private List<YayunyuanSelectRenWuUserBaseEntity> yyysrwybaselist = new ArrayList<YayunyuanSelectRenWuUserBaseEntity>();// 更改数据结构后的外层list
+//    String linename = "";
+//
+//    private void GetHadTask() {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                try {
+//                    Log.e(TAG, "----LoadDataNow" + userid);
+////                    // 用户账号
+////                    String userZhanghu = GApplication.use.getUserzhanghu();
+//                    ;
+//                    String netresultClean = new AccountAndResistCollateralService()
+//                            .queryJobOrderDetailHandleStatusByEscort(userid);// 返回数据源是msg+params
+//                    // 需要分开进行解决
+//                    // netresultClean测试数据源
+//                    // [{"linename":"北辰支行中心库一线","flag":"0","corpid":"904050100","state":"01","corpname":"小淀支行","linenum":"BC01"}],
+//                    // {"sj":"BC0120191218174053"}
+//
+//                    // 思路规则 同一条线路下可以有上缴和请领两个派工单 也可以只有一个上缴或者是请领 2 可以给你每个网点下都加入派工单
+//                    // 无论上缴还是请领
+//                    Log.e(TAG, "返回=============netresultClean=====" + netresultClean);
+//                    if (null == netresultClean) {
+//
+//                        handler.sendEmptyMessage(52);
+//                    } else if (netresultClean.equals("该押运员没有正在执行的派工单任务")) {
+//                        handler.sendEmptyMessage(53);
+//                        /// 这里是跳转领取任务页面还是在当前页面不显示数据 只有页面
+//                    } else {
+//                        String strnew = netresultClean.substring(0, netresultClean.indexOf("*"));
+//                        String Dispatch = netresultClean.substring(strnew.length() + 1, netresultClean.length());
+//                        Log.e(TAG, "返回==================" + Dispatch);
+//                        Log.e(TAG, "返回==================" + strnew);
+//                        Gson gson = new Gson();
+//                        // 解析派工单
+//                        disoatchlist.clear();
+//                        yyysrwycodelist.clear();
+//                        YayunSelectRenwuUserDispatchList jrb = gson.fromJson(Dispatch,
+//                                YayunSelectRenwuUserDispatchList.class);
+//                        Log.e(TAG, "获取派工单集合=====!!!!!" + jrb.getQl() + "======" + jrb.getSj());
+//                        YayunSelectRenwuUserDispatchList yyselectdispath = new YayunSelectRenwuUserDispatchList();
+//                        yyselectdispath.setQl(jrb.getQl());
+//                        yyselectdispath.setSj(jrb.getSj());
+//                        disoatchlist.add(yyselectdispath);
+//
+//                        for (int i = 0; i < disoatchlist.size(); i++) {
+//                            Log.e(TAG, "第一次获取派工单集合的请领和上缴=====!!!!!" + jrb.getQl() + "======" + jrb.getSj());
+//                            Log.e(TAG, "第一次获取派工单集合的请领和上缴=====!!!!!" + disoatchlist.get(i).getQl() + "======"
+//                                    + disoatchlist.get(i).getSj());
+//                        }
+//                        // 为每条线路下的 =DispatchList.get(i)= 派工单
+//
+//                        if (!strnew.equals("") || strnew != null || !strnew.equals("anyType{}")) {
+//                            // 数据返回
+//                            Log.e(TAG, "netresultClean测试数据源" + strnew.toString());
+//                            YayunSelectRewuUserList.clear();
+//                            linname = "";
+//                            list.clear();// 每次进入需要清除数据
+//                            Type type = new TypeToken<ArrayList<YayunyuanSelectRenWuUserCodeEntity>>() {
+//                            }.getType();
+//
+//                            List<YayunyuanSelectRenWuUserCodeEntity> list = gson.fromJson(strnew, type);
+//
+//                            yyysrwycodelist = list;
+//
+//                            // 打印
+//                            Log.e(TAG, "查看长度派工单---" + disoatchlist.size());
+//                            yyysrwybaselist.clear();
+//                            List<YayunyuanSelectRenWuUserBaseEntity> baselist2 = new ArrayList<YayunyuanSelectRenWuUserBaseEntity>();
+//                            for (YayunyuanSelectRenWuUserCodeEntity codeEntity : yyysrwycodelist) {
+//                                // 拿到base集合
+//                                List<YayunyuanSelectRenWuUserBaseEntity> baselist1 = codeEntity.getData();
+//                                for (YayunyuanSelectRenWuUserBaseEntity entity : baselist1) {
+//                                    entity.setLinename(codeEntity.getLinename());
+//                                    entity.setLinenum(codeEntity.getLinenum());
+//                                    // 当前农行的业务逻辑不可删除
+//                                    // 派工单说明： 1两种情况一种派工单实体的集合长度为2 线路1 下所有网点是sj
+//                                    // 线路2下所有网点为ql总是互斥
+//                                    // 2线路只有一条 派工单实体集合为长度为1 线路1 下网点1 有上缴没请领，网点2
+//                                    // 只有请领请领没上交网点3既有上缴也有请领 （网点1和网点3的情况共用一个上缴派工单）
+//                                    // 3 上缴05到01 状态是由pc端操作完成pda无法控制
+//                                    // 4 请领有任务时肯定有派工单 上缴一个列表只有一个是不为00
+//                                    // 状态那么就有派工单其它状态均有派工单
+//                                    baselist2.add(entity);
+//                                }
+//                            }
+//
+//                            for (int i = 0; i < baselist2.size(); i++) {
+//                                Log.e(TAG, baselist2.size() + "=====baselist2长度");
+//                                Log.e(TAG, baselist2.get(i) + "=====baselist2长度");
+//                            }
+//                            for (YayunyuanSelectRenWuUserBaseEntity baseentity : baselist2) {
+//                                // 上缴：00待确认 01待交接 02/04已交接 /// 线路和派工单两条
+//                                if (linename == null || linename.equals("")) {
+//                                    linename = baseentity.getLinename();// / 线路1
+//                                } else {
+//                                    if (linename.equals(baseentity.getLinename())) {
+//                                        Log.e(TAG, "linenname" + linename);
+//                                    } else {
+//                                        // linename=baseentity.getLinename();// 长度为2
+//                                        // 的情况//// 线路2
+//
+//                                    }
+//                                }
+//                                handler.sendEmptyMessage(15);
+//                                if (null != disoatchlist && yyysrwycodelist.size() > 1 && disoatchlist.size() > 1) {
+//
+//                                    if (linename != null || !linename.equals("")) {
+//                                        if (linename.equals(baseentity.getLinename())) {// 长度是一
+//                                            if ((!baseentity.getSjstate().equals("00"))
+//                                                    || baseentity.getSjstate().equals("01")
+//                                                    || baseentity.getSjstate().equals("02")
+//                                                    || baseentity.getSjstate().equals("04")) {
+//
+//                                                for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                    baseentity.setSj(disoatchlist.get(i).getSj());
+//                                                }
+//                                            } else if (baseentity.getSjstate().equals("00")) {
+//
+//                                                Log.e(TAG, "当前没有派工单或者没生成");
+//                                            }
+//
+//                                            // 请领： 05待交接 00/04已交接
+//                                            if (baseentity.getQlstate().equals("05")
+//                                                    || baseentity.getQlstate().equals("00")
+//                                                    || baseentity.getQlstate().equals("04")) {
+//                                                for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                    baseentity.setQl(disoatchlist.get(i).getQl());
+//                                                }
+//                                            }
+//                                        } else {// / 两个线路名不相等
+//                                            if ((!baseentity.getSjstate().equals("00"))
+//                                                    || baseentity.getSjstate().equals("01")
+//                                                    || baseentity.getSjstate().equals("02")
+//                                                    || baseentity.getSjstate().equals("04")) {
+//                                                for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                    baseentity.setSj(disoatchlist.get(i).getSj());
+//                                                }
+//                                            } else if (baseentity.getSjstate().equals("00")) {
+//
+//                                                Log.e(TAG, "当前没有派工单或者没生成");
+//                                            }
+//
+//                                            // 请领： 05待交接 00/04已交接
+//                                            if (baseentity.getQlstate().equals("05")
+//                                                    || baseentity.getQlstate().equals("00")
+//                                                    || baseentity.getQlstate().equals("04")) {
+//                                                for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                    baseentity.setQl(disoatchlist.get(i).getQl());
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                    // 当前只有一条线路和一条派工单的实体
+//                                } else if (disoatchlist.size() == 1 && yyysrwycodelist.size() == 1
+//                                        && null != disoatchlist) {
+//                                    // for (int i = 0; i < disoatchlist.size(); i++)
+//                                    // {
+//                                    // 请领： 05待交接 00/04已交接
+//                                    if (null != baseentity.getQlstate()) {
+//                                        if (baseentity.getQlstate().equals("05") || baseentity.getQlstate().equals("00")
+//                                                || baseentity.getQlstate().equals("04")) {
+//                                            for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                baseentity.setQl(disoatchlist.get(i).getQl());
+//                                                Log.e(TAG, "1111111111111！！！！！！！！" + disoatchlist.get(i).getQl());
+//                                            }
+//                                        } else {
+//                                            Log.e(TAG, ".getQlstate()" + "不符合派工单的条件");
+//                                        }
+//
+//                                    } else {
+//                                        Log.e(TAG, ".getQlstate()" + "没有派工单");
+//                                    }
+//                                    // sj
+//                                    if (null != baseentity.getSjstate()) {
+//                                        if ((!baseentity.getSjstate().equals("00"))
+//                                                || baseentity.getSjstate().equals("01")
+//                                                || baseentity.getSjstate().equals("02")
+//                                                || baseentity.getSjstate().equals("04")) {
+//                                            for (int i = 0; i < disoatchlist.size(); i++) {
+//                                                baseentity.setSj(disoatchlist.get(i).getSj());
+//                                                Log.e(TAG, "1111111111111！！！！！！！！" + disoatchlist.get(i).getSj());
+//                                            }
+//                                        } else if (baseentity.getSjstate().equals("00")) {
+//
+//                                            Log.e(TAG, "当前没有派工单或者没生成");
+//                                        }
+//                                    }
+//                                }
+//                                yyysrwybaselist.add(baseentity);
+//
+//                            }
+//
+//                            // disoatchlist
+//                            for (YayunSelectRenwuUserDispatchList strentity01 : disoatchlist) {
+//                                Log.e(TAG, "请领" + strentity01.getQl());
+//                                Log.e(TAG, "上缴" + strentity01.getSj());
+//
+//                            }
+//
+//                            for (YayunyuanSelectRenWuUserBaseEntity yayunyuan : yyysrwybaselist) {
+//                                Log.i(TAG, "派工单ql" + yayunyuan.getQl());
+//                                Log.i(TAG, "派工单sj----a--" + yayunyuan.getSj());
+//                                Log.i(TAG, "派工单sj----b--" + yayunyuan.getCorpname());
+//                                Log.i(TAG, "派工单sj----c-" + "：：：：：：：" + yyysrwybaselist.size());
+//                            }
+//
+//                            if (null != yyysrwybaselist && yyysrwybaselist.size() > 0) {
+//                                Log.e(TAG, "yyysrwybaselist----" + yyysrwybaselist.size());
+//                            } else {
+//                                Log.e(TAG, "网路请求失败了");
+//
+//                                // handler.sendEmptyMessage(3);
+//                            }
+//
+//                        } else {
+//                            Log.e(TAG, "网路请无数据;");
+//                            handler.sendEmptyMessage(52);
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    Log.e(TAG, "***===" + e);
+//                    handler.sendEmptyMessage(51);
+//                }
+//            }
+//
+//        }.start();
+//    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "押运员登录");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        managerClass.getRuning().remove();
     }
 }
