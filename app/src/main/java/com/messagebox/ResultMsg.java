@@ -368,8 +368,9 @@ public class ResultMsg {
                         remove();
                     }
                 }).start();
-
-                Intent intent = new Intent("com.ljsw.pda4.CleanMangeCheckTaskQingfenRenwuActivity");
+                Intent intent;
+                intent = new Intent("com.ljsw.pda3.QinglingWangdian");// 订单没做完
+//                intent = new Intent("com.ljsw.pda4.CleanMangeCheckTaskQingfenRenwuActivity");//  订单做完了
                 context.startActivity(intent);
                 Mapplication.getApplication().IsDiZhiOnly=false;
 
