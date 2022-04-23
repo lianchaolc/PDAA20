@@ -125,7 +125,7 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 	private Table[] subimtMark; // 提交信息
 
 	String dizhishunum = "0";// 获取抵制押品要打印的数量
-
+private  String dizhishunumgetnew="0";
 	private RFID_Device getRfid() {
 		if (rfid == null) {
 			rfid = new RFID_Device();
@@ -1133,7 +1133,9 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 							+ dizhilist.size());
 					for (int i = 0; i < dizhishulist.size(); i++) {
 						dizhishunum = dizhishulist.get(i);// 获取抵制押品的数量进行判断
+						dizhishunumgetnew=dizhishulist.get(i);
 						Log.d(TAG, "====***" + dizhishunum);
+						Log.d(TAG, "====***" + dizhishunumgetnew);
 					}
 
 					// 将集合中数量和 集合拿出来放到页面显示
@@ -1488,9 +1490,10 @@ public class ShangJiaoQingFen_o_qf extends FragmentActivity implements OnClickLi
 				manager.getRuning().remove();
 				System.out.println("------------------------------页面跳转");
 				if(dizhishunum.equals("0") ){
-				Skip.skip(ShangJiaoQingFen_o_qf.this, QingFenJinDu_qf.class, null, 0);
+			 	Skip.skip(ShangJiaoQingFen_o_qf.this, QingFenJinDu_qf.class, null, 0);
 				}else {
-					Skip.skip(ShangJiaoQingFen_o_qf.this, SelectTaskByCollateralActivity.class, null, 0);
+					Skip.skip(ShangJiaoQingFen_o_qf.this, QingFenJinDu_qf.class, null, 0);
+
 					//2022.1.25 这里添加后跳转抵质数大于且不为0时
 				}
 			}
