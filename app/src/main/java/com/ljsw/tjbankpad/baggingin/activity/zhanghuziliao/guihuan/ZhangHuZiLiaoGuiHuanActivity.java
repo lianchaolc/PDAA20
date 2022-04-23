@@ -110,12 +110,17 @@ public class ZhangHuZiLiaoGuiHuanActivity extends Activity implements OnClickLis
                 manager.getRuning().runding(ZhangHuZiLiaoGuiHuanActivity.this, "正在开启扫描请稍等...");
                 Intent intent = new Intent(ZhangHuZiLiaoGuiHuanActivity.this,
                         ZhangHuZiLiaoGuiHuanJiaojieActivity.class);
-                Log.e(TAG, "====!!!cd===" + o_Application.qinglingruku.size());
-                Log.e(TAG, "=======" + o_Application.qinglingruku.get(arg2));
+//                Log.e(TAG, "====!!!cd===" + o_Application.qinglingruku.size());
+//                Log.e(TAG, "=======" + o_Application.qinglingruku.get(arg2));
+
+                if(o_Application.qinglingruku==null){
+                    Log.d(TAG,"数据加载未完成------");
+                }else{
                 o_Application.qlruku = o_Application.qinglingruku.get(arg2);
                 Log.e(TAG, "=======" + taskNumber);
                 intent.putExtra("taskNumber", o_Application.qinglingruku.get(arg2).getRiqi());
                 startActivity(intent);
+               }
                 manager.getRuning().remove();
             }
         });
@@ -128,6 +133,7 @@ public class ZhangHuZiLiaoGuiHuanActivity extends Activity implements OnClickLis
      * 账户资料归还的网络请求
      */
     private void getAccountReturnTaskList() {
+        manager.getRuning().runding(ZhangHuZiLiaoGuiHuanActivity.this, "正在获取数请稍等...");
         new Thread() {
             @Override
             public void run() {
@@ -179,7 +185,9 @@ public class ZhangHuZiLiaoGuiHuanActivity extends Activity implements OnClickLis
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            manager.getRuning().remove();
             switch (msg.what) {
+
                 case 0:
                     manager.getRuning().remove();
                     manager.getAbnormal().timeout(ZhangHuZiLiaoGuiHuanActivity.this, "加载超时,重试?", OnClick1);
@@ -297,4 +305,9 @@ public class ZhangHuZiLiaoGuiHuanActivity extends Activity implements OnClickLis
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        manager.getRuning().remove(); //  去除遮罩
+    }
 }
