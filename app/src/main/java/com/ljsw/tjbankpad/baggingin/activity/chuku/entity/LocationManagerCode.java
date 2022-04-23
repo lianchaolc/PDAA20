@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class LocationManagerCode implements Serializable {
 
+	public LocationManagerCode() {
+	}
+
 	private String COUNT; // 数量
 	private String CLEARTASKNUM; // 任务号
 	private List<DetailList> detailList; /// 任务号中的集合
