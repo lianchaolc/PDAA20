@@ -79,7 +79,41 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 				}
 			}
 		};
+
+		if(o_Application.shangjiao_qingfen_chuku.get(0).getStrstye().equals("")){
+			yanzhengFinger();
+		}else{
+			yanzhengFingerbyDZypmanger();
+		}
 	}
+
+	private void yanzhengFingerbyDZypmanger() {
+		new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				YanZhengZhiWenService yanzheng = new YanZhengZhiWenService();
+				try {
+					result_user = yanzheng.checkFingerprint(o_Application.kuguan_db.getOrganizationId(), "29",
+							ShareUtil.ivalBack);
+					Thread.sleep(1000);
+					if (result_user != null) {
+						handler.sendEmptyMessage(100);
+					} else {
+						handler.sendEmptyMessage(99);
+					}
+				} catch (SocketTimeoutException e) {
+					e.printStackTrace();
+					handler.sendEmptyMessage(97);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					handler.sendEmptyMessage(98);
+				}
+			}
+
+		}.start();
+	}
+
 
 	@Override
 	protected void onResume() {
