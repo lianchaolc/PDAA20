@@ -8,6 +8,7 @@ import java.util.Map;
 import a20.cn.uhf.admin.Util;
 import android.app.Activity;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,7 +106,8 @@ public class GApplication extends Application {
 	 * @author zhouKai
 	 */
 	public static Map<String, List<LookStorageDetail>> taskDetails;
-
+	CrashHandler.CrashUploader crashUploader;
+	PendingIntent pendingIntent;
 	public LayoutInflater getlf(Activity a) {
 		if (lf == null) {
 			lf = a.getLayoutInflater();
@@ -116,7 +118,7 @@ public class GApplication extends Application {
 	/**
 	 * 单例获取Application实例
 	 * 
-	 * @param context
+	 * @param
 	 * @return
 	 */
 	public static GApplication getApplication() {
@@ -174,7 +176,12 @@ public class GApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-//		CrashHandler.getInstance().init(this); 2021.8.3 注释掉
+//		CrashHandler.getInstance().init(this);
+
+
+		CrashHandler crashHandler=CrashHandler.getInstance();
+
+		crashHandler.init(this,crashUploader,pendingIntent);
 //		Util.initSoundPool(this);
 
 		initLog();
