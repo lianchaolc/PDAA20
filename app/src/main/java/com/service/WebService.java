@@ -269,7 +269,7 @@ public class WebService {
         envelope.encodingStyle = "UTF-8";
 
         // 创建HTTPtransports对象，并指定WSDL文档的URL
-        HttpTransportSE ht = new HttpTransportSE(FixationValue.URL6, 20000);
+        HttpTransportSE ht = new HttpTransportSE(FixationValue.URL6, 80000);
 
         // 调用webservice
         String patch = FixationValue.URL6 + "/" + methodName;
@@ -561,6 +561,54 @@ public class WebService {
         Log.e(TAG, "----------soapObject：" + soapObject);
         return soapObject;
     }
+
+
+
+
+
+    /***
+     * 20210916 清分管理员复查合计的URL19 公共类
+     * @param methodName
+     * @param parameter
+     * @return
+     * @throws Exception
+     *
+     * 角色29
+     */
+    public static SoapObject getSoapObjectDZLiabraryManger(String methodName, WebParameter[] parameter)
+            throws Exception {
+        // 创建Soap对象，并指定命名空间和方法名
+        // 地址空间发生了改变
+        SoapObject request = new SoapObject(FixationValue.NAMESPACEZH, methodName);
+        // 遍历添加参数 WebParameter为泛型类 属性1：参数名称 属性2：参数值
+        if (parameter != null) {
+            for (WebParameter webParameter : parameter) {
+                request.addProperty(webParameter.getName(), webParameter.getValue());
+            }
+        }
+        // 指定版本
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = false;// 后加入
+
+        // 设置Bodyout属性
+        envelope.bodyOut = request;
+        (new MarshalBase64()).register(envelope);
+        envelope.encodingStyle = "UTF-8";
+
+        // 创建HTTPtransports对象，并指定WSDL文档的URL
+        HttpTransportSE ht = new HttpTransportSE(FixationValue.url19, 20000);
+
+        // 调用webservice
+        String patch = FixationValue.url19 + "/" + methodName;
+        Log.e(TAG, "----------访问的地址：" + patch);
+        ht.call(patch, envelope);
+        // 返回结果集z
+
+        SoapObject soapObject = (SoapObject) envelope.getResponse();
+        Log.e(TAG, "----------soapObject：" + soapObject);
+        return soapObject;
+    }
+
 }
 
 //  http://192.168.1.232:9080/webcash_up/webservice
