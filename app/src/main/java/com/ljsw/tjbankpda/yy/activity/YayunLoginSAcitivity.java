@@ -24,6 +24,7 @@ import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.entity.YayunSelectRewuUserEntity;
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.entity.YayunyuanSelectRenWuUserBaseEntity;
 import com.ljsw.tjbankpad.baggingin.activity.accountandresistcollateral.service.entity.YayunyuanSelectRenWuUserCodeEntity;
+import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.qf.entity.YaYunLb;
 import com.ljsw.tjbankpda.util.Skip;
 import com.ljsw.tjbankpda.yy.application.S_application;
@@ -205,7 +206,10 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                         }
                         managerClass.getRuning().remove();
                         managerClassbutn.getSureCancel().makeSuerCancel4(
-                                YayunLoginSAcitivity.this, result_user.getUsername(), result_user.getUserzhanghu(), "本次领取任务线路：" + linename,
+                                YayunLoginSAcitivity.this,
+                                o_Application.yayunyuan.getLoginUserName(),
+                        o_Application.yayunyuan.getYonghuZhanghao(),
+                                "本次领取任务线路：" + linename,
                                 new View.OnClickListener() {
                                     @Override
                                     public void onClick(View arg0) {
@@ -352,6 +356,8 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                     Log.d(TAG, GApplication.use.getUsername() + ":::::覆盖后");
                     Log.d(TAG, GApplication.use.getUserzhanghu() + ":::::覆盖后");
                     Log.d(TAG, S_application.s_userYayun + ":::::");
+                    o_Application.yayunyuan.setLoginUserName(result_user.getUsername());
+                    o_Application.yayunyuan.setYonghuZhanghao(result_user.getUserzhanghu());
                     m.what = 1;
                 } else {
                     m.what = 0;
