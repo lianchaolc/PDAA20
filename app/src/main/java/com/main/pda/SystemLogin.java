@@ -8,6 +8,7 @@ import com.example.pda.R;
 import com.golbal.pda.GolbalUtil;
 import com.golbal.pda.GolbalView;
 import com.ljsw.tjbankpda.db.application.o_Application;
+import com.ljsw.tjbankpda.qf.application.Mapplication;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
@@ -198,7 +199,9 @@ public class SystemLogin extends Activity implements OnTouchListener {
 					System.out.println("GApplication.loginJidouId :" + GApplication.user.getOrganizationId());
 					// 登录成功，缓存用户名到SharedPreference文件中
 					SharedPreUtil.getInstance().putUserName(name);
-
+					// 修改2022.4.18
+					Mapplication.getApplication().user1=null;
+					Mapplication.getApplication().user2=null;
 					managerClass.getGolbalutil().gotoActivity(SystemLogin.this, HomeMenu.class, null,
 							GolbalUtil.ismover);
 					break;
