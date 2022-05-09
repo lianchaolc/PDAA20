@@ -69,7 +69,12 @@ public class AccountInfoInHandoverActivity extends FragmentActivity implements O
 		getnumber.setHandler(handler);
 		initView();
 		;
-		copylist.addAll(o_Application.qlruku.getZhouzhuanxiang());
+		if(null==o_Application.qlruku.getZhouzhuanxiang()){
+
+		}else{
+			copylist.addAll(o_Application.qlruku.getZhouzhuanxiang());
+		}
+
 		ladapter = new LeftAdapter();
 		radapter = new RightAdapter();
 		manager = new ManagerClass();
