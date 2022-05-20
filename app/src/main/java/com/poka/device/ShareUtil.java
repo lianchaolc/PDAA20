@@ -48,6 +48,10 @@ public class ShareUtil {
 	public static Bitmap finger_gather; // 指纹采集
 	public static int three = 3;// 验证指纹失败的次数
 
+	public static Bitmap finger_dizhikuguandenglu_left;// 四期 抵质押品库管登陆左指纹
+	public static Bitmap finger_dizhikuguandenglu_right;// 四期 抵质押品库管登陆右指纹
+
+
 	public static int authType = 0;
 
 	public static int battery = 0;
