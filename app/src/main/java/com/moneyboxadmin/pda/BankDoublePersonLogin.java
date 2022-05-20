@@ -1085,7 +1085,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     ;
                     String zhanghao = data.getStringExtra("zhanghao");
                     username = data.getStringExtra("name");
-                    textname1 = username;
+                    textname1 =admin+":"+username;
                     if (null != zhanghao || !zhanghao.equals("")) {
                         fingeruserone = zhanghao;
                     }
@@ -1134,7 +1134,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     }
                 }
                 if (flag.equals("QFweiqinghuishoutwo")) {
-                    textname2 = o_Application.qingfen.getLoginUserName();
+                    textname2 =admin+":"+ o_Application.qingfen.getLoginUserName();
                     userid2 = o_Application.qingfen.getYonghuZhanghao();
                     fname_right = o_Application.qingfen.getLoginUserName();
                     fname_right = data.getStringExtra("name");
@@ -1153,7 +1153,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                         if (null != username) {
                             fname_left = username;
                         }
-                        finger_left.setImageResource(R.drawable.sccuss);
+//                        finger_left.setImageResource(R.drawable.sccuss);
 
                     }
                     f1 = "1";
@@ -1334,7 +1334,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                             cValue, type, "3", "1", BankDoublePersonLogin.userid1);
                 }
                 if (flag.equals("EmptAfterCleantwo")) {
-                    textname2 = o_Application.qingfen.getLoginUserName();
+                    textname2 =admin+ ":"+o_Application.qingfen.getLoginUserName();//  加入头部显示清分员
                     if (null == userid2) {
                         userid2 = o_Application.qingfen.getYonghuZhanghao();
                     }
