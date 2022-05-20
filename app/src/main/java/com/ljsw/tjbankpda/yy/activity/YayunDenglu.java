@@ -175,6 +175,7 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 							Intent intent = new Intent();
 							intent.putExtra("isOk", "success");
 							intent.putExtra("name", name);
+							intent.putExtra("username", o_Application.yayunyuan.getLoginUserName());
 							GApplication.use = new User();
 							GApplication.use.setUserzhanghu(name);
 							GApplication.use.setUsername(o_Application.yayunyuan.getLoginUserName());
@@ -186,6 +187,7 @@ public class YayunDenglu extends Activity implements OnTouchListener {
 							Intent intent = new Intent();
 							intent.putExtra("isOk", "success");
 							intent.putExtra("name", name);
+							intent.putExtra("username", o_Application.yayunyuan.getLoginUserName());
 							GApplication.use = new User();
 							GApplication.use.setUserzhanghu(name);
 							GApplication.use.setUsername(o_Application.yayunyuan.getLoginUserName());
