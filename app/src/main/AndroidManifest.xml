@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pda"
-    android:versionCode="1"
-    android:versionName="1.50">
+    android:versionCode="4"
+    android:versionName="1.60">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -31,6 +31,7 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+
     <application
         android:name="com.application.GApplication"
         android:allowBackup="true"
@@ -38,6 +39,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true"
+
         tools:ignore="AllowBackup">
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -732,6 +734,11 @@
         <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerClenWeiqingCActivity"></activity>
         <!--空钞箱出库后有清分员按指纹验证22.3.8-->
         <activity android:name="com.moneyboxadmin.pda.BDPLCheckFingerEmptAfterCleanActionCActivity"></activity>
+   <!--抵质押品管库员账号登录在清分时 上缴清分出库交接(库管员>抵质押品管理员)5.7-->
+        <activity android:name="com.ljsw.tjbankpda.db.activity.DiZhiYaPinGuanKuYuanDengLu"></activity>
+
+<!--抵质押品清分管库员登录-->
+        <activity android:name="com.ljsw.tjbankpad.baggingin.activity.chuku.CleanDZLibraryDoubleLogin"/>
 
     </application>
 
