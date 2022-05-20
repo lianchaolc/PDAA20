@@ -41,6 +41,8 @@ import afu.util.BaseFingerActivity;
 
 /**
  * 押运员单人登录页面
+ * 登录的时候 指纹放在Ga
+ * 账号登录用的 o_Application.yayunyuan
  *
  * @author Administrator
  */
@@ -104,6 +106,7 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                                         Log.d(TAG, "===GApplication.use" + GApplication.use.getUserzhanghu());
                                         S_application.s_userYayun = result_user
                                                 .getUserzhanghu();
+                                        S_application.s_userYayunName=result_user.getUsername();
                                         getescortselectTask();
 
                                     }
@@ -205,10 +208,13 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                             managerClassbutn = new ManagerClass();
                         }
                         managerClass.getRuning().remove();
+                        if(managerClassbutn.getSureCancel()!=null){
+                            managerClassbutn.getSureCancel().remove4();
+                        }
                         managerClassbutn.getSureCancel().makeSuerCancel4(
                                 YayunLoginSAcitivity.this,
-                                o_Application.yayunyuan.getLoginUserName(),
-                        o_Application.yayunyuan.getYonghuZhanghao(),
+                                S_application.s_userYayunName,
+                                S_application.s_userYayun ,
                                 "本次领取任务线路：" + linename,
                                 new View.OnClickListener() {
                                     @Override
@@ -231,6 +237,8 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                         break;
 
                     case 17:
+                        managerClass.getRuning().runding(YayunLoginSAcitivity.this,
+                                "正在查询...");
                         GetHadTask();
                         break;
 
@@ -356,8 +364,8 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                     Log.d(TAG, GApplication.use.getUsername() + ":::::覆盖后");
                     Log.d(TAG, GApplication.use.getUserzhanghu() + ":::::覆盖后");
                     Log.d(TAG, S_application.s_userYayun + ":::::");
-                    o_Application.yayunyuan.setLoginUserName(result_user.getUsername());
-                    o_Application.yayunyuan.setYonghuZhanghao(result_user.getUserzhanghu());
+                    Log.d(TAG, result_user.getUsername() + ":::::");
+
                     m.what = 1;
                 } else {
                     m.what = 0;
@@ -389,6 +397,7 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                 if (bundle.getString("name") != null
                         && !bundle.getString("name").equals("")) {
                     S_application.s_userYayun = bundle.getString("name");
+                    S_application.s_userYayunName=bundle.getString("username");
                 }
                 // 跳转下一个页面
                 new Thread(new Runnable() {
@@ -438,7 +447,6 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                                 netresultClean = new AccountAndResistCollateralService()
                                 .getescortselectTask(userid);
                         Log.e(TAG, "测试数据源----" + netresultClean + "---" + netresultClean);
-                        Log.e(TAG, "测试数据源是否有任务----" + netresultClean.toString());
                         selectTast = true;
                         if (netresultClean.equals("1")) {
                             Skip.skip(YayunLoginSAcitivity.this,
@@ -447,8 +455,10 @@ public class YayunLoginSAcitivity extends BaseFingerActivity {
                             managerClass.getSureCancel().remove3();
                         } else if (netresultClean.equals("0")) {
                             Log.e(TAG, "跳转任务----");
-                            managerClass.getRuning().runding(YayunLoginSAcitivity.this,
-                                    "正在查询...");
+                            if(managerClass.getRuning()!=null){
+                                managerClass.getRuning().remove();
+                            }
+
 
                             handler.sendEmptyMessage(17);
 
