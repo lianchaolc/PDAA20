@@ -389,6 +389,7 @@ public class WangdianCheckFingerNetPointColletcActivity extends Activity impleme
                                 bundlebdpcf.putString("netpoincollect", "账号验证成功");
                                 bundlebdpcf.putString("zhanghao",NetPointUserNo);
                                 bundlebdpcf.putString("name",o_Application.netpoint.getLoginUserName());
+                                GApplication.jigouidwangdian1=o_Application.netpoint.getOrganizationId();
                                 User u = new User();
                                 u.setUserzhanghu(NetPointUserNo);
                                 u.setPwd(pwd);
@@ -413,20 +414,27 @@ public class WangdianCheckFingerNetPointColletcActivity extends Activity impleme
                                 GApplication.wd_user2 = u;
                                 System.out.println("getLoginUserName()2"
                                         + GApplication.user.getLoginUserName());
+                                GApplication.jigouidwangdian2=o_Application.netpoint.getOrganizationId();
                                 if(null!=left){
 
-                                    if (left.equals(NetPointUserNo)) {
+                                    if (left.equals(o_Application.netpoint.getLoginUserName())) {
                                         Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
                                     } else if(o_Application.netpoint.getLoginUserName().equals(left)) {
                                         Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
 
                                     }else{
                                         jigouidCheck = o_Application.netpoint.getOrganizationId();
-                                        intentC.putExtras(bundlebdpcfwdt);
-                                        managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在验证用户名和密码...");
+                                        if( GApplication.jigouidwangdian1.equals(o_Application.netpoint.getOrganizationId())){
+                                            intentC.putExtras(bundlebdpcfwdt);
+                                            managerClass.getRuning().runding(WangdianCheckFingerNetPointColletcActivity.this, "正在验证用户名和密码...");
 
-                                        WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
-                                        WangdianCheckFingerNetPointColletcActivity.this.finish();
+                                            WangdianCheckFingerNetPointColletcActivity.this.setResult(5, intentC);
+                                            WangdianCheckFingerNetPointColletcActivity.this.finish();
+                                        }else{
+                                            Toast.makeText(WangdianCheckFingerNetPointColletcActivity.this, "验证不成功机构不同!", Toast.LENGTH_SHORT).show();
+
+                                        }
+
 
                                     }
                                 }
