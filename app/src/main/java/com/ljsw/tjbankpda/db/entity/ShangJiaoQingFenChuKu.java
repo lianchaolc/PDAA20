@@ -4,12 +4,34 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ShangJiaoQingFenChuKu implements Serializable {
+	public ShangJiaoQingFenChuKu(String jihuadan, List<String> xianluming, List<String> count, List<String> zhouzhuanxiang,
+								 int zzxcount, String ordertype) {
+		this.jihuadan = jihuadan;
+		this.xianluming = xianluming;
+		this.count = count;
+		this.zhouzhuanxiang = zhouzhuanxiang;
+		this.zzxcount = zzxcount;
+		this.ordertype = ordertype;
+	}
+
 	private static final long serialVersionUID = 1L;
 	private String jihuadan;
 	private List<String> xianluming;
 	private List<String> count;// 各线路分别的周转箱数量
 	private List<String> zhouzhuanxiang;
 	private int zzxcount;
+	private String  ordertype;// 类型 抵质和中控 现金  3   2 1  现金和中控12
+	public String getOrdertype() {
+		return ordertype;
+	}
+
+	public void setOrdertype(String ordertype) {
+		this.ordertype = ordertype;
+	}
+
+
+
+
 
 	public String getJihuadan() {
 		return jihuadan;
