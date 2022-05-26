@@ -59,7 +59,7 @@ public class GApplication extends Application {
 	public static User wd_user2;// 网点人员二
 	public static User kuguan1, kuguan2;// 库管员一二
 	public static Bitmap map;// 储存第一位库管员的指纹图片
-
+    public  static String netState="";//获取当前的网络状态3G2G WIFI
 	public GApplication() {
 	};
 
@@ -118,7 +118,7 @@ public class GApplication extends Application {
 	/**
 	 * 单例获取Application实例
 	 * 
-	 * @param context
+	 * @param
 	 * @return
 	 */
 	public static GApplication getApplication() {
