@@ -2019,7 +2019,7 @@ private  String dizhishunumgetnew="0";
 //					param = new QingfenRenwuService().isPrintbagnumberlist(peisongId);
 						param = new QingfenRenwuService().isPrintbagnumberlist(peisongId,seleckPrinrResult);
 						Log.d(TAG,"_____======"+param);
-						if(param.equals("anyType{}")){
+						if(param.equals("anyType{}")||param.equals("暂无存放抵质押品的格子可用")){
 							timeoutHandle.sendEmptyMessage(14);
 						}else{
 							// 加入判断为null时候操作
