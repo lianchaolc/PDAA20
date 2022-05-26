@@ -40,43 +40,6 @@ public class LoadInfo {
 
 	}
 
-//	private  boolean saxXML(String fileName){
-//		Log.i("解析", fileName);
-//		//读取器
-//		SAXReader read = new SAXReader();
-//		Log.i("1111", "111");
-//		try {
-//		//文档对象
-//		File file = new File(fileName);
-//		Log.i("file", file.exists()+"");		
-//		Document document = read.read(file);			
-//		Log.i("222", "222");
-//		//获取文档根节点
-//		Element root = document.getRootElement();
-//		Log.i("333", "33");
-//		//获取子节点
-//		Element version = root.element("version");
-//		Log.i("44", "44");
-//		VersionInfo.VERSION =version.getText(); 
-//		System.out.println("版本----"+version.getText());
-//		Log.i("55", "555");
-//		Element apk = root.element("apk");	
-//		VersionInfo.APKNAME = apk.getText();
-//		System.out.println("apk名称----"+apk.getText());
-//		Log.i("66", "66");
-//		Element url = root.element("url");
-//		VersionInfo.URL = url.getText();
-//		System.out.println("路径----"+url.getText());
-//		Log.i("77", "77");
-//		return true;
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			return false;
-//		}				
-//	}
-//	
-//	
-
 	/**
 	 * 解析XML
 	 * 
