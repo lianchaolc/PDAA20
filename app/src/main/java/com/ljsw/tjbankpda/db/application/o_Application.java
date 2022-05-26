@@ -93,6 +93,7 @@ public class o_Application {
     public static SystemUser netpoint;
     //抵质押品管库员
     public static SystemUser diziyuan;
+
     public static o_Application getApplication() {
         if (application == null) {
             application = new o_Application();
@@ -104,7 +105,7 @@ public class o_Application {
     public static SystemUser Accountcenterusers;
     //2021.7.27   保存交接时候的库管员
     public static SystemUser LibraryCentreuser;
-
+    public static SystemUser LibraryDZUser;
 ////20218.3   保存交接时 传递给押运员
 //    public   static   SystemUser;
 
