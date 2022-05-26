@@ -1,5 +1,6 @@
 package com.service;
 
+import com.application.GApplication;
 import com.golbal.pda.GolbalUtil;
 import com.golbal.pda.GolbalView;
 import com.main.pda.SystemLogin;
@@ -82,7 +83,7 @@ public class NetService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-
+			int netType = 0;
 			if (action != null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
 				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(
 						Context.CONNECTIVITY_SERVICE);
@@ -98,6 +99,32 @@ public class NetService extends Service {
 							// 发送通知
 							sendmsg(1);
 						}
+
+						ConnectivityManager connMgr = (ConnectivityManager) context
+								.getSystemService(Context.CONNECTIVITY_SERVICE);
+						NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+						if (networkInfo == null) {
+							sendmsg(-99);// 当前无网路
+						}
+						int nType = networkInfo.getType();
+						if (nType == ConnectivityManager.TYPE_WIFI) {
+							netType = 1;// wifi
+							GApplication.netState="11";
+						} else if (nType == ConnectivityManager.TYPE_MOBILE) {
+							int nSubType = networkInfo.getSubtype();
+							TelephonyManager mTelephony = (TelephonyManager) context
+									.getSystemService(Context.TELEPHONY_SERVICE);
+							if (nSubType == TelephonyManager.NETWORK_TYPE_UMTS
+									&& !mTelephony.isNetworkRoaming()) {
+								netType = 2;// 3G
+								GApplication.netState="13";
+							} else {
+								netType = 3;// 2G
+								GApplication.netState="13";
+							}
+						}else if(networkInfo.getType()==ConnectivityManager.TYPE_ETHERNET){//以太网 的网络类型 9
+							GApplication.netState="11";
+						}
 					}
 				} else {
 					if (SystemLogin.current) { // 如果是登录当前界面
@@ -106,6 +133,18 @@ public class NetService extends Service {
 						new GolbalView().toastShow(context, "当前网络连接失败");
 					}
 				}
+
+
+//				ConnectivityManager connMgr = (ConnectivityManager) context
+//						.getSystemService(Context.CONNECTIVITY_SERVICE);
+//				NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+//				int nType = networkInfo.getType();
+//				if(netType==ConnectivityManager.TYPE_ETHERNET){//以太网 的网络类型
+//					GApplication.netState="11";
+//				}
+
+
+
 			}
 		}
 	};
@@ -118,6 +157,9 @@ public class NetService extends Service {
 	private void sendmsg(int i) {
 		m = handnet.obtainMessage();
 		m.what = i;
-		handnet.sendMessage(m);
+		if(null==handnet){}else{
+			handnet.sendMessage(m);
+		}
+
 	}
 }
