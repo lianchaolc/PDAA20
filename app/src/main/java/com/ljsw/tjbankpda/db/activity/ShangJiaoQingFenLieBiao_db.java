@@ -92,7 +92,7 @@ public class ShangJiaoQingFenLieBiao_db extends FragmentActivity implements OnCl
 				try {// GApplication.user.getOrganizationId()
 					jihuadan = new ShangJiaoQingFenJiHuaDan()
 							.getShangjiaoJihuaMingxi(o_Application.kuguan_db.getOrganizationId());
-					if (!jihuadan.equals("")) {
+					if (null!=jihuadan||!jihuadan.equals("")) {
 						manager.getRuning().remove();
 						jihualist = Table.doParse(jihuadan);
 						handler.sendEmptyMessage(2);
@@ -154,6 +154,7 @@ public class ShangJiaoQingFenLieBiao_db extends FragmentActivity implements OnCl
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		o_Application.qingfendanmingxi = o_Application.shangjiao_qingfen_chuku.get(arg2);
+		System.out.print("类型区分"+o_Application.qingfendanmingxi.getOrdertype());
 		Skip.skip(this, QingFenJiHuaMingXi_db.class, null, 0);
 	}
 
@@ -198,19 +199,37 @@ public class ShangJiaoQingFenLieBiao_db extends FragmentActivity implements OnCl
 				view = new ViewHodler();
 				view.renwu = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_juanbie);
 				view.count = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_count);
+				view.Type = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_type);
+
 				arg1.setTag(view);
 			} else {
 				view = (ViewHodler) arg1.getTag();
 			}
 			view.renwu.setText(o_Application.shangjiao_qingfen_chuku.get(arg0).getJihuadan());
 			view.count.setText(o_Application.shangjiao_qingfen_chuku.get(arg0).getZzxcount() + "");
+			if(o_Application.shangjiao_qingfen_chuku.get(arg0).getOrdertype().equals("1")){
+				view.Type.setText("现金");
+			}
+			else if(o_Application.shangjiao_qingfen_chuku.get(arg0).getOrdertype().equals("2")){
+				view.Type.setText("重空");
+			}
+			else if(o_Application.shangjiao_qingfen_chuku.get(arg0).getOrdertype().equals("12")){
+				view.Type.setText("现金重空");
+			}
+			else if(o_Application.shangjiao_qingfen_chuku.get(arg0).getOrdertype().equals("3")){
+				view.Type.setText("抵质押品");
+			}
+			else{
+				view.Type.setText("无效类型");
+			}
+//			view.Type.setText(o_Application.shangjiao_qingfen_chuku.get(arg0).getOrdertype());// 抵质押品上缴请领22.4.16
 			return arg1;
 		}
 
 	}
 
 	public static class ViewHodler {
-		TextView renwu, count;
+		TextView renwu, count,Type;
 	}
 
 	public void getData() {
@@ -219,7 +238,9 @@ public class ShangJiaoQingFenLieBiao_db extends FragmentActivity implements OnCl
 				o_Application.shangjiao_qingfen_chuku.add(new ShangJiaoQingFenChuKu(
 						jihualist[i].get("jihuadan").getValues().get(0), jihualist[i].get("xianluming").getValues(),
 						jihualist[i].get("shuliang").getValues(), jihualist[i].get("zhouzhuanxiang").getValues(),
-						jihualist[i].get("zhouzhuanxiang").getValues().size()));
+						jihualist[i].get("zhouzhuanxiang").getValues().size(),
+				        jihualist[i].get("ordertype").getValues().get(0)
+				));
 				/*
 				 * System.out.println("jihualist:" + jihualist[i].toString());
 				 * System.out.println("jihuadan:"+
