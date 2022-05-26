@@ -68,7 +68,10 @@ public class S_application {
     public static String s_qlpaigongdan; // 请领派工单
     public static int jiaojieType; // 交接类型 1.总行押运与分库库管 2分行押运为网点人员 3总行押运与网点人员
     public static String s_yayunXianluId; // 押运线路id
-
+// 交接的 抵质押品管库员
+    public static String s_librarydz_yaun; // 管库员lc
+    public static String s_librarydzr_Id; // 管库员机构id lc
+    public static String s_librarydz_name; // 管库员名称
     public S_application() {
     }
 
