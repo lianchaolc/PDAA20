@@ -174,6 +174,7 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 								GApplication.jigouid = GApplication.sk.getNetId();
 								System.out.println("网点人员的机构:" + GApplication.jigouid);
 								System.out.println("网点人员的机构2:" + GApplication.user.getOrganizationId());
+								bundle.putString("name",GApplication.user.getLoginUserName());
 								intent.putExtras(bundle);
 								managerClass.getRuning().runding(WangdianCheckFingerActivity.this, "用户名和密码验证成功");
 								managerClass.getGolbalutil().gotoActivity(WangdianCheckFingerActivity.this,
@@ -193,6 +194,7 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 								if (left.equals(GApplication.user.getLoginUserName())) {
 									Toast.makeText(WangdianCheckFingerActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
 								} else {
+									bundle.putString("left", left);
 									intent.putExtras(bundle);
 									managerClass.getRuning().runding(WangdianCheckFingerActivity.this, "正在验证用户名和密码...");
 									managerClass.getGolbalutil().gotoActivity(WangdianCheckFingerActivity.this,
@@ -203,16 +205,6 @@ public class WangdianCheckFingerActivity extends Activity implements OnTouchList
 					}
 					break;
 				case 0:
-//					error--;
-//					if (error <= 0) {
-//						managerClass.getGolbalView().toastShow(
-//								WangdianCheckFingerActivity.this,
-//								"连续错误3次以上！帐号已被锁定");
-//					} else {
-//						managerClass.getGolbalView().toastShow(
-//								WangdianCheckFingerActivity.this,
-//								"用户或密码不正确！还有" + error + "次机会");
-//					}
 					if (msg.obj != null) {
 						managerClass.getGolbalView().toastShow(WangdianCheckFingerActivity.this, msg.obj.toString());
 					} else {
