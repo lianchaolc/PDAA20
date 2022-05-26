@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.ljsw.tjbankpda.qf.entity.OrderInfo;
@@ -164,6 +163,12 @@ public class QinglingWangdianActivity extends FragmentActivity {
 					});
 				}
 				dialogfa.show();
+
+			}
+			if (msg.what==98){
+				manager.getRuning().runding(QinglingWangdianActivity.this, "数据加载中...查找当前任务进度");
+				manager.getAbnormal().remove();
+				QinglingWangdianActivity.this.finish();
 
 			}
 		};
@@ -641,7 +646,13 @@ public class QinglingWangdianActivity extends FragmentActivity {
 							Log.e(TAG, "++++++=" + checklist.get(i));
 						}
 
+					}else{
+//						抵质押品的单独流程这里我提交数据后没任务的情况
+						if(GApplication.user.getLoginUserId().equals("29")){
+							timeoutHandle.sendEmptyMessage(98);
+						}
 					}
+
 				} catch (SocketTimeoutException e) {
 					e.printStackTrace();
 					timeoutHandle.sendEmptyMessage(0);
