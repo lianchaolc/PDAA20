@@ -74,7 +74,9 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
     private String userId = "";
 
     private Intent dizhiyapinIntent;
-
+    private  TextView dzypyy_usertextView1; // 角色名称
+    private  TextView accountcenter_login_title;//  顶部top
+    private TextView dzypll_yayun_bottom;// d抵质押品底部提示
     @SuppressLint("HandlerLeak")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,10 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
         try {
             if (!Tasknumber.equals("") && Tasknumber != null) {
                 flag = true;
+            }else{
+
             }
+
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -126,6 +131,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                         if (flag) {
                             undateAccountReturnFromCenterToWareHouse(); // 账户中心归还任务列表提交数据
                         } else {
+
                             long now = System.currentTimeMillis();
                             if (now - lastClickTime > 1000) {
                                 lastClickTime = now;
@@ -156,6 +162,12 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                         fingerCount++;
                         top.setText("验证失败" + fingerCount + "次，请重按");
                         if (fingerCount >= ShareUtil.three) {
+                            if(GApplication.user.getLoginUserId().equals(29)){
+                                intentlogin.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
+                                DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intentlogin, 1);
+                                top.setText("");
+                                fingerCount = 0;
+                            }
                             // 跳用户登录
                             intentlogin.setClass(DiZhiYaPinSaoMiaoZhiWenActivity.this, KuGuanYuanByZhangHuzhongxinLogin.class);
                             DiZhiYaPinSaoMiaoZhiWenActivity.this.startActivityForResult(intentlogin, 1);
@@ -253,6 +265,10 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                     case 997:
                         Toast.makeText(DiZhiYaPinSaoMiaoZhiWenActivity.this, "参数不完整请检查参数", Toast.LENGTH_SHORT).show();
                         break;
+                    case 996:
+                        Toast.makeText(DiZhiYaPinSaoMiaoZhiWenActivity.this, "参数不完整请检查参数", Toast.LENGTH_SHORT).show();
+                        break;
+
                 }
             }
         };
@@ -269,9 +285,15 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
         }
         Log.e(TAG, "number"+returnaccountinteninfolist);
         Log.e(TAG, "Tasknumber"+Tasknumber);
+        if(GApplication.user.getLoginUserId().equals("29")){
+            dzypyy_usertextView1.setText("抵质押品管库员");
+            accountcenter_login_title.setText("抵质押品管库员");
+            dzypll_yayun_bottom.setText("抵质押品管库员按压指纹");
+        }
         try {
             if (!Tasknumber.equals("") && Tasknumber != null) {
                 flag = true;
+            }else{
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -283,6 +305,9 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
         finger = (ImageView) this.findViewById(R.id.dzypyy_image);
         top = (TextView) this.findViewById(R.id.dzypyy_top);
         bottom = (TextView) this.findViewById(R.id.dzypll_yayun_bottom);
+        dzypyy_usertextView1=this.findViewById(R.id.dzypyy_usertextView1);
+        accountcenter_login_title=this.findViewById(R.id.accountcenter_login_title);// logintop
+        dzypll_yayun_bottom=this.findViewById(R.id.dzypll_yayun_bottom);
     }
 
     @Override
@@ -429,6 +454,17 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                     }
                 }).start();
 
+            }else  if(isOk.equals("success11")){
+
+                fname.setText(o_Application.diziyuan.getLoginUserName());
+                finger.setImageResource(R.drawable.result_isok);
+                bottom.setText("验证成功!");
+                if (bundle.getString("name") != null && !bundle.getString("name").equals("")) {
+                    S_application.s_librarydz_yaun = bundle.getString("name");
+                }
+                number = bundle.getString("name");
+                ;
+                getRuKuBysecurityLibrary();// 调用提交接口抵制押品
             }
         }
     }
@@ -462,7 +498,7 @@ public class DiZhiYaPinSaoMiaoZhiWenActivity extends BaseFingerActivity {
                     e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    handler.sendEmptyMessage(1);
+                    handler.sendEmptyMessage(998);
                 }
             }
 
