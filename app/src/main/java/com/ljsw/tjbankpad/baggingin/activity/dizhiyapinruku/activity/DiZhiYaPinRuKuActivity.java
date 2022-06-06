@@ -95,17 +95,27 @@ public class DiZhiYaPinRuKuActivity extends Activity implements OnClickListener 
 				try {
 					dzyprkparms = new GetResistCollateralBaggingService().GetResistCollateralBaggingCleanList();
 					Log.e(TAG, "测试数据源!!!!!!!!!!!!!!!!!!getRuKu" + dzyprkparms);
-					if (null!=dzyprkparms||!dzyprkparms.equals("")) {
+					if (null!=dzyprkparms||!dzyprkparms.equals("")||!dzyprkparms.equals("[]")) {
 						Gson gson = new Gson();
 						DiZhiYaPinRuKu[] mDiZhiYaPinRuKu = gson.fromJson(dzyprkparms, DiZhiYaPinRuKu[].class);
-						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[0]);
+//						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[0]);
 //						Log.e(TAG, "run: " + mDiZhiYaPinRuKu[1]);
+						if(mDiZhiYaPinRuKu.length<=0){
+							handler.sendEmptyMessage(3);
+							return;
+						}
 						for (int i = 0; i < mDiZhiYaPinRuKu.length; i++) {
 							dzyprukuArrayList = Arrays.asList(mDiZhiYaPinRuKu);
 						}
+
 						handler.sendEmptyMessage(2);
 					} else {
-						handler.sendEmptyMessage(3);
+						if(dzyprkparms.equals("[]")){
+							handler.sendEmptyMessage(3);
+						}else{
+							handler.sendEmptyMessage(3);
+						}
+
 					}
 				} catch (SocketTimeoutException e) {
 					e.printStackTrace();
