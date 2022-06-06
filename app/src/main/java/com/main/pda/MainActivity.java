@@ -78,7 +78,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 		systemset = (ImageView) findViewById(R.id.systeset);
 		version = (ImageView) findViewById(R.id.version);
 		showversion=(TextView) findViewById(R.id.showversion);//设置版本号组件
-		showversion.setText("版本号"+getVersion()+"");//设置版本号
+		showversion.setText("版本号"+"release"+getVersion()+"");//设置版本号
 		// 触摸事件
 		home.setOnTouchListener(this);
 		systemset.setOnTouchListener(this);
@@ -97,9 +97,16 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 
 //			thread.start();
 
-
+			getInfoBynetState();
 		}
 
+	}
+
+	/***
+	 * 获取网路 状态
+	 * 有线还是无线
+	 * */
+	private void getInfoBynetState() {
 	}
 
 	@Override
@@ -296,14 +303,17 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 				FixationValue.URL3 = substring + "/cash_cm";
 				FixationValue.URL4 = substring + "/cash_cmanagement";
 				FixationValue.URL5 = substring + "/cash_kuguanyuan";
+				FixationValue.url20 = substring + "/cash_pda";
 			} else {
 				FixationValue.URL2 = getsaveinfo + "/cash_boxHDHE";
 				FixationValue.URL3 = getsaveinfo + "/cash_cm";
 				FixationValue.URL4 = getsaveinfo + "/cash_cmanagement";
 				FixationValue.URL5 = getsaveinfo + "/cash_kuguanyuan";
+				FixationValue.url20 = getsaveinfo + "/cash_pda";
 			}
 			System.out.println("地址2：" + FixationValue.URL2);
 			System.out.println("地址：" + FixationValue.URL);
+			System.out.println("地址：" + FixationValue.url20);
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -394,6 +404,7 @@ public class MainActivity extends PrivilegeActivity implements OnTouchListener {
 			System.out.println("地址17：" + FixationValue.URL17);
 			System.out.println("地址18：" + FixationValue.url18);
 			System.out.println("地址19：" + FixationValue.url19);
+			System.out.println("地址20：" + FixationValue.url20);
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
