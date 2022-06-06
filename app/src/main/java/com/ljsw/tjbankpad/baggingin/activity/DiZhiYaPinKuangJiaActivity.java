@@ -52,12 +52,12 @@ import static java.lang.Integer.parseInt;
 
 /***
  * 抵制押品最外层框架 条目点击
- * 
+ *
  * @author Administrator
- * 
+ *
  */
 public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnClickListener {
-	protected static final String TAG = "DiZhiYaPinKuangJiaActivity";
+	protected static final String TAG = "DiZhiYaPinKuangJia";
 	private RelativeLayout relazhaungdai;
 	private RelativeLayout relazhuangxiang;
 	private RelativeLayout relachuku;
@@ -128,7 +128,8 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		OnClick1 = new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				manager.getAbnormal().remove();
+//				manager.getAbnormal().remove();
+				manager.getRuning().remove();
 //					getAccountTurnOverLineCount();// 网络请求
 			}
 		};
@@ -141,6 +142,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	@Override
 	protected void onResume() {
 		super.onResume();
+		o_Application.qinglingruku.clear();
 		GApplication.user.getLoginUserId();
 		GApplication.user.getLoginUserName();
 		GApplication.user.getOrganizationId();
@@ -178,6 +180,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	 */
 	private void getClearCollateralTaskListAndCount() {
 		new Thread() {
+			@SuppressLint("LongLogTag")
 			@Override
 			public void run() {
 				super.run();
@@ -351,6 +354,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 
 	}
 
+	@SuppressLint("LongLogTag")
 	private void initView() {
 
 //		标题
@@ -466,12 +470,14 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 
 			break;
 		case FixationValue.warehouse:
+			relazhaungdai.setVisibility(View.GONE);;
+			relachuku .setVisibility(View.GONE);
 			zhanghuziliaozhuangdai.setVisibility(View.GONE); //
 			ruzhanghuzhongxin.setVisibility(View.GONE);
 			relazhaungdai.setVisibility(View.GONE);
 			relazhuangxiang.setVisibility(View.GONE);
-			relachuku.setVisibility(View.VISIBLE);
-			relayruku.setVisibility(View.VISIBLE);
+			relachuku.setVisibility(View.GONE);
+			relayruku.setVisibility(View.GONE);
 			zhanghuziliaoruku.setVisibility(View.VISIBLE);
 			zhanghuziliaochukujieyue.setVisibility(View.VISIBLE);
 			zhanghuziliaoguihuan.setVisibility(View.VISIBLE);//
@@ -498,6 +504,7 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		}
 	}
 
+	@SuppressLint("WrongConstant")
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -617,7 +624,8 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 	 */
 	private Handler handler = new Handler() {
 
-		@Override
+		@SuppressLint("LongLogTag")
+        @Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what) {
@@ -722,4 +730,5 @@ public class DiZhiYaPinKuangJiaActivity extends FragmentActivity implements OnCl
 		super.onDestroy();
 		managerClass.getRuning().remove();
 	}
+
 }
