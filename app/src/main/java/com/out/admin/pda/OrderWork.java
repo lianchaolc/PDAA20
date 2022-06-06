@@ -433,4 +433,13 @@ public class OrderWork extends Activity implements OnTouchListener {
 		}
 	};
 
+	/***
+	 * 回退不消失dialog
+	 */
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		managerClass.getAbnormal().remove();
+		managerClass.getRuning().remove();
+	}
 }
