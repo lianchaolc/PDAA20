@@ -139,4 +139,24 @@ public class SaveAuthLogService {
 		String code = soap.getProperty("code").toString();
 		return code;
 	}
+
+	/***
+	 * 2022.5. 获取plnumid下的机构
+	 */
+	public String GetplnumId(String plannumId) throws Exception {
+//		                     getCorpIdByPlanNum
+		String methodName = "getCorpIdByPlanNum";
+		Log.i("plannumId","params"+plannumId);
+		WebParameter[] parameter = {
+				new WebParameter<String>("arg0", plannumId) };
+		SoapObject soap = WebService.getSoapObjectWHB(methodName, parameter);
+		String code = soap.getProperty("code").toString();
+		String params = soap.getProperty("params").toString();
+		if ("00".equals(code)) {
+			Log.d("getCorpIdByPlanNum","params"+params);
+			return params;
+
+		}
+		return "";
+	}
 }
