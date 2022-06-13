@@ -98,7 +98,7 @@
         <LinearLayout
             android:id="@+id/ll_qingfenrenwu_ql"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_443y"
+            android:layout_height="@dimen/dimen_473y"
             android:orientation="vertical"
 
             android:visibility="visible">
@@ -128,8 +128,8 @@
 
             <ListView
                 android:id="@+id/lv_qingfenrenwu_qingling"
-                android:layout_width="@dimen/dimen_450x"
-                android:layout_height="@dimen/dimen_315y"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_385y"
                 android:layout_gravity="center"
                 android:cacheColorHint="#00000000"
                 android:divider="@color/bule_main"
@@ -167,7 +167,7 @@
         <LinearLayout
             android:id="@+id/ll_qingfenrenwu_sj"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_443y"
+            android:layout_height="@dimen/dimen_473y"
             android:orientation="vertical"
 
             android:visibility="gone">
@@ -198,7 +198,7 @@
             <ListView
                 android:id="@+id/lv_selecttaskbycollate_shangjiao"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_315y"
+                android:layout_height="@dimen/dimen_400y"
                 android:cacheColorHint="#00000000"
                 android:divider="@color/bule_main"
                 android:background="@color/black_boder"
