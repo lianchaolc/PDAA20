@@ -155,7 +155,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                     public void onClick(View arg0) {
 //                        getDate();
                         manager.getAbnormal().remove();
-                        manager.getRuning().runding(CleanMangeCheckTaskQingfenRenwuActivity.this, "数据加载中...");
+                        manager.getRuning().runding(CleanMangeCheckTaskQingfenRenwuActivity.this, "数据加载...");
                     }
                 });
             }
@@ -168,6 +168,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 //                        getDate();
                         manager.getAbnormal().remove();
                         manager.getRuning().runding(CleanMangeCheckTaskQingfenRenwuActivity.this, "数据加载中...");
+                        manager.getRuning().remove();
                     }
                 });
             }
@@ -210,7 +211,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 
     @Override
     protected void onResume() {
-        Mapplication.getApplication().IsDiZhiOnly=true;// 设置走那个提交数据
+        Mapplication.getApplication().IsDiZhiOnly = true;// 设置走那个提交数据
         // TODO Auto-generated method stub
         super.onResume();
         System.out.println("调用getDate");
@@ -240,16 +241,16 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
         btnShangjiao.setEnabled(false);
         btnShangjiao.setBackgroundResource(R.drawable.button_gray);
         //设置顶部的任号//  上缴、请领
-        if(strqlnum==null||strqlnum.equals("")){
+        if (strqlnum == null || strqlnum.equals("")) {
             tvQLNo.setText("");
-        }else{
-            tvQLNo.setText(strqlnum+"");
+        } else {
+            tvQLNo.setText(strqlnum + "");
         }
 
-        if(strsjnum==null||strsjnum.equals("")){
+        if (strsjnum == null || strsjnum.equals("")) {
             tvSJNo.setText("");
-        }else{
-            tvSJNo.setText(strsjnum+"");
+        } else {
+            tvSJNo.setText(strsjnum + "");
         }
 
     }
@@ -259,12 +260,9 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
      */
     private void findListView() {
         System.out.println("Adapter绑定");
-//        qlAdapter = new QinglingBaseAdapter(ltQLRenwu);
-//        sjAdapter = new ShangjiaoBaseAdapter(ltSJRenwu);
 
 
         QinglingBaseAdapter qladapter = new QinglingBaseAdapter(CleanltQLRenwulist);
-//                    lv_selecttaskbycollate_shangjiao.setAdapter(selectTaskCollaterAdapter);
         lvQingling.setAdapter(qladapter);
         ShangjiaoBaseAdapter sjadapter = new ShangjiaoBaseAdapter(CleanltSJRenwulist);
         lvShangjiao.setAdapter(sjadapter);
@@ -277,9 +275,9 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Bundle bundle = new Bundle();
-                String xianluId =CleanltQLRenwulist.get(arg2).getLINENUM();
+                String xianluId = CleanltQLRenwulist.get(arg2).getLINENUM();
                 bundle.putString("XianluName", CleanltQLRenwulist.get(arg2).getLINENAME());
-                bundle.putString("XianluId",  CleanltQLRenwulist.get(arg2).getLINENUM());
+                bundle.putString("XianluId", CleanltQLRenwulist.get(arg2).getLINENUM());
                 bundle.putString("renwudan", strqlnum);
 
                 Skip.skip(CleanMangeCheckTaskQingfenRenwuActivity.this, QinglingWangdianActivity.class, bundle, 0);
@@ -330,35 +328,6 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
      *
      * @returns
      */
-//    private void getDate() {
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                String params;
-//                try {
-//
-//                    // 调用接口获得全部数据
-//                    System.out.println("上传的参数（清分员1）=" + Mapplication.getApplication().UserId);
-//                    params = new QingfenRenwuService().getQingfenRenwu(Mapplication.getApplication().UserId);
-//                    System.out.println("返回的结果:" + params);
-//                    // 解析字符串
-//                    RenwuData = Table.doParse(params);
-//                    Message msg = okHandle.obtainMessage();
-//                    msg.obj = RenwuData;
-//
-//                    okHandle.sendEmptyMessage(0);
-//                } catch (SocketTimeoutException e) {
-//                    e.printStackTrace();
-//                    timeoutHandle.sendEmptyMessage(0);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    timeoutHandle.sendEmptyMessage(1);
-//                }
-//            }
-//        }).start();
-//
-//    }
 
     @Override
     protected void onPause() {
@@ -420,7 +389,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 
 
             vh.tvName.setText(lt.get(position).getLINENAME());
-            vh.tvCount.setText("" + lt.get(position).getORGNUM()+"");
+            vh.tvCount.setText("" + lt.get(position).getORGNUM() + "");
             return v;
         }
 
@@ -476,9 +445,6 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                 btnShangjiao.setEnabled(true);
                 btnShangjiao.setBackgroundResource(R.drawable.buttom_selector_bg);
             }
-//            vh.tvName.setText(lt.get(position).getName());
-//            vh.tvWangdianCount.setText("" + lt.get(position).getWangdianCount());
-//            vh.tvZhouzhuanxiangCount.setText("" + lt.get(position).getZhouzhuanxiangCount());
             vh.tvName.setText(lt.get(position).getLineName());
             vh.tvWangdianCount.setText("" + lt.get(position).getOrgCount());
             vh.tvZhouzhuanxiangCount.setText("" + lt.get(position).getBoxCount());
@@ -581,14 +547,14 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 //                    strsjtype = bundle.getString("sjtype");
                     String upnum = "";
                     String gettype = "";
-                    if (strqlnum == null||strqlnum.equals("")) {
+                    if (strqlnum == null || strqlnum.equals("")) {
                         upnum = strsjnum;
                         gettype = strsjtype;
-                    } else if (strsjnum == null||strsjnum.equals("")) {
+                    } else if (strsjnum == null || strsjnum.equals("")) {
                         upnum = strqlnum;
                         gettype = strqltype;
                     } else {
-                        Log.e(TAG, "测试upnum====" + upnum+"+++++++++++++type===="+gettype);
+                        Log.e(TAG, "测试upnum====" + upnum + "+++++++++++++type====" + gettype);
 
                         handler.sendEmptyMessage(4);
                     }
@@ -597,7 +563,8 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                     parms = new GetResistCollateralBaggingService().getListClearingWorkDetail(upnum, gettype);
                     Log.e(TAG, "测试" + parms);
                     // 返回的类型anyType{}需要进行判断
-                    if (parms != null && !parms.equals("anyType{}")) {
+                    if (parms != null && !parms.equals("anyType{}")&&!parms.equals("[]")) {
+                        Log.e(TAG, "anyType测试" + parms);
                         Gson gson = new Gson();
                         CleanltQLRenwulist.clear();// 每次进入后清除
                         CleanltSJRenwulist.clear();
@@ -617,6 +584,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                         handler.sendEmptyMessage(2);
 
                     } else {
+                        Log.e(TAG, "3测试" + parms);
                         handler.sendEmptyMessage(3);
                     }
                 } catch (SocketTimeoutException e) {
@@ -644,6 +612,7 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            manager.getRuning().remove();
             switch (msg.what) {
                 case 0:
                     manager.getRuning().remove();
@@ -655,22 +624,8 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
                     break;
                 case 2:
                     manager.getRuning().remove();
-//                    selectTaskCollaterAdapter = new SelectTaskCollaterAdapter(AllTypeList, SelectTaskByCollateralActivity.this);
-//                    lv_selecttaskbycollate_shangjiao.setAdapter(selectTaskCollaterAdapter);
-//
-//
-//                    qinglingBaseAdapter = new SelectTaskByCollateralActivity.QinglingBaseAdapter(selectTaskBYCollaterallistql);//                    上缴
-//                    System.out.println("Adapter绑定");
-//                    // 绑定Adapter
-//                    lv_qingfenrenwu_qingling.setAdapter(qinglingBaseAdapter);//                    上缴
-//                    selectTaskCollaterAdapter.notifyDataSetChanged();
-//                    qinglingBaseAdapter.notifyDataSetChanged();
-//                    adapter.notifyDataSetChanged();
-//                    listview.setAdapter(adapter);
-//				new TurnListviewHeight(listview);
 
                     QinglingBaseAdapter qladapter = new QinglingBaseAdapter(CleanltQLRenwulist);
-//                    lv_selecttaskbycollate_shangjiao.setAdapter(selectTaskCollaterAdapter);
                     lvQingling.setAdapter(qladapter);
                     ShangjiaoBaseAdapter sjadapter = new ShangjiaoBaseAdapter(CleanltSJRenwulist);
                     lvShangjiao.setAdapter(sjadapter);
@@ -680,28 +635,33 @@ public class CleanMangeCheckTaskQingfenRenwuActivity extends FragmentActivity im
 
                     rlTitleQingling = (RelativeLayout) findViewById(R.id.rl_qingfenrenwu_qingling_title);
                     rlTitleShangjiao = (RelativeLayout) findViewById(R.id.rl_qingfenrenwu_shangjiao_title);
-                    if(CleanltQLRenwulist.size()>0&&CleanltSJRenwulist.size()<1){
+                    if (CleanltQLRenwulist.size() > 0 && CleanltSJRenwulist.size() < 1) {
                         llQingling.setVisibility(View.VISIBLE);
                         llShangjiao.setVisibility(View.GONE);
                         rlTitleShangjiao.setVisibility(View.GONE);
-                    }else if(CleanltSJRenwulist.size()>0&&CleanltQLRenwulist.size()<1){
+                    } else if (CleanltSJRenwulist.size() > 0 && CleanltQLRenwulist.size() < 1) {
                         llShangjiao.setVisibility(View.VISIBLE);
                         llQingling.setVisibility(View.GONE);
                         rlTitleQingling.setVisibility(View.GONE);// 顶部的标题进行隐藏
-                    }else{
+                    } else {
                         llQingling.setVisibility(View.VISIBLE);
                         llShangjiao.setVisibility(View.VISIBLE);
                     }
                     break;
                 case 3:
-                    manager.getRuning().remove();
-                    manager.getAbnormal().timeout(CleanMangeCheckTaskQingfenRenwuActivity.this, "没有任务", new View.OnClickListener() {
+//                    manager.getRuning().remove();
+//                    manager.getAbnormal().timeout(CleanMangeCheckTaskQingfenRenwuActivity.this, "没有任务", new View.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(View arg0) {
+//                            manager.getAbnormal().remove();
+//                            //                    没有任务或者查不到任务就跳转到上一个页面
+//                            manager.getRuning().remove();
+                            CleanMangeCheckTaskQingfenRenwuActivity.this.finish();
+//                        }
+//                    });
 
-                        @Override
-                        public void onClick(View arg0) {
-                            manager.getAbnormal().remove();
-                        }
-                    });
+
                     break;
                 case 4:
 
