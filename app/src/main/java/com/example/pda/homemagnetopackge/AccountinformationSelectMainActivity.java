@@ -42,7 +42,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
  * 
  */
 public class AccountinformationSelectMainActivity extends Activity implements OnClickListener {
-	protected static final String TAG = "AccountinformationSelectMainActivity";
+	protected static final String TAG = "Accountinfo";
 	private ImageView zhql_ruku_back;
 	private ListView accountinfoListview;
 	private Button btnintent, updata;
@@ -225,18 +225,22 @@ public class AccountinformationSelectMainActivity extends Activity implements On
 			if (v == null) {
 				holder = new ViewHolderAdapterWailk();
 				;
-				v = lf.inflate(R.layout.postmansaccountlistview_walkie_chebox_item, null);
-				holder.dizhiyapincheboxresult = (TextView) v.findViewById(R.id.postmancountresult1);
-				holder.postmancounttv = (TextView) v.findViewById(R.id.postmancounttv);
-				holder.mCheckBox = (CheckBox) v.findViewById(R.id.dzyp_chebox);
-				holder.postmanstatetimetv=(TextView)v.findViewById(R.id.postmanstatetimetv);// 显示时间
+//				v = lf.inflate(R.layout.postmansaccountlistview_walkie_chebox_item, null);
+				v = lf.inflate(R.layout.accountinformationlistview_walkie_chebox_item, null);
+
+
+
+				holder.dizhiyapincheboxresult = (TextView) v.findViewById(R.id.postmancountresult1accountinformationlistview);
+				holder.postmancounttv = (TextView) v.findViewById(R.id.postmancounttvaccountinformationlistview);
+				holder.mCheckBox = (CheckBox) v.findViewById(R.id.dzyp_cheboxaccountinformationlistview);
+//				holder.postmanstatetimetv=(TextView)v.findViewById(R.id.postmanstatetimetv);// 显示时间
 				v.setTag(holder);
 			} else {
 				holder = (ViewHolderAdapterWailk) v.getTag();
 			}
 
 			// 显示任务的单号 只有一个订单号
-			holder.postmanstatetimetv.setVisibility(View.VISIBLE);
+//			holder.postmanstatetimetv.setVisibility(View.VISIBLE);
 			holder.dizhiyapincheboxresult.setText(accountinfoList.get(position).getLinename());
 			holder.postmancounttv.setText(accountinfoList.get(position).getCount());
 			// 显示是否被选中
@@ -267,7 +271,7 @@ public class AccountinformationSelectMainActivity extends Activity implements On
 		public TextView dizhiyapincheboxtype;
 		public TextView postmancounttv;
 		public CheckBox mCheckBox;
-		private TextView postmanstatetimetv;
+//		private TextView postmanstatetimetv;
 	}
 
 	class SelectListen implements OnCheckedChangeListener {
