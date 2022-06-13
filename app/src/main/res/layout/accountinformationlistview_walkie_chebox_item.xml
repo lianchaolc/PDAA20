@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:layout_marginTop="10dip"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#EFEEEE"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE"></View>
+
+        <CheckBox
+            android:id="@+id/dzyp_cheboxaccountinformationlistview"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dip"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:textColor="@color/back" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE"></View>
+
+        <TextView
+            android:id="@+id/postmancountresult1accountinformationlistview"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:gravity="center"
+            android:text="physon"
+            android:textColor="@color/back"
+            android:textSize="22px" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#EFEEEE"></View>
+
+        <TextView
+            android:id="@+id/postmancounttvaccountinformationlistview"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="physo"
+            android:textColor="@color/back"
+            android:textSize="22px" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#EFEEEE"></View>
+
+</LinearLayout>
