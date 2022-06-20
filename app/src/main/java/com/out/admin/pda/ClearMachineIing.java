@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClearMachineIing extends Activity implements OnTouchListener {
 	// 正在进行清机加钞
@@ -157,6 +158,9 @@ public class ClearMachineIing extends Activity implements OnTouchListener {
 			sb.append(boxNum);
 			sb.append("|");
 		}
+		if(sb.length()==0){
+			return "";
+		}
 		return sb.toString().substring(0, sb.length() - 1);
 	}
 
@@ -168,8 +172,14 @@ public class ClearMachineIing extends Activity implements OnTouchListener {
 		// GApplication.getApplication().user.getOrganizationId(),
 		// BankDoublePersonLogin.userid1, BankDoublePersonLogin.userid2);
 		// revised By zhangxuewei for CorpId Question
+		if(getBoxNumList().equals("")){
+			Toast.makeText(ClearMachineIing.this,"箱子数为0",Toast.LENGTH_LONG).show();
+		}else{
+
+
 		getClearMachineIngBiz().cleanAtmAddMoney(getBoxNumList(), GApplication.getApplication().taskCorpId,
 				BankDoublePersonLogin.userid1, BankDoublePersonLogin.userid2);
+		}
 	}
 
 	@Override
