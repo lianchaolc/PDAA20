@@ -36,7 +36,7 @@ import com.service.NetService;
 
 /**
  * 押运模块双人登录页面
- * 
+ *
  * @author Administrator
  */
 public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener {
@@ -139,13 +139,13 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 				super.handleMessage(msg);
 
 				switch (msg.what) {
-				case 1:
-					System.out.println("登陆成功！！！！！！！！！！！！！！！！！！！！！！");
-					error = 3;
+					case 1:
+						System.out.println("登陆成功！！！！！！！！！！！！！！！！！！！！！！");
+						error = 3;
 
-					System.out.println("登陆成功返回的" + GApplication.user.getOrganizationId());
-					System.out.println("列表点击的" + S_application.getApplication().wangdianJigouId);
-					// 如果机构相同
+						System.out.println("登陆成功返回的" + GApplication.user.getOrganizationId());
+						System.out.println("列表点击的" + S_application.getApplication().wangdianJigouId);
+						// 如果机构相同
 
 					/*
 					 * 取消机构限制机构限制，不再要求押运员和网点人员为同一机构， 所以注掉此段代码。
@@ -215,31 +215,39 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 //					}
 //					break;
 
-					managerClass.getRuning().remove();
-					if (!o_Application.diziyuan.getOrganizationId()
-							.equals(o_Application.kuguan_db.getOrganizationId())
-							|| !o_Application.diziyuan.getLoginUserId().equals("29")) {
-						managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "请使用抵质押品管库员身份!",
-								new OnClickListener() {
+						managerClass.getRuning().remove();
+						if (!o_Application.qingfenyuan.getOrganizationId()
+								.equals(o_Application.kuguan_db.getOrganizationId())
+								|| !o_Application.qingfenyuan.getLoginUserId().equals("7")) {
+							managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "请使用清分管理员身份!",
+									new OnClickListener() {
 
-									@Override
-									public void onClick(View arg0) {
-										editname.setText("");
-										editpwd.setText("");
-										managerClass.getAbnormal().remove();
-									}
-								});
-					} else {
-						if (o_Application.left_user != null) {
-							if (o_Application.diziyuan.getLoginUserName()
-									.equals(o_Application.left_user.getLoginUserName())) {
-								managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "重复验证!",
-										new OnClickListener() {
-											@Override
-											public void onClick(View arg0) {
-												managerClass.getAbnormal().remove();
-											}
-										});
+										@Override
+										public void onClick(View arg0) {
+											editname.setText("");
+											editpwd.setText("");
+											managerClass.getAbnormal().remove();
+										}
+									});
+						} else {
+							if (o_Application.left_user != null) {
+								if (o_Application.qingfenyuan.getLoginUserName()
+										.equals(o_Application.left_user.getLoginUserName())) {
+									managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "重复验证!",
+											new OnClickListener() {
+												@Override
+												public void onClick(View arg0) {
+													managerClass.getAbnormal().remove();
+												}
+											});
+								} else {
+									Intent intent = new Intent();
+									intent.putExtra("isOk", "success");
+									intent.putExtra("name", name);
+									CleanOpretarDoubleLogin.this.setResult(CleanOpretarDoubleLogin.this.RESULT_OK, intent);
+									o_Application.FingerJiaojieNum.add(name);
+									CleanOpretarDoubleLogin.this.finish();
+								}
 							} else {
 								Intent intent = new Intent();
 								intent.putExtra("isOk", "success");
@@ -248,27 +256,19 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 								o_Application.FingerJiaojieNum.add(name);
 								CleanOpretarDoubleLogin.this.finish();
 							}
-						} else {
-							Intent intent = new Intent();
-							intent.putExtra("isOk", "success");
-							intent.putExtra("name", name);
-							CleanOpretarDoubleLogin.this.setResult(CleanOpretarDoubleLogin.this.RESULT_OK, intent);
-							o_Application.FingerJiaojieNum.add(name);
-							CleanOpretarDoubleLogin.this.finish();
 						}
-					}
-				case 0:
-					managerClass.getGolbalView().toastShow(CleanOpretarDoubleLogin.this, S_application.wrong);
-					break;
-				case -4:
-					managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "登陆超时，重新链接？", onclickreplace);
-					break;
-				case -1:
-					managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "登录出现异常", onclickreplace);
-					break;
-				case -3:
-					managerClass.getGolbalView().toastShow(CleanOpretarDoubleLogin.this, "用户或密码为空！");
-					break;
+					case 0:
+						managerClass.getGolbalView().toastShow(CleanOpretarDoubleLogin.this, S_application.wrong);
+						break;
+					case -4:
+						managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "登陆超时，重新链接？", onclickreplace);
+						break;
+					case -1:
+						managerClass.getAbnormal().timeout(CleanOpretarDoubleLogin.this, "登录出现异常", onclickreplace);
+						break;
+					case -3:
+						managerClass.getGolbalView().toastShow(CleanOpretarDoubleLogin.this, "用户或密码为空！");
+						break;
 
 				}
 
@@ -296,58 +296,58 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 		// 按下的时候
 		if (MotionEvent.ACTION_DOWN == even.getAction()) {
 			switch (view.getId()) {
-			// 登陆
-			case R.id.system_login_btn:
-				login.setBackgroundResource(R.drawable.buttom_select_press);
-				break;
-			// 取消
-			case R.id.system_login_cancel:
-				cancel.setBackgroundResource(R.drawable.buttom_select_press);
-				break;
+				// 登陆
+				case R.id.system_login_btn:
+					login.setBackgroundResource(R.drawable.buttom_select_press);
+					break;
+				// 取消
+				case R.id.system_login_cancel:
+					cancel.setBackgroundResource(R.drawable.buttom_select_press);
+					break;
 			}
 		}
 
 		// 手指松开的时候
 		if (MotionEvent.ACTION_UP == even.getAction()) {
 			switch (view.getId()) {
-			// 登陆
-			case R.id.system_login_btn:
-				name = editname.getText().toString();
-				pwd = editpwd.getText().toString();
-				login.setBackgroundResource(R.drawable.buttom_selector_bg);
-				// 非空验证
-				if (isnull(name, pwd)) {
-					// 有网络才可以执行登录操作
-					Log.i("network", network + "");
-					if (network) {
-						// 提示
-						try {
-							managerClass.getRuning().runding(CleanOpretarDoubleLogin.this, "正在登录...");
-						} catch (Exception e) {
-							e.printStackTrace();
-							System.out.println(e.getMessage());
+				// 登陆
+				case R.id.system_login_btn:
+					name = editname.getText().toString();
+					pwd = editpwd.getText().toString();
+					login.setBackgroundResource(R.drawable.buttom_selector_bg);
+					// 非空验证
+					if (isnull(name, pwd)) {
+						// 有网络才可以执行登录操作
+						Log.i("network", network + "");
+						if (network) {
+							// 提示
+							try {
+								managerClass.getRuning().runding(CleanOpretarDoubleLogin.this, "正在登录...");
+							} catch (Exception e) {
+								e.printStackTrace();
+								System.out.println(e.getMessage());
+							}
+							// 登陆方法
+							Thread thread = new Thread(new YayunLogin(name, pwd));
+							thread.start();
+							// // 登陆方法
+							// getSystemLogin().login(name, pwd);
+						} else {
+							managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
+							// Toast.makeText(this,"网络没有连通，无法登录",
+							// Toast.LENGTH_LONG).show();
 						}
-						// 登陆方法
-						Thread thread = new Thread(new YayunLogin(name, pwd));
-						thread.start();
-						// // 登陆方法
-						// getSystemLogin().login(name, pwd);
-					} else {
-						managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
-						// Toast.makeText(this,"网络没有连通，无法登录",
-						// Toast.LENGTH_LONG).show();
 					}
-				}
 
-				break;
-			// 取消
-			case R.id.system_login_cancel:
-				login.setBackgroundResource(R.drawable.buttom_select_press);
-				Intent intent = new Intent();
-				intent.putExtra("isOk", "error");
-				CleanOpretarDoubleLogin.this.setResult(CleanOpretarDoubleLogin.this.RESULT_OK, intent);
-				CleanOpretarDoubleLogin.this.finish();
-				break;
+					break;
+				// 取消
+				case R.id.system_login_cancel:
+					login.setBackgroundResource(R.drawable.buttom_select_press);
+					Intent intent = new Intent();
+					intent.putExtra("isOk", "error");
+					CleanOpretarDoubleLogin.this.setResult(CleanOpretarDoubleLogin.this.RESULT_OK, intent);
+					CleanOpretarDoubleLogin.this.finish();
+					break;
 
 			}
 			GolbalUtil.ismover = 0;
@@ -361,14 +361,14 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 		if (MotionEvent.ACTION_CANCEL == even.getAction()) {
 			GolbalUtil.ismover = 0;
 			switch (view.getId()) {
-			// 登陆
-			case R.id.system_login_btn:
-				login.setBackgroundResource(R.drawable.buttom_selector_bg);
-				break;
-			// 取消
-			case R.id.system_login_cancel:
-				cancel.setBackgroundResource(R.drawable.buttom_selector_bg);
-				break;
+				// 登陆
+				case R.id.system_login_btn:
+					login.setBackgroundResource(R.drawable.buttom_selector_bg);
+					break;
+				// 取消
+				case R.id.system_login_cancel:
+					cancel.setBackgroundResource(R.drawable.buttom_selector_bg);
+					break;
 			}
 		}
 
@@ -428,9 +428,9 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 
 	/**
 	 * 押运登录
-	 * 
+	 *
 	 * @author yuyunheng
-	 * 
+	 *
 	 */
 	private class YayunLogin implements Runnable {
 		private String name;
@@ -450,8 +450,8 @@ public class CleanOpretarDoubleLogin extends Activity implements OnTouchListener
 					msg.what = -3; // 帐号或密码为空
 				} else {
 //					loginUser = getSystemLogin().login(name, pwd);
-					o_Application.diziyuan = new SecondLogin().login(name, pwd);
-					if (o_Application.diziyuan != null) { // 成功获取
+					o_Application.qingfenyuan = new SecondLogin().login(name, pwd);
+					if (o_Application.qingfenyuan != null) { // 成功获取
 //						GApplication.user = loginUser; // 
 						msg.what = 1;
 					} else { // 未成功获取
