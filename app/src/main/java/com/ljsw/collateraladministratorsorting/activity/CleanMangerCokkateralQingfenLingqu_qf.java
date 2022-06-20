@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.application.GApplication;
 import com.example.pda.R;
 import com.ljsw.tjbankpda.main.QingFenJinDu_qf;
 import com.ljsw.tjbankpda.main.QingFenLingQu_qf;
@@ -60,10 +61,13 @@ public class CleanMangerCokkateralQingfenLingqu_qf extends FragmentActivity impl
     private Handler okHandle = new Handler() {// 数据获取成功handler
 
         public void handleMessage(Message msg) {
-            // 绑定Adapter
+            // 绑定Adapter请求
             listMark.clear();
             leftlist = RenwuData[0].get("zhouzhuanxiang").getValues();
-            Mapplication.getApplication().ltQflkBoxNum.clear();
+            if (GApplication.user.getLoginUserId().equals("29")){
+                Mapplication.getApplication().ltQflkBoxNum.clear();
+            }
+
             Mapplication.getApplication().ltQflkBoxNum.addAll(leftlist);
             for (String str : leftlist) {
                 listMark.add(str);
