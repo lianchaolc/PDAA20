@@ -284,7 +284,7 @@
                             android:id="@+id/money_box_admins"
                             android:layout_width="@dimen/dimen_110x"
                             android:layout_height="@dimen/dimen_110y"
-                            android:src="@drawable/atmbox" />
+                            android:src="@drawable/meun_money_change" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -374,7 +374,7 @@
                             android:id="@+id/home_menu_img_dizhiyapiniv"
                             android:layout_width="@dimen/dimen_110x"
                             android:layout_height="@dimen/dimen_110y"
-                            android:src="@drawable/meun_money" />
+                            android:src="@drawable/meun_money_change" />
 
                         <TextView
                             android:id="@+id/textViewdizhiyapin"
@@ -414,7 +414,7 @@
                     <LinearLayout
                         android:id="@+id/home_menu_layout_cleantohome"
                         android:layout_width="@dimen/dimen_190x"
-                        android:layout_height="@dimen/dimen_190y"
+                        android:layout_height="@dimen/dimen_206y"
                         android:gravity="center"
                         android:orientation="vertical">
 
