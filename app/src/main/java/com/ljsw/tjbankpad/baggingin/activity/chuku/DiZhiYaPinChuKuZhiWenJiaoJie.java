@@ -35,8 +35,10 @@ import android.widget.TextView;
 /***
  *
  * 清分人员的双人指纹验证 双人指纹验证
+ * 2022.4.15  进行交接验证转换为抵质押押品管库员
  *
  * @author Administrator BankDoublePersonLogin 包含清分人员的验证
+ * qingfenyuan  diziyuan
  */
 public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements OnClickListener {
     protected static final String TAG = "DiZhiYaPinChuKu";
@@ -48,7 +50,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
     String f2 = null; // 第二个按手指的人
     StringBuffer f1AndF2 = new StringBuffer();
     private ManagerClass manager;
-    private OnClickListener OnClick, OnClick2;
+    private OnClickListener OnClick, OnClick2, OnClick3;
     private String left_name, right_name;
     private int wrongleftNum, wrongrightNum;// 指纹验证失败次数统计
     private Intent intent;
@@ -65,7 +67,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
     private Dialog dialogfa;// 失败的dialog显示
     private String Cardid = "";
     private boolean checkcardid = false;// 判断是否走现金装袋的方法默认不走
-
+    private TextView qflogin_title;// 头部
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
         userTxt1 = (TextView) this.findViewById(R.id.qfusername11);
         userTxt2 = (TextView) this.findViewById(R.id.qfusername22);
         prompt = (TextView) this.findViewById(R.id.qfyanshi);
-
+        qflogin_title = (TextView) this.findViewById(R.id.qflogin_title);
         Intent intent1 = getIntent();
         Cardid = intent1.getStringExtra("cardid");
         if (Cardid != null) {
@@ -326,6 +328,111 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                         if (!isFinishing()) {
                             dialogfa.show();
                         }
+
+                    case 21: // 抵质押品管库员  的指纹验证
+                        // 第一位验证
+                        if (!firstSuccess && !"1".equals(f1)) {
+                            img_left.setImageBitmap(ShareUtil.finger_bitmap_left);// 有值不为null
+                            left_name = result_user.getLoginUserName();
+                            ShareUtil.zhiwenid_left = result_user.getLoginUserId();// 12001032
+
+                            setName_left.setText(left_name);
+                            f1 = "1";
+
+                            StringBuffer sb = new StringBuffer();
+                            for (int i = 0; i < ShareUtil.ivalBack.length; i++) {
+                                sb.append(ShareUtil.ivalBack[i]);
+                            }
+                            firstSuccess = true;
+                            yy_fingerTop.setText("第一位验证成功");
+                            if (S_application.jiaojieType == 1) {
+                                prompt.setText("请第二位抵质押品库管员按手指...");
+                            } else {
+                                System.out.println("2015-11-09:hander");
+                                prompt.setText("请第二位抵质押品库管员按手指...");
+                            }
+                            // 第二位验证
+                        } else if (firstSuccess && !"2".equals(f2)) {
+                            right_name = result_user.getLoginUserName();
+                            if (right_name != null && right_name.equals(left_name)) {
+                                System.out.println("重复验证了吗？");
+                                yy_fingerTop.setText("重复验证!");
+                                right_name="";
+                            } else {
+                                yy_fingerTop.setText("");
+                                img_right.setImageBitmap(ShareUtil.finger_bitmap_right);
+                                ShareUtil.zhiwenid_right = result_user.getLoginUserId();
+                                System.out.println("右边指纹特征值：" + ShareUtil.finger_jiaojie_qingfen_right);
+                                setName_right.setText(right_name);
+                                f2 = "2";
+                                f1AndF2.append(ShareUtil.zhiwenid_left + BianyiType.xiahuaxian + ShareUtil.zhiwenid_right);
+                                S_application.s_userWangdian = f1AndF2.toString();
+                                prompt.setText("验证成功！");
+                                top.setText("");
+                                firstSuccess = false;
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // TODO Auto-generated method stub
+                                        try {
+                                            Thread.sleep(1000);
+                                            handler.sendEmptyMessage(4);
+                                        } catch (InterruptedException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }).start();
+                            }
+                        }
+                        break;
+                    case 20:
+                        // 验证3次失败跳登录页面 未实现
+                        if (f1 == null) {
+                            wrongleftNum++;
+                            yy_fingerTop.setText("验证失败:" + wrongleftNum + "次");
+                        } else if (f2 == null) {
+                            wrongrightNum++;
+                            yy_fingerTop.setText("验证失败:" + wrongrightNum + "次");
+                        } else {
+                            if(!firstSuccess && !"2".equals(f2) && !"1".equals(f1)&&!right_name.equals(left_name)&&right_name!=null){
+                                manager.getAbnormal().timeout(DiZhiYaPinChuKuZhiWenJiaoJie.this, "验证已完成!",
+                                        new OnClickListener() {
+                                            @Override
+                                            public void onClick(View arg0) {
+                                                manager.getAbnormal().remove();
+                                                yy_fingerTop.setText("");
+
+                                                return;
+                                            }
+                                        });
+                            }else if (right_name.equals("")&&f2.equals("2")){
+                                wrongrightNum++;
+                                yy_fingerTop.setText("验证失败:" + wrongrightNum + "次");
+                            }
+
+                        }
+                        if (wrongleftNum >= ShareUtil.three) {
+                            // 左侧跳用户登录
+                            firstSuccess = false;
+                            intent.setClass(DiZhiYaPinChuKuZhiWenJiaoJie.this, CleanDZLibraryDoubleLogin.class);
+                            DiZhiYaPinChuKuZhiWenJiaoJie.this.startActivityForResult(intent, 1);
+                            yy_fingerTop.setText("");
+                            wrongleftNum = 0;
+                        } else if (wrongrightNum >= ShareUtil.three) {
+                            // 右侧跳用户登录
+                            firstSuccess = true;
+                            intent.setClass(DiZhiYaPinChuKuZhiWenJiaoJie.this, CleanDZLibraryDoubleLogin.class);
+                            DiZhiYaPinChuKuZhiWenJiaoJie.this.startActivityForResult(intent, 1);
+                            wrongrightNum = 0;
+                            yy_fingerTop.setText("");
+                        }
+                        break;
+                    case -21:
+                        manager.getAbnormal().timeout(DiZhiYaPinChuKuZhiWenJiaoJie.this, "网络连接失败,重试?", OnClick);
+                        break;
+                    case -24:
+                        manager.getAbnormal().timeout(DiZhiYaPinChuKuZhiWenJiaoJie.this, "验证超时,重试?", OnClick);
                         break;
                 }
             }
@@ -336,12 +443,19 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
         if (S_application.jiaojieType == 7) {
             prompt.setText("请第一位清分员按手指...");
             jiaosheId = "4";
+        } else if (GApplication.user.getLoginUserId().equals("29")) {
+            userTxt1.setText("抵质押品管库员");
+            userTxt2.setText("抵质押品管库员");
+            qflogin_title.setText("抵质押品交接");
+            prompt.setText("请第一位抵质押品管库员按手指...");
+            jiaosheId = ShareUtil.WdId;
         } else {
             userTxt1.setText("清分人员");
             userTxt2.setText("清分人员");
-            prompt.setText("请第一位网点人员按手指...");
+            prompt.setText("请第一位清分人员按手指...");
             jiaosheId = ShareUtil.WdId;
         }
+
 
         img_left = (ImageView) this.findViewById(R.id.qfyyjj_left);
         img_right = (ImageView) this.findViewById(R.id.qfyyjj_right);
@@ -409,21 +523,44 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
 //                        7 + "", // 网点人员角色Id
 //                        ShareUtil.ivalBack); // 指纹的特征
 
-                result_user = yanzheng.checkFingerprint("988030000", // 机构编号
-                        7 + "", // 网点人员角色Id
-                        ShareUtil.ivalBack); // 指纹的特征
-
-                Log.e(TAG, "==" + cleanmmangerone);
-                if (result_user != null) {
-                    System.out.println("我是帐号吗==" + result_user.getLoginUserId());
-                    if (cleanmmangerone == null || "".equals(cleanmmangerone)) {
-                        cleanmmangerone = result_user.getLoginUserId();
+//                result_user = yanzheng.checkFingerprint("988030000", // 机构编号
+//                        7 + "", // 网点人员角色Id
+//                        ShareUtil.ivalBack); // 指纹的特征
+//               这里需要对角色进行判断 29 的和以前钞袋子区分
+                if (GApplication.user.getLoginUserId().equals("29")) {
+                    result_user = yanzheng.checkFingerprint("988030000", // 机构编号
+                            29 + "", // 网点人员角色Id
+                            ShareUtil.ivalBack); // 指纹的特征
+                    Log.e(TAG, "==" + cleanmmangerone);
+                    if (result_user != null) {
+                        System.out.println("我是帐号吗==" + result_user.getLoginUserId());
+                        if (cleanmmangerone == null || "".equals(cleanmmangerone)) {
+                            cleanmmangerone = result_user.getLoginUserId();
+                        } else {
+                            cleanmangerother = result_user.getLoginUserId();
+                        }
+                        m.what = 21;
                     } else {
-                        cleanmangerother = result_user.getLoginUserId();
+                        m.what = 20;
                     }
-                    m.what = 1;
                 } else {
-                    m.what = 0;
+                    result_user = yanzheng.checkFingerprint("988030000", // 机构编号
+                            7 + "", // 网点人员角色Id
+                            ShareUtil.ivalBack); // 指纹的特征
+
+
+                    Log.e(TAG, "==" + cleanmmangerone);
+                    if (result_user != null) {
+                        System.out.println("我是帐号吗==" + result_user.getLoginUserId());
+                        if (cleanmmangerone == null || "".equals(cleanmmangerone)) {
+                            cleanmmangerone = result_user.getLoginUserId();
+                        } else {
+                            cleanmangerother = result_user.getLoginUserId();
+                        }
+                        m.what = 1;
+                    } else {
+                        m.what = 0;
+                    }
                 }
             } catch (SocketTimeoutException e) {
                 e.printStackTrace();
@@ -446,15 +583,15 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
         if (null == f1) {
             firstSuccess = false;
             if (S_application.jiaojieType == 1) {
-                prompt.setText("请第一位清分员按手指...");
+                prompt.setText("请第一位抵质押品管库员按手指...");
             } else {
-                prompt.setText("请第一位清分人员按手指...");
+                prompt.setText("请第一位抵质押品管库员手指...");
             }
         } else {
             if (S_application.jiaojieType == 1) {
-                prompt.setText("请第二位清分按手指...");
+                prompt.setText("请第二位抵质押品管库员按手指...");
             } else {
-                prompt.setText("请第一位清分员按手指...");
+                prompt.setText("请第一位抵质押品管库员按手指...");
             }
         }
         /// 通过登录密码的方式进行验证获取到的账户名称
@@ -464,7 +601,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
             String name = bundle.getString("name");
             if (isOk.equals("success") && !firstSuccess) {
                 f1 = "1";
-                left_name = o_Application.qingfenyuan.getLoginUserName();// 改动190225
+                left_name = o_Application.diziyuan.getLoginUserName();// 改动190225
                 setName_left.setText(left_name);
                 img_left.setImageResource(R.drawable.result_isok);
                 firstSuccess = true;
@@ -472,17 +609,18 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                 ShareUtil.zhiwenid_left = name;
                 cleanmmangerone = name;
                 if (S_application.jiaojieType == 1) {
-                    prompt.setText("请第二位清分员按手指...");
+                    prompt.setText("请第二位抵质押品管库员按手指...");
                 } else {
                     System.out.println("2015-11-09:hander2");
-                    prompt.setText("请第二位清分员按手指...");
+                    prompt.setText("请第二位抵质押品管库员按手指...");
                 }
                 S_application.left_user = GApplication.user;
             } else if (isOk.equals("success") && firstSuccess) {
                 f2 = "2";
-                right_name = o_Application.qingfenyuan.getLoginUserName();// 改动190225
+                right_name = o_Application.diziyuan.getLoginUserName();// 改动190225
                 if (right_name != null && right_name.equals(left_name)) {
                     yy_fingerTop.setText("重复验证!");
+                    right_name="";
                 } else {
                     setName_right.setText(right_name);
                     img_right.setImageResource(R.drawable.result_isok);
@@ -491,7 +629,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
                     ShareUtil.zhiwenid_right = name;
                     cleanmangerother = name;
                     prompt.setText("验证成功！！");
-                    S_application.right_user = o_Application.qingfenyuan;// 改动190225
+                    S_application.right_user = o_Application.diziyuan;// 改动190225
                     f1AndF2.append(ShareUtil.zhiwenid_left + BianyiType.xiahuaxian + ShareUtil.zhiwenid_right);
                     S_application.s_userWangdian = f1AndF2.toString();
                     if (f1 != null && f2 != null) {
@@ -549,7 +687,7 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
     }
 
     /***
-     * 向后台提交数据 清分人员 清分人员2 任务编号 货位管理员
+     * 向后台提交数据 清分人员 清分人员2 任务编号 货位管理员  抵质押品
      */
     private void sendPlanItem() {
 
@@ -589,7 +727,8 @@ public class DiZhiYaPinChuKuZhiWenJiaoJie extends BaseFingerActivity implements 
     }
 
     /***
-     * |lc 20190430 现金装袋后指纹传送数据
+     * |lc 20190430 现金装袋
+     * 后指纹传送数据
      */
 
     private void CleanClienToCash() {
