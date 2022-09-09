@@ -30,7 +30,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 @SuppressLint("HandlerLeak")
 public class QingFenYuanDengLu extends Activity implements OnTouchListener {
 	// 系统登陆界面
