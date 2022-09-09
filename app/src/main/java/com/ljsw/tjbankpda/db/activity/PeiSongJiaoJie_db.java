@@ -216,6 +216,8 @@ public class PeiSongJiaoJie_db extends BaseFingerActivity implements OnClickList
 				if (o_Application.FingerJiaojieNum.size() > 0) {
 					o_Application.FingerJiaojieNum.clear();
 				}
+				manager.getRuning().remove();
+				manager.getSureCancel().remove();
 				Skip.skip(PeiSongJiaoJie_db.this, RenWuLieBiao_db.class, null, 0);
 				break;
 			case 5:
@@ -468,6 +470,8 @@ public class PeiSongJiaoJie_db extends BaseFingerActivity implements OnClickList
 		cashBoxNum = "";
 		o_Application.yayunyuan = null;
 		manager.getRuning().remove();
+		manager.getSureCancel().remove();
+
 	}
 
 	@Override
