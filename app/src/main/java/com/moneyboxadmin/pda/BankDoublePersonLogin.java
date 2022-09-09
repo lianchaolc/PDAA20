@@ -87,7 +87,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
 
     String user = null;
     String userid = null;
-
+    String userbyweiqinghuishou = null;
     public static String textname1; // 姓名1
     public static String textname2; // 姓名2
 
@@ -340,7 +340,6 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
 
         name1.setText(admin);
         name2.setText(admin);
-
         if ("库管员".equals(admin)) {
             loginTitle.setText(admin + "双人登陆");
             show.setText("请第一位库管员按压手指...");
@@ -389,6 +388,8 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 }
             }
         };
+
+
     }
 
     /***
@@ -538,6 +539,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
         loginTitle = (TextView) findViewById(R.id.login_title);
         finger_left = (ImageView) findViewById(R.id.finger_left);
         finger_right = (ImageView) findViewById(R.id.finger_right);
+
     }
 
     @Override
@@ -579,6 +581,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
     }
 
     /**
+     * corp
      * 2秒后自动跳下一个页面
      */
     public void towseconds() {
@@ -659,7 +662,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
             num = 2;
         }
         if (username2.getText() != null && !(username2.getText() + "").equals("")) {
-            num =1;
+            num = 1;
         }
 
         switch (num) {
@@ -667,6 +670,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 user = bundle.getString("username"); // 用户名
                 userid = bundle.getString("userid"); // 用户ID
                 username1.setText("姓名:" + user);
+                userbyweiqinghuishou=username1.getText().toString();
                 textname1 = admin + ": " + user; // 头部显示用的用户名
                 userid1 = userid;
                 fingeruserone = userid1;
@@ -786,6 +790,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
         // 1.第一位交接人员验证指纹
         if (!firstSuccess) {
             ShareUtil.finger_bitmap_left = img;
+
             finger_left.setImageBitmap(img);
             f1 = "1";
             Finger finger = new Finger();
@@ -916,7 +921,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     if (GApplication.wd_user1.getUsername().isEmpty()) {
                     } else {
                         if (null == textname1 || textname1.equals("") && null != GApplication.user) {
-                            textname1 = admin + username;
+                            textname1 = admin + ":"+ username;
                         }
                     }
                     fname_left = username;
@@ -928,17 +933,17 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     byte[] cValue = null;
                     if ("在行式".equals(OrderWork.type)) {
                         getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, WebJoin.list, WebSiteJoin.webJoinID,
-                                getUserID(type), cValue, type, "3", "1", GApplication.wd_user1.getUserzhanghu());
+                                getUserID(type), cValue, type, "3", "2", GApplication.wd_user1.getUserzhanghu());
 
                     } else {
                         getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, WebJoin.list,
                                 GApplication.user.getOrganizationId(), "5", cValue, "C0",
-                                "3", "1", GApplication.wd_user1.getUserzhanghu());
+                                "3", "2", GApplication.wd_user1.getUserzhanghu());
                     }
                 }
                 if (flag.equals("wangdiantwo")) {
                     userid2 = GApplication.wd_user2.getUserzhanghu();
-                    textname2 = admin + GApplication.wd_user2.getUsername();
+                    textname2 = admin + ":"+GApplication.wd_user2.getUsername();
                     fname_right = GApplication.wd_user2.getUsername();
                     fname_right = data.getStringExtra("name");
                     finger_right.setImageResource(R.drawable.sccuss);
@@ -1009,7 +1014,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     if (null != zhanghao || !zhanghao.equals("")) {
                         fingeruserone = zhanghao;
                     }
-                    if (null == userid1||userid1.equals("")) {
+                    if (null == userid1 || userid1.equals("")) {
                         userid1 = GApplication.user.getYonghuZhanghao();
                     }
                     finger_left.setImageResource(R.drawable.sccuss);
@@ -1029,7 +1034,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 }
                 if (flag.equals("kuguanyuanbykognchaoxiangtwo")) {
 
-                    if (null == userid2||userid2.equals("")) {
+                    if (null == userid2 || userid2.equals("")) {
                         userid2 = GApplication.user.getYonghuZhanghao();
                     }
                     String username = data.getStringExtra("name");
@@ -1056,7 +1061,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                     f2 = "2";
 
                     Log.e("kkk", GApplication.user.getYonghuZhanghao());
-                    Log.e("kkk", fname_left);
+//                    Log.e("kkk", fname_left);
                     Log.e("kkk", fname_right);
                     if (fname_left.equals(fname_right)) {
                         Toast.makeText(BankDoublePersonLogin.this, "请两位库管员人员进行验证！", Toast.LENGTH_SHORT).show();
@@ -1073,236 +1078,13 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                 }
 
             }
-        } else if (requestCode == 070 || requestCode == 071 || requestCode == 072) { //  清分员   未清回收钞箱交接   //  空钞箱出库后072
+        } else if (requestCode == 070 || requestCode == 072) { //  清分员   未清回收钞箱交接   //  空钞箱出库后072
             if (null != data) {
                 String flag = data.getStringExtra("FLAG");
 
 
                 Log.e("kkk", "onStop" + flag);
 
-
-                if (flag.equals("QFweiqinghuishouone")) { //未清回收钞箱交接
-                    ;
-                    String zhanghao = data.getStringExtra("zhanghao");
-                    username = data.getStringExtra("name");
-                    textname1 =admin+":"+username;
-                    if (null != zhanghao || !zhanghao.equals("")) {
-                        fingeruserone = zhanghao;
-                    }
-                    if (null != o_Application.qingfen) {
-                        userid1 = o_Application.qingfen.getYonghuZhanghao();
-                    }
-                    finger_left.setImageResource(R.drawable.sccuss);
-                    if (o_Application.qingfen.getLoginUserName().isEmpty()) {
-                    } else {
-                        Log.e("kkk", "账号不为空" + o_Application.qingfen.getLoginUserName());
-                    }
-                    fname_left = username;
-                    username1.setText(fname_left);
-                    f1 = "3";
-                    one = 0;
-                    firstSuccess = true;
-                    Log.e("kkk", o_Application.qingfen.getYonghuZhanghao());
-                    if (admin.equals("清分员")) {
-                        Toast.makeText(BankDoublePersonLogin.this, "验证成功" + "", Toast.LENGTH_SHORT).show();
-                        if (bizName != null && bizName.equals("未清回收钞箱出库")) {
-                            if (null != BankDoublePersonLogin.userid1) {
-                                getyanzhenuser1 = BankDoublePersonLogin.userid1;
-                            }
-                            if (null == BankDoublePersonLogin.userid1) {
-                                getyanzhenuser1 = zhanghao;
-                                BankDoublePersonLogin.userid1 = zhanghao;
-                            }
-
-                            String[] cashBoxArray = cashBoxNums.split(";");
-                            ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
-                            for (int i = 0; i < cashBoxArray.length; i++) {
-                                BoxDetail boxDetail = new BoxDetail();
-                                boxDetail.setNum(cashBoxArray[i]);
-                                cashBoxList.add(boxDetail);
-                            }
-
-                            Log.d(TAG, "getOrganizationId()" + GApplication.user.getOrganizationId());
-                            Log.d(TAG, "getOrganizationId()" + BankDoublePersonLogin.userid1);
-                            byte[] cValue = null;
-                            // modify end
-                            getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, cashBoxList,
-                                    GApplication.user.getOrganizationId(), getUserID(type),
-                                    cValue, type, "3", "1", BankDoublePersonLogin.userid1);
-
-                        }
-                    }
-                }
-                if (flag.equals("QFweiqinghuishoutwo")) {
-                    textname2 =admin+":"+ o_Application.qingfen.getLoginUserName();
-                    userid2 = o_Application.qingfen.getYonghuZhanghao();
-                    fname_right = o_Application.qingfen.getLoginUserName();
-                    fname_right = data.getStringExtra("name");
-                    finger_right.setImageResource(R.drawable.sccuss);
-                    if (o_Application.qingfen == null) {
-                        userid2 = o_Application.qingfen.getYonghuZhanghao();
-                        return;
-                    }
-                    username2.setText(fname_right + "");// 加入人
-                    if (o_Application.qingfen.getLoginUserName() != null && GApplication.map != null) {
-                        finger_left.setImageBitmap(GApplication.map);
-                    } else {
-                        if (null != user) {
-                            fname_left = user;
-                        }
-                        if (null != username) {
-                            fname_left = username;
-                        }
-//                        finger_left.setImageResource(R.drawable.sccuss);
-
-                    }
-                    f1 = "1";
-                    f2 = "2";
-
-                    Log.e("kkk", GApplication.user.getYonghuZhanghao());
-                    Log.e("kkk", fname_left);
-                    Log.e("kkk", fname_right);
-                    if (fname_left.equals(fname_right)) {
-                        Toast.makeText(BankDoublePersonLogin.this, "请两位清分人员进行验证！", Toast.LENGTH_SHORT).show();
-                    } else {
-                        firstSuccess = false;
-                        fname_left = null;
-                        fname_right = null;
-
-                        if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
-
-
-                            if (bizName != null && bizName.equals("未清回收钞箱出库")) {
-                                System.out.println(StopNewClearBox.list.size());
-                                System.out.println(bizName);
-                                System.out.println("bizNum" + bizNum);
-                                GolbalUtil.onclicks = true;
-                                String[] cashBoxArray = cashBoxNums.split(";");
-                                ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
-                                for (int i = 0; i < cashBoxArray.length; i++) {
-                                    BoxDetail boxDetail = new BoxDetail();
-                                    boxDetail.setNum(cashBoxArray[i]);
-                                    cashBoxList.add(boxDetail);
-                                }
-                                Log.d(TAG, "getOrganizationId()" + GApplication.user.getOrganizationId());
-                                Log.d(TAG, "userid2()" + BankDoublePersonLogin.userid2);
-                                Log.d(TAG, "type()" + getUserID(type));
-//                                这里面调用了2个接口// 这一要穿两个清分员和清分员id\
-                                byte[] cValue = null;
-                                getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, cashBoxList,
-                                        GApplication.user.getOrganizationId(), getUserID(type),
-                                        cValue, type, "4", "2", BankDoublePersonLogin.userid2);
-//                                userid1和user2 都是清分员
-                                Log.d(TAG, "userid1Boxoutdo" + userid1 + userid2);
-                                Log.d(TAG, "userid1Boxoutdo" + userid1 + userid2);
-                                getMoneyBoxOutDo().getemptyMoneyBoxoutdo(bizName, StopNewClearBox.list, planNum,
-                                        userid1, userid2,
-                                        GApplication.user.getOrganizationId(), bizNum, BoxDetailInfoDo.isfirst);
-
-                            }
-
-                            if (type == null) {
-                                Log.d(TAG, " 请重新做");
-                                // 登录
-//                                getFingerCheck().fingerLoginCheck(finger);
-//                                当type 为null应该处理
-                            } else { // 交接 WebSiteJoin.webJoinID
-                                if (admin.equals("加钞人员")) {
-                                    byte[] cValue = null;
-                                    Log.i("开始交接", "开始交接");
-                                    if ("在行式".equals(OrderWork.type)) {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, WebJoin.list, WebSiteJoin.webJoinID,
-                                                getUserID(type), cValue, type, f1, "2");
-
-
-                                    } else {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, WebJoin.list,
-                                                GApplication.user.getOrganizationId(), "5", cValue, "C0",
-                                                f1, "2");
-                                    }
-
-                                } else {
-                                    // 如果是空钞箱交接
-                                    if ("01".equals(type)) {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, Getnumber.list_boxdeatil,
-                                                GApplication.user.getOrganizationId(), getUserID(type),
-                                                ShareUtil.ivalBack, type, f1, "2");
-                                    } else {// 当前判断分支是：未清回收钞箱出库
-                                        // modify begin 2017-4-25 by liuchang 清分员指纹验证通过后交接的钞箱数量有原来通过sql查询，
-                                        // 改为通过页面中“钞箱出入库前检测”按钮检测后确认的数量
-                                        String[] cashBoxArray = cashBoxNums.split(";");
-                                        ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
-                                        for (int i = 0; i < cashBoxArray.length; i++) {
-                                            BoxDetail boxDetail = new BoxDetail();
-                                            boxDetail.setNum(cashBoxArray[i]);
-                                            cashBoxList.add(boxDetail);
-                                        }
-                                        // modify end
-                                        byte[] cValue = null;
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, cashBoxList,
-                                                GApplication.user.getOrganizationId(), getUserID(type),
-                                                cValue, type, f1, "2");
-                                    }
-                                    Log.i("aaaaaaa", "sss");
-                                }
-                            }
-                            // 2.第二位交接人验证指纹
-                        } else {
-//                            ShareUtil.finger_bitmap_right = img;
-//                            finger_right.setImageBitmap(ShareUtil.finger_bitmap_right);
-                            f2 = "2";
-
-                            if (type == null) { // 登录
-                                Finger finger = new Finger();
-                                finger.setCorpId(GApplication.user.getOrganizationId()); // 机构ID
-                                finger.setRoleId(GApplication.user.getLoginUserId()); // 角色ID
-                                finger.setcValue(ShareUtil.ivalBack); // 特征值
-                                getFingerCheck().fingerLoginCheck(finger);
-                            } else { // 交接 WebSiteJoin
-                                if (isscuess) {
-                                    return;
-                                }
-                                if (admin.equals("加钞人员")) {
-                                    if ("在行式".equals(OrderWork.type)) {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, WebJoin.list, WebSiteJoin.webJoinID,
-                                                getUserID(type), ShareUtil.ivalBack, type, f2, "2");
-                                    } else {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, WebJoin.list,
-                                                GApplication.user.getOrganizationId(), "5", ShareUtil.ivalBack, "C0",
-                                                f2, "2");
-                                    }
-
-                                } else {
-                                    // 如果是空钞箱交接
-                                    if ("01".equals(type)) {
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, Getnumber.list_boxdeatil,
-                                                GApplication.user.getOrganizationId(), getUserID(type),
-                                                ShareUtil.ivalBack, type, f2, "2");
-                                    } else {
-                                        // 未清回收钞箱出库交接
-                                        // modify begin 2017-4-25 by liuchang 清分员指纹验证通过后交接的钞箱数量有原来通过sql查询，
-                                        // 改为通过页面中“钞箱出入库前检测”按钮检测后确认的数量
-                                        String[] cashBoxArray = cashBoxNums.split(";");
-                                        ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
-                                        for (int i = 0; i < cashBoxArray.length; i++) {
-                                            BoxDetail boxDetail = new BoxDetail();
-                                            boxDetail.setNum(cashBoxArray[i]);
-                                            cashBoxList.add(boxDetail);
-                                        }
-                                        // modify end
-                                        byte[] cValue = null;
-                                        getSaveAuthLogBiz().getSaveAuthLog(planNum, cashBoxList,
-                                                GApplication.user.getOrganizationId(), getUserID(type),
-                                                cValue, type, f2, "2");
-                                    }
-                                }
-
-                            }
-                            towseconds();//  跳转页面
-                        }
-
-                    }
-                }
 
                 if (flag.equals("EmptAfterCleanone")) { //空钞箱出库后给清分
                     String zhanghao = data.getStringExtra("zhanghao");
@@ -1334,7 +1116,7 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
                             cValue, type, "3", "1", BankDoublePersonLogin.userid1);
                 }
                 if (flag.equals("EmptAfterCleantwo")) {
-                    textname2 =admin+ ":"+o_Application.qingfen.getLoginUserName();//  加入头部显示清分员
+                    textname2 = admin + ":" + o_Application.qingfen.getLoginUserName();//  加入头部显示清分员
                     if (null == userid2) {
                         userid2 = o_Application.qingfen.getYonghuZhanghao();
                     }
@@ -1440,14 +1222,14 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
 
                     finger_right.setImageResource(R.drawable.sccuss);
                     // System.out.println("one is :"+one);
-                    Toast.makeText(BankDoublePersonLogin.this, "2！" + GApplication.user.getLoginUserName(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BankDoublePersonLogin.this, "2！" + GApplication.user.getLoginUserName(), Toast.LENGTH_SHORT).show();
 
                     if (GApplication.user == null) {
 
                         return;
                     }
 
-                    if (GApplication.user.getYonghuZhanghao() != null && GApplication.map != null) {
+                    if (GApplication.user.getLoginUserName() != null && GApplication.map != null) {
                         finger_left.setImageBitmap(GApplication.map);
                     } else {
                         if (null != user) {
@@ -1480,6 +1262,144 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
             }
 
 
+        } else if (requestCode == 071) {// 未清回收钞箱出库
+            if (null != data) {
+                String flag = data.getStringExtra("FLAG");
+
+
+                Log.e("kkk", "onStop" + flag);
+                if (flag.equals("QFweiqinghuishouone")) { //未清回收钞箱交接
+                    ;
+                    String zhanghao = data.getStringExtra("zhanghao");
+                    username = data.getStringExtra("name");
+                    textname1 = admin + ":" + username;
+                    if (null != zhanghao || !zhanghao.equals("")) {
+                        fingeruserone = zhanghao;
+                    }
+                    if (null != o_Application.qingfen) {
+                        userid1 = o_Application.qingfen.getYonghuZhanghao();
+                    }
+                    finger_left.setImageResource(R.drawable.sccuss);
+                    if (o_Application.qingfen.getLoginUserName().isEmpty()) {
+                    } else {
+                        Log.e("kkk", "账号不为空" + o_Application.qingfen.getLoginUserName());
+                    }
+                    fname_left = username;
+                    username1.setText(fname_left);
+                    f1 = "3";
+                    one = 0;
+                    firstSuccess = true;
+                    Log.e("kkk", o_Application.qingfen.getYonghuZhanghao());
+                    if (admin.equals("清分员")) {
+                        Toast.makeText(BankDoublePersonLogin.this, "验证成功" + "", Toast.LENGTH_SHORT).show();
+                        if (bizName != null && bizName.equals("未清回收钞箱出库")) {
+                            if (null != BankDoublePersonLogin.userid1) {
+                                getyanzhenuser1 = BankDoublePersonLogin.userid1;
+                            }
+                            if (null == BankDoublePersonLogin.userid1) {
+                                getyanzhenuser1 = zhanghao;
+                                BankDoublePersonLogin.userid1 = zhanghao;
+                            }
+
+                            String[] cashBoxArray = cashBoxNums.split(";");
+                            ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
+                            for (int i = 0; i < cashBoxArray.length; i++) {
+                                BoxDetail boxDetail = new BoxDetail();
+                                boxDetail.setNum(cashBoxArray[i]);
+                                cashBoxList.add(boxDetail);
+                            }
+
+                            Log.d(TAG, "getOrganizationId()" + GApplication.user.getOrganizationId());
+                            Log.d(TAG, "getOrganizationId()" + BankDoublePersonLogin.userid1);
+                            byte[] cValue = null;
+                            // modify end
+//                            getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, cashBoxList,
+//                                    GApplication.user.getOrganizationId(), getUserID(type),
+//                                    cValue, type, "3", "1", BankDoublePersonLogin.userid1);
+
+                        }
+                    }
+                }
+                if (flag.equals("QFweiqinghuishoutwo")) {
+                    textname2 = admin + ":" + o_Application.qingfen.getLoginUserName()+ "测试" ;
+                    userid2 = o_Application.qingfen.getYonghuZhanghao();
+                    fname_right = o_Application.qingfen.getLoginUserName();
+                    fname_right = data.getStringExtra("name");
+                    finger_right.setImageResource(R.drawable.sccuss);
+                    if (o_Application.qingfen == null) {
+                        userid2 = o_Application.qingfen.getYonghuZhanghao();
+                        return;
+                    }
+                    username2.setText(fname_right + "");// 加入人
+
+                    if (username1.getText() != null && GApplication.map != null) {
+                        finger_left.setImageBitmap(GApplication.map);
+                    } else {
+                        if (null != userbyweiqinghuishou) {
+                            fname_left = userbyweiqinghuishou;
+                        }
+                      if( finger_left.equals("")){  /// 这里这样写需要测试
+                          finger_left.setImageResource(R.drawable.sccuss);
+                      }
+
+                    }
+                    f1 = "1";
+                    f2 = "2";
+
+                    Log.e("kkk", GApplication.user.getYonghuZhanghao());
+                    Log.e("kkk", fname_left);
+                    Log.e("kkk", fname_right);
+                    Log.e("kkk", userid1);
+                    Log.e("kkk", userid2);
+                    Log.e(TAG,""+username1.getText());
+                    Log.e(TAG,""+username2.getText());
+                    if (fname_left.equals(fname_right)) {
+                        Toast.makeText(BankDoublePersonLogin.this, "请两位清分人员进行验证！", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        firstSuccess = false;
+                        fname_left = null;
+                        fname_right = null;
+
+                        if (null != f1 && null != f2 && f1.equals("1") && f2.equals("2")) {
+                            if (bizName != null && bizName.equals("未清回收钞箱出库")) {
+                                System.out.println(StopNewClearBox.list.size());
+                                System.out.println(bizName);
+                                System.out.println("bizNum" + bizNum);
+                                GolbalUtil.onclicks = true;
+                                String[] cashBoxArray = cashBoxNums.split(";");
+                                ArrayList<BoxDetail> cashBoxList = new ArrayList<BoxDetail>();
+                                for (int i = 0; i < cashBoxArray.length; i++) {
+                                    BoxDetail boxDetail = new BoxDetail();
+                                    boxDetail.setNum(cashBoxArray[i]);
+                                    cashBoxList.add(boxDetail);
+                                }
+                                Log.d(TAG, "getOrganizationId()" + GApplication.user.getOrganizationId());
+                                Log.d(TAG, "userid2()" + BankDoublePersonLogin.userid2);
+                                Log.d(TAG, "type()" + getUserID(type));
+//                                这里面调用了2个接口// 这一要穿两个清分员和清分员id\
+                                byte[] cValue = null;
+//                                getSaveAuthLogBiz().getSaveAuthLogbyPW(planNum, cashBoxList,
+//                                        GApplication.user.getOrganizationId(), getUserID(type),
+//                                        cValue, type, "4", "2", BankDoublePersonLogin.userid2);
+//////                                userid1和user2 都是清分员
+//                                Log.d(TAG, "userid1Boxoutdo" + userid1 + userid2);
+//                                Log.d(TAG, "userid1Boxoutdo" + userid1 + userid2);
+//                                getMoneyBoxOutDo().getemptyMoneyBoxoutdo(bizName, StopNewClearBox.list, planNum,
+//                                        userid1, userid2,
+//                                        GApplication.user.getOrganizationId(), bizNum, BoxDetailInfoDo.isfirst);
+//
+                            }
+
+                        }
+
+
+                    }
+                }
+//                towseconds();//  跳转页面
+            }
+
+
         }
     }
 
@@ -1489,5 +1409,8 @@ public class BankDoublePersonLogin extends BaseFingerActivity implements OnTouch
         super.onDestroy();
         userid1 = "";
         userid2 = "";
+        FingerCheckBiz fingerCheckBiz = new FingerCheckBiz();//  清分员进入后指纹位置显示不正确
+        fingerCheckBiz.num = 0;
     }
+
 }
