@@ -71,7 +71,7 @@ public class SQL {
 
 	/**
 	 * 查询
-	 * 
+	 *
 	 * @return
 	 */
 	public static Cursor select(String sql) {
@@ -81,7 +81,7 @@ public class SQL {
 
 	/**
 	 * 修改
-	 * 
+	 *
 	 * @param cv          //要更改的字段及内容,如果 cv.put("username","张三")
 	 * @param whereClause 修改条件 如user=?
 	 * @param whereArgs   修改条件参数 {"张三"}
@@ -93,7 +93,7 @@ public class SQL {
 
 	/**
 	 * 删除
-	 * 
+	 *
 	 * @param whereClause 删除条件 如user=?
 	 * @param whereArgs   删除条件参数 {"张三"}
 	 */
@@ -102,7 +102,7 @@ public class SQL {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public static void exupdate(int value, int index, int id) {
 		// db.execSQL("update download set size1='00000',size2='1111111' where _id=1");
