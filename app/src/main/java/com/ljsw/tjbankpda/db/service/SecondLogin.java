@@ -36,6 +36,38 @@ public class SecondLogin {
 		return null;
 	}
 
+	/*** 这里有个登录针对atm
+	 * url  20
+	 * @param userId
+	 * @param pwd
+	 * @param role
+	 * @param orgid
+	 * @return
+	 * @throws Exception
+	 */
+	public String  loginPDAlihang(String userId, String pwd,String role,String orgid ) throws Exception {
+		String mothedName = "PDALogin";
+		WebParameter[] param = {
+				new WebParameter<String>("arg0", userId),
+				new WebParameter<String>("arg1", pwd),
+				new WebParameter<String>("arg2", role),
+				new WebParameter<String>("arg3", orgid)};
+		SoapObject soap = null;
+		soap = WebServiceFromThree.getSoapObject(mothedName, param, FixationValue.NAMESPACE, FixationValue.url20);
+		System.out.println("----------login:" + soap);
+		String code = soap.getProperty("code").toString();
+		String msg = soap.getProperty("msg").toString();
+		String params = soap.getProperty("params").toString();
+		S_application.wrong = msg;
+		SystemUser user = null;
+		if (code.equals("00")) {
+
+			return params;
+		}else{
+			return  msg;
+		}
+	}
+
 	/**
 	 * 获取清分员所属小组
 	 * 
