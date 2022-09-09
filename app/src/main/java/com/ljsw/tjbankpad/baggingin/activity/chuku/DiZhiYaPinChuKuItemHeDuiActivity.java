@@ -88,6 +88,10 @@ public class DiZhiYaPinChuKuItemHeDuiActivity extends FragmentActivity implement
 		Log.e("btdzypSaomiao", "===" + o_Application.qlruku.getZhouzhuanxiang().toString());
 		o_Application.qlruku.getZhouzhuanxiang().clear();
 		o_Application.qlruku.getZhouzhuanxiang().addAll(copylistheduichuku);
+		if(o_Application.numberlist.size()>0)
+		{
+			o_Application.qlruku.getZhouzhuanxiang().addAll(o_Application.numberlist);
+		}
 		manager.getRfid().addNotifly(getnumber1);
 		o_Application.numberlist.clear();
 		new Thread() {
