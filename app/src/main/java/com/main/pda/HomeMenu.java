@@ -52,8 +52,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
     private ImageView home_menu_img_cleantohome;// 图片库管员现金装袋后交接接图片
     private ImageView home_menu_img_dizhimnagepancha;//  imageview盘查库
     private ImageView home_menu_img_dizhimnagepanchapc;//盘查库
-    private  ImageView  home_menu_img_cleanmangerclean;// 抵质押品清分员29  清分图片
-
+    private ImageView home_menu_img_cleanmangerclean;// 抵质押品清分员29  清分图片
     Bundle bundle = new Bundle();
 
     LinearLayout latmboxadmin; // ATM钞箱管理
@@ -116,14 +115,14 @@ public class HomeMenu extends Activity implements OnTouchListener {
         home_menu_img_accountcenter = (ImageView) findViewById(R.id.home_menu_img_accountcenter);
         home_menu_img_accountcenter.setOnTouchListener(this);
 
-        home_menu_img_cleanmangerclean=findViewById(R.id.home_menu_img_cleanmangerclean);// 清分员清分
+        home_menu_img_cleanmangerclean = findViewById(R.id.home_menu_img_cleanmangerclean);// 清分员清分
         home_menu_img_cleanmangerclean.setOnTouchListener(this);
         textViewaccountcenter = (TextView) findViewById(R.id.textViewaccountcenter);
         home_menu_layout_sublibrarytwocode = findViewById(R.id.home_menu_layout_sublibrarytwocode);
         home_menu_layout_sublibrarytwocode.setOnTouchListener(this);
         home_menu_layout_cleanmanger = findViewById(R.id.home_menu_layout_cleanmanger);
         home_menu_layout_cleanmanger.setOnTouchListener(this);
-        home_menu_img_dizhimnagepanchapc=findViewById(R.id.home_menu_img_dizhimnagepanchapc);
+        home_menu_img_dizhimnagepanchapc = findViewById(R.id.home_menu_img_dizhimnagepanchapc);
         home_menu_img_dizhimnagepanchapc.setOnTouchListener(this);
         if (GApplication.user.getLoginUserId().equals("4")) {
             dizhioraccountintiontitle.setText("档案柜管理");
@@ -168,7 +167,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
         home_menu_layout_cleanmangerclean.setOnTouchListener(this);
         home_menu_layout_dizhimnagepancha.setOnTouchListener(this);
 //抵质押品管库元
-        home_menu_layout_dizhimnagepanchapc=findViewById(R.id.home_menu_layout_dizhimnagepanchapc);
+        home_menu_layout_dizhimnagepanchapc = findViewById(R.id.home_menu_layout_dizhimnagepanchapc);
         home_menu_layout_dizhimnagepanchapc.setOnTouchListener(this);
         homemangertopacke = (LinearLayout) findViewById(R.id.home_menu_layout_homemangertopacke);
         homemangertopacke.setOnTouchListener(this);
@@ -200,7 +199,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
             switch (view.getId()) {
                 // ATM钞箱管理
                 case R.id.money_box_admins:
-                    atmboxadmin.setImageResource(R.drawable.atmbox_down);
+                    atmboxadmin.setImageResource(R.drawable.meun_money);
                     break;
                 // 系统管理
                 case R.id.systemanager:
@@ -214,6 +213,9 @@ public class HomeMenu extends Activity implements OnTouchListener {
                 case R.id.outjoin:
                     outjoin.setImageResource(R.drawable.warehouse_down);
                     break;
+                case R.id.home_menu_img_dizhiyapiniv:
+                    dizhiyapiniv.setImageResource(R.drawable.meun_money);
+                    break;
             }
 
         }
@@ -221,15 +223,17 @@ public class HomeMenu extends Activity implements OnTouchListener {
         // 手指松开的时候
         if (MotionEvent.ACTION_UP == even.getAction()) {
             Log.i("getGetUtil().ismover", getGetUtil().ismover + "");
+            ShowTitle();
             switch (view.getId()) {
 
                 // ATM钞箱管理
                 case R.id.money_box_admins:
-                    atmboxadmin.setImageResource(R.drawable.atmbox);
+                    atmboxadmin.setImageResource(R.drawable.meun_money);
                     // 跳到库管双人登陆页面
                     bundle.putString("user", "库管员");
+                    manager.getRuning().runding(HomeMenu.this, "正在开启指纹扫描，请稍等...");
                     getGetUtil().gotoActivity(HomeMenu.this, BankDoublePersonLogin.class, bundle, getGetUtil().ismover);
-//						HomeMenu.this.finish();//关闭当前页面
+                    manager.getRuning().remove();
                     break;
                 // 系统管理
                 case R.id.systemanager:
@@ -268,6 +272,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
                     getGetUtil().gotoActivity(HomeMenu.this, BankDoublePersonLogin.class, bundle, getGetUtil().ismover);
                     break;
                 case R.id.home_menu_img_dizhiyapiniv: // 抵制押品管理图片
+                    dizhiyapiniv.setImageResource(R.drawable.meun_money);
                     bundle.putString("user", "清分员");
                     bundle.putString("where", "清分管理");
 
@@ -278,7 +283,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 //							现金装袋
                         getGetUtil().gotoActivity(HomeMenu.this, CashtopackageSelectActivity.class, null,
                                 getGetUtil().ismover);
-                    }else if(GApplication.user.getLoginUserId().equals("29")){
+                    } else if (GApplication.user.getLoginUserId().equals("29")) {
                         getGetUtil().gotoActivity(HomeMenu.this, DiZhiYaPinKuangJiaActivity.class, null,
                                 getGetUtil().ismover);
 
@@ -335,15 +340,15 @@ public class HomeMenu extends Activity implements OnTouchListener {
                 //盘查库任务
 
                 case R.id.home_menu_img_dizhimnagepanchapc:
-                    Bundle  bundle=new Bundle();
-                    bundle.putString("pancha","盘查");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pancha", "盘查");
                     getGetUtil().gotoActivity(HomeMenu.this, CheckLibraryByCollMangerActivity.class, bundle, getGetUtil().ismover);
                     break;
 
 //清分操          作 抵质押品管理员 清分
-                case  R.id.home_menu_img_cleanmangerclean:
+                case R.id.home_menu_img_cleanmangerclean:
 
-                    getGetUtil().gotoActivity(HomeMenu.this , SelectTaskByCollateralActivity.class, null, getGetUtil().ismover);
+                    getGetUtil().gotoActivity(HomeMenu.this, SelectTaskByCollateralActivity.class, null, getGetUtil().ismover);
                     break;
 
 
@@ -355,6 +360,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
 
             getGetUtil().ismover = 0;
         }
+        manager.getRuning().remove();
         // 手指移动的时候
         if (MotionEvent.ACTION_MOVE == even.getAction()) {
             getGetUtil().ismover++;
@@ -364,7 +370,7 @@ public class HomeMenu extends Activity implements OnTouchListener {
             switch (view.getId()) {
                 // ATM钞箱管理
                 case R.id.money_box_admins:
-                    atmboxadmin.setImageResource(R.drawable.atmbox);
+                    atmboxadmin.setImageResource(R.drawable.meun_money);
                     break;
                 // 系统管理
                 case R.id.systemanager:
@@ -378,11 +384,21 @@ public class HomeMenu extends Activity implements OnTouchListener {
                 case R.id.outjoin:
                     outjoin.setImageResource(R.drawable.warehouse);
                     break;
+                case R.id.home_menu_img_dizhiyapiniv:
+                    dizhiyapiniv.setImageResource(R.drawable.meun_money);
+                    break;
             }
             getGetUtil().ismover = 0;
         }
 
         return true;
+    }
+
+    /***
+     * 需要提示
+     */
+    private void ShowTitle() {
+        manager.getRuning().runding(HomeMenu.this,  "请稍后...");
     }
 
     /**
