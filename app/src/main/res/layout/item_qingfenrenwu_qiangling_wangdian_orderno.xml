@@ -14,11 +14,11 @@
         android:id="@+id/smtext"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_60y"
-        android:layout_marginLeft="@dimen/dimen_20x"
+        android:layout_marginLeft="@dimen/dimen_3x"
         android:layout_marginTop="@dimen/dimen_5y"
         android:gravity="center_horizontal"
         android:text="TextView"
         android:textColor="@color/back"
-        android:textSize="@dimen/text_size_35" />
+        android:textSize="@dimen/text_size_34" />
 
 </LinearLayout>
