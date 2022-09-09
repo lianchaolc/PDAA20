@@ -30,11 +30,20 @@ import com.golbal.pda.GolbalUtil;
 import com.ljsw.tjbankpda.db.activity.QingFenYuanDengLu;
 import com.ljsw.tjbankpda.db.application.o_Application;
 import com.ljsw.tjbankpda.db.service.SecondLogin;
+import com.ljsw.tjbankpda.main.QingFenLingQu_qf;
+import com.ljsw.tjbankpda.qf.application.Mapplication;
+import com.ljsw.tjbankpda.qf.service.QingfenRenwuService;
+import com.ljsw.tjbankpda.util.Table;
+import com.ljsw.tjbankpda.util.TurnListviewHeight;
 import com.ljsw.tjbankpda.yy.application.S_application;
 import com.loginsystem.biz.SystemLoginBiz;
 import com.manager.classs.pad.ManagerClass;
 import com.messagebox.MenuShow;
 import com.moneyboxadmin.biz.LoginInfoByNetPont;
+import com.moneyboxadmin.service.SaveAuthLogService;
+import com.out.admin.pda.OrderWork;
+import com.out.admin.pda.WebSiteJoin;
+import com.out.biz.AssignBiz;
 import com.poka.device.ShareUtil;
 import com.service.NetService;
 
@@ -69,15 +78,23 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
     private ManagerClass managerClass;
 
     private SystemLoginBiz systemLogin;
-    private LoginInfoByNetPont   loginInfoByNetPont= null; //网点人员登录实体
+    private LoginInfoByNetPont loginInfoByNetPont = null; //网点人员登录实体
+
     public SystemLoginBiz getSystemLogin() {
         if (systemLogin == null) {
             systemLogin = new SystemLoginBiz();
         }
         return systemLogin;
     }
+
     private String jigouidCheck;//  存放第一个人机构id和第二人进行对比
     private String jigouidCheck2;//  存放第一个人机构id和第二人进行对比
+
+    AssignBiz assign;
+
+    public AssignBiz getAssign() {
+        return assign = assign == null ? new AssignBiz() : assign;
+    }
 
     @SuppressLint("HandlerLeak")
     @Override
@@ -135,111 +152,6 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
             }
         };
 
-        // Hand通知操作
-//        getSystemLogin().handler_login = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                managerClass.getRuning().remove();
-//                super.handleMessage(msg);
-//
-//                switch (msg.what) {
-//                    case 1:
-//                        error = 3;
-//                        Log.e("", "orgid===" + GApplication.user.getOrganizationId());
-//                        //  第一个人只验证是否为网点人员就好第二个人需要验证是否和第一个人同意网点和角色5
-//
-//                        if (!"5".equals(GApplication.user.getLoginUserId())) {// 角色不为5
-//                            System.out.println("网点登录匹配角色id：" + GApplication.user.getLoginUserId());
-//                            managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "请使用网点人员帐号登录",
-//                                    new OnClickListener() {
-//                                        @Override
-//                                        public void onClick(View arg0) {
-//                                            managerClass.getAbnormal().remove();
-//                                            editname.setText("");
-//                                            editpwd.setText("");
-//                                        }
-//                                    });
-//                        } else {
-//
-//                            GApplication.getApplication().app_hash.put("login_username", editname.getText());
-//                            /**
-//                             * SM得到传来的标识
-//                             */
-//                            Intent intent = getIntent();
-//                            Bundle netpoincollect = intent.getExtras();
-//                            Intent     intentC   = new Intent(BDPLCheckFingerNetPointCActivity.this, KuanXiangNetPointCollectActivity.class);
-//                            if (netpoincollect != null) {
-//                                String flag = netpoincollect.getString("FLAG");
-//                                if (flag.equals("wangdianone")) {
-//                                    Bundle bundlebdpcf=new Bundle();
-//                                    bundlebdpcf.putString("FLAG", flag);
-//                                    bundlebdpcf.putString("netpoincollect", "账号验证成功");
-//                                    bundlebdpcf.putString("zhanghao",name);
-//                                    bundlebdpcf.putString("name",GApplication.user.getLoginUserName());
-//                                    User u = new User();
-//                                    u.setUserzhanghu(name);
-//                                    u.setPwd(pwd);
-//                                    u.setUsername(GApplication.user.getLoginUserName());
-//                                    u.setUserzhanghu(GApplication.user.getYonghuZhanghao());
-//                                    GApplication.wd_user1 = u;
-//                                    intentC.putExtras(bundlebdpcf);
-//                                    managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "用户名和密码验证成功");
-//
-//                                    BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
-//                                    BDPLCheckFingerNetPointCActivity.this.finish();
-//                                }
-//                                if (flag.equals("wangdiantwo")) {
-//                                    Bundle bundlebdpcfwdt=new Bundle();
-//                                    bundlebdpcfwdt.putString("FLAG", flag);
-//                                    bundlebdpcfwdt.putString("name",GApplication.user.getLoginUserName());
-//                                    String left = netpoincollect.getString("left");
-//                                    User u = new User();
-//                                    u.setUserzhanghu(name);
-//                                    u.setPwd(pwd);
-//                                    u.setUsername(GApplication.user.getLoginUserName());
-//                                    GApplication.wd_user2 = u;
-//                                    System.out.println("GApplication.user.getLoginUserName()2  :"
-//                                            + GApplication.user.getLoginUserName());
-//                                    if(null!=left){
-//
-//                                    if (left.equals(name)) {
-//                                        Toast.makeText(BDPLCheckFingerNetPointCActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
-//                                    } else {
-//                                        jigouidCheck = GApplication.jigouid;
-//                                            intentC.putExtras(bundlebdpcfwdt);
-//                                            managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "正在验证用户名和密码...");
-//
-//                                            BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
-//                                            BDPLCheckFingerNetPointCActivity.this.finish();
-//
-//                                    }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        break;
-//                    case 0:
-//                        if (msg.obj != null) {
-//                            managerClass.getGolbalView().toastShow(BDPLCheckFingerNetPointCActivity.this, msg.obj.toString());
-//                        } else {
-//                            managerClass.getGolbalView().toastShow(BDPLCheckFingerNetPointCActivity.this, "");
-//                        }
-//                        break;
-//                    case -4:
-//                        managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "登陆超时，重新链接？", onclickreplace);
-//                        break;
-//                    case -1:
-//                        managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "登录出现异常", onclickreplace);
-//                        break;
-//                    case -3:
-//                        managerClass.getGolbalView().toastShow(BDPLCheckFingerNetPointCActivity.this, "用户或密码为空！");
-//                        break;
-//
-//                }
-//
-//            }
-//
-//        };
 
         share = this.getPreferences(0);
         editor = share.edit();
@@ -248,33 +160,48 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
         GApplication.addActivity(this, "1system");
     }
 
+    private Handler okHandle = new Handler() {// 数据获取成功handler
+
+        public void handleMessage(Message msg) {
+            // 绑定Adapter
+
+
+            managerClass.getRuning().remove();
+
+            Toast.makeText(BDPLCheckFingerNetPointCActivity.this,"获取机构号"+params,1000).show();
+
+        }
+
+        ;
+    };
+
     /***
      * 网点人员登录  类似清分管理员
      */
     private void LoginBynetPointUser() {
-            managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "登录中...");
-            new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-                    try {
+        managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "登录中...");
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
 
-                        o_Application.netpoint= new SecondLogin().login(UserNo, pwd);
-                        if (o_Application.netpoint != null) {
-                            handler.sendEmptyMessage(2);
-                        } else {
-                            handler.sendEmptyMessage(3);
-                        }
-                    } catch (SocketTimeoutException e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(0);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(1);
+                    o_Application.netpoint = new SecondLogin().login(UserNo, pwd);
+                    if (o_Application.netpoint != null) {
+                        handler.sendEmptyMessage(2);
+                    } else {
+                        handler.sendEmptyMessage(3);
                     }
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(1);
                 }
+            }
 
-            }.start();
+        }.start();
     }
 
     @Override
@@ -323,7 +250,15 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
                             // System.out.println("开始调用登陆的方法========"+"checkFingerprint");
                             // 登陆方法
 //                            getSystemLogin().login(name, pwd);
-                            LoginBynetPointUser();
+                            if (OrderWork.type.equals("离行式")) {
+                                //  获取机构 getCorpIdByPlanNum?arg0=BC01202203105
+
+                                LoginBynetPointUserbylihang();
+                            } else {
+
+                                LoginBynetPointUser();
+                            }
+
                         } else {
                             managerClass.getGolbalView().toastShow(this, "网络没有连通，无法登录");
                             // Toast.makeText(this,"网络没有连通，无法登录",
@@ -365,6 +300,58 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
         return true;
     }
 
+    /***
+     * 离行账号密码登录
+     */
+    String netrestlbyloginlihang = "";
+
+    private void LoginBynetPointUserbylihang() {
+        managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "登录中...");
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    if (null == params || params.equals("")) {
+                        handler.sendEmptyMessage(4);
+                    } else {
+
+                        netrestlbyloginlihang = new SecondLogin().loginPDAlihang(UserNo, pwd, "5", params);
+
+                        if (netrestlbyloginlihang.contains(";")) {
+
+                            SystemUser user = new SystemUser();
+                            String[] array = netrestlbyloginlihang.split(";");
+                            user.setLoginUserName(array[0]);
+                            user.setOrganizationName(array[1]);
+                            user.setLoginUserId(array[2]);
+                            user.setOrganizationId(array[3]);
+                            user.setYonghuZhanghao(UserNo);
+                            o_Application.netpoint = user;
+                            handler.sendEmptyMessage(2);
+                        } else {
+                            System.out.println("离行获取失败");
+                            handler.sendEmptyMessage(5);
+                        }
+//                        if (o_Application.netpoint != null) {
+//                            handler.sendEmptyMessage(2);
+//                        } else {
+//
+//                        }
+                    }
+
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    handler.sendEmptyMessage(1);
+                }
+            }
+
+        }.start();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -384,6 +371,11 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
         editpwd.setFocusable(false);
         editpwd.setFocusableInTouchMode(true);
         editname.setText("");
+        if (OrderWork.type.equals("离行式")) {
+            //  获取机构 getCorpIdByPlanNum?arg0=BC01202203105
+            getcroidSystemLogin();
+        }
+
     }
 
     // 非空验证
@@ -440,6 +432,35 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
         return super.onKeyDown(keyCode, event);
     }
 
+    private Handler timeoutHandle = new Handler() {// 连接超时handler
+        public void handleMessage(Message msg) {
+            managerClass.getRuning().remove();
+            if (msg.what == 0) {
+                managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "数据连接超时", new OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        managerClass.getAbnormal().remove();
+                        managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "数据加载中...");
+                        getcroidSystemLogin();
+                    }
+                });
+            }
+            if (msg.what == 1) {
+                managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "网络连接失败", new OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        managerClass.getAbnormal().remove();
+                        managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "数据加载中...");
+                        getcroidSystemLogin();
+
+                    }
+                });
+            }
+            managerClass.getRuning().remove();
+        }
+
+        ;
+    };
     private Handler handler = new Handler() {
 
         @SuppressWarnings("static-access")
@@ -498,7 +519,7 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
                     error = 3;
                     //  第一个人只验证是否为网点人员就好第二个人需要验证是否和第一个人同意网点和角色5
                     if (!"5".equals(o_Application.netpoint.getLoginUserId())) {// 角色不为5 网点人员
-                        System.out.println("网点登录匹配角色id：" +o_Application.netpoint.getLoginUserId());
+                        System.out.println("网点登录匹配角色id：" + o_Application.netpoint.getLoginUserId());
                         managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "请使用网点人员帐号登录",
                                 new OnClickListener() {
                                     @Override
@@ -510,57 +531,124 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
                                 });
                     } else {
 
-                        GApplication.getApplication().app_hash.put("login_username", editname.getText());
-                        /**
-                         * SM得到传来的标识
-                         */
-                        Intent intent = getIntent();
-                        Bundle netpoincollect = intent.getExtras();
-                        Intent     intentC   = new Intent(BDPLCheckFingerNetPointCActivity.this, KuanXiangNetPointCollectActivity.class);
-                        if (netpoincollect != null) {
-                            String flag = netpoincollect.getString("FLAG");
-                            if (flag.equals("wangdianone")) {
-                                Bundle bundlebdpcf=new Bundle();
-                                bundlebdpcf.putString("FLAG", flag);
-                                bundlebdpcf.putString("netpoincollect", "账号验证成功");
-                                bundlebdpcf.putString("zhanghao",UserNo);
-                                bundlebdpcf.putString("name",o_Application.netpoint.getLoginUserName());
-                                User u = new User();
-                                u.setUserzhanghu(UserNo);
-                                u.setPwd(pwd);
-                                u.setUsername(o_Application.netpoint.getLoginUserName());
-                                u.setUserzhanghu(o_Application.netpoint.getYonghuZhanghao());
-                                GApplication.wd_user1 = u;
-                                intentC.putExtras(bundlebdpcf);
-                                managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "用户名和密码验证成功");
+                        if (OrderWork.type.equals("离行式")) { //  前端无法区分在行和离行 密码验证一合成一个  后端进行拦截
+                            System.out.println("离行式");
+                            System.out.println("离行式webJoinID" + WebSiteJoin.webJoinID);
+                            System.out.println("type" + OrderWork.type);
+                            System.out.println("type" + WebSiteJoin.corp);
+                            Intent intent = getIntent();
+                            Bundle netpoincollect = intent.getExtras();
+                            Intent intentC = new Intent(BDPLCheckFingerNetPointCActivity.this, KuanXiangNetPointCollectActivity.class);
+                            if (netpoincollect != null) {
+                                String flag = netpoincollect.getString("FLAG");
+                                if (flag.equals("wangdianone")) {
+                                    Bundle bundlebdpcf = new Bundle();
+                                    bundlebdpcf.putString("FLAG", flag);
+                                    bundlebdpcf.putString("netpoincollect", "账号验证成功");
+                                    bundlebdpcf.putString("zhanghao", UserNo);
+                                    bundlebdpcf.putString("name", o_Application.netpoint.getLoginUserName());
+                                    User u = new User();
+                                    u.setUserzhanghu(UserNo);
+                                    u.setPwd(pwd);
+                                    u.setUsername(o_Application.netpoint.getLoginUserName());
+                                    u.setUserzhanghu(o_Application.netpoint.getYonghuZhanghao());
+                                    GApplication.wd_user1 = u;
+                                    intentC.putExtras(bundlebdpcf);
+                                    managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "用户名和密码验证成功");
 
-                                BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
-                                BDPLCheckFingerNetPointCActivity.this.finish();
+                                    BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
+                                    BDPLCheckFingerNetPointCActivity.this.finish();
+                                }
+                                if (flag.equals("wangdiantwo")) {
+                                    Bundle bundlebdpcfwdt = new Bundle();
+                                    bundlebdpcfwdt.putString("FLAG", flag);
+                                    bundlebdpcfwdt.putString("name", o_Application.netpoint.getLoginUserName());
+                                    String left = netpoincollect.getString("left");
+                                    User u = new User();
+                                    u.setUserzhanghu(UserNo);
+                                    u.setPwd(pwd);
+                                    u.setUsername(o_Application.netpoint.getLoginUserName());
+                                    GApplication.wd_user2 = u;
+                                    System.out.println("getLoginUserName()2"
+                                            + GApplication.user.getLoginUserName());
+                                    if (null != left) {
+
+                                        if (left.equals(UserNo)) {
+                                            Toast.makeText(BDPLCheckFingerNetPointCActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            jigouidCheck = o_Application.netpoint.getOrganizationId();
+                                            intentC.putExtras(bundlebdpcfwdt);
+                                            managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "正在验证用户名和密码...");
+
+                                            BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
+                                            BDPLCheckFingerNetPointCActivity.this.finish();
+
+                                        }
+                                    }
+                                }
                             }
-                            if (flag.equals("wangdiantwo")) {
-                                Bundle bundlebdpcfwdt=new Bundle();
-                                bundlebdpcfwdt.putString("FLAG", flag);
-                                bundlebdpcfwdt.putString("name",o_Application.netpoint.getLoginUserName());
-                                String left = netpoincollect.getString("left");
-                                User u = new User();
-                                u.setUserzhanghu(UserNo);
-                                u.setPwd(pwd);
-                                u.setUsername(o_Application.netpoint.getLoginUserName());
-                                GApplication.wd_user2 = u;
-                                System.out.println("getLoginUserName()2"
-                                        + GApplication.user.getLoginUserName());
-                                if(null!=left){
 
-                                    if (left.equals(UserNo)) {
-                                        Toast.makeText(BDPLCheckFingerNetPointCActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        jigouidCheck = o_Application.netpoint.getOrganizationId();
-                                        intentC.putExtras(bundlebdpcfwdt);
-                                        managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "正在验证用户名和密码...");
+                        } else {
+                            System.out.println("在行的指纹交接");
 
-                                        BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
-                                        BDPLCheckFingerNetPointCActivity.this.finish();
+                            if (WebSiteJoin.corp.equals("") || !WebSiteJoin.corp.equals(o_Application.netpoint.getOrganizationId())) {
+                                System.out.println(WebSiteJoin.corp);
+                                System.out.println(o_Application.netpoint.getOrganizationId() + "---");
+                                Toast.makeText(BDPLCheckFingerNetPointCActivity.this, "所选网点和加钞人不一致", 500).show();
+                                return;
+                            } else if (WebSiteJoin.corp.equals(o_Application.netpoint.getOrganizationId()))
+                                GApplication.getApplication().app_hash.put("login_username", editname.getText());
+                            /**
+                             * SM得到传来的标识
+                             */
+                            Intent intent = getIntent();
+                            Bundle netpoincollect = intent.getExtras();
+                            Intent intentC = new Intent(BDPLCheckFingerNetPointCActivity.this, KuanXiangNetPointCollectActivity.class);
+                            if (netpoincollect != null) {
+                                String flag = netpoincollect.getString("FLAG");
+                                if (flag.equals("wangdianone")) {
+                                    Bundle bundlebdpcf = new Bundle();
+                                    bundlebdpcf.putString("FLAG", flag);
+                                    bundlebdpcf.putString("netpoincollect", "账号验证成功");
+                                    bundlebdpcf.putString("zhanghao", UserNo);
+                                    bundlebdpcf.putString("name", o_Application.netpoint.getLoginUserName());
+                                    User u = new User();
+                                    u.setUserzhanghu(UserNo);
+                                    u.setPwd(pwd);
+                                    u.setUsername(o_Application.netpoint.getLoginUserName());
+                                    u.setUserzhanghu(o_Application.netpoint.getYonghuZhanghao());
+                                    GApplication.wd_user1 = u;
+                                    intentC.putExtras(bundlebdpcf);
+                                    managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "用户名和密码验证成功");
 
+                                    BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
+                                    BDPLCheckFingerNetPointCActivity.this.finish();
+                                }
+                                if (flag.equals("wangdiantwo")) {
+                                    Bundle bundlebdpcfwdt = new Bundle();
+                                    bundlebdpcfwdt.putString("FLAG", flag);
+                                    bundlebdpcfwdt.putString("name", o_Application.netpoint.getLoginUserName());
+                                    String left = netpoincollect.getString("left");
+                                    User u = new User();
+                                    u.setUserzhanghu(UserNo);
+                                    u.setPwd(pwd);
+                                    u.setUsername(o_Application.netpoint.getLoginUserName());
+                                    GApplication.wd_user2 = u;
+                                    System.out.println("getLoginUserName()2"
+                                            + GApplication.user.getLoginUserName());
+                                    if (null != left) {
+
+                                        if (left.equals(UserNo)) {
+                                            Toast.makeText(BDPLCheckFingerNetPointCActivity.this, "该用户已经验证过!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            jigouidCheck = o_Application.netpoint.getOrganizationId();
+                                            intentC.putExtras(bundlebdpcfwdt);
+                                            managerClass.getRuning().runding(BDPLCheckFingerNetPointCActivity.this, "正在验证用户名和密码...");
+
+                                            BDPLCheckFingerNetPointCActivity.this.setResult(7, intentC);
+                                            BDPLCheckFingerNetPointCActivity.this.finish();
+
+                                        }
                                     }
                                 }
                             }
@@ -577,10 +665,72 @@ public class BDPLCheckFingerNetPointCActivity extends Activity implements OnTouc
                         }
                     });
                     break;
+                case 4:
+                    managerClass.getRuning().remove();
+                    managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "请获取加钞人员的机构", new OnClickListener() {
+                        @Override
+                        public void onClick(View arg0) {
+                            managerClass.getAbnormal().remove();
+                        }
+                    });
+                case 5:
+                    managerClass.getRuning().remove();
+                    managerClass.getAbnormal().timeout(BDPLCheckFingerNetPointCActivity.this, "" + netrestlbyloginlihang, new OnClickListener() {
+                        @Override
+                        public void onClick(View arg0) {
+                            managerClass.getAbnormal().remove();
+                        }
+                    });
+
                 default:
                     break;
             }
         }
 
     };
+
+    /***
+     * 获取 验证的返回plnuid
+     * @return
+     * getCorpIdByPlanNum
+     * arg0=BC01202203105
+     */
+    String params; //orgind离行
+
+    public void getcroidSystemLogin() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    // 传递plnumid
+                    System.out.println("传递plnumid" + getAssign().order.getPlanNum());
+                    String plnum = getAssign().order.getPlanNum();
+                    if (null == plnum || plnum.equals("")) {
+                        System.out.println("传递plnumid---获取失败了");
+                    } else {
+                        System.out.println("plnum" + plnum);
+                        params = new SaveAuthLogService().GetplnumId(plnum);
+                        System.out.println("params==" + params);
+                    }
+
+
+                    okHandle.sendEmptyMessage(0);
+                } catch (SocketTimeoutException e) {
+                    e.printStackTrace();
+                    timeoutHandle.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    timeoutHandle.sendEmptyMessage(1);
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        managerClass.getAbnormal().remove();
+    }
 }
