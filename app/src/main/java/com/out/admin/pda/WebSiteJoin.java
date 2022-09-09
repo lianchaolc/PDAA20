@@ -599,6 +599,7 @@ public class WebSiteJoin extends Activity implements OnTouchListener {
 			name = CorpListByPlanNumBiz.list.get(i).getName();
 			id = CorpListByPlanNumBiz.list.get(i).getId();
 			webJoinID = id;
+			System.out.println(webJoinID+"----");
 			if (name.equals(corpName)) {
 				corp = CorpListByPlanNumBiz.list.get(i).getId();
 				break;
