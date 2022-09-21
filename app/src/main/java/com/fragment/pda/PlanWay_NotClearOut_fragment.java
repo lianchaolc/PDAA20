@@ -426,7 +426,7 @@ public class PlanWay_NotClearOut_fragment extends Fragment implements PlanFragme
 				// 手指松开的时候
 				if (MotionEvent.ACTION_UP == even.getAction()) {
 					sure.setBackgroundResource(R.drawable.buttom_selector_bg);
-					if (planNumList.size() > 0) {// 线路选择不为空
+					if (planNumList.size() > 0) {// 线路选择不为空 BC01202203086
 						// 把当前点击的项的编号、路线、业务、放进bundle
 						bundle_listitem = new Bundle();
 						bundle_listitem.putStringArrayList("number", planNumList);
