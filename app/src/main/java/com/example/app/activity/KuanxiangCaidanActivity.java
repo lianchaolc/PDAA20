@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -96,16 +97,24 @@ public class KuanxiangCaidanActivity extends Activity {
 	};
 
 	public void quanxian() {
-		if (GApplication.getApplication().loginjueseid.equals("9")) {
-			chukulayout.setVisibility(View.GONE);
-			jiaojielayout.setVisibility(View.VISIBLE);
-		} else if (GApplication.getApplication().loginjueseid.equals("4")) {
-			chukulayout.setVisibility(View.VISIBLE);
-			jiaojielayout.setVisibility(View.GONE);
-		} else if (GApplication.getApplication().loginjueseid.equals(ShareUtil.WdId)) {
-			chukulayout.setVisibility(View.GONE);
-			jiaojielayout.setVisibility(View.GONE);
+
+		try {
+			if (GApplication.getApplication().loginjueseid.equals("9")) {
+				chukulayout.setVisibility(View.GONE);
+				jiaojielayout.setVisibility(View.VISIBLE);
+			} else if (GApplication.getApplication().loginjueseid.equals("4")) {
+				chukulayout.setVisibility(View.VISIBLE);
+				jiaojielayout.setVisibility(View.GONE);
+			} else if (GApplication.getApplication().loginjueseid.equals(ShareUtil.WdId)) {
+				chukulayout.setVisibility(View.GONE);
+				jiaojielayout.setVisibility(View.GONE);
+			}
+		}catch (Exception e){
+
+			Log.d("KuanxiangCai","异常"+e.getMessage());
+
 		}
+
 	}
 
 	@Override
