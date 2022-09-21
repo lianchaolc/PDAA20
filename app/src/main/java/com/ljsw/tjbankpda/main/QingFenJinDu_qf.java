@@ -5,7 +5,9 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.application.GApplication;
 import com.example.pda.R;
+import com.ljsw.collateraladministratorsorting.activity.SelectTaskByCollateralActivity;
 import com.ljsw.tjbankpda.qf.entity.PeiSongDan;
 import com.ljsw.tjbankpda.qf.entity.QingfenRemwu;
 import com.ljsw.tjbankpda.qf.service.QingfenRenwuService;
@@ -131,8 +133,15 @@ public class QingFenJinDu_qf extends FragmentActivity implements OnClickListener
 				});
 			} else if (msg.what == 2) {
 				// 退出当前activity 并跳转到任务列表页面
-				Skip.skip(QingFenJinDu_qf.this, QingfenRenwuActivity.class, null, 0);
-				QingFenJinDu_qf.this.finish();
+				if(GApplication.user.getLoginUserId().equals("29")){// 这里对抵质押品的跳转需要区分一下
+
+					Skip.skip(QingFenJinDu_qf.this, SelectTaskByCollateralActivity.class, null, 0);
+					QingFenJinDu_qf.this.finish();
+				}else{
+					Skip.skip(QingFenJinDu_qf.this, QingfenRenwuActivity.class, null, 0);
+					QingFenJinDu_qf.this.finish();
+				}
+
 			}
 		};
 	};
@@ -261,19 +270,21 @@ public class QingFenJinDu_qf extends FragmentActivity implements OnClickListener
 				arg1 = lf.inflate(R.layout.adapter_jihuadan_xianjin, null);
 				yh.danhao = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_juanbie);
 				yh.wangdian = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_count);
+				yh.xianjin_type = (TextView) arg1.findViewById(R.id.adapter_jihuadan_xianjin_type);
 				arg1.setTag(yh);
 			} else {
 				yh = (YiQingHolder) arg1.getTag();
 			}
 			yh.danhao.setText(ylistData.get(arg0).getDanhao());
 			yh.wangdian.setText(ylistData.get(arg0).getWangdian());
+			yh.xianjin_type.setVisibility(View.GONE);
 			return arg1;
 		}
 
 	}
 
 	public static class YiQingHolder {
-		TextView danhao, wangdian;
+		TextView danhao, wangdian,xianjin_type;
 	}
 
 	public void getData() {
