@@ -30,7 +30,6 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class YayunCheckFingerActivity extends Activity implements OnTouchListener {
 	Button login; // 登陆按钮
@@ -410,5 +409,4 @@ public class YayunCheckFingerActivity extends Activity implements OnTouchListene
 		return super.onKeyDown(keyCode, event);
 	}
 
-// login.setOnClickListener(this);
 }
