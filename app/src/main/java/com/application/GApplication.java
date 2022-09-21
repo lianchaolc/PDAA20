@@ -17,7 +17,6 @@ import com.elvishew.xlog.LogConfiguration;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
 import com.elvishew.xlog.flattener.ClassicFlattener;
-import com.elvishew.xlog.formatter.border.BorderFormatter;
 import com.elvishew.xlog.printer.AndroidPrinter;
 import com.elvishew.xlog.printer.ConsolePrinter;
 import com.elvishew.xlog.printer.Printer;
@@ -178,7 +177,6 @@ public class GApplication extends Application {
 		super.onCreate();
 		CrashHandler.getInstance().init(this);
 //		Util.initSoundPool(this);
-
 		initLog();
 	}
 
