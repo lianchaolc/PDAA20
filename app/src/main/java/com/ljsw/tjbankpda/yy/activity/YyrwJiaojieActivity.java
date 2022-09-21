@@ -11,6 +11,7 @@ import afu.util.BaseFingerActivity;
 import com.application.GApplication;
 import com.entity.SystemUser;
 import com.example.pda.R;
+import com.ljsw.pdachecklibrary.CheckLibraryUpdataActivity;
 import com.ljsw.tjbankpda.db.service.YanZhengZhiWenService;
 import com.ljsw.tjbankpda.util.BianyiType;
 import com.ljsw.tjbankpda.util.Skip;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 押运任务交接,网点人员(库管员)验证指纹页面
@@ -166,14 +168,32 @@ public class YyrwJiaojieActivity extends BaseFingerActivity implements OnClickLi
 						wrongrightNum++;
 						yy_fingerTop.setText("验证失败:" + wrongrightNum + "次");
 					} else {
-						manager.getAbnormal().timeout(YyrwJiaojieActivity.this, "验证已完成!", new OnClickListener() {
-							@Override
-							public void onClick(View arg0) {
-								manager.getAbnormal().remove();
-								yy_fingerTop.setText("");
-								return;
+						if(	(left_name!=null||!left_name.equals(""))){
+							if((right_name!=null||!right_name.equals(""))){
+
+								if (right_name.equals(left_name)){
+									Toast.makeText(YyrwJiaojieActivity.this, "验证指纹是同一个人",
+											400).show();
+									f2=null;
+								}else{
+
+
+
+							manager.getAbnormal().timeout(YyrwJiaojieActivity.this, "验证已完成!", new OnClickListener() {
+								@Override
+								public void onClick(View arg0) {
+									manager.getAbnormal().remove();
+									yy_fingerTop.setText("");
+									return;
+								}
+							});
+								}
+						}else{
+								f2=null;
+
 							}
-						});
+						}
+
 					}
 					if (wrongleftNum >= ShareUtil.three) {
 						// 左侧跳用户登录
