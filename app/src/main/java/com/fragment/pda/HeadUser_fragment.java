@@ -38,19 +38,25 @@ public class HeadUser_fragment extends Fragment {
         super.onStart();
         name1 = (TextView) getActivity().findViewById(R.id.head_user1);
         name2 = (TextView) getActivity().findViewById(R.id.head_user2);
-        if (null != GApplication.getApplication().user.getOrganizationId()) {
+        try {
+            String orgid=GApplication.getApplication().user.getOrganizationId();
+            if (null != orgid) {
 
-
-            if (GApplication.getApplication().user.getLoginUserId().equals("8")) {
-                name1.setText("押运员：" + GApplication.getApplication().user.getLoginUserName());
-                name2.setText("");
+                if (GApplication.getApplication().user.getLoginUserId().equals("8")) {
+                    name1.setText("押运员：" + GApplication.getApplication().user.getLoginUserName());
+                    name2.setText("");
+                } else {
+                    name1.setText(BankDoublePersonLogin.textname1);
+                    name2.setText(BankDoublePersonLogin.textname2);
+                }
             } else {
-                name1.setText(BankDoublePersonLogin.textname1);
-                name2.setText(BankDoublePersonLogin.textname2);
+                System.out.print("空的");
             }
-        } else {
-            System.out.print("空的");
+        }catch (Exception e){
+            System.out.print("空的"+e);
+
         }
+
     }
 
 }
