@@ -430,6 +430,8 @@ public class OrderWork extends Activity implements OnTouchListener {
 				break;
 
 			}
+
+			managerClass.getRuning().remove();//  因为网络状态不好导致dialog不消失
 		}
 	};
 
