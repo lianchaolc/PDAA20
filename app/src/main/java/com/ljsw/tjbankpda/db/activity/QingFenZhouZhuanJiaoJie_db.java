@@ -32,7 +32,7 @@ import com.poka.device.ShareUtil;
  * 上缴清分出库交接(库管员>清分管理员)
  * 
  * @author yuyunheng
- * 
+ * 上缴清分出库交接(库管员>抵质押品管理员)
  */
 @SuppressLint("HandlerLeak")
 public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements OnClickListener {
@@ -49,6 +49,7 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 	private String cashBoxNum;// 提交款箱
 	private String userId;// 提交指纹验证人的账户
 	private boolean isFlag = true;
+	private String isFlagState = "0";// 1 跳转现金中控3 跳转抵质押品  0 是返回或者清除数据
 	/**
 	 * 演示用 功能实现请删除
 	 */
@@ -56,6 +57,8 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 
 	private FingerCheckBiz fingerCheck;
 	private ManagerClass manager;
+	private TextView textView4, textView3 ,qingfenshangjiao_bottom_tishi;
+	private  String  NetResult="";//  返回结果进行提示
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,14 +82,52 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 				}
 			}
 		};
+// 这里是3 就是抵质押品否则是 重控或者现金走老流程
+//		if(null!=o_Application.qingfendanmingxi.getOrdertype()||!o_Application.qingfendanmingxi.getOrdertype().equals("")){
+//			if(o_Application.qingfendanmingxi.getOrdertype().equals("3")){
+////				yanzhengFingerbyDZypmanger();
+//
+//			}else{
+////			走老流程
+//				yanzhengFinger();
+//
+//			}
+//		}else{
+//			System.out.println("没有数据！！！");
+//
+//		}
 
-		if(o_Application.shangjiao_qingfen_chuku.get(0).getStrstye().equals("")){
-			yanzhengFinger();
-		}else{
-			yanzhengFingerbyDZypmanger();
-		}
 	}
 
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		isFlag = true;
+
+		load();
+		if(null!=o_Application.qingfendanmingxi.getOrdertype()||!o_Application.qingfendanmingxi.getOrdertype().equals("")){
+			if(o_Application.qingfendanmingxi.getOrdertype().equals("3")){
+				isFlagState="3";
+				qingfenshangjiao_bottom_tishi.setText("请抵质押品管库员按压指纹");
+				textView3.setText("抵押管库员");;//顶部标识
+				textView4.setText("抵押管库员");
+
+			}else{
+//			走老流程
+				isFlagState="1";
+			}
+		}else{
+			System.out.println("没有数据！！！");
+			isFlagState="0";
+		}
+
+
+	}
+	/****
+	 *  验证指纹方法22.5.12
+	 */
 	private void yanzhengFingerbyDZypmanger() {
 		new Thread() {
 			@Override
@@ -94,6 +135,8 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 				super.run();
 				YanZhengZhiWenService yanzheng = new YanZhengZhiWenService();
 				try {
+					System.out.println("----"+o_Application.kuguan_db.getOrganizationId());
+					System.out.println(29);
 					result_user = yanzheng.checkFingerprint(o_Application.kuguan_db.getOrganizationId(), "29",
 							ShareUtil.ivalBack);
 					Thread.sleep(1000);
@@ -112,14 +155,6 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 			}
 
 		}.start();
-	}
-
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		isFlag = true;
-		load();
 	}
 
 	public void yanzhengFinger() {
@@ -259,7 +294,10 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 				break;
 			case 7:
 				manager.getRuning().remove();
-				manager.getAbnormal().timeout(QingFenZhouZhuanJiaoJie_db.this, "提交失败,重试?", new OnClickListener() {
+				if(NetResult.equals("")||NetResult==null){}else{
+
+
+				manager.getAbnormal().timeout(QingFenZhouZhuanJiaoJie_db.this, NetResult.trim()+"提交失败,重试?", new OnClickListener() {
 
 					@Override
 					public void onClick(View arg0) {
@@ -267,7 +305,70 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 						Jiaojie();
 					}
 				});
+				}
 				break;
+
+				///  抵质押品管库员要走的处理方法
+				case 99:
+
+					if (!f1.equals("1")) {
+						wrongleftNum++;
+						top_tishi.setText("验证失败:" + wrongleftNum + "次");
+					} else {
+						wrongrightNum++;
+						top_tishi.setText("验证失败:" + wrongrightNum + "次");
+					}
+					if (wrongleftNum >= ShareUtil.three) {
+						// 左侧跳用户登录
+						firstSuccess = false;
+						intent.setClass(QingFenZhouZhuanJiaoJie_db.this, DiZhiYaPinGuanKuYuanDengLu.class);
+						QingFenZhouZhuanJiaoJie_db.this.startActivityForResult(intent, 100);
+						top_tishi.setText("");
+						wrongleftNum = 0;
+					} else if (wrongrightNum >= ShareUtil.three) {
+						// 右侧跳用户登录
+						firstSuccess = true;
+						intent.setClass(QingFenZhouZhuanJiaoJie_db.this, DiZhiYaPinGuanKuYuanDengLu.class);
+						QingFenZhouZhuanJiaoJie_db.this.startActivityForResult(intent, 100);
+						wrongrightNum = 0;
+						top_tishi.setText("");
+					}
+					break;
+				case 100: //  成功
+
+					if (!firstSuccess && !"1".equals(f1)) {
+						img_left.setImageBitmap(ShareUtil.finger_dizhikuguandenglu_left);
+						left_name = result_user.getLoginUserName();
+						o_Application.FingerJiaojieNum.add(result_user.getLoginUserId());
+						setName_left.setText(left_name);
+						f1 = "1";
+						// //System.out.println("左边指纹特征值："+ShareUtil.ivalBack);
+						StringBuffer sb = new StringBuffer();
+						for (int i = 0; i < ShareUtil.ivalBack.length; i++) {
+							sb.append(ShareUtil.ivalBack[i]);
+						}
+						firstSuccess = true;
+						bottom_tishi.setText("请第二位库管员按手指...");
+						top_tishi.setText("第一位验证成功");
+						// 第二位验证
+					} else if (firstSuccess && !"2".equals(f2)) {
+						right_name = result_user.getLoginUserName();
+						if (right_name != null && right_name.equals(left_name)) {
+							top_tishi.setText("重复验证!");
+						} else {
+							top_tishi.setText("");
+							img_right.setImageBitmap(ShareUtil.finger_dizhikuguandenglu_right);
+							o_Application.FingerJiaojieNum.add(result_user.getLoginUserId());
+							setName_right.setText(right_name);
+							f2 = "2";
+							bottom_tishi.setText("验证成功！");
+							firstSuccess = false;
+							manager.getRuning().runding(QingFenZhouZhuanJiaoJie_db.this, "数据提交中...");
+							Jiaojie();
+						}
+					}
+					break;
+
 			default:
 				break;
 			}
@@ -278,7 +379,9 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		super.onActivityResult(arg0, arg1, arg2);
-		if (arg2 != null) {
+		System.out.println("arg0"+arg0);
+		System.out.println("arg1"+arg1);
+		if (arg2 != null&&arg1!=100) {
 			Bundle bundle = arg2.getExtras();
 			String isOk = bundle.getString("isOk");
 			if (isOk.equals("success")) {
@@ -311,6 +414,39 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 
 			}
 		}
+		if (arg2 != null&&arg1==100) {
+			Bundle bundle = arg2.getExtras();
+			String isOk = bundle.getString("isOk");
+			if (isOk.equals("success")) {
+				if (!f1.equals("1")) {
+					f1 = "1";
+					left_name = o_Application.diziyuan.getLoginUserName();
+					setName_left.setText(left_name);
+					img_left.setImageResource(R.drawable.result_isok);
+					firstSuccess = true;
+					top_tishi.setText("第一位验证成功");
+					bottom_tishi.setText("请第二位库管员按手指...");
+					o_Application.left_user = o_Application.diziyuan;
+				} else {
+					right_name = o_Application.diziyuan.getLoginUserName();
+					// 判断是否重复验证
+					if (right_name != null && right_name.equals(left_name)) {
+						top_tishi.setText("重复验证!");
+					} else {
+						f2 = "2";
+						setName_right.setText(right_name);
+						img_right.setImageResource(R.drawable.result_isok);
+						firstSuccess = false;
+						top_tishi.setText("");
+						bottom_tishi.setText("验证成功！");
+						o_Application.right_user = o_Application.diziyuan;
+						manager.getRuning().runding(this, "数据提交中...");
+						Jiaojie();
+					}
+				}
+
+			}
+		}
 
 	}
 
@@ -325,6 +461,9 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 		bottom_tishi = (TextView) findViewById(R.id.qingfenshangjiao_bottom_tishi);
 		img_left = (ImageView) findViewById(R.id.qingfenshangjiao_img_left);
 		img_right = (ImageView) findViewById(R.id.qingfenshangjiao_img_right);
+		textView3=(TextView)findViewById(R.id.textView3);//顶部标识
+		textView4=(TextView)findViewById(R.id.textView4);
+		qingfenshangjiao_bottom_tishi=(TextView)findViewById(R.id.qingfenshangjiao_bottom_tishi);
 	}
 
 	@Override
@@ -368,6 +507,7 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 					if (isOk.trim().equals("00")) {
 						handler.sendEmptyMessage(4);
 					} else {
+						NetResult=isOk;
 						handler.sendEmptyMessage(7);
 					}
 				} catch (SocketTimeoutException e) {
@@ -427,6 +567,7 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
 		o_Application.right_user = null;
 
 		isFlag = false;
+		isFlagState="0";
 		manager.getRuning().remove();
 	}
 
@@ -458,10 +599,23 @@ public class QingFenZhouZhuanJiaoJie_db extends BaseFingerActivity implements On
         } else {
             ShareUtil.finger_kuguandenglu_right = img;
         }
-
+//         设置图片指纹特征值
+		if (!firstSuccess && !"1".equals(f1)) {
+			ShareUtil.finger_dizhikuguandenglu_left = img;
+		} else {
+			ShareUtil.finger_dizhikuguandenglu_right = img;
+		}
         if (isFlag) {
             isFlag = false;
-            yanzhengFinger();
+//            yanzhengFinger();
+			if(isFlagState.equals("1")){
+				yanzhengFinger();
+			}else if(isFlagState.equals("3")){
+				yanzhengFingerbyDZypmanger();
+			}else{
+				isFlagState.equals("0");
+			}
         }
+
     }
 }
