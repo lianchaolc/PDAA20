@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.application.GApplication;
 import com.example.app.entity.KuanXiangBox;
+import com.example.app.entity.KuanXiangChuRu;
 import com.example.app.entity.S_box;
 import com.example.app.util.Skip;
 import com.example.pda.R;
@@ -66,15 +67,18 @@ public class JiaoJieActivity extends Activity {
     String netPointUser = "";
     String cardDrvier = "";
     Intent intentA;
-
     public static final int REQUEST_CODE_B = 0;
     public final int REQUEST_CODE_C = 2;
-    private  String  Bindfailshow;//  绑定失败
+    private String Bindfailshow;//  绑定失败
+    private long lastClickTime = 0;/// 限制点击的时间间隔
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_jiaojie);
+        // 禁止休睡眠
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         load();
         intentA = getIntent();
         manager = new ManagerClass();
@@ -113,16 +117,16 @@ public class JiaoJieActivity extends Activity {
         zkcount = 0;
         wkcount = 0;
 
-
-        ;
-//        Bundle netpoincollect = intent.getExtras();
-//        if (null != intent) {
-        String yanzheng = intentA.getStringExtra("netpoincollect");
-//          System.out.println("yanzheng"+yanzheng);
         if (null == netPoint || netPoint.equals("")) {
             System.out.println("这是是null 第一次进入?");
             // 绑定信息成功
             getLineNum();
+        }
+        if (null == GApplication.kxc) {
+            System.out.println("走了获取线路吗?");
+            getLineNum();// 获取线路
+        } else {
+            getInfo();
         }
     }
 
@@ -134,7 +138,7 @@ public class JiaoJieActivity extends Activity {
             Log.e("onActivityResult", "" + data);
             if (null == data) {
                 Log.e("", "我是空的" + data);
-                        Toast.makeText(JiaoJieActivity.this, "信息失请重新录入信息", 500).show();
+                Toast.makeText(JiaoJieActivity.this, "信息缺失请重新录入信息", 500).show();
             } else {
                 String sumText = data.getStringExtra("netpoincollect");
                 String netpointleft = data.getStringExtra("netpointleft");
@@ -185,12 +189,17 @@ public class JiaoJieActivity extends Activity {
                 case R.id.wanshou_jiaojie:
                     listWanshou.setVisibility(View.VISIBLE);
                     listZaosong.setVisibility(View.GONE);
+                    Toast.makeText(JiaoJieActivity.this, "网点人员绑定才能看到任务", 1000).show();
                     break;
                 case R.id.zaosong_jiaojie:
                     listWanshou.setVisibility(View.GONE);
                     listZaosong.setVisibility(View.VISIBLE);
                     break;
                 case R.id.jiaojie_shuaxin:
+                    long now = System.currentTimeMillis();
+                    if (now - lastClickTime > 1000) {
+                        lastClickTime = now;
+
                     if (null == GApplication.kxc) {
                         System.out.println("走了获取线路吗?");
                         getLineNum();// 获取线路
@@ -198,6 +207,11 @@ public class JiaoJieActivity extends Activity {
                         getInfo();
                     }
 
+                    } else {
+                        Toast.makeText(JiaoJieActivity.this, "您点击的太快了请勿重复刷新", 300).show();
+//                        return;
+
+                    }
                     break;
             }
         }
@@ -213,6 +227,7 @@ public class JiaoJieActivity extends Activity {
                     break;
                 case R.id.wanshou_listView1:// 晚收交接列表点击
                     manager.getRuning().runding(JiaoJieActivity.this, "数据加载中...");
+
                     GApplication.sk = wlist.get(checkId);
                     // 需呀判断是否需呀早送
                     ShiFouZaoSong();
@@ -254,7 +269,8 @@ public class JiaoJieActivity extends Activity {
                     if (state.equals("0")) { // 晚收列表中
                         BuZaoSong();// 不早送 跳转晚收
                     } else if (state.equals("1")) {
-                        ZaoSong();// 早送申请
+//                        ZaoSong();// 早送申请  2022.5.11 需求早送申请 不要了 所以当我不管你是什么值我都走不早送
+                        BuZaoSong();// 不早送 跳转晚收
                     }
                     break;
                 case 3:
@@ -302,6 +318,7 @@ public class JiaoJieActivity extends Activity {
                     });
                     break;
                 case 7:
+                    Log.d("jiaojie","7是否空这判断"+GApplication.boxHandoverList);
                     if (zkcount != 0) {
                         zkcount = 0;
                     }
@@ -311,12 +328,14 @@ public class JiaoJieActivity extends Activity {
                     zlist.clear();
                     wlist.clear();
                     // 以上是刷新时起作用
+                    Log.d("jiaojie","7是否空这判 GApplication.kxc)断"+ GApplication.kxc);
 
                     if (null != GApplication.kxc) {
                         luxianName.setText(GApplication.kxc.getChaochexianlu());
                     }
-                    if (GApplication.boxHandoverList != null) {// 交接列表不为空
-                        for (int i = 0; i < GApplication.boxHandoverList.size(); i++) {
+                    Log.d("jiaojie","7是否空这判 GApplication.GApplication.boxHandoverList)断"+ GApplication.boxHandoverList.size());
+                    if (GApplication.boxHandoverList != null&&GApplication.boxHandoverList.size()>0) {// 交接列表不为空
+                        for (int i = 0; i < GApplication.boxHandoverList.size();i++) {
                             if (GApplication.boxHandoverList.get(i).getType().equals("0")) {
                                 zlist.add(GApplication.boxHandoverList.get(i));// 添加早送集合
                                 zkcount += Integer.parseInt(GApplication.boxHandoverList.get(i).getBoxNum());
@@ -326,7 +345,13 @@ public class JiaoJieActivity extends Activity {
                             }
                         }
                     }
-                    manager.getRuning().remove();
+                    try {
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     listZaosong.setAdapter(zaoAdapter);
                     wanAdapter.notifyDataSetChanged();
                     zaoAdapter.notifyDataSetChanged();
@@ -335,6 +360,7 @@ public class JiaoJieActivity extends Activity {
                     zkuanxiangNum.setText("" + zlist.size());// 早送款箱总数
                     wwangdianNum.setText("" + wkcount);// 反了 凑合用
                     wkuanxiangNum.setText("" + wlist.size());
+                    manager.getRuning().remove();
                     break;
                 case 8:
                     manager.getRuning().remove();
@@ -415,7 +441,7 @@ public class JiaoJieActivity extends Activity {
                     if (null != GApplication.kxc) {
                         luxianName.setText(GApplication.kxc.getChaochexianlu());
                     }
-                    getInfo();
+                    getInfo();// 展示数据
                     break;
                 case 17:
                     manager.getRuning().remove();
@@ -507,8 +533,16 @@ public class JiaoJieActivity extends Activity {
                     break;
 
                 case 26:
-                    Toast.makeText(JiaoJieActivity.this, ""+Bindfailshow, 500).show();
-                    JiaoJieActivity.this.finish();
+                    manager.getAbnormal().timeout(JiaoJieActivity.this, Bindfailshow, new OnClickListener() {
+
+                        @Override
+                        public void onClick(View arg0) {
+                            manager.getAbnormal().remove();
+                        }
+                    });
+//                    Toast.makeText(JiaoJieActivity.this, "" + Bindfailshow, 500).show();
+//                    Toast.makeText(JiaoJieActivity.this, "" , 500).show();
+                    manager.getRuning().remove();
                     break;
                 case 27:
                     manager.getRuning().remove();
@@ -595,6 +629,7 @@ public class JiaoJieActivity extends Activity {
             public void run() {
                 super.run();
                 try {// 该机构是否需要早送申请，如果需要PDA进入早送申请页面，反之进入交接页面
+// 等于1  早送  否则为0
                     state = ks.getApplicationByCorpId(GApplication.sk.getNetId());
                     System.out.println("早送申请的标识:" + state);
                     if (state != null) {
@@ -777,6 +812,7 @@ public class JiaoJieActivity extends Activity {
     }
 
     public void getInfo() {
+        if(manager.getRuning()!=null){manager.getRuning().remove();}
         manager.getRuning().runding(JiaoJieActivity.this, "数据加载中...");
         new Thread() {
 
@@ -784,10 +820,13 @@ public class JiaoJieActivity extends Activity {
             public void run() {
                 super.run();
                 try {// 获取款箱交接列表 0是早送列表 1是晚收列表
-
+                    Log.d("jiaojie","早送列表 "+GApplication.kxc.getXianlubianhao());
                     GApplication.boxHandoverList = ks.getBoxHandoverList(GApplication.kxc.getXianlubianhao());
-                    manager.getRuning().remove();
+                    Log.d("jiaojie",""+GApplication.boxHandoverList);
+//                    manager.getRuning().remove();
+                    Log.d("jiaojie","是否空"+GApplication.boxHandoverList);
                     if (GApplication.boxHandoverList != null) {
+                        Log.d("jiaojie","是否空这判断"+GApplication.boxHandoverList);
                         handler.sendEmptyMessage(7);
                     } else {
                         handler.sendEmptyMessage(4);
@@ -823,7 +862,13 @@ public class JiaoJieActivity extends Activity {
                     if (GApplication.kxc != null) {
                         handler.sendEmptyMessage(16);
                     } else {
-                        handler.sendEmptyMessage(25);
+                        if(wlist.size()>0){//  晚收有数据进入录入信息页面
+                            Log.d("jiaojie","返回的晚收数据值大于0 证明有数据");
+                        }else if (netPoint.equals("")||null==netPoint){//  没有录入过信息
+                            handler.sendEmptyMessage(25);// m没数据绑定把
+                            Log.d("jiaojie","录入信息了"+netPoint);
+                        }
+
                     }
 
                 } catch (SocketTimeoutException e) {
@@ -874,7 +919,7 @@ public class JiaoJieActivity extends Activity {
     public void getLastReviceBind() {
 
 
-        if (null==netPoint || netPoint.equals("") || netPointUser.equals("")) {
+        if (null == netPoint || netPoint.equals("") || netPointUser.equals("")) {
             handler.sendEmptyMessage(28);// 网点人员为空请重新录入信息
 
         } else if (cardDrvier.equals("")) {
@@ -892,8 +937,8 @@ public class JiaoJieActivity extends Activity {
                         if (resultcode.equals("00")) {
                             getLineNum();
                         } else {
-                            Bindfailshow=resultcode;
-                            if(null!=Bindfailshow||!Bindfailshow.equals("")){
+                            Bindfailshow = resultcode;
+                            if (null != Bindfailshow || !Bindfailshow.equals("")) {
                                 handler.sendEmptyMessage(26);
                             }
 
