@@ -119,7 +119,7 @@ public class ZhouZhuanXiangSaoMiao_qf extends FragmentActivity implements OnClic
 					public void run() {
 						// TODO Auto-generated method stub
 						try {
-							Thread.sleep(10000);// 睡眠10秒让用户有时间进行下一步操作
+							Thread.sleep(10000);// 睡眠10秒让用户有时间进行下一步操作22.5.13 修改时间10——>5
 							okHandle.sendEmptyMessage(2);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
