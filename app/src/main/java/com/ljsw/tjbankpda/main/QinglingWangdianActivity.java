@@ -16,6 +16,7 @@ import com.ljsw.tjbankpda.util.Table;
 import com.ljsw.tjbankpda.util.TurnListviewHeight;
 import com.manager.classs.pad.ManagerClass;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -48,7 +49,7 @@ import android.widget.TextView;
  * @author FUHAIQING 选中要装那些类型的物品 复选框（现金/重空/抵质/）
  */
 public class QinglingWangdianActivity extends FragmentActivity {
-	protected static final String TAG = "QinglingWangdianActivity";
+	protected static final String TAG = "QinglingWangdi";
 	/* 定义控件变量 */
 	private ListView lvWangdian;
 	private WangdianBaseAdapter wa;
@@ -120,6 +121,14 @@ public class QinglingWangdianActivity extends FragmentActivity {
 
 			wa.notifyDataSetInvalidated(); // 更新数据
 			manager.getRuning().remove();
+			if(GApplication.user.getLoginUserId().equals("29")){
+//							timeoutHandle.sendEmptyMessage(98);
+				Log.e(TAG, "++++++=关闭当前的页面没有任务");
+				if(ltCurrent_OrderCount.size()==0&&ltCurrent_Order.size()==0&&ltw.size()==0){
+					QinglingWangdianActivity.this.finish();
+				}
+			}
+
 		};
 	};
 	private Handler timeoutHandle = new Handler() {// 连接超时handler
@@ -168,6 +177,7 @@ public class QinglingWangdianActivity extends FragmentActivity {
 			if (msg.what==98){
 				manager.getRuning().runding(QinglingWangdianActivity.this, "数据加载中...查找当前任务进度");
 				manager.getAbnormal().remove();
+				manager.getRuning().remove();
 				QinglingWangdianActivity.this.finish();
 
 			}
@@ -257,7 +267,6 @@ public class QinglingWangdianActivity extends FragmentActivity {
 					// 访问服务器0
 					System.out.println("collateral=" + collateral); // collateral
 					params = new QingfenRenwuService().checkIfHasGotCollateral(collateral);
-//					RenwuData=Table.doParse(params);
 					if (params.equals("99")) {
 						;// 不成功
 						collateralstate = "2";
@@ -496,7 +505,6 @@ public class QinglingWangdianActivity extends FragmentActivity {
 
 					if (checklist.contains(ltOrder.get(positon).getLtOrder().get(j))
 							&& ltCurrent_Order.get(positon).get(j) == 1) {
-						/// caozuo
 						Log.e("TAG", "" + ltOrder.get(positon).getLtOrder().get(j));
 //						Toast.makeText(QinglingWangdianActivity.this, "请检查是否有返回没有完成交接的订单号"+ltOrder.get(positon).getLtOrder().get(j), 1000).show();
 						timeoutHandle.sendEmptyMessage(2);
@@ -517,6 +525,7 @@ public class QinglingWangdianActivity extends FragmentActivity {
 
 		}
 
+		@SuppressLint("WrongConstant")
 		public void JumpAc() {
 			Log.d("", "" + "booleancollateral===" + collateralstate);
 			if (!qlNumSbstr.toString().contains("DYXD")) {
@@ -609,7 +618,7 @@ public class QinglingWangdianActivity extends FragmentActivity {
 		/**
 		 * 更新网点信息
 		 * 
-		 * @param position
+		 * @param
 		 */
 		private void updateAll() {
 			wa.notifyDataSetChanged();
@@ -627,6 +636,9 @@ public class QinglingWangdianActivity extends FragmentActivity {
 	/****
 	 * 新增需求 防止没有任务的（zk xj dz） 被点击 需要后台发送数据检查哪些是可以点击 那个点击后提示没有实物 参数 corouid ：任务号
 	 * 地址押品装箱时，返回没有完成交接的订单号 需求更改 当默认全不选 现在改为提交跳转的时候去对比发现没有实物的时候进行提示20190412
+	 *
+	 * checklist>0  代表没有实物需要领取实物
+	 * checklist==0  代表有实物 可继续向下做  这里只需要 checklist  获取值不要其他操作
 	 */
 
 	public void getUncheckCovuns() {
@@ -637,20 +649,16 @@ public class QinglingWangdianActivity extends FragmentActivity {
 				try {
 					Log.e(TAG, "renwudan====：" + renwudan);
 					requestResult = new QingfenRenwuService().getUncheckCovuns(renwudan);
-					Log.e(TAG, "测试数据源：" + requestResult);
-					checklist.clear();// 每次进入清空
-					if (requestResult != null && !requestResult.equals("anyType{}")) {
+					Log.e(TAG, "测试数据源22.6.08：" + requestResult);
+					checklist.clear();// 每次进入清空 &&!requestResult.equals("[]")
+					if (requestResult != null && !requestResult.equals("anyType{}")&&!requestResult.equals("[]")) {
 						checklist = new Gson().fromJson(requestResult, new TypeToken<List<Object>>() {
 						}.getType());
 						for (int i = 0; i < checklist.size(); i++) {
-							Log.e(TAG, "++++++=" + checklist.get(i));
+							Log.e(TAG, "++++++=checklist" + checklist.get(i));
 						}
-
 					}else{
-//						抵质押品的单独流程这里我提交数据后没任务的情况
-						if(GApplication.user.getLoginUserId().equals("29")){
-							timeoutHandle.sendEmptyMessage(98);
-						}
+
 					}
 
 				} catch (SocketTimeoutException e) {
@@ -666,4 +674,11 @@ public class QinglingWangdianActivity extends FragmentActivity {
 
 	}
 
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//		manager.getAbnormal().remove();
+//		manager.getRuning().remove();
+//		QinglingWangdianActivity.this.finish();
+//	}
 }
