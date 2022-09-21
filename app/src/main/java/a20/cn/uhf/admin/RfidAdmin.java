@@ -32,7 +32,7 @@ public class RfidAdmin {
 	private static final String TAG = "MainActivityRFID";
 	public Handler hand = null;
 	Bundle bundle;
-	public       boolean   booleanstrnewThread=false;
+	public       boolean   booleanstrnewThread=false;// 判断走那个扫描
 	public RfidAdmin() {
 		if (facilityGPIO == null)
 			facilityGPIO = new GPIO(GlobalConstant.IO_RFID_POWER);
@@ -104,6 +104,7 @@ public class RfidAdmin {
 
 	public void stopRfid() {
 		startFlag = false;
+		booleanstrnewThread=false;
 	}
 
 	public void startRfid() {
@@ -155,6 +156,7 @@ public class RfidAdmin {
 								m.what = RFID_Device.rdid_a20;
 								if(booleanstrnewThread){ //开启子线程fangfa2021.8.18
 									m.what = RFID_Device.rdid_a20_newthread;
+									Log.d(TAG, "==========InventoryThread============开启子线程"+Thread.currentThread().getName());
 								}else{
 
 								}
@@ -177,6 +179,7 @@ public class RfidAdmin {
 					}
 				}
 			} catch (Exception e) {
+				booleanstrnewThread=false;
 				Log.e(TAG, "run: RfidAdmin 串口关闭后获取数据异常");
 			}
 		}
