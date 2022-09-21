@@ -154,11 +154,11 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                     case 1:
                         error = 3;
                         if (o_Application.LibraryCentreuser != null && !o_Application.LibraryCentreuser.getLoginUserId().equals("4")) {// 变成库管员
-                            Log.e(TAG,"S_application.getApplication().s_librarycenthander_yaun"+S_application.getApplication().s_librarycenthander_yaun);
-                            Log.e(TAG,"S_application.getApplication().s_librarycenthander_Id"+S_application.getApplication().s_librarycenthander_Id);
-                            Log.e(TAG,"S_application.getApplication().s_librarycenthander_name"+S_application.getApplication().s_librarycenthander_name);
+                            Log.e(TAG, "S_application.getApplication().s_librarycenthander_yaun" + S_application.getApplication().s_librarycenthander_yaun);
+                            Log.e(TAG, "S_application.getApplication().s_librarycenthander_Id" + S_application.getApplication().s_librarycenthander_Id);
+                            Log.e(TAG, "S_application.getApplication().s_librarycenthander_name" + S_application.getApplication().s_librarycenthander_name);
 
-                            if (S_application.getApplication().s_librarycenthander_yaun == null||S_application.getApplication().s_librarycenthander_yaun.equals("")) {// 管库员后加
+                            if (S_application.getApplication().s_librarycenthander_yaun == null || S_application.getApplication().s_librarycenthander_yaun.equals("")) {// 管库员后加
                                 managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使库管员身份!",
                                         new OnClickListener() {
                                             @Override
@@ -171,8 +171,8 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                             }
                         } else {
                             System.out.print("______else" + name);
-                            Log.e(TAG,"数据不空"+name);
-                            if (S_application.getApplication().s_librarycenthander_yaun == null||S_application.getApplication().s_librarycenthander_yaun.equals("")) {
+                            Log.e(TAG, "数据不空" + name);
+                            if (S_application.getApplication().s_librarycenthander_yaun == null || S_application.getApplication().s_librarycenthander_yaun.equals("")) {
                                 // 修改
                                 Intent intent = new Intent();
                                 intent.putExtra("isOk", "success");
@@ -183,11 +183,11 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                                 KuGuanYuanByZhangHuzhongxinLogin.this
                                         .setResult(KuGuanYuanByZhangHuzhongxinLogin.this.RESULT_OK, intent);
                                 KuGuanYuanByZhangHuzhongxinLogin.this.finish();
-                            } else if (S_application.getApplication().s_librarycenthander_yaun != null||!S_application.getApplication().s_librarycenthander_yaun.equals("")
+                            } else if (S_application.getApplication().s_librarycenthander_yaun != null || !S_application.getApplication().s_librarycenthander_yaun.equals("")
                                     && S_application.getApplication().s_librarycenthander_yaun.equals(name)) {
                                 // 修改
-                                Log.e(TAG,"数据不为空返回值"+name);
-                                Log.e(TAG,"数据不为空返回值"+S_application.getApplication().s_librarycenthander_yaun);
+                                Log.e(TAG, "数据不为空返回值" + name);
+                                Log.e(TAG, "数据不为空返回值" + S_application.getApplication().s_librarycenthander_yaun);
                                 Intent intent = new Intent();
                                 intent.putExtra("isOk", "success");
                                 intent.putExtra("name", name);
@@ -228,7 +228,79 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                         managerClass.getGolbalView().toastShow(KuGuanYuanByZhangHuzhongxinLogin.this, "用户或密码为空！");
                         break;
                     case -5:
-                        managerClass.getGolbalView().toastShow(KuGuanYuanByZhangHuzhongxinLogin.this,"请使用正确的角色");
+                        managerClass.getGolbalView().toastShow(KuGuanYuanByZhangHuzhongxinLogin.this, "请使用正确的角色");
+                        break;
+
+                    case 11:
+                        error = 3;
+                        if (o_Application.diziyuan != null && !o_Application.diziyuan.getLoginUserId().equals("29")) {// 变成抵质库管员
+
+                            if (o_Application.diziyuan == null || o_Application.diziyuan.equals("")) {// 管库员后加
+                                managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使抵质押品库管员身份!",
+                                        new OnClickListener() {
+                                            @Override
+                                            public void onClick(View arg0) {
+                                                editname.setText("");
+                                                editpwd.setText("");
+                                                managerClass.getAbnormal().remove();
+                                            }
+                                        });
+                            }else if(!o_Application.diziyuan .getLoginUserId().equals("29")){
+                                managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使抵质押品库管员身份!",
+                                        new OnClickListener() {
+                                            @Override
+                                            public void onClick(View arg0) {
+                                                editname.setText("");
+                                                editpwd.setText("");
+                                                managerClass.getAbnormal().remove();
+                                            }
+                                        });
+
+                            }
+                        } else {
+                            System.out.print("______else" + name);
+                            Log.e(TAG, "数据不空" + name);
+                            if (S_application.getApplication().s_librarydz_yaun == null || S_application.getApplication().s_librarydz_yaun.equals("")) {
+                                // 修改
+                                Intent intent = new Intent();
+                                intent.putExtra("isOk", "success11");
+                                intent.putExtra("name", name);
+                                GApplication.use = new User();
+                                GApplication.use.setUserzhanghu(name);
+                                GApplication.use.setUsername(GApplication.user.getLoginUserName());
+                                KuGuanYuanByZhangHuzhongxinLogin.this
+                                        .setResult(KuGuanYuanByZhangHuzhongxinLogin.this.RESULT_OK, intent);
+                                KuGuanYuanByZhangHuzhongxinLogin.this.finish();
+                            } else if (S_application.getApplication().s_librarydz_yaun != null || !S_application.getApplication().s_librarydz_yaun.equals("")
+                                    && S_application.getApplication().s_librarydz_yaun.equals(name)) {
+                                // 修改
+                                Log.e(TAG, "数据不为空返回值" + name);
+                                Log.e(TAG, "数据不为空返回值" + S_application.getApplication().s_librarydz_yaun);
+                                Intent intent = new Intent();
+                                intent.putExtra("isOk", "success11");
+                                intent.putExtra("name", name);
+                                GApplication.use = new User();
+                                GApplication.use.setUserzhanghu(name);
+                                GApplication.use.setUsername(GApplication.user.getLoginUserName());
+                                KuGuanYuanByZhangHuzhongxinLogin.this
+                                        .setResult(KuGuanYuanByZhangHuzhongxinLogin.this.RESULT_OK, intent);
+                                KuGuanYuanByZhangHuzhongxinLogin.this.finish();
+                            } else {
+                                System.out.println("s_userYayun:" + S_application.getApplication().s_librarydz_yaun);
+                                System.out.println("name:" + name);
+                                managerClass.getAbnormal().timeout(KuGuanYuanByZhangHuzhongxinLogin.this, "请使用抵质押品库管员本人登录!!!!",
+                                        new OnClickListener() {
+                                            @Override
+                                            public void onClick(View arg0) {
+                                                editname.setText("");
+                                                editpwd.setText("");
+                                                managerClass.getAbnormal().remove();
+                                            }
+                                        });
+                            }
+
+                        }
+
                         break;
 
                 }
@@ -426,18 +498,28 @@ public class KuGuanYuanByZhangHuzhongxinLogin extends Activity implements OnTouc
                     Log.e("TSG", "S_application" + S_application.getApplication().s_userguankuyaun);
                     loginUser = getSystemLogin().login(name, pwd);
                     if (loginUser != null) { // 成功获取
-						o_Application.yayunyuan = loginUser;
-                        S_application.getApplication().s_librarycenthander_yaun="";
-                        o_Application.LibraryCentreuser = loginUser;
+                        if (GApplication.user.getLoginUserId().equals("29")) {
+                            o_Application.diziyuan = loginUser;
+                            S_application.getApplication().s_librarydz_yaun = "";
+                            o_Application.LibraryDZUser = loginUser;
+                            S_application.getApplication().s_librarydzr_Id = o_Application.diziyuan.getOrganizationId();
+                            S_application.getApplication().s_librarydz_name =o_Application.diziyuan.getLoginUserName();
+                            msg.what = 11;
+                        } else if (GApplication.user.getLoginUserId().equals("4")) {
+                            o_Application.yayunyuan = loginUser;
+                            S_application.getApplication().s_librarydz_yaun = "";
+                            o_Application.LibraryCentreuser = loginUser;
+                            S_application.getApplication().s_librarycenthander_Id = o_Application.LibraryCentreuser.getOrganizationId();
+                            S_application.getApplication().s_librarycenthander_name = o_Application.LibraryCentreuser.getLoginUserName();
+                            Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_Id);
+                            Log.e("TSG", "s_librarycenthander_yaun" + S_application.getApplication().s_librarycenthander_yaun);
+                            msg.what = 1;
+                        }
 
-                        S_application.getApplication().s_librarycenthander_Id = o_Application.LibraryCentreuser.getOrganizationId();
-                        S_application.getApplication().s_librarycenthander_name = o_Application.LibraryCentreuser.getLoginUserName();
-                        Log.e("TSG", "S_application" + S_application.getApplication().s_librarycenthander_Id);
-                        Log.e("TSG", "s_librarycenthander_yaun" + S_application.getApplication().s_librarycenthander_yaun);
-                        msg.what = 1;
                     } else { // 未成功获取
                         msg.what = 0;
                     }
+
                 }
             } catch (SocketTimeoutException ee) {
                 // TODO: handle exception
